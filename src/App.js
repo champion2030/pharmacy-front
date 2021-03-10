@@ -10,6 +10,8 @@ import { logout } from "./actions/auth";
 import { clearMessage } from "./actions/message";
 import { history } from "./helpers/history";
 import UsersTable from "./components/usersTable/UsersTable";
+import Employees from "./pages/Employees/Employees";
+import {CssBaseline, createMuiTheme, ThemeProvider} from '@material-ui/core';
 
 const App = () => {
 
@@ -57,9 +59,6 @@ const App = () => {
                 </Link>
               </li>
               <li className="nav-item">
-                {/*<a href="/login" className="nav-link" onClick={logOut}>*/}
-                {/*  LogOut*/}
-                {/*</a>*/}
                 <Link to={"/login"} className="nav-link" onClick={logOut}>
                   LogOut
                 </Link>
@@ -89,7 +88,10 @@ const App = () => {
             <Route exact path="/register" component={Register} />
             <Route exact path="/profile" component={Profile} />
             <Route exact path="/users" component={UsersTable} />
+            <Route exact path="/employees" component={Employees} />
+            <Route exact path="/users" component={UsersTable} />
           </Switch>
+          <CssBaseline/>
         </div>
       </div>
     </Router>
