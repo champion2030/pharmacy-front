@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { Grid, } from '@material-ui/core';
-import Controls from "../../components/controls/Controls";
-import { useForm, Form } from '../../components/useForm';
+import Controls from "../../components/employees/controls/Controls";
+import { useForm, Form } from '../../components/employees/useForm';
 import * as employeeService from "../../services/employeeService";
 
 
