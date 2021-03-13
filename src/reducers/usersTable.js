@@ -2,11 +2,11 @@ import {SET_USERS} from "../actions/types";
 
 const defaultState = {
     users: [],
-    isFetching : true
+    isFetching: true
 }
 
-export default function userReducer(state = defaultState, action){
-    switch (action.type){
+export default function userReducer(state = defaultState, action) {
+    switch (action.type) {
         case SET_USERS:
             return {
                 ...state,

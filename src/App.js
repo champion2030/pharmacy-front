@@ -12,6 +12,7 @@ import {history} from "./helpers/history";
 import UsersTable from "./components/usersTable/UsersTable";
 import Employees from "./pages/Employees/Employees";
 import {CssBaseline, createMuiTheme, ThemeProvider} from '@material-ui/core';
+import SignIn from "./components/Login";
 
 
 const theme = createMuiTheme({
@@ -119,7 +120,7 @@ const App = () => {
                     <div>
                         <Switch>
                             <Route exact path={["/", "/users"]} component={UsersTable}/>
-                            <Route exact path="/login" component={Login}/>
+                            <Route exact path="/login" component={SignIn}/>
                             <Route exact path="/register" component={Register}/>
                             <Route exact path="/profile" component={Profile}/>
                             <Route exact path="/users" component={UsersTable}/>
