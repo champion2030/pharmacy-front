@@ -10,7 +10,6 @@ import {logout} from "./actions/auth";
 import {clearMessage} from "./actions/message";
 import {history} from "./helpers/history";
 import UsersTable from "./components/usersTable/UsersTable";
-import Employees from "./pages/Employees/Employees";
 import {CssBaseline, createMuiTheme, ThemeProvider} from '@material-ui/core';
 import SignIn from "./components/Login";
 
@@ -72,11 +71,6 @@ const App = () => {
                                     UsersTable
                                 </Link>
                             </li>
-                            <li className="nav-item">
-                                <Link to={"/employees"} className="nav-link">
-                                    Employees
-                                </Link>
-                            </li>
 
                             {currentUser && (
                                 <li className="nav-item">
@@ -124,7 +118,6 @@ const App = () => {
                             <Route exact path="/register" component={Register}/>
                             <Route exact path="/profile" component={Profile}/>
                             <Route exact path="/users" component={UsersTable}/>
-                            <Route exact path="/employees" component={Employees}/>
                             <Route exact path="/users" component={UsersTable}/>
                         </Switch>
                         <CssBaseline/>

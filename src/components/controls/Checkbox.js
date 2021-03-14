@@ -15,7 +15,8 @@ export default function Checkbox(props) {
     return (
         <FormControl>
             <FormControlLabel
-                control={<MuiCheckbox
+                control={
+                    <MuiCheckbox
                     name={name}
                     color="primary"
                     checked={value}
