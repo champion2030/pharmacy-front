@@ -2,7 +2,6 @@ import React, {useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {getAllUsers, getUsers} from "../../actions/getUsers";
 import {
-    Grid,
     InputAdornment,
     makeStyles,
     Paper,
@@ -22,6 +21,7 @@ import {setCurrentPage} from "../../reducers/usersTable";
 import {Search} from "@material-ui/icons";
 import AddIcon from "@material-ui/icons/Add";
 import UserModalWindow from "./UserModalWindow";
+import UserFormWindow from "./UserFormWindow";
 
 
 const useStyles = makeStyles(theme => ({
@@ -226,48 +226,7 @@ const UsersTable = () => {
                 }
             </Paper>
             <UserModalWindow active={modalActive} setActive={setModalActive}>
-                <form className={classes.root} autoComplete="off">
-                    <Grid>
-                        <Controls.Input
-                            name="fullName"
-                            label="Full Name"
-                            //value={values.fullName}
-                            //onChange={handleInputChange}
-                            //error={errors.fullName}
-                        />
-                        <Controls.Input
-                            label="Email"
-                            name="email"
-                            //value={values.email}
-                            //onChange={handleInputChange}
-                            //error={errors.email}
-                        />
-                        <Controls.Input
-                            label="Mobile"
-                            name="mobile"
-                            //value={values.mobile}
-                            //onChange={handleInputChange}
-                            //error={errors.mobile}
-                        />
-                        <Controls.Input
-                            label="City"
-                            name="city"
-                            //value={values.city}
-                            //onChange={handleInputChange}
-                        />
-                        <div>
-                            <Controls.Button
-                                type="submit"
-                                text="Submit" />
-                            <Controls.Button
-                                text="Reset"
-                                color="default"
-                                onClick={() => setModalActive(false)}
-                            />
-                        </div>
-
-                    </Grid>
-                </form>
+                <UserFormWindow active={modalActive} setActive={setModalActive}/>
             </UserModalWindow>
         </div>
     )
