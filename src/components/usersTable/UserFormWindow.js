@@ -22,7 +22,7 @@ const UserFormWindow = ({active, setActive}) => {
     const [emailDirty, setEmailDirty] = useState(false)
     const [passwordDirty, setPasswordDirty] = useState(false)
 
-    const [usernameError, setUsernameError] = useState('User should not be empty')
+    const [usernameError, setUsernameError] = useState('Username should not be empty')
     const [emailError, setEmailError] = useState('Email should not be empty')
     const [passwordError, setPasswordError] = useState('Password should not be empty')
 
@@ -30,9 +30,9 @@ const UserFormWindow = ({active, setActive}) => {
     const usernameHandler = (e) => {
         setUsername(e.target.value)
         if (e.target.value.length === 0) {
-            setUsernameError('User should not be empty')
+            setUsernameError('Username should not be empty')
         } else if (e.target.value.length < 4) {
-            setUsernameError('User name should be 4 and more letters')
+            setUsernameError('Username should be 4 and more letters')
         } else {
             setUsernameError('')
         }
@@ -97,9 +97,27 @@ const UserFormWindow = ({active, setActive}) => {
         setPasswordError("")
     };
 
+    function checkEmpty() {
+        if (username.length === 0) {
+            setUsernameDirty(true)
+            setUsernameError("Username should not be empty")
+            return false
+        } else if (email.length === 0) {
+            setEmailDirty(true)
+            setEmailError("Email should not be empty")
+            return false
+        }
+        else if (password.length === 0) {
+            setPasswordDirty(true)
+            setPasswordError("Password should not be empty")
+            return false
+        }
+        return true
+    }
+
 
     return (
-        <form className={classes.root} onSubmit={handleSubmit}>
+        <form className={classes.root}>
             <Grid>
                 <TextField
                     variant="outlined"
@@ -136,8 +154,13 @@ const UserFormWindow = ({active, setActive}) => {
                         type="submit"
                         text="Submit"
                         onClick={e => {
-                            handleSubmit(e)
-                            setActive(false)}}
+                            if (!checkEmpty()) {
+                                e.preventDefault();
+                            } else {
+                                handleSubmit(e)
+                                setActive(false)
+                            }
+                        }}
                     />
                     <Controls.Button
                         text="Reset"
