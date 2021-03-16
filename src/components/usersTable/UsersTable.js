@@ -94,12 +94,12 @@ const UsersTable = () => {
 
     useEffect(() => {
         dispatch(getUsers(currentPage, rowsPerPage))
-    }, [currentPage, dispatch, rowsPerPage])
+    }, [currentPage, dispatch, rowsPerPage, modalActive])
 
 
     useEffect(() => {
         dispatch(getAllUsers())
-    }, [dispatch])
+    }, [modalActive])
 
 
     const filteredUsers = allUsers.filter(user => {
@@ -225,7 +225,7 @@ const UsersTable = () => {
                         null
                 }
             </Paper>
-            <UserModalWindow active={modalActive} setActive={setModalActive}>
+            <UserModalWindow active={modalActive}>
                 <UserFormWindow active={modalActive} setActive={setModalActive}/>
             </UserModalWindow>
         </div>

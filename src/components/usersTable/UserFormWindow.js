@@ -1,6 +1,9 @@
-import {colors, Grid, makeStyles, TextField} from "@material-ui/core";
+import {Grid, makeStyles, TextField} from "@material-ui/core";
 import Controls from "../controls/Controls";
-import React, {useEffect, useState} from "react";
+import React, {useEffect, useRef, useState} from "react";
+import {useDispatch, useSelector} from "react-redux";
+import {register} from "../../actions/auth";
+import {clearMessage} from "../../actions/message";
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -14,6 +17,10 @@ const useStyles = makeStyles(theme => ({
 const UserFormWindow = ({active, setActive}) => {
     const classes = useStyles()
 
+    const dispatch = useDispatch();
+    const {message} = useSelector(state => state.message);
+
+
     const [username, setUsername] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
@@ -22,44 +29,25 @@ const UserFormWindow = ({active, setActive}) => {
     const [emailDirty, setEmailDirty] = useState(false)
     const [passwordDirty, setPasswordDirty] = useState(false)
 
-    const [usernameError, setUsernameError] = useState('Username should not be empty')
-    const [emailError, setEmailError] = useState('Email should not be empty')
-    const [passwordError, setPasswordError] = useState('Password should not be empty')
+    const [usernameError, setUsernameError] = useState('Username can not be empty')
+    const [emailError, setEmailError] = useState('Email can not be empty')
+    const [passwordError, setPasswordError] = useState('Password can not be empty')
 
+    const [formValid, setFormValid] = useState(false)
 
-    const usernameHandler = (e) => {
-        setUsername(e.target.value)
-        if (e.target.value.length === 0) {
-            setUsernameError('Username should not be empty')
-        } else if (e.target.value.length < 4) {
-            setUsernameError('Username should be 4 and more letters')
+    const [successful, setSuccessful] = useState(false);
+
+    useEffect(() => {
+        if (emailError || usernameError || passwordError){
+            setFormValid(false)
         } else {
-            setUsernameError('')
+            setFormValid(true)
         }
-    }
+    }, [emailError, passwordError, usernameError])
 
-    const emailHandler = (e) => {
-        setEmail(e.target.value)
-        const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-        if (e.target.value.length === 0) {
-            setEmailError('Email should not be empty')
-        } else if (!re.test(String(e.target.value).toLowerCase())) {
-            setEmailError('Email is not correct')
-        } else {
-            setEmailError('')
-        }
-    }
-
-    const passwordHandler = (e) => {
-        setPassword(e.target.value)
-        if (e.target.value.length === 0) {
-            setPasswordError('Password should not be empty')
-        } else if (e.target.value.length < 5) {
-            setPasswordError('Password should be more then 5 letters')
-        } else {
-            setPasswordError('')
-        }
-    }
+    useEffect(() => {
+        dispatch(clearMessage());
+    }, [active]);
 
     const bluerHandler = (e) => {
         switch (e.target.name) {
@@ -76,14 +64,59 @@ const UserFormWindow = ({active, setActive}) => {
     }
 
 
+    const usernameHandler = (e) => {
+        setUsername(e.target.value)
+        if (e.target.value.length === 0) {
+            setUsernameError('This field is required!')
+        } else if (e.target.value.length < 4 || e.target.value.length > 20) {
+            setUsernameError('The username must be between 3 and 20 characters!')
+        } else {
+            setUsernameError("")
+        }
+
+    }
+
+    const emailHandler = (e) => {
+        setEmail(e.target.value)
+        const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        if (e.target.value.length === 0) {
+            setEmailError('This field is required!')
+        } else if (!re.test(String(e.target.value).toLowerCase())) {
+            setEmailError('This is not a valid email.')
+        } else {
+            setEmailError("")
+        }
+    }
+
+    const passwordHandler = (e) => {
+        setPassword(e.target.value)
+        if (e.target.value.length === 0) {
+            setPasswordError('This field is required!')
+        } else if (e.target.value.length < 5 || e.target.value.length > 40) {
+            setPasswordError('The password must be between 6 and 40 characters!')
+        } else {
+            setPasswordError("")
+        }
+    }
+
     const handleSubmit = (e) => {
         e.preventDefault();
-        setUsername("")
-        setEmail("")
-        setPassword("")
-        setUsernameError("")
-        setEmailError("")
-        setPasswordError("")
+
+        dispatch(register(username, email, password))
+            .then(() => {
+                setSuccessful(true);
+                setUsername("")
+                setEmail("")
+                setPassword("")
+                setUsernameError("")
+                setEmailError("")
+                setPasswordError("")
+                setActive(false)
+            })
+            .catch(() => {
+                setSuccessful(false);
+            });
+
 
     };
 
@@ -95,26 +128,9 @@ const UserFormWindow = ({active, setActive}) => {
         setUsernameError("")
         setEmailError("")
         setPasswordError("")
+
+
     };
-
-    function checkEmpty() {
-        if (username.length === 0) {
-            setUsernameDirty(true)
-            setUsernameError("Username should not be empty")
-            return false
-        } else if (email.length === 0) {
-            setEmailDirty(true)
-            setEmailError("Email should not be empty")
-            return false
-        }
-        else if (password.length === 0) {
-            setPasswordDirty(true)
-            setPasswordError("Password should not be empty")
-            return false
-        }
-        return true
-    }
-
 
     return (
         <form className={classes.root}>
@@ -123,44 +139,47 @@ const UserFormWindow = ({active, setActive}) => {
                     variant="outlined"
                     label="Username"
                     name="username"
-                    onBlur={e => bluerHandler(e)}
                     value={username}
+                    onBlur={event => bluerHandler(event)}
                     onChange={e => usernameHandler(e)}
                 />
-                {(usernameDirty && usernameError) && <div style={{color: 'red'}}>{usernameError}</div>}
+                {(usernameError && usernameDirty) && <div style={{color: 'red'}}>{usernameError}</div>}
 
                 <TextField
                     variant="outlined"
                     label="Email"
                     name="email"
-                    onBlur={e => bluerHandler(e)}
                     value={email}
+                    onBlur={event => bluerHandler(event)}
                     onChange={e => emailHandler(e)}
+
                 />
-                {(emailDirty && emailError) && <div style={{color: 'red'}}>{emailError}</div>}
+                {(emailError && emailDirty) && <div style={{color: 'red'}}>{emailError}</div>}
 
                 <TextField
                     variant="outlined"
                     label="Password"
                     name="password"
-                    onBlur={e => bluerHandler(e)}
                     value={password}
+                    onBlur={event => bluerHandler(event)}
                     onChange={e => passwordHandler(e)}
                 />
-                {(passwordDirty && passwordError) && <div style={{color: 'red'}}>{passwordError}</div>}
+                {(passwordError && passwordDirty) && <div style={{color: 'red'}}>{passwordError}</div>}
+
+                { !successful && message && (
+                    <div className="form-group">
+                        <div className="alert alert-danger" role="alert">
+                            {message}
+                        </div>
+                    </div>
+                )}
+
 
                 <div>
                     <Controls.Button
-                        type="submit"
                         text="Submit"
-                        onClick={e => {
-                            if (!checkEmpty()) {
-                                e.preventDefault();
-                            } else {
-                                handleSubmit(e)
-                                setActive(false)
-                            }
-                        }}
+                        disabled={!formValid}
+                        onClick={handleSubmit}
                     />
                     <Controls.Button
                         text="Reset"
