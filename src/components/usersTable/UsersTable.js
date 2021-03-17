@@ -22,6 +22,7 @@ import {Search} from "@material-ui/icons";
 import AddIcon from "@material-ui/icons/Add";
 import UserModalWindow from "./UserModalWindow";
 import UserFormWindow from "./UserFormWindow";
+import ConfirmDialog from "./ConfirmDialog";
 
 
 const useStyles = makeStyles(theme => ({
@@ -70,6 +71,8 @@ const UsersTable = () => {
     const [value, setValue] = useState('')
     const [rowsPerPage, setRowsPerPage] = useState(5);
     const [modalActive, setModalActive] = useState(false)
+    const [confirmDialog, setConfirmDialog] = useState({isOpen: false, title: '', subTitle: ''})
+    const [notify, setNotify] = useState({isOpen: false, message: '', type: ''})
 
 
     const handleChangePage = (event, newPage) => {
@@ -80,6 +83,18 @@ const UsersTable = () => {
         setRowsPerPage(+event.target.value);
         dispatch(setCurrentPage(1))
     };
+
+    const onDelete = id => {
+        setConfirmDialog({
+            ...confirmDialog,
+            isOpen: false
+        })
+        setNotify({
+            isOpen: true,
+            message: 'Deleted Successfully',
+            type: 'error'
+        })
+    }
 
 
     // useEffect(() => {
@@ -157,16 +172,17 @@ const UsersTable = () => {
                                                 </Controls.ActionButton>
                                                 <Controls.ActionButton
                                                     color="secondary"
-                                                    // onClick={() => {
-                                                    //     setConfirmDialog({
-                                                    //         isOpen: true,
-                                                    //         title: 'Are you sure to delete this record?',
-                                                    //         subTitle: "You can't undo this operation",
-                                                    //         onConfirm: () => {
-                                                    //             onDelete(item.id)
-                                                    //         }
-                                                    //     })
-                                                    // }}
+                                                    onClick={() => {
+                                                        setConfirmDialog({
+                                                            isOpen: true,
+                                                            title: 'Are you sure to delete this record?',
+                                                            subTitle: "You can't undo this operation",
+                                                            onConfirm: () => {
+                                                                onDelete(item.id)
+                                                                alert(1)
+                                                            }
+                                                        })
+                                                    }}
                                                 >
                                                     <CloseIcon fontSize="small"/>
                                                 </Controls.ActionButton>
@@ -191,16 +207,16 @@ const UsersTable = () => {
                                                 </Controls.ActionButton>
                                                 <Controls.ActionButton
                                                     color="secondary"
-                                                    // onClick={() => {
-                                                    //     setConfirmDialog({
-                                                    //         isOpen: true,
-                                                    //         title: 'Are you sure to delete this record?',
-                                                    //         subTitle: "You can't undo this operation",
-                                                    //         onConfirm: () => {
-                                                    //             onDelete(item.id)
-                                                    //         }
-                                                    //     })
-                                                    // }}
+                                                    onClick={() => {
+                                                        setConfirmDialog({
+                                                            isOpen: true,
+                                                            title: 'Are you sure to delete this record?',
+                                                            subTitle: "You can't undo this operation",
+                                                            onConfirm: () => {
+                                                                onDelete(item.id)
+                                                            }
+                                                        })
+                                                    }}
                                                 >
                                                     <CloseIcon fontSize="small"/>
                                                 </Controls.ActionButton>
@@ -228,6 +244,10 @@ const UsersTable = () => {
             <UserModalWindow active={modalActive}>
                 <UserFormWindow active={modalActive} setActive={setModalActive}/>
             </UserModalWindow>
+            <ConfirmDialog
+                confirmDialog={confirmDialog}
+                setConfirmDialog={setConfirmDialog}
+            />
         </div>
     )
 };
