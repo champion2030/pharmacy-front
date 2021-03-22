@@ -22,7 +22,7 @@ import {Search} from "@material-ui/icons";
 import AddIcon from "@material-ui/icons/Add";
 import UserModalWindow from "./UserModalWindow";
 import UserFormWindow from "./UserFormWindow";
-import ConfirmDialog from "./ConfirmDialog";
+import ConfirmDialog from "../ConfirmDialog";
 
 
 const useStyles = makeStyles(theme => ({
@@ -120,6 +120,8 @@ const UsersTable = () => {
     const filteredUsers = allUsers.filter(user => {
         return user.username.toLowerCase().includes(value.toLowerCase())
     })
+
+    console.log(users)
 
 
     return (

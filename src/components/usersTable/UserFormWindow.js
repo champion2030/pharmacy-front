@@ -111,6 +111,7 @@ const UserFormWindow = ({active, setActive}) => {
                 setUsernameError("")
                 setEmailError("")
                 setPasswordError("")
+                setFormValid(false)
                 setActive(false)
             })
             .catch(() => {
@@ -128,8 +129,7 @@ const UserFormWindow = ({active, setActive}) => {
         setUsernameError("")
         setEmailError("")
         setPasswordError("")
-
-
+        setFormValid(false)
     };
 
     return (

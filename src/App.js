@@ -3,7 +3,6 @@ import {useDispatch, useSelector} from "react-redux";
 import {Router, Switch, Route, Link} from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
-import Login from "./components/Login";
 import Register from "./components/Register";
 import Profile from "./components/Profile";
 import {logout} from "./actions/auth";
@@ -12,6 +11,7 @@ import {history} from "./helpers/history";
 import UsersTable from "./components/usersTable/UsersTable";
 import {CssBaseline, createMuiTheme, ThemeProvider} from '@material-ui/core';
 import SignIn from "./components/Login";
+import FormOfIssueTable from "./components/formOfIssueTable/FormOfIssueTable";
 
 
 const theme = createMuiTheme({
@@ -71,6 +71,11 @@ const App = () => {
                                     UsersTable
                                 </Link>
                             </li>
+                            <li className="nav-item">
+                                <Link to={"/formOfIssue"} className="nav-link">
+                                    FormOfIssueTable
+                                </Link>
+                            </li>
 
                             {currentUser && (
                                 <li className="nav-item">
@@ -85,7 +90,7 @@ const App = () => {
                             <div className="navbar-nav ml-auto">
                                 <li className="nav-item">
                                     <Link to={"/profile"} className="nav-link">
-                                        {currentUser.data.username}
+                                        {currentUser.username}
                                     </Link>
                                 </li>
                                 <li className="nav-item">
@@ -118,7 +123,7 @@ const App = () => {
                             <Route exact path="/register" component={Register}/>
                             <Route exact path="/profile" component={Profile}/>
                             <Route exact path="/users" component={UsersTable}/>
-                            <Route exact path="/users" component={UsersTable}/>
+                            <Route exact path="/formOfIssue" component={FormOfIssueTable}/>
                         </Switch>
                         <CssBaseline/>
                     </div>
