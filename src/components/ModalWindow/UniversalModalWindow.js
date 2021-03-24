@@ -1,7 +1,7 @@
 import React from 'react';
-import './FormOfIssueModalWindowStyles.css'
+import './UniversalModalWindowStyles.css'
 
-const FormOfIssueModalWindow = ({active, children}) => {
+const UniversalModalWindow = ({active, children}) => {
     return(
         <div className={active ? "modal active" : "modal"} >
             <div className={active ? "modal__content active" : "modal__content"} onClick={e => e.stopPropagation()}>
@@ -11,4 +11,4 @@ const FormOfIssueModalWindow = ({active, children}) => {
     )
 }
 
-export default FormOfIssueModalWindow;
+export default UniversalModalWindow;

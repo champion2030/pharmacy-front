@@ -17,7 +17,7 @@ import AddIcon from "@material-ui/icons/Add";
 import FormOfIssueFormWindow from "./FormOfIssueFormWindow";
 import ConfirmDialog from "../ConfirmDialog";
 import {getForms} from "../../actions/getFormsOfIssue";
-import FormOfIssueModalWindow from "./FormOfIssueModalWindow";
+import UniversalModalWindow from "../ModalWindow/UniversalModalWindow";
 
 
 const useStyles = makeStyles(theme => ({
@@ -101,7 +101,7 @@ const FormOfIssueTable = () => {
                             forms.map(item =>
                                 (
                                     <TableRow key={item.id}>
-                                        <TableCell>{item.formofissue}</TableCell>
+                                        <TableCell>{item.form_of_issue}</TableCell>
 
                                         <TableCell>
                                             <Controls.ActionButton
@@ -135,9 +135,9 @@ const FormOfIssueTable = () => {
                     </TableBody>
                 </Table>
             </Paper>
-            <FormOfIssueModalWindow active={modalActive}>
+            <UniversalModalWindow active={modalActive}>
                 <FormOfIssueFormWindow active={modalActive} setActive={setModalActive}/>
-            </FormOfIssueModalWindow>
+            </UniversalModalWindow>
             <ConfirmDialog
                 confirmDialog={confirmDialog}
                 setConfirmDialog={setConfirmDialog}

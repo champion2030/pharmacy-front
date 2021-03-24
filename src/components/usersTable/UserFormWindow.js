@@ -130,6 +130,7 @@ const UserFormWindow = ({active, setActive}) => {
         setEmailError("")
         setPasswordError("")
         setFormValid(false)
+        setActive(false)
     };
 
     return (
@@ -183,12 +184,8 @@ const UserFormWindow = ({active, setActive}) => {
                     />
                     <Controls.Button
                         text="Reset"
-                        type="reset"
                         color="default"
-                        onClick={e => {
-                            handleReset(e)
-                            setActive(false)
-                        }}
+                        onClick={handleReset}
                     />
                 </div>
 

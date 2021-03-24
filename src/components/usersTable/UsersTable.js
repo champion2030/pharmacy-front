@@ -20,9 +20,9 @@ import TablePagination from "@material-ui/core/TablePagination";
 import {setCurrentPage} from "../../reducers/usersTable";
 import {Search} from "@material-ui/icons";
 import AddIcon from "@material-ui/icons/Add";
-import UserModalWindow from "./UserModalWindow";
 import UserFormWindow from "./UserFormWindow";
 import ConfirmDialog from "../ConfirmDialog";
+import UniversalModalWindow from "../ModalWindow/UniversalModalWindow";
 
 
 const useStyles = makeStyles(theme => ({
@@ -96,17 +96,6 @@ const UsersTable = () => {
         })
     }
 
-
-    // useEffect(() => {
-    //     const raw = localStorage.getItem('currentPage')
-    //     dispatch(setCurrentPage(JSON.parse(raw)))
-    // },[dispatch])
-    //
-    // useEffect(() => {
-    //     localStorage.setItem('currentPage', JSON.stringify(currentPage))
-    // }, [currentPage])
-
-
     useEffect(() => {
         dispatch(getUsers(currentPage, rowsPerPage))
     }, [currentPage, dispatch, rowsPerPage, modalActive])
@@ -120,9 +109,6 @@ const UsersTable = () => {
     const filteredUsers = allUsers.filter(user => {
         return user.username.toLowerCase().includes(value.toLowerCase())
     })
-
-    console.log(users)
-
 
     return (
         <div>
@@ -243,9 +229,9 @@ const UsersTable = () => {
                         null
                 }
             </Paper>
-            <UserModalWindow active={modalActive}>
+            <UniversalModalWindow active={modalActive}>
                 <UserFormWindow active={modalActive} setActive={setModalActive}/>
-            </UserModalWindow>
+            </UniversalModalWindow>
             <ConfirmDialog
                 confirmDialog={confirmDialog}
                 setConfirmDialog={setConfirmDialog}

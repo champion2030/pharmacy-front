@@ -3,6 +3,7 @@ import Controls from "../controls/Controls";
 import React, {useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {clearMessage} from "../../actions/message";
+import {createNewForm} from "../../actions/getFormsOfIssue";
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -31,7 +32,7 @@ const FormOfIssueFormWindow = ({active, setActive}) => {
     const [successful, setSuccessful] = useState(false);
 
     useEffect(() => {
-        if (formOfIssueError){
+        if (formOfIssueError) {
             setFormValid(false)
         } else {
             setFormValid(true)
@@ -59,14 +60,12 @@ const FormOfIssueFormWindow = ({active, setActive}) => {
         } else {
             setFormOfIssueError("")
         }
-
     }
 
 
     const handleSubmit = (e) => {
         e.preventDefault();
-
-        /*dispatch(register(username, email, password))
+        dispatch(createNewForm(formOfIssue))
             .then(() => {
                 setSuccessful(true);
                 setFormOfIssue("")
@@ -76,15 +75,7 @@ const FormOfIssueFormWindow = ({active, setActive}) => {
             })
             .catch(() => {
                 setSuccessful(false);
-            });*/
-        setSuccessful(true);
-        setFormOfIssue("")
-        setFormOfIssueError("")
-        setFormValid(false)
-        setActive(false)
-
-
-
+            });
     };
 
     const handleReset = (e) => {
@@ -108,7 +99,7 @@ const FormOfIssueFormWindow = ({active, setActive}) => {
                 />
                 {(formOfIssueError && formOfIssueDirty) && <div style={{color: 'red'}}>{formOfIssueError}</div>}
 
-                { !successful && message && (
+                {!successful && message && (
                     <div className="form-group">
                         <div className="alert alert-danger" role="alert">
                             {message}
@@ -124,9 +115,8 @@ const FormOfIssueFormWindow = ({active, setActive}) => {
                     />
                     <Controls.Button
                         text="Reset"
-                        type="reset"
                         color="default"
-                        onClick={e => {handleReset(e)}}
+                        onClick={handleReset}
                     />
                 </div>
 
