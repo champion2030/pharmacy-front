@@ -1,5 +1,5 @@
 import axios from "axios";
-import {setAllUsers, setIsFetching, setUsers} from "../reducers/usersTable";
+import {setAllUsers, setIsFetching, setUsers} from "../reducers/usersTableReducer";
 
 const API_URL = "http://localhost:8080/api/";
 

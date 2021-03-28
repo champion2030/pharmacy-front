@@ -3,7 +3,7 @@ import Controls from "../controls/Controls";
 import React, {useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {clearMessage} from "../../actions/message";
-import {createNewForm} from "../../actions/getFormsOfIssue";
+import {createNewGroup} from "../../actions/getPharmacologicalGroups";
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -14,30 +14,30 @@ const useStyles = makeStyles(theme => ({
     }
 }))
 
-const FormOfIssueFormWindow = ({active, setActive}) => {
+const PharmacologicalGroupFormWindow = ({active, setActive}) => {
     const classes = useStyles()
 
     const dispatch = useDispatch();
 
     const {message} = useSelector(state => state.message);
 
-    const [formOfIssue, setFormOfIssue] = useState('')
+    const [pharmacologicalGroup, setPharmacologicalGroup] = useState('')
 
-    const [formOfIssueDirty, setFormOfIssueDirty] = useState(false)
+    const [pharmacologicalGroupDirty, setPharmacologicalGroupDirty] = useState(false)
 
-    const [formOfIssueError, setFormOfIssueError] = useState('Form Of Issue can not be empty')
+    const [pharmacologicalGroupError, setPharmacologicalGroupError] = useState('Pharmacological Group can not be empty')
 
     const [formValid, setFormValid] = useState(false)
 
     const [successful, setSuccessful] = useState(false);
 
     useEffect(() => {
-        if (formOfIssueError) {
+        if (pharmacologicalGroupError) {
             setFormValid(false)
         } else {
             setFormValid(true)
         }
-    }, [formOfIssueError])
+    }, [pharmacologicalGroupError])
 
     useEffect(() => {
         dispatch(clearMessage());
@@ -46,31 +46,31 @@ const FormOfIssueFormWindow = ({active, setActive}) => {
 
     const bluerHandler = (e) => {
         switch (e.target.name) {
-            case 'formOfIssue':
-                setFormOfIssueDirty(true)
+            case 'pharmacologicalGroup':
+                setPharmacologicalGroupDirty(true)
                 break
         }
     }
 
     const formOfIssueHandler = (e) => {
-        setFormOfIssue(e.target.value)
+        setPharmacologicalGroup(e.target.value)
         if (e.target.value.length === 0) {
-            setFormOfIssueError('This field is required!')
-        } else if (e.target.value.length < 4 || e.target.value.length > 20) {
-            setFormOfIssueError('The form of issue must be between 3 and 20 characters!')
+            setPharmacologicalGroupError('This field is required!')
+        } else if (e.target.value.length < 4 || e.target.value.length > 35) {
+            setPharmacologicalGroupError('The pharmacological group must be between 3 and 35 characters!')
         } else {
-            setFormOfIssueError("")
+            setPharmacologicalGroupError("")
         }
     }
 
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        dispatch(createNewForm(formOfIssue))
+        dispatch(createNewGroup(pharmacologicalGroup))
             .then(() => {
                 setSuccessful(true);
-                setFormOfIssue("")
-                setFormOfIssueError("")
+                setPharmacologicalGroup("")
+                setPharmacologicalGroupError("")
                 setFormValid(false)
                 setActive(false)
             })
@@ -81,8 +81,8 @@ const FormOfIssueFormWindow = ({active, setActive}) => {
 
     const handleReset = (e) => {
         e.preventDefault()
-        setFormOfIssue("")
-        setFormOfIssueError("")
+        setPharmacologicalGroup("")
+        setPharmacologicalGroupError("")
         setActive(false)
     };
 
@@ -91,13 +91,13 @@ const FormOfIssueFormWindow = ({active, setActive}) => {
             <Grid>
                 <TextField
                     variant="outlined"
-                    label="Form Of Issue"
-                    name="formOfIssue"
-                    value={formOfIssue}
+                    label="Pharmacological group"
+                    name="pharmacologicalGroup"
+                    value={pharmacologicalGroup}
                     onBlur={event => bluerHandler(event)}
                     onChange={e => formOfIssueHandler(e)}
                 />
-                {(formOfIssueError && formOfIssueDirty) && <div style={{color: 'red'}}>{formOfIssueError}</div>}
+                {(pharmacologicalGroupError && pharmacologicalGroupDirty) && <div style={{color: 'red'}}>{pharmacologicalGroupError}</div>}
 
                 {!successful && message && (
                     <div className="form-group">
@@ -126,4 +126,4 @@ const FormOfIssueFormWindow = ({active, setActive}) => {
 
 }
 
-export default FormOfIssueFormWindow;
+export default PharmacologicalGroupFormWindow;

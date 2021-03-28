@@ -3,7 +3,7 @@ import Controls from "../controls/Controls";
 import React, {useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {clearMessage} from "../../actions/message";
-import {createNewForm} from "../../actions/getFormsOfIssue";
+import {createNewReason} from "../../actions/getReasonsForReturn";
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -14,30 +14,30 @@ const useStyles = makeStyles(theme => ({
     }
 }))
 
-const FormOfIssueFormWindow = ({active, setActive}) => {
+const ReasonForReturnFormWindow = ({active, setActive}) => {
     const classes = useStyles()
 
     const dispatch = useDispatch();
 
     const {message} = useSelector(state => state.message);
 
-    const [formOfIssue, setFormOfIssue] = useState('')
+    const [reasonForReturn, setReasonForReturn] = useState('')
 
-    const [formOfIssueDirty, setFormOfIssueDirty] = useState(false)
+    const [reasonForReturnDirty, setReasonForReturnDirty] = useState(false)
 
-    const [formOfIssueError, setFormOfIssueError] = useState('Form Of Issue can not be empty')
+    const [reasonForReturnError, setReasonForReturnError] = useState('Reason for return can not be empty')
 
     const [formValid, setFormValid] = useState(false)
 
     const [successful, setSuccessful] = useState(false);
 
     useEffect(() => {
-        if (formOfIssueError) {
+        if (reasonForReturnError) {
             setFormValid(false)
         } else {
             setFormValid(true)
         }
-    }, [formOfIssueError])
+    }, [reasonForReturnError])
 
     useEffect(() => {
         dispatch(clearMessage());
@@ -46,31 +46,31 @@ const FormOfIssueFormWindow = ({active, setActive}) => {
 
     const bluerHandler = (e) => {
         switch (e.target.name) {
-            case 'formOfIssue':
-                setFormOfIssueDirty(true)
+            case 'reasonForReturn':
+                setReasonForReturnDirty(true)
                 break
         }
     }
 
     const formOfIssueHandler = (e) => {
-        setFormOfIssue(e.target.value)
+        setReasonForReturn(e.target.value)
         if (e.target.value.length === 0) {
-            setFormOfIssueError('This field is required!')
-        } else if (e.target.value.length < 4 || e.target.value.length > 20) {
-            setFormOfIssueError('The form of issue must be between 3 and 20 characters!')
+            setReasonForReturnError('This field is required!')
+        } else if (e.target.value.length < 4 || e.target.value.length > 50) {
+            setReasonForReturnError('The reason must be between 3 and 50 characters!')
         } else {
-            setFormOfIssueError("")
+            setReasonForReturnError("")
         }
     }
 
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        dispatch(createNewForm(formOfIssue))
+        dispatch(createNewReason(reasonForReturn))
             .then(() => {
                 setSuccessful(true);
-                setFormOfIssue("")
-                setFormOfIssueError("")
+                setReasonForReturn("")
+                setReasonForReturnError("")
                 setFormValid(false)
                 setActive(false)
             })
@@ -81,8 +81,8 @@ const FormOfIssueFormWindow = ({active, setActive}) => {
 
     const handleReset = (e) => {
         e.preventDefault()
-        setFormOfIssue("")
-        setFormOfIssueError("")
+        setReasonForReturn("")
+        setReasonForReturnError("")
         setActive(false)
     };
 
@@ -91,13 +91,13 @@ const FormOfIssueFormWindow = ({active, setActive}) => {
             <Grid>
                 <TextField
                     variant="outlined"
-                    label="Form Of Issue"
-                    name="formOfIssue"
-                    value={formOfIssue}
+                    label="Reason for return"
+                    name="reasonForReturn"
+                    value={reasonForReturn}
                     onBlur={event => bluerHandler(event)}
                     onChange={e => formOfIssueHandler(e)}
                 />
-                {(formOfIssueError && formOfIssueDirty) && <div style={{color: 'red'}}>{formOfIssueError}</div>}
+                {(reasonForReturnError && reasonForReturnDirty) && <div style={{color: 'red'}}>{reasonForReturnError}</div>}
 
                 {!successful && message && (
                     <div className="form-group">
@@ -119,11 +119,9 @@ const FormOfIssueFormWindow = ({active, setActive}) => {
                         onClick={handleReset}
                     />
                 </div>
-
             </Grid>
         </form>
     )
-
 }
 
-export default FormOfIssueFormWindow;
+export default ReasonForReturnFormWindow;

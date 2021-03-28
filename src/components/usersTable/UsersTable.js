@@ -17,7 +17,7 @@ import EditOutlinedIcon from "@material-ui/icons/EditOutlined";
 import CloseIcon from "@material-ui/icons/Close";
 import UsersTableHead from "./UsersTableHead";
 import TablePagination from "@material-ui/core/TablePagination";
-import {setCurrentPage} from "../../reducers/usersTable";
+import {setCurrentPage} from "../../reducers/usersTableReducer";
 import {Search} from "@material-ui/icons";
 import AddIcon from "@material-ui/icons/Add";
 import UserFormWindow from "./UserFormWindow";
@@ -167,7 +167,6 @@ const UsersTable = () => {
                                                             subTitle: "You can't undo this operation",
                                                             onConfirm: () => {
                                                                 onDelete(item.id)
-                                                                alert(1)
                                                             }
                                                         })
                                                     }}

@@ -1,25 +1,26 @@
 import axios from "axios";
-import {setForms, setIsFetching} from "../reducers/formOfIssueTableReducer";
+import {setIsFetching} from "../reducers/typeOfPropertyTableReducer";
 import {SET_MESSAGE} from "./types";
+import {setTypes} from "../reducers/typeOfPropertyTableReducer";
 
 const API_URL = "http://localhost:8080/api/";
 
-export const getForms = () => {
+export const getTypes = () => {
     return async (dispatch) => {
         dispatch(setIsFetching(true))
-        const forms = await axios.get(API_URL + `getFormOfIssue`);
-        dispatch(setForms(forms.data))
+        const types = await axios.get(API_URL + `getTypeOfProperty`);
+        dispatch(setTypes(types.data))
     }
 };
 
-export const createNewForm = (form_of_issue) => (dispatch) => {
+export const createNewType = (name_of_property) => (dispatch) => {
     dispatch(setIsFetching(true))
-    const form = axios.post(API_URL + `createFormOfIssue`, {form_of_issue})
-    return form.then(
+    const type = axios.post(API_URL + `createTypeOfProperty`, {name_of_property})
+    return type.then(
         (response) => {
             dispatch({
                 type: SET_MESSAGE,
-                payload: "Form created successful!",
+                payload: "Type created successful!",
             });
             return Promise.resolve();
         },

@@ -3,7 +3,7 @@ import Controls from "../controls/Controls";
 import React, {useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {clearMessage} from "../../actions/message";
-import {createNewForm} from "../../actions/getFormsOfIssue";
+import {createNewType} from "../../actions/getTypesOfProperty";
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -14,30 +14,30 @@ const useStyles = makeStyles(theme => ({
     }
 }))
 
-const FormOfIssueFormWindow = ({active, setActive}) => {
+const TypeOfPropertyFormWindow = ({active, setActive}) => {
     const classes = useStyles()
 
     const dispatch = useDispatch();
 
     const {message} = useSelector(state => state.message);
 
-    const [formOfIssue, setFormOfIssue] = useState('')
+    const [typeOfProperty, setTypeOfProperty] = useState('')
 
-    const [formOfIssueDirty, setFormOfIssueDirty] = useState(false)
+    const [typeOfPropertyDirty, setTypeOfPropertyDirty] = useState(false)
 
-    const [formOfIssueError, setFormOfIssueError] = useState('Form Of Issue can not be empty')
+    const [typeOfPropertyError, setTypeOfPropertyError] = useState('Type of property can not be empty')
 
     const [formValid, setFormValid] = useState(false)
 
     const [successful, setSuccessful] = useState(false);
 
     useEffect(() => {
-        if (formOfIssueError) {
+        if (typeOfPropertyError) {
             setFormValid(false)
         } else {
             setFormValid(true)
         }
-    }, [formOfIssueError])
+    }, [typeOfPropertyError])
 
     useEffect(() => {
         dispatch(clearMessage());
@@ -46,31 +46,31 @@ const FormOfIssueFormWindow = ({active, setActive}) => {
 
     const bluerHandler = (e) => {
         switch (e.target.name) {
-            case 'formOfIssue':
-                setFormOfIssueDirty(true)
+            case 'typeOfProperty':
+                setTypeOfPropertyDirty(true)
                 break
         }
     }
 
     const formOfIssueHandler = (e) => {
-        setFormOfIssue(e.target.value)
+        setTypeOfProperty(e.target.value)
         if (e.target.value.length === 0) {
-            setFormOfIssueError('This field is required!')
+            setTypeOfPropertyError('This field is required!')
         } else if (e.target.value.length < 4 || e.target.value.length > 20) {
-            setFormOfIssueError('The form of issue must be between 3 and 20 characters!')
+            setTypeOfPropertyError('The pharmacological group must be between 3 and 20 characters!')
         } else {
-            setFormOfIssueError("")
+            setTypeOfPropertyError("")
         }
     }
 
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        dispatch(createNewForm(formOfIssue))
+        dispatch(createNewType(typeOfProperty))
             .then(() => {
                 setSuccessful(true);
-                setFormOfIssue("")
-                setFormOfIssueError("")
+                setTypeOfProperty("")
+                setTypeOfPropertyError("")
                 setFormValid(false)
                 setActive(false)
             })
@@ -81,8 +81,8 @@ const FormOfIssueFormWindow = ({active, setActive}) => {
 
     const handleReset = (e) => {
         e.preventDefault()
-        setFormOfIssue("")
-        setFormOfIssueError("")
+        setTypeOfProperty("")
+        setTypeOfPropertyError("")
         setActive(false)
     };
 
@@ -91,13 +91,13 @@ const FormOfIssueFormWindow = ({active, setActive}) => {
             <Grid>
                 <TextField
                     variant="outlined"
-                    label="Form Of Issue"
-                    name="formOfIssue"
-                    value={formOfIssue}
+                    label="Type of property"
+                    name="typeOfProperty"
+                    value={typeOfProperty}
                     onBlur={event => bluerHandler(event)}
                     onChange={e => formOfIssueHandler(e)}
                 />
-                {(formOfIssueError && formOfIssueDirty) && <div style={{color: 'red'}}>{formOfIssueError}</div>}
+                {(typeOfPropertyError && typeOfPropertyDirty) && <div style={{color: 'red'}}>{typeOfPropertyError}</div>}
 
                 {!successful && message && (
                     <div className="form-group">
@@ -126,4 +126,4 @@ const FormOfIssueFormWindow = ({active, setActive}) => {
 
 }
 
-export default FormOfIssueFormWindow;
+export default TypeOfPropertyFormWindow;

@@ -3,7 +3,7 @@ import Controls from "../controls/Controls";
 import React, {useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {clearMessage} from "../../actions/message";
-import {createNewForm} from "../../actions/getFormsOfIssue";
+import {createNewName} from "../../actions/getPharmacyNames";
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -14,30 +14,30 @@ const useStyles = makeStyles(theme => ({
     }
 }))
 
-const FormOfIssueFormWindow = ({active, setActive}) => {
+const PharmacyNameFormWindow = ({active, setActive}) => {
     const classes = useStyles()
 
     const dispatch = useDispatch();
 
     const {message} = useSelector(state => state.message);
 
-    const [formOfIssue, setFormOfIssue] = useState('')
+    const [pharmacyName, setPharmacyName] = useState('')
 
-    const [formOfIssueDirty, setFormOfIssueDirty] = useState(false)
+    const [pharmacyNameDirty, setPharmacyNameDirty] = useState(false)
 
-    const [formOfIssueError, setFormOfIssueError] = useState('Form Of Issue can not be empty')
+    const [pharmacyNameError, setPharmacyNameError] = useState('Pharmacy name can not be empty')
 
     const [formValid, setFormValid] = useState(false)
 
     const [successful, setSuccessful] = useState(false);
 
     useEffect(() => {
-        if (formOfIssueError) {
+        if (pharmacyNameError) {
             setFormValid(false)
         } else {
             setFormValid(true)
         }
-    }, [formOfIssueError])
+    }, [pharmacyNameError])
 
     useEffect(() => {
         dispatch(clearMessage());
@@ -46,31 +46,31 @@ const FormOfIssueFormWindow = ({active, setActive}) => {
 
     const bluerHandler = (e) => {
         switch (e.target.name) {
-            case 'formOfIssue':
-                setFormOfIssueDirty(true)
+            case 'pharmacyName':
+                setPharmacyNameDirty(true)
                 break
         }
     }
 
     const formOfIssueHandler = (e) => {
-        setFormOfIssue(e.target.value)
+        setPharmacyName(e.target.value)
         if (e.target.value.length === 0) {
-            setFormOfIssueError('This field is required!')
+            setPharmacyNameError('This field is required!')
         } else if (e.target.value.length < 4 || e.target.value.length > 20) {
-            setFormOfIssueError('The form of issue must be between 3 and 20 characters!')
+            setPharmacyNameError('The pharmacy name must be between 3 and 20 characters!')
         } else {
-            setFormOfIssueError("")
+            setPharmacyNameError("")
         }
     }
 
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        dispatch(createNewForm(formOfIssue))
+        dispatch(createNewName(pharmacyName))
             .then(() => {
                 setSuccessful(true);
-                setFormOfIssue("")
-                setFormOfIssueError("")
+                setPharmacyName("")
+                setPharmacyNameError("")
                 setFormValid(false)
                 setActive(false)
             })
@@ -81,8 +81,8 @@ const FormOfIssueFormWindow = ({active, setActive}) => {
 
     const handleReset = (e) => {
         e.preventDefault()
-        setFormOfIssue("")
-        setFormOfIssueError("")
+        setPharmacyName("")
+        setPharmacyNameError("")
         setActive(false)
     };
 
@@ -91,13 +91,13 @@ const FormOfIssueFormWindow = ({active, setActive}) => {
             <Grid>
                 <TextField
                     variant="outlined"
-                    label="Form Of Issue"
-                    name="formOfIssue"
-                    value={formOfIssue}
+                    label="Pharmacy name"
+                    name="pharmacyName"
+                    value={pharmacyName}
                     onBlur={event => bluerHandler(event)}
                     onChange={e => formOfIssueHandler(e)}
                 />
-                {(formOfIssueError && formOfIssueDirty) && <div style={{color: 'red'}}>{formOfIssueError}</div>}
+                {(pharmacyNameError && pharmacyNameDirty) && <div style={{color: 'red'}}>{pharmacyNameError}</div>}
 
                 {!successful && message && (
                     <div className="form-group">
@@ -126,4 +126,4 @@ const FormOfIssueFormWindow = ({active, setActive}) => {
 
 }
 
-export default FormOfIssueFormWindow;
+export default PharmacyNameFormWindow;

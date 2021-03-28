@@ -47,6 +47,7 @@ const UserFormWindow = ({active, setActive}) => {
 
     useEffect(() => {
         dispatch(clearMessage());
+        setFormValid(false)
     }, [active]);
 
     const bluerHandler = (e) => {
@@ -129,7 +130,6 @@ const UserFormWindow = ({active, setActive}) => {
         setUsernameError("")
         setEmailError("")
         setPasswordError("")
-        setFormValid(false)
         setActive(false)
     };
 

@@ -3,7 +3,7 @@ import Controls from "../controls/Controls";
 import React, {useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {clearMessage} from "../../actions/message";
-import {createNewForm} from "../../actions/getFormsOfIssue";
+import {createNewArea} from "../../actions/getAreas";
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -14,30 +14,30 @@ const useStyles = makeStyles(theme => ({
     }
 }))
 
-const FormOfIssueFormWindow = ({active, setActive}) => {
+const AreaFormWindow = ({active, setActive}) => {
     const classes = useStyles()
 
     const dispatch = useDispatch();
 
     const {message} = useSelector(state => state.message);
 
-    const [formOfIssue, setFormOfIssue] = useState('')
+    const [area, setArea] = useState('')
 
-    const [formOfIssueDirty, setFormOfIssueDirty] = useState(false)
+    const [areaDirty, setAreaDirty] = useState(false)
 
-    const [formOfIssueError, setFormOfIssueError] = useState('Form Of Issue can not be empty')
+    const [areaError, setAreaError] = useState('Area can not be empty')
 
     const [formValid, setFormValid] = useState(false)
 
     const [successful, setSuccessful] = useState(false);
 
     useEffect(() => {
-        if (formOfIssueError) {
+        if (areaError) {
             setFormValid(false)
         } else {
             setFormValid(true)
         }
-    }, [formOfIssueError])
+    }, [areaError])
 
     useEffect(() => {
         dispatch(clearMessage());
@@ -46,31 +46,31 @@ const FormOfIssueFormWindow = ({active, setActive}) => {
 
     const bluerHandler = (e) => {
         switch (e.target.name) {
-            case 'formOfIssue':
-                setFormOfIssueDirty(true)
+            case 'area':
+                setAreaDirty(true)
                 break
         }
     }
 
     const formOfIssueHandler = (e) => {
-        setFormOfIssue(e.target.value)
+        setArea(e.target.value)
         if (e.target.value.length === 0) {
-            setFormOfIssueError('This field is required!')
+            setAreaError('This field is required!')
         } else if (e.target.value.length < 4 || e.target.value.length > 20) {
-            setFormOfIssueError('The form of issue must be between 3 and 20 characters!')
+            setAreaError('The area must be between 3 and 20 characters!')
         } else {
-            setFormOfIssueError("")
+            setAreaError("")
         }
     }
 
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        dispatch(createNewForm(formOfIssue))
+        dispatch(createNewArea(area))
             .then(() => {
                 setSuccessful(true);
-                setFormOfIssue("")
-                setFormOfIssueError("")
+                setArea("")
+                setAreaError("")
                 setFormValid(false)
                 setActive(false)
             })
@@ -81,8 +81,8 @@ const FormOfIssueFormWindow = ({active, setActive}) => {
 
     const handleReset = (e) => {
         e.preventDefault()
-        setFormOfIssue("")
-        setFormOfIssueError("")
+        setArea("")
+        setAreaError("")
         setActive(false)
     };
 
@@ -91,13 +91,13 @@ const FormOfIssueFormWindow = ({active, setActive}) => {
             <Grid>
                 <TextField
                     variant="outlined"
-                    label="Form Of Issue"
-                    name="formOfIssue"
-                    value={formOfIssue}
+                    label="Area"
+                    name="area"
+                    value={area}
                     onBlur={event => bluerHandler(event)}
                     onChange={e => formOfIssueHandler(e)}
                 />
-                {(formOfIssueError && formOfIssueDirty) && <div style={{color: 'red'}}>{formOfIssueError}</div>}
+                {(areaError && areaDirty) && <div style={{color: 'red'}}>{areaError}</div>}
 
                 {!successful && message && (
                     <div className="form-group">
@@ -119,11 +119,9 @@ const FormOfIssueFormWindow = ({active, setActive}) => {
                         onClick={handleReset}
                     />
                 </div>
-
             </Grid>
         </form>
     )
-
 }
 
-export default FormOfIssueFormWindow;
+export default AreaFormWindow;

@@ -1,25 +1,26 @@
 import axios from "axios";
-import {setForms, setIsFetching} from "../reducers/formOfIssueTableReducer";
+import {setIsFetching} from "../reducers/pharmacyNameTableReducer";
 import {SET_MESSAGE} from "./types";
+import {setNames} from "../reducers/pharmacyNameTableReducer";
 
 const API_URL = "http://localhost:8080/api/";
 
-export const getForms = () => {
+export const getNames = () => {
     return async (dispatch) => {
         dispatch(setIsFetching(true))
-        const forms = await axios.get(API_URL + `getFormOfIssue`);
-        dispatch(setForms(forms.data))
+        const names = await axios.get(API_URL + `getPharmacyName`);
+        dispatch(setNames(names.data))
     }
 };
 
-export const createNewForm = (form_of_issue) => (dispatch) => {
+export const createNewName = (name) => (dispatch) => {
     dispatch(setIsFetching(true))
-    const form = axios.post(API_URL + `createFormOfIssue`, {form_of_issue})
-    return form.then(
+    const newName = axios.post(API_URL + `createPharmacyName`, {name})
+    return newName.then(
         (response) => {
             dispatch({
                 type: SET_MESSAGE,
-                payload: "Form created successful!",
+                payload: "Name created successful!",
             });
             return Promise.resolve();
         },

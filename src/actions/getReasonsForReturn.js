@@ -1,25 +1,26 @@
 import axios from "axios";
-import {setForms, setIsFetching} from "../reducers/formOfIssueTableReducer";
+import {setIsFetching} from "../reducers/countryOfManufactureTableReducer";
 import {SET_MESSAGE} from "./types";
+import {setReasons} from "../reducers/reasonForReturnTablereducer";
 
 const API_URL = "http://localhost:8080/api/";
 
-export const getForms = () => {
+export const getReasons = () => {
     return async (dispatch) => {
         dispatch(setIsFetching(true))
-        const forms = await axios.get(API_URL + `getFormOfIssue`);
-        dispatch(setForms(forms.data))
+        const reasons = await axios.get(API_URL + `getReasonForReturn`);
+        dispatch(setReasons(reasons.data))
     }
 };
 
-export const createNewForm = (form_of_issue) => (dispatch) => {
+export const createNewReason = (reason_for_return) => (dispatch) => {
     dispatch(setIsFetching(true))
-    const form = axios.post(API_URL + `createFormOfIssue`, {form_of_issue})
-    return form.then(
+    const newReason = axios.post(API_URL + `createReasonForReturn`, {reason_for_return})
+    return newReason.then(
         (response) => {
             dispatch({
                 type: SET_MESSAGE,
-                payload: "Form created successful!",
+                payload: "Reason created successful!",
             });
             return Promise.resolve();
         },

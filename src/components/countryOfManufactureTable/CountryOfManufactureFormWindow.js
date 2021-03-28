@@ -3,7 +3,7 @@ import Controls from "../controls/Controls";
 import React, {useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {clearMessage} from "../../actions/message";
-import {createNewForm} from "../../actions/getFormsOfIssue";
+import {createNewCountry} from "../../actions/getCountriesOfManufacture";
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -14,30 +14,30 @@ const useStyles = makeStyles(theme => ({
     }
 }))
 
-const FormOfIssueFormWindow = ({active, setActive}) => {
+const CountryOfManufactureFormWindow = ({active, setActive}) => {
     const classes = useStyles()
 
     const dispatch = useDispatch();
 
     const {message} = useSelector(state => state.message);
 
-    const [formOfIssue, setFormOfIssue] = useState('')
+    const [countryOfManufacture, setCountryOfManufacture] = useState('')
 
-    const [formOfIssueDirty, setFormOfIssueDirty] = useState(false)
+    const [countryOfManufactureDirty, setCountryOfManufactureDirty] = useState(false)
 
-    const [formOfIssueError, setFormOfIssueError] = useState('Form Of Issue can not be empty')
+    const [countryOfManufactureError, setCountryOfManufactureError] = useState('Country of manufacture can not be empty')
 
     const [formValid, setFormValid] = useState(false)
 
     const [successful, setSuccessful] = useState(false);
 
     useEffect(() => {
-        if (formOfIssueError) {
+        if (countryOfManufactureError) {
             setFormValid(false)
         } else {
             setFormValid(true)
         }
-    }, [formOfIssueError])
+    }, [countryOfManufactureError])
 
     useEffect(() => {
         dispatch(clearMessage());
@@ -46,31 +46,31 @@ const FormOfIssueFormWindow = ({active, setActive}) => {
 
     const bluerHandler = (e) => {
         switch (e.target.name) {
-            case 'formOfIssue':
-                setFormOfIssueDirty(true)
+            case 'countryOfManufacture':
+                setCountryOfManufactureDirty(true)
                 break
         }
     }
 
     const formOfIssueHandler = (e) => {
-        setFormOfIssue(e.target.value)
+        setCountryOfManufacture(e.target.value)
         if (e.target.value.length === 0) {
-            setFormOfIssueError('This field is required!')
+            setCountryOfManufactureError('This field is required!')
         } else if (e.target.value.length < 4 || e.target.value.length > 20) {
-            setFormOfIssueError('The form of issue must be between 3 and 20 characters!')
+            setCountryOfManufactureError('The country must be between 3 and 20 characters!')
         } else {
-            setFormOfIssueError("")
+            setCountryOfManufactureError("")
         }
     }
 
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        dispatch(createNewForm(formOfIssue))
+        dispatch(createNewCountry(countryOfManufacture))
             .then(() => {
                 setSuccessful(true);
-                setFormOfIssue("")
-                setFormOfIssueError("")
+                setCountryOfManufacture("")
+                setCountryOfManufactureError("")
                 setFormValid(false)
                 setActive(false)
             })
@@ -81,8 +81,8 @@ const FormOfIssueFormWindow = ({active, setActive}) => {
 
     const handleReset = (e) => {
         e.preventDefault()
-        setFormOfIssue("")
-        setFormOfIssueError("")
+        setCountryOfManufacture("")
+        setCountryOfManufactureError("")
         setActive(false)
     };
 
@@ -91,13 +91,14 @@ const FormOfIssueFormWindow = ({active, setActive}) => {
             <Grid>
                 <TextField
                     variant="outlined"
-                    label="Form Of Issue"
-                    name="formOfIssue"
-                    value={formOfIssue}
+                    label="Country of manufacture"
+                    name="countryOfManufacture"
+                    value={countryOfManufacture}
                     onBlur={event => bluerHandler(event)}
                     onChange={e => formOfIssueHandler(e)}
                 />
-                {(formOfIssueError && formOfIssueDirty) && <div style={{color: 'red'}}>{formOfIssueError}</div>}
+                {(countryOfManufactureError && countryOfManufactureDirty) &&
+                <div style={{color: 'red'}}>{countryOfManufactureError}</div>}
 
                 {!successful && message && (
                     <div className="form-group">
@@ -123,7 +124,6 @@ const FormOfIssueFormWindow = ({active, setActive}) => {
             </Grid>
         </form>
     )
-
 }
 
-export default FormOfIssueFormWindow;
+export default CountryOfManufactureFormWindow;

@@ -1,25 +1,25 @@
 import axios from "axios";
-import {setForms, setIsFetching} from "../reducers/formOfIssueTableReducer";
+import {setGroups, setIsFetching} from "../reducers/pharmacologicalGroupTableReducer";
 import {SET_MESSAGE} from "./types";
 
 const API_URL = "http://localhost:8080/api/";
 
-export const getForms = () => {
+export const getGroups = () => {
     return async (dispatch) => {
         dispatch(setIsFetching(true))
-        const forms = await axios.get(API_URL + `getFormOfIssue`);
-        dispatch(setForms(forms.data))
+        const groups = await axios.get(API_URL + `getPharmacologicalGroup`);
+        dispatch(setGroups(groups.data))
     }
 };
 
-export const createNewForm = (form_of_issue) => (dispatch) => {
+export const createNewGroup = (pharmacological_group) => (dispatch) => {
     dispatch(setIsFetching(true))
-    const form = axios.post(API_URL + `createFormOfIssue`, {form_of_issue})
-    return form.then(
+    const group = axios.post(API_URL + `createPharmacologicalGroup`, {pharmacological_group})
+    return group.then(
         (response) => {
             dispatch({
                 type: SET_MESSAGE,
-                payload: "Form created successful!",
+                payload: "Group created successful!",
             });
             return Promise.resolve();
         },

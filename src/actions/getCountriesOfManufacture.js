@@ -1,25 +1,26 @@
 import axios from "axios";
-import {setForms, setIsFetching} from "../reducers/formOfIssueTableReducer";
+import {setIsFetching} from "../reducers/countryOfManufactureTableReducer";
 import {SET_MESSAGE} from "./types";
+import {setCountries} from "../reducers/countryOfManufactureTableReducer";
 
 const API_URL = "http://localhost:8080/api/";
 
-export const getForms = () => {
+export const getCountries = () => {
     return async (dispatch) => {
         dispatch(setIsFetching(true))
-        const forms = await axios.get(API_URL + `getFormOfIssue`);
-        dispatch(setForms(forms.data))
+        const countries = await axios.get(API_URL + `getCountryOfManufacture`);
+        dispatch(setCountries(countries.data))
     }
 };
 
-export const createNewForm = (form_of_issue) => (dispatch) => {
+export const createNewCountry = (country) => (dispatch) => {
     dispatch(setIsFetching(true))
-    const form = axios.post(API_URL + `createFormOfIssue`, {form_of_issue})
-    return form.then(
+    const newCountry = axios.post(API_URL + `createCountryOfManufacture`, {country})
+    return newCountry.then(
         (response) => {
             dispatch({
                 type: SET_MESSAGE,
-                payload: "Form created successful!",
+                payload: "Country created successful!",
             });
             return Promise.resolve();
         },

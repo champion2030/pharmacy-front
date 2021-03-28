@@ -12,6 +12,12 @@ import UsersTable from "./components/usersTable/UsersTable";
 import {CssBaseline, createMuiTheme, ThemeProvider} from '@material-ui/core';
 import SignIn from "./components/Login";
 import FormOfIssueTable from "./components/formOfIssueTable/FormOfIssueTable";
+import PharmacologicalGroupTable from "./components/pharmacologicalGroupTable/PharmacologicalGroupTable";
+import CountryOfManufactureTable from "./components/countryOfManufactureTable/CountryOfManufactureTable";
+import TypeOfPropertyTable from "./components/typeOfPropertyTable/TypeOfPropertyTable";
+import PharmacyNameTable from "./components/pharmacyName/PharmacyNameTable";
+import AreaTable from "./components/areaTable/AreaTable";
+import ReasonForReturnTable from "./components/reasonForReturnTable/ReasonForReturnTable";
 
 
 const theme = createMuiTheme({
@@ -76,6 +82,37 @@ const App = () => {
                                     FormOfIssueTable
                                 </Link>
                             </li>
+                            <li className="nav-item">
+                                <Link to={"/pharmacologicalGroup"} className="nav-link">
+                                    PharmacologicalGroupTable
+                                </Link>
+                            </li>
+                            <li className="nav-item">
+                                <Link to={"/countryOfManufacture"} className="nav-link">
+                                    CountryOfManufactureTable
+                                </Link>
+                            </li>
+                            <li className="nav-item">
+                                <Link to={"/typeOfProperty"} className="nav-link">
+                                    TypeOfPropertyTable
+                                </Link>
+                            </li>
+                            <li className="nav-item">
+                                <Link to={"/pharmacyName"} className="nav-link">
+                                    PharmacyNameTable
+                                </Link>
+                            </li>
+                            <li className="nav-item">
+                                <Link to={"/area"} className="nav-link">
+                                    AreaTable
+                                </Link>
+                            </li>
+                            <li className="nav-item">
+                                <Link to={"/reasonForReturn"} className="nav-link">
+                                    ReasonForReturnTable
+                                </Link>
+                            </li>
+
 
                             {currentUser && (
                                 <li className="nav-item">
@@ -124,6 +161,12 @@ const App = () => {
                             <Route exact path="/profile" component={Profile}/>
                             <Route exact path="/users" component={UsersTable}/>
                             <Route exact path="/formOfIssue" component={FormOfIssueTable}/>
+                            <Route exact path="/pharmacologicalGroup" component={PharmacologicalGroupTable}/>
+                            <Route exact path="/countryOfManufacture" component={CountryOfManufactureTable}/>
+                            <Route exact path="/typeOfProperty" component={TypeOfPropertyTable}/>
+                            <Route exact path="/pharmacyName" component={PharmacyNameTable}/>
+                            <Route exact path="/area" component={AreaTable}/>
+                            <Route exact path="/reasonForReturn" component={ReasonForReturnTable}/>
                         </Switch>
                         <CssBaseline/>
                     </div>
