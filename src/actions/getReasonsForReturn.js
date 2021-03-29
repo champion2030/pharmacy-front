@@ -17,7 +17,7 @@ export const createNewReason = (reason_for_return) => (dispatch) => {
     dispatch(setIsFetching(true))
     const newReason = axios.post(API_URL + `createReasonForReturn`, {reason_for_return})
     return newReason.then(
-        (response) => {
+        () => {
             dispatch({
                 type: SET_MESSAGE,
                 payload: "Reason created successful!",

@@ -17,7 +17,7 @@ export const createNewType = (name_of_property) => (dispatch) => {
     dispatch(setIsFetching(true))
     const type = axios.post(API_URL + `createTypeOfProperty`, {name_of_property})
     return type.then(
-        (response) => {
+        () => {
             dispatch({
                 type: SET_MESSAGE,
                 payload: "Type created successful!",

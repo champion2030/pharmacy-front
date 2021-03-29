@@ -1,9 +1,8 @@
 import {
-    SET_CURRENT_COUNTRY,
     SET_CURRENT_FORM,
     SET_FORMS,
     SET_IS_FETCHING,
-    UPDATE_INPUT_COUNTRY, UPDATE_INPUT_FORM
+    UPDATE_INPUT_FORM
 } from "../actions/types";
 
 const defaultState = {

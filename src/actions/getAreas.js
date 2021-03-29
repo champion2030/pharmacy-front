@@ -17,7 +17,7 @@ export const createNewArea = (name_of_area) => (dispatch) => {
     dispatch(setIsFetching(true))
     const newArea = axios.post(API_URL + `createArea`, {name_of_area})
     return newArea.then(
-        (response) => {
+        () => {
             dispatch({
                 type: SET_MESSAGE,
                 payload: "Area created successful!",
@@ -59,7 +59,7 @@ export const updateCurrentArea = (name_of_area, id) => (dispatch) => {
     dispatch(setIsFetching(true))
     const updatedArea = axios.put(API_URL + `updateArea/${id}`, {name_of_area})
     return updatedArea.then(
-        (response) => {
+        () => {
             dispatch({
                 type: SET_MESSAGE,
                 payload: "Area updated successful!",

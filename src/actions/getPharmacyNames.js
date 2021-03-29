@@ -2,10 +2,6 @@ import axios from "axios";
 import {setCurrentPharmacyName, setIsFetching, updateInputPharmacyName} from "../reducers/pharmacyNameTableReducer";
 import {SET_MESSAGE} from "./types";
 import {setNames} from "../reducers/pharmacyNameTableReducer";
-import {
-    setCurrentPharmacologicalGroup,
-    updateInputPharmacologicalGroup
-} from "../reducers/pharmacologicalGroupTableReducer";
 
 const API_URL = "http://localhost:8080/api/";
 
@@ -21,7 +17,7 @@ export const createNewName = (name) => (dispatch) => {
     dispatch(setIsFetching(true))
     const newName = axios.post(API_URL + `createPharmacyName`, {name})
     return newName.then(
-        (response) => {
+        () => {
             dispatch({
                 type: SET_MESSAGE,
                 payload: "Name created successful!",
@@ -63,7 +59,7 @@ export const updateCurrentPharmacyName = (name, id) => (dispatch) => {
     dispatch(setIsFetching(true))
     const updatedName = axios.put(API_URL + `updatePharmacyName/${id}`, {name})
     return updatedName.then(
-        (response) => {
+        () => {
             dispatch({
                 type: SET_MESSAGE,
                 payload: "Name updated successful!",

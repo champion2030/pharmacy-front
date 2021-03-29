@@ -17,7 +17,7 @@ export const createNewCountry = (country) => (dispatch) => {
     dispatch(setIsFetching(true))
     const newCountry = axios.post(API_URL + `createCountryOfManufacture`, {country})
     return newCountry.then(
-        (response) => {
+        () => {
             dispatch({
                 type: SET_MESSAGE,
                 payload: "Country created successful!",
@@ -60,7 +60,7 @@ export const updateCurrentCountry = (country, id) => (dispatch) => {
     dispatch(setIsFetching(true))
     const updatedCountry = axios.put(API_URL + `updateCountryOfManufacture/${id}`, {country})
     return updatedCountry.then(
-        (response) => {
+        () => {
             dispatch({
                 type: SET_MESSAGE,
                 payload: "Country updated successful!",

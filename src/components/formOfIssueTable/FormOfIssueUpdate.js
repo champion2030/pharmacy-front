@@ -4,12 +4,7 @@ import {makeStyles, Paper, TextField,} from "@material-ui/core";
 import {useParams} from "react-router-dom"
 import Controls from "../controls/Controls";
 import {clearMessage} from "../../actions/message";
-import {
-    getCurrentCountry,
-    updateCurrentCountry,
-    updateCurrentInputCountry
-} from "../../actions/getCountriesOfManufacture";
-import formOfIssueReducer from "../../reducers/formOfIssueTableReducer";
+
 import {
     getCurrentFormOfIssue,
     updateCurrentFormOfIssue,

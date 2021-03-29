@@ -6,7 +6,6 @@ import {
     updateInputFormOfIssue
 } from "../reducers/formOfIssueTableReducer";
 import {SET_MESSAGE} from "./types";
-import {setCurrentCountry, updateInputCountry} from "../reducers/countryOfManufactureTableReducer";
 
 const API_URL = "http://localhost:8080/api/";
 
@@ -22,7 +21,7 @@ export const createNewForm = (form_of_issue) => (dispatch) => {
     dispatch(setIsFetching(true))
     const form = axios.post(API_URL + `createFormOfIssue`, {form_of_issue})
     return form.then(
-        (response) => {
+        () => {
             dispatch({
                 type: SET_MESSAGE,
                 payload: "Form created successful!",
@@ -64,7 +63,7 @@ export const updateCurrentFormOfIssue = (form_of_issue, id) => (dispatch) => {
     dispatch(setIsFetching(true))
     const updatedForm = axios.put(API_URL + `updateFormOfIssue/${id}`, {form_of_issue})
     return updatedForm.then(
-        (response) => {
+        () => {
             dispatch({
                 type: SET_MESSAGE,
                 payload: "Form updated successful!",

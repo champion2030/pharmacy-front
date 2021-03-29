@@ -5,18 +5,6 @@ import {useParams} from "react-router-dom"
 import Controls from "../controls/Controls";
 import {clearMessage} from "../../actions/message";
 import {
-    getCurrentCountry,
-    updateCurrentCountry,
-    updateCurrentInputCountry
-} from "../../actions/getCountriesOfManufacture";
-import formOfIssueReducer from "../../reducers/formOfIssueTableReducer";
-import {
-    getCurrentFormOfIssue,
-    updateCurrentFormOfIssue,
-    updateCurrentInputFormOfIssue
-} from "../../actions/getFormsOfIssue";
-import pharmacologicalGroupReducer from "../../reducers/pharmacologicalGroupTableReducer";
-import {
     getCurrentPharmacologicalGroup,
     updateCurrentInputPharmacologicalGroup, updateCurrentPharmacologicalGroup
 } from "../../actions/getPharmacologicalGroups";

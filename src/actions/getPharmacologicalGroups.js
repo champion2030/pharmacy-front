@@ -6,7 +6,6 @@ import {
     updateInputPharmacologicalGroup
 } from "../reducers/pharmacologicalGroupTableReducer";
 import {SET_MESSAGE} from "./types";
-import {setCurrentFormOfIssue, updateInputFormOfIssue} from "../reducers/formOfIssueTableReducer";
 
 const API_URL = "http://localhost:8080/api/";
 
@@ -22,7 +21,7 @@ export const createNewGroup = (pharmacological_group) => (dispatch) => {
     dispatch(setIsFetching(true))
     const group = axios.post(API_URL + `createPharmacologicalGroup`, {pharmacological_group})
     return group.then(
-        (response) => {
+        () => {
             dispatch({
                 type: SET_MESSAGE,
                 payload: "Group created successful!",
@@ -64,7 +63,7 @@ export const updateCurrentPharmacologicalGroup = (pharmacological_group, id) => 
     dispatch(setIsFetching(true))
     const updatedGroup = axios.put(API_URL + `updatePharmacologicalGroup/${id}`, {pharmacological_group})
     return updatedGroup.then(
-        (response) => {
+        () => {
             dispatch({
                 type: SET_MESSAGE,
                 payload: "Group updated successful!",
