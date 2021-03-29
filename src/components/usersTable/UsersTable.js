@@ -21,7 +21,7 @@ import {setCurrentPage} from "../../reducers/usersTableReducer";
 import {Search} from "@material-ui/icons";
 import AddIcon from "@material-ui/icons/Add";
 import UserFormWindow from "./UserFormWindow";
-import ConfirmDialog from "../ConfirmDialog";
+import ConfirmDialog from "../commonComponents/ConfirmDialog";
 import UniversalModalWindow from "../ModalWindow/UniversalModalWindow";
 
 

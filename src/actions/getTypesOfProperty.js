@@ -34,5 +34,9 @@ export const createNewType = (name_of_property) => (dispatch) => {
             return Promise.reject();
         }
     );
+}
 
-};
+export const deleteTypeOfProperty = (id) => async (dispatch) => {
+    dispatch(setIsFetching(true))
+    await axios.delete(API_URL + `deleteTypeOfProperty/${id}`)
+}

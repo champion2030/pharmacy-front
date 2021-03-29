@@ -34,5 +34,9 @@ export const createNewReason = (reason_for_return) => (dispatch) => {
             return Promise.reject();
         }
     );
+}
 
-};
+export const deleteReasonForReturn = (id) => async (dispatch) => {
+    dispatch(setIsFetching(true))
+    await axios.delete(API_URL + `deleteReasonForReturn/${id}`)
+}

@@ -13,11 +13,13 @@ import Controls from "../controls/Controls";
 import EditOutlinedIcon from "@material-ui/icons/EditOutlined";
 import CloseIcon from "@material-ui/icons/Close";
 import AddIcon from "@material-ui/icons/Add";
-import ConfirmDialog from "../ConfirmDialog";
+import ConfirmDialog from "../commonComponents/ConfirmDialog";
 import UniversalModalWindow from "../ModalWindow/UniversalModalWindow";
-import {getNames} from "../../actions/getPharmacyNames";
+import {deletePharmacyName, getNames} from "../../actions/getPharmacyNames";
 import PharmacyNameTableHead from "./PharmacyNameTableHead";
 import PharmacyNameFormWindow from "./PharmacyNameFormWindow";
+import Notification from "../commonComponents/Notification";
+import {NavLink} from "react-router-dom";
 
 
 const useStyles = makeStyles(theme => ({
@@ -69,6 +71,7 @@ const PharmacyNameTable = () => {
             ...confirmDialog,
             isOpen: false
         })
+        dispatch(deletePharmacyName(id))
         setNotify({
             isOpen: true,
             message: 'Deleted Successfully',
@@ -78,7 +81,7 @@ const PharmacyNameTable = () => {
 
     useEffect(() => {
         dispatch(getNames())
-    }, [dispatch, modalActive])
+    }, [dispatch, modalActive, names])
 
 
     return (
@@ -104,14 +107,11 @@ const PharmacyNameTable = () => {
                                         <TableCell>{item.name}</TableCell>
 
                                         <TableCell>
-                                            <Controls.ActionButton
-                                                color="primary"
-                                                // onClick={() => {
-                                                //     openInPopup(item)
-                                                // }}
-                                            >
-                                                <EditOutlinedIcon fontSize="small"/>
-                                            </Controls.ActionButton>
+                                            <NavLink to={`/currentPharmacyName/${item.id}`}>
+                                                <Controls.ActionButton color="primary">
+                                                    <EditOutlinedIcon fontSize="small"/>
+                                                </Controls.ActionButton>
+                                            </NavLink>
                                             <Controls.ActionButton
                                                 color="secondary"
                                                 onClick={() => {
@@ -138,6 +138,10 @@ const PharmacyNameTable = () => {
             <UniversalModalWindow active={modalActive}>
                 <PharmacyNameFormWindow active={modalActive} setActive={setModalActive}/>
             </UniversalModalWindow>
+            <Notification
+                notify={notify}
+                setNotify={setNotify}
+            />
             <ConfirmDialog
                 confirmDialog={confirmDialog}
                 setConfirmDialog={setConfirmDialog}

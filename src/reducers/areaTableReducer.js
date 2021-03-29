@@ -1,8 +1,9 @@
-import {SET_AREAS, SET_IS_FETCHING} from "../actions/types";
+import {SET_AREAS, SET_CURRENT_AREA, SET_IS_FETCHING, UPDATE_INPUT} from "../actions/types";
 
 const defaultState = {
     areas: [],
-    isFetching: true
+    isFetching: true,
+    name_of_area: ""
 }
 
 export default function areaReducer(state = defaultState, action) {
@@ -18,6 +19,16 @@ export default function areaReducer(state = defaultState, action) {
                 ...state,
                 isFetching: action.payload
             }
+        case SET_CURRENT_AREA:
+            return {
+                ...state,
+                name_of_area: action.payload
+            }
+        case UPDATE_INPUT:
+            return {
+                ...state,
+                name_of_area: action.payload
+            }
         default:
             return state
     }
@@ -25,3 +36,7 @@ export default function areaReducer(state = defaultState, action) {
 
 export const setAreas = (areas) => ({type: SET_AREAS, payload: areas})
 export const setIsFetching = (bool) => ({type: SET_IS_FETCHING, payload: bool})
+export const setCurrentArea = (area) => ({type: SET_CURRENT_AREA, payload: area})
+export const updateInput = (input) => ({type: UPDATE_INPUT, payload: input})
+
+

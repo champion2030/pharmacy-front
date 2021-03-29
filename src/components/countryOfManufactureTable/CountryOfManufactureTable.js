@@ -13,11 +13,13 @@ import Controls from "../controls/Controls";
 import EditOutlinedIcon from "@material-ui/icons/EditOutlined";
 import CloseIcon from "@material-ui/icons/Close";
 import AddIcon from "@material-ui/icons/Add";
-import ConfirmDialog from "../ConfirmDialog";
+import ConfirmDialog from "../commonComponents/ConfirmDialog";
 import UniversalModalWindow from "../ModalWindow/UniversalModalWindow";
 import CountryOfManufactureTableHead from "./CountryOfManufactureTableHead";
-import {getCountries} from "../../actions/getCountriesOfManufacture";
+import {deleteCountryOfManufacture, getCountries} from "../../actions/getCountriesOfManufacture";
 import CountryOfManufactureFormWindow from "./CountryOfManufactureFormWindow";
+import Notification from "../commonComponents/Notification";
+import {NavLink} from "react-router-dom";
 
 
 const useStyles = makeStyles(theme => ({
@@ -69,6 +71,7 @@ const CountryOfManufactureTable = () => {
             ...confirmDialog,
             isOpen: false
         })
+        dispatch(deleteCountryOfManufacture(id))
         setNotify({
             isOpen: true,
             message: 'Deleted Successfully',
@@ -78,7 +81,7 @@ const CountryOfManufactureTable = () => {
 
     useEffect(() => {
         dispatch(getCountries())
-    }, [dispatch, modalActive])
+    }, [dispatch, modalActive, countries])
 
 
     return (
@@ -104,14 +107,11 @@ const CountryOfManufactureTable = () => {
                                         <TableCell>{item.country}</TableCell>
 
                                         <TableCell>
-                                            <Controls.ActionButton
-                                                color="primary"
-                                                // onClick={() => {
-                                                //     openInPopup(item)
-                                                // }}
-                                            >
-                                                <EditOutlinedIcon fontSize="small"/>
-                                            </Controls.ActionButton>
+                                            <NavLink to={`/currentCountry/${item.id}`}>
+                                                <Controls.ActionButton color="primary">
+                                                    <EditOutlinedIcon fontSize="small"/>
+                                                </Controls.ActionButton>
+                                            </NavLink>
                                             <Controls.ActionButton
                                                 color="secondary"
                                                 onClick={() => {
@@ -141,6 +141,10 @@ const CountryOfManufactureTable = () => {
             <ConfirmDialog
                 confirmDialog={confirmDialog}
                 setConfirmDialog={setConfirmDialog}
+            />
+            <Notification
+                notify={notify}
+                setNotify={setNotify}
             />
         </div>
     )

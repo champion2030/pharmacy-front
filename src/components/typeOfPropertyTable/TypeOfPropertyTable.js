@@ -13,11 +13,13 @@ import Controls from "../controls/Controls";
 import EditOutlinedIcon from "@material-ui/icons/EditOutlined";
 import CloseIcon from "@material-ui/icons/Close";
 import AddIcon from "@material-ui/icons/Add";
-import ConfirmDialog from "../ConfirmDialog";
+import ConfirmDialog from "../commonComponents/ConfirmDialog";
 import UniversalModalWindow from "../ModalWindow/UniversalModalWindow";
 import TypeOfPropertyTableHead from "./TypeOfPropertyTableHead";
-import {getTypes} from "../../actions/getTypesOfProperty";
+import {deleteTypeOfProperty, getTypes} from "../../actions/getTypesOfProperty";
 import TypeOfPropertyFormWindow from "./TypeOfPropertyFormWindow";
+import Notification from "../commonComponents/Notification";
+import {NavLink} from "react-router-dom";
 
 
 const useStyles = makeStyles(theme => ({
@@ -69,6 +71,7 @@ const TypeOfPropertyTable = () => {
             ...confirmDialog,
             isOpen: false
         })
+        dispatch(deleteTypeOfProperty(id))
         setNotify({
             isOpen: true,
             message: 'Deleted Successfully',
@@ -78,7 +81,7 @@ const TypeOfPropertyTable = () => {
 
     useEffect(() => {
         dispatch(getTypes())
-    }, [dispatch, modalActive])
+    }, [dispatch, modalActive, types])
 
 
     return (
@@ -104,14 +107,11 @@ const TypeOfPropertyTable = () => {
                                         <TableCell>{item.name_of_property}</TableCell>
 
                                         <TableCell>
-                                            <Controls.ActionButton
-                                                color="primary"
-                                                // onClick={() => {
-                                                //     openInPopup(item)
-                                                // }}
-                                            >
-                                                <EditOutlinedIcon fontSize="small"/>
-                                            </Controls.ActionButton>
+                                            <NavLink to="/users">
+                                                <Controls.ActionButton color="primary">
+                                                    <EditOutlinedIcon fontSize="small"/>
+                                                </Controls.ActionButton>
+                                            </NavLink>
                                             <Controls.ActionButton
                                                 color="secondary"
                                                 onClick={() => {
@@ -138,6 +138,10 @@ const TypeOfPropertyTable = () => {
             <UniversalModalWindow active={modalActive}>
                 <TypeOfPropertyFormWindow active={modalActive} setActive={setModalActive}/>
             </UniversalModalWindow>
+            <Notification
+                notify={notify}
+                setNotify={setNotify}
+            />
             <ConfirmDialog
                 confirmDialog={confirmDialog}
                 setConfirmDialog={setConfirmDialog}

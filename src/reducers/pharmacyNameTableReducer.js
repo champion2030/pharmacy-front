@@ -1,8 +1,14 @@
-import {SET_IS_FETCHING, SET_NAMES} from "../actions/types";
+import {
+    SET_CURRENT_PHARMACY_NAME,
+    SET_IS_FETCHING,
+    SET_NAMES,
+    UPDATE_INPUT_PHARMACY_NAME
+} from "../actions/types";
 
 const defaultState = {
     names: [],
-    isFetching: true
+    isFetching: true,
+    name: ""
 }
 
 export default function pharmacyNameReducer(state = defaultState, action) {
@@ -12,6 +18,16 @@ export default function pharmacyNameReducer(state = defaultState, action) {
                 ...state,
                 names: action.payload,
                 isFetching: false
+            }
+        case SET_CURRENT_PHARMACY_NAME:
+            return {
+                ...state,
+                name: action.payload
+            }
+        case UPDATE_INPUT_PHARMACY_NAME:
+            return {
+                ...state,
+                name: action.payload
             }
         case SET_IS_FETCHING:
             return {
@@ -25,3 +41,5 @@ export default function pharmacyNameReducer(state = defaultState, action) {
 
 export const setNames = (names) => ({type: SET_NAMES, payload: names})
 export const setIsFetching = (bool) => ({type: SET_IS_FETCHING, payload: bool})
+export const setCurrentPharmacyName = (name) => ({type: SET_CURRENT_PHARMACY_NAME, payload: name})
+export const updateInputPharmacyName = (input) => ({type: UPDATE_INPUT_PHARMACY_NAME, payload: input})

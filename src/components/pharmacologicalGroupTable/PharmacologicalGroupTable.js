@@ -13,12 +13,13 @@ import Controls from "../controls/Controls";
 import EditOutlinedIcon from "@material-ui/icons/EditOutlined";
 import CloseIcon from "@material-ui/icons/Close";
 import AddIcon from "@material-ui/icons/Add";
-import ConfirmDialog from "../ConfirmDialog";
+import ConfirmDialog from "../commonComponents/ConfirmDialog";
 import UniversalModalWindow from "../ModalWindow/UniversalModalWindow";
 import PharmacologicalGroupTableHead from "./PharmacologicalGroupTableHead";
 import PharmacologicalGroupFormWindow from "./PharmacologicalGroupFormWindow";
-import {getGroups} from "../../actions/getPharmacologicalGroups";
-
+import {deletePharmacologicalGroup, getGroups} from "../../actions/getPharmacologicalGroups";
+import Notification from "../commonComponents/Notification";
+import {NavLink} from "react-router-dom";
 
 const useStyles = makeStyles(theme => ({
     pageContent: {
@@ -59,7 +60,7 @@ const PharmacologicalGroupTable = () => {
 
     const classes = useStyles();
     const dispatch = useDispatch()
-    const groups = useSelector(state => state.pharmacologicalFormsReducer.groups)
+    const groups = useSelector(state => state.pharmacologicalGroupReducer.groups)
     const [modalActive, setModalActive] = useState(false)
     const [confirmDialog, setConfirmDialog] = useState({isOpen: false, title: '', subTitle: ''})
     const [notify, setNotify] = useState({isOpen: false, message: '', type: ''})
@@ -69,6 +70,7 @@ const PharmacologicalGroupTable = () => {
             ...confirmDialog,
             isOpen: false
         })
+        dispatch(deletePharmacologicalGroup(id))
         setNotify({
             isOpen: true,
             message: 'Deleted Successfully',
@@ -78,7 +80,7 @@ const PharmacologicalGroupTable = () => {
 
     useEffect(() => {
         dispatch(getGroups())
-    }, [dispatch, modalActive])
+    }, [dispatch, modalActive, groups])
 
 
     return (
@@ -104,14 +106,11 @@ const PharmacologicalGroupTable = () => {
                                         <TableCell>{item.pharmacological_group}</TableCell>
 
                                         <TableCell>
-                                            <Controls.ActionButton
-                                                color="primary"
-                                                // onClick={() => {
-                                                //     openInPopup(item)
-                                                // }}
-                                            >
-                                                <EditOutlinedIcon fontSize="small"/>
-                                            </Controls.ActionButton>
+                                            <NavLink to={`/currentPharmacologicalGroup/${item.id}`}>
+                                                <Controls.ActionButton color="primary">
+                                                    <EditOutlinedIcon fontSize="small"/>
+                                                </Controls.ActionButton>
+                                            </NavLink>
                                             <Controls.ActionButton
                                                 color="secondary"
                                                 onClick={() => {
@@ -138,6 +137,10 @@ const PharmacologicalGroupTable = () => {
             <UniversalModalWindow active={modalActive}>
                 <PharmacologicalGroupFormWindow active={modalActive} setActive={setModalActive}/>
             </UniversalModalWindow>
+            <Notification
+                notify={notify}
+                setNotify={setNotify}
+            />
             <ConfirmDialog
                 confirmDialog={confirmDialog}
                 setConfirmDialog={setConfirmDialog}

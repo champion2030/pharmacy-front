@@ -1,5 +1,5 @@
 import axios from "axios";
-import {setIsFetching} from "../reducers/countryOfManufactureTableReducer";
+import {setCurrentCountry, setIsFetching, updateInputCountry} from "../reducers/countryOfManufactureTableReducer";
 import {SET_MESSAGE} from "./types";
 import {setCountries} from "../reducers/countryOfManufactureTableReducer";
 
@@ -35,4 +35,46 @@ export const createNewCountry = (country) => (dispatch) => {
         }
     );
 
+};
+
+export const deleteCountryOfManufacture = (id) => async (dispatch) => {
+    dispatch(setIsFetching(true))
+    await axios.delete(API_URL + `deleteCountryOfManufacture/${id}`)
+}
+
+export const getCurrentCountry = (id) => {
+    return async (dispatch) => {
+        dispatch(setIsFetching(true))
+        const area = await axios.get(API_URL + `getCurrentCountryOfManufacture/${id}`);
+        dispatch(setCurrentCountry(area.data.country))
+    }
+};
+
+export const updateCurrentInputCountry = (input) => {
+    return async (dispatch) => {
+        dispatch(updateInputCountry(input))
+    }
+};
+
+export const updateCurrentCountry = (country, id) => (dispatch) => {
+    dispatch(setIsFetching(true))
+    const updatedCountry = axios.put(API_URL + `updateCountryOfManufacture/${id}`, {country})
+    return updatedCountry.then(
+        (response) => {
+            dispatch({
+                type: SET_MESSAGE,
+                payload: "Country updated successful!",
+            });
+            return Promise.resolve();
+        },
+        (error) => {
+            const message = error.response.data.error
+
+            dispatch({
+                type: SET_MESSAGE,
+                payload: message,
+            });
+            return Promise.reject();
+        }
+    );
 };

@@ -1,6 +1,6 @@
 import React, {useEffect} from "react";
 import {useDispatch, useSelector} from "react-redux";
-import {Router, Switch, Route, Link} from "react-router-dom";
+import {Redirect,Router, Switch, Route, Link} from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 import Register from "./components/Register";
@@ -18,6 +18,11 @@ import TypeOfPropertyTable from "./components/typeOfPropertyTable/TypeOfProperty
 import PharmacyNameTable from "./components/pharmacyName/PharmacyNameTable";
 import AreaTable from "./components/areaTable/AreaTable";
 import ReasonForReturnTable from "./components/reasonForReturnTable/ReasonForReturnTable";
+import AreaUpdate from "./components/areaTable/AreaUpdate";
+import CountryOfManufactureUpdate from "./components/countryOfManufactureTable/CountryOfManufactureUpdate";
+import FormOfIssueUpdate from "./components/formOfIssueTable/FormOfIssueUpdate";
+import PharmacologicalGroupUpdate from "./components/pharmacologicalGroupTable/PharmacologicalGroupUpdate";
+import PharmacyNameUpdate from "./components/pharmacyName/PharmacyNameUpdate";
 
 
 const theme = createMuiTheme({
@@ -167,6 +172,12 @@ const App = () => {
                             <Route exact path="/pharmacyName" component={PharmacyNameTable}/>
                             <Route exact path="/area" component={AreaTable}/>
                             <Route exact path="/reasonForReturn" component={ReasonForReturnTable}/>
+                            <Route exact path="/currentArea/:id" component={AreaUpdate}/>
+                            <Route exact path="/currentCountry/:id" component={CountryOfManufactureUpdate}/>
+                            <Route exact path="/currentFormOfIssue/:id" component={FormOfIssueUpdate}/>
+                            <Route exact path="/currentPharmacologicalGroup/:id" component={PharmacologicalGroupUpdate}/>
+                            <Route exact path="/currentPharmacyName/:id" component={PharmacyNameUpdate}/>
+                            <Redirect to="/"/>
                         </Switch>
                         <CssBaseline/>
                     </div>

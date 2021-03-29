@@ -15,9 +15,11 @@ import CloseIcon from "@material-ui/icons/Close";
 import FormOfIssueTableHead from "./FormOfIssueTableHead";
 import AddIcon from "@material-ui/icons/Add";
 import FormOfIssueFormWindow from "./FormOfIssueFormWindow";
-import ConfirmDialog from "../ConfirmDialog";
-import {getForms} from "../../actions/getFormsOfIssue";
+import ConfirmDialog from "../commonComponents/ConfirmDialog";
+import {deleteFormOfIssue, getForms} from "../../actions/getFormsOfIssue";
 import UniversalModalWindow from "../ModalWindow/UniversalModalWindow";
+import Notification from "../commonComponents/Notification";
+import {NavLink} from "react-router-dom";
 
 
 const useStyles = makeStyles(theme => ({
@@ -69,6 +71,7 @@ const FormOfIssueTable = () => {
             ...confirmDialog,
             isOpen: false
         })
+        dispatch(deleteFormOfIssue(id))
         setNotify({
             isOpen: true,
             message: 'Deleted Successfully',
@@ -78,7 +81,7 @@ const FormOfIssueTable = () => {
 
     useEffect(() => {
         dispatch(getForms())
-    }, [dispatch, modalActive])
+    }, [dispatch, modalActive, forms])
 
 
     return (
@@ -104,14 +107,11 @@ const FormOfIssueTable = () => {
                                         <TableCell>{item.form_of_issue}</TableCell>
 
                                         <TableCell>
-                                            <Controls.ActionButton
-                                                color="primary"
-                                                // onClick={() => {
-                                                //     openInPopup(item)
-                                                // }}
-                                            >
-                                                <EditOutlinedIcon fontSize="small"/>
-                                            </Controls.ActionButton>
+                                            <NavLink to={`/currentFormOfIssue/${item.id}`}>
+                                                <Controls.ActionButton color="primary">
+                                                    <EditOutlinedIcon fontSize="small"/>
+                                                </Controls.ActionButton>
+                                            </NavLink>
                                             <Controls.ActionButton
                                                 color="secondary"
                                                 onClick={() => {
@@ -138,6 +138,10 @@ const FormOfIssueTable = () => {
             <UniversalModalWindow active={modalActive}>
                 <FormOfIssueFormWindow active={modalActive} setActive={setModalActive}/>
             </UniversalModalWindow>
+            <Notification
+                notify={notify}
+                setNotify={setNotify}
+            />
             <ConfirmDialog
                 confirmDialog={confirmDialog}
                 setConfirmDialog={setConfirmDialog}

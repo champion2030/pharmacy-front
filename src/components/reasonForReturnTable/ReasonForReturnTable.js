@@ -13,11 +13,12 @@ import Controls from "../controls/Controls";
 import EditOutlinedIcon from "@material-ui/icons/EditOutlined";
 import CloseIcon from "@material-ui/icons/Close";
 import AddIcon from "@material-ui/icons/Add";
-import ConfirmDialog from "../ConfirmDialog";
+import ConfirmDialog from "../commonComponents/ConfirmDialog";
 import UniversalModalWindow from "../ModalWindow/UniversalModalWindow";
 import ReasonForReturnTableHead from "./ReasonForReturnTableHead";
-import {getReasons} from "../../actions/getReasonsForReturn";
+import {deleteReasonForReturn, getReasons} from "../../actions/getReasonsForReturn";
 import ReasonForReturnFormWindow from "./ReasonForReturnFormWindow";
+import Notification from "../commonComponents/Notification";
 
 
 const useStyles = makeStyles(theme => ({
@@ -69,6 +70,7 @@ const ReasonForReturnTable = () => {
             ...confirmDialog,
             isOpen: false
         })
+        dispatch(deleteReasonForReturn(id))
         setNotify({
             isOpen: true,
             message: 'Deleted Successfully',
@@ -78,7 +80,7 @@ const ReasonForReturnTable = () => {
 
     useEffect(() => {
         dispatch(getReasons())
-    }, [dispatch, modalActive])
+    }, [dispatch, modalActive, reasons])
 
 
     return (
@@ -138,6 +140,10 @@ const ReasonForReturnTable = () => {
             <UniversalModalWindow active={modalActive}>
                 <ReasonForReturnFormWindow active={modalActive} setActive={setModalActive}/>
             </UniversalModalWindow>
+            <Notification
+                notify={notify}
+                setNotify={setNotify}
+            />
             <ConfirmDialog
                 confirmDialog={confirmDialog}
                 setConfirmDialog={setConfirmDialog}

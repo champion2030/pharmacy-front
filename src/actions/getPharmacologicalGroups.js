@@ -1,6 +1,12 @@
 import axios from "axios";
-import {setGroups, setIsFetching} from "../reducers/pharmacologicalGroupTableReducer";
+import {
+    setCurrentPharmacologicalGroup,
+    setGroups,
+    setIsFetching,
+    updateInputPharmacologicalGroup
+} from "../reducers/pharmacologicalGroupTableReducer";
 import {SET_MESSAGE} from "./types";
+import {setCurrentFormOfIssue, updateInputFormOfIssue} from "../reducers/formOfIssueTableReducer";
 
 const API_URL = "http://localhost:8080/api/";
 
@@ -33,5 +39,46 @@ export const createNewGroup = (pharmacological_group) => (dispatch) => {
             return Promise.reject();
         }
     );
+}
 
+export const deletePharmacologicalGroup = (id) => async (dispatch) => {
+    dispatch(setIsFetching(true))
+    await axios.delete(API_URL + `deletePharmacologicalGroup/${id}`)
+}
+
+export const getCurrentPharmacologicalGroup = (id) => {
+    return async (dispatch) => {
+        dispatch(setIsFetching(true))
+        const form = await axios.get(API_URL + `getCurrentPharmacologicalGroup/${id}`);
+        dispatch(setCurrentPharmacologicalGroup(form.data.pharmacological_group))
+    }
+};
+
+export const updateCurrentInputPharmacologicalGroup = (input) => {
+    return async (dispatch) => {
+        dispatch(updateInputPharmacologicalGroup(input))
+    }
+};
+
+export const updateCurrentPharmacologicalGroup = (pharmacological_group, id) => (dispatch) => {
+    dispatch(setIsFetching(true))
+    const updatedGroup = axios.put(API_URL + `updatePharmacologicalGroup/${id}`, {pharmacological_group})
+    return updatedGroup.then(
+        (response) => {
+            dispatch({
+                type: SET_MESSAGE,
+                payload: "Group updated successful!",
+            });
+            return Promise.resolve();
+        },
+        (error) => {
+            const message = error.response.data.error
+
+            dispatch({
+                type: SET_MESSAGE,
+                payload: message,
+            });
+            return Promise.reject();
+        }
+    );
 };
