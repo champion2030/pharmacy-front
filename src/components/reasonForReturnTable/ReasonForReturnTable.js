@@ -19,6 +19,7 @@ import ReasonForReturnTableHead from "./ReasonForReturnTableHead";
 import {deleteReasonForReturn, getReasons} from "../../actions/getReasonsForReturn";
 import ReasonForReturnFormWindow from "./ReasonForReturnFormWindow";
 import Notification from "../commonComponents/Notification";
+import {NavLink} from "react-router-dom";
 
 
 const useStyles = makeStyles(theme => ({
@@ -106,14 +107,11 @@ const ReasonForReturnTable = () => {
                                         <TableCell>{item.reason_for_return}</TableCell>
 
                                         <TableCell>
-                                            <Controls.ActionButton
-                                                color="primary"
-                                                // onClick={() => {
-                                                //     openInPopup(item)
-                                                // }}
-                                            >
-                                                <EditOutlinedIcon fontSize="small"/>
-                                            </Controls.ActionButton>
+                                            <NavLink to={`/currentReasonForReturn/${item.id}`}>
+                                                <Controls.ActionButton color="primary">
+                                                    <EditOutlinedIcon fontSize="small"/>
+                                                </Controls.ActionButton>
+                                            </NavLink>
                                             <Controls.ActionButton
                                                 color="secondary"
                                                 onClick={() => {

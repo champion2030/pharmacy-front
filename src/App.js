@@ -23,6 +23,8 @@ import CountryOfManufactureUpdate from "./components/countryOfManufactureTable/C
 import FormOfIssueUpdate from "./components/formOfIssueTable/FormOfIssueUpdate";
 import PharmacologicalGroupUpdate from "./components/pharmacologicalGroupTable/PharmacologicalGroupUpdate";
 import PharmacyNameUpdate from "./components/pharmacyName/PharmacyNameUpdate";
+import ReasonForReturnUpdate from "./components/reasonForReturnTable/ReasonForReturnUpdate";
+import TypeOfPropertyUpdate from "./components/typeOfPropertyTable/TypeOfPropertyUpdate";
 
 
 const theme = createMuiTheme({
@@ -177,6 +179,8 @@ const App = () => {
                             <Route exact path="/currentFormOfIssue/:id" component={FormOfIssueUpdate}/>
                             <Route exact path="/currentPharmacologicalGroup/:id" component={PharmacologicalGroupUpdate}/>
                             <Route exact path="/currentPharmacyName/:id" component={PharmacyNameUpdate}/>
+                            <Route exact path="/currentReasonForReturn/:id" component={ReasonForReturnUpdate}/>
+                            <Route exact path="/currentTypeOfProperty/:id" component={TypeOfPropertyUpdate}/>
                             <Redirect to="/"/>
                         </Switch>
                         <CssBaseline/>

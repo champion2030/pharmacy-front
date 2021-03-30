@@ -32,7 +32,7 @@ const AreaUpdate = (props) => {
     useEffect(() => {
         dispatch(getCurrentArea(id))
         dispatch(clearMessage())
-    }, [])
+    }, [dispatch, id])
 
     const formOfIssueHandler = (e) => {
         dispatch(updateCurrentInput(e.target.value))

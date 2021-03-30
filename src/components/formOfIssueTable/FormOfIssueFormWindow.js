@@ -42,14 +42,10 @@ const FormOfIssueFormWindow = ({active, setActive}) => {
     useEffect(() => {
         dispatch(clearMessage());
         setFormValid(false)
-    }, [active]);
+    }, [dispatch, active]);
 
     const bluerHandler = (e) => {
-        switch (e.target.name) {
-            case 'formOfIssue':
-                setFormOfIssueDirty(true)
-                break
-        }
+        setFormOfIssueDirty(true)
     }
 
     const formOfIssueHandler = (e) => {

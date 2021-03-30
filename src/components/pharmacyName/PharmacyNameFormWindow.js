@@ -42,14 +42,10 @@ const PharmacyNameFormWindow = ({active, setActive}) => {
     useEffect(() => {
         dispatch(clearMessage());
         setFormValid(false)
-    }, [active]);
+    }, [dispatch, active]);
 
     const bluerHandler = (e) => {
-        switch (e.target.name) {
-            case 'pharmacyName':
-                setPharmacyNameDirty(true)
-                break
-        }
+        setPharmacyNameDirty(true)
     }
 
     const formOfIssueHandler = (e) => {

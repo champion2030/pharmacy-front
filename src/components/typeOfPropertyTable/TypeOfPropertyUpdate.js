@@ -5,9 +5,10 @@ import {useParams} from "react-router-dom"
 import Controls from "../controls/Controls";
 import {clearMessage} from "../../actions/message";
 import {
-    getCurrentPharmacologicalGroup,
-    updateCurrentInputPharmacologicalGroup, updateCurrentPharmacologicalGroup
-} from "../../actions/getPharmacologicalGroups";
+    getCurrentTypeOfProperty,
+    updateCurrentInputTypeOfProperty,
+    updateCurrentTypeOfProperty
+} from "../../actions/getTypesOfProperty";
 
 const useStyles = makeStyles(theme => ({
     pageContent: {
@@ -21,28 +22,28 @@ const useStyles = makeStyles(theme => ({
     }
 }))
 
-const PharmacologicalGroupUpdate = (props) => {
+const TypeOfPropertyUpdate = (props) => {
 
     const dispatch = useDispatch()
 
     const classes = useStyles();
-    const pharmacological_group = useSelector(state => state.pharmacologicalGroupReducer.pharmacological_group)
+    const name_of_property = useSelector(state => state.typesOfPropertyReducer.name_of_property)
     const {id} = useParams()
     const [successful, setSuccessful] = useState(false);
     const {message} = useSelector(state => state.message);
 
 
     useEffect(() => {
-        dispatch(getCurrentPharmacologicalGroup(id))
+        dispatch(getCurrentTypeOfProperty(id))
         dispatch(clearMessage())
     }, [dispatch, id])
 
     const formOfIssueHandler = (e) => {
-        dispatch(updateCurrentInputPharmacologicalGroup(e.target.value))
+        dispatch(updateCurrentInputTypeOfProperty(e.target.value))
     }
 
     const handleSubmit = (e) => {
-        dispatch(updateCurrentPharmacologicalGroup(pharmacological_group, id))
+        dispatch(updateCurrentTypeOfProperty(name_of_property, id))
             .then(() => {
                 setSuccessful(true);
                 props.history.goBack()
@@ -57,9 +58,9 @@ const PharmacologicalGroupUpdate = (props) => {
             <div className={classes.items}>
                 <TextField
                     variant="outlined"
-                    label="Form of issue"
-                    name="formOfIssue"
-                    value={pharmacological_group}
+                    label="Type of property"
+                    name="typeOfProperty"
+                    value={name_of_property}
                     onChange={e => formOfIssueHandler(e)}
                 />
                 {!successful && message && (
@@ -86,4 +87,4 @@ const PharmacologicalGroupUpdate = (props) => {
     )
 };
 
-export default PharmacologicalGroupUpdate;
+export default TypeOfPropertyUpdate;

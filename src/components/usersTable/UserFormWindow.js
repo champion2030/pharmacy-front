@@ -1,6 +1,6 @@
 import {Grid, makeStyles, TextField} from "@material-ui/core";
 import Controls from "../controls/Controls";
-import React, {useEffect, useRef, useState} from "react";
+import React, {useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {register} from "../../actions/auth";
 import {clearMessage} from "../../actions/message";
@@ -19,7 +19,6 @@ const UserFormWindow = ({active, setActive}) => {
 
     const dispatch = useDispatch();
     const {message} = useSelector(state => state.message);
-
 
     const [username, setUsername] = useState('')
     const [email, setEmail] = useState('')
@@ -48,7 +47,7 @@ const UserFormWindow = ({active, setActive}) => {
     useEffect(() => {
         dispatch(clearMessage());
         setFormValid(false)
-    }, [active]);
+    }, [dispatch, active]);
 
     const bluerHandler = (e) => {
         switch (e.target.name) {
@@ -61,9 +60,10 @@ const UserFormWindow = ({active, setActive}) => {
             case 'password':
                 setPasswordDirty(true)
                 break
+            default:
+                break
         }
     }
-
 
     const usernameHandler = (e) => {
         setUsername(e.target.value)
@@ -175,7 +175,6 @@ const UserFormWindow = ({active, setActive}) => {
                     </div>
                 )}
 
-
                 <div>
                     <Controls.Button
                         text="Submit"
@@ -192,7 +191,6 @@ const UserFormWindow = ({active, setActive}) => {
             </Grid>
         </form>
     )
-
 }
 
 export default UserFormWindow;

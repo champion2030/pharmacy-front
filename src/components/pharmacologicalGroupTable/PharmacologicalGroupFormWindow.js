@@ -42,14 +42,10 @@ const PharmacologicalGroupFormWindow = ({active, setActive}) => {
     useEffect(() => {
         dispatch(clearMessage());
         setFormValid(false)
-    }, [active]);
+    }, [dispatch, active]);
 
     const bluerHandler = (e) => {
-        switch (e.target.name) {
-            case 'pharmacologicalGroup':
-                setPharmacologicalGroupDirty(true)
-                break
-        }
+        setPharmacologicalGroupDirty(true)
     }
 
     const formOfIssueHandler = (e) => {
@@ -97,7 +93,8 @@ const PharmacologicalGroupFormWindow = ({active, setActive}) => {
                     onBlur={event => bluerHandler(event)}
                     onChange={e => formOfIssueHandler(e)}
                 />
-                {(pharmacologicalGroupError && pharmacologicalGroupDirty) && <div style={{color: 'red'}}>{pharmacologicalGroupError}</div>}
+                {(pharmacologicalGroupError && pharmacologicalGroupDirty) &&
+                <div style={{color: 'red'}}>{pharmacologicalGroupError}</div>}
 
                 {!successful && message && (
                     <div className="form-group">

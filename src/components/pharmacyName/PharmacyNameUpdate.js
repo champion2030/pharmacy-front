@@ -36,7 +36,7 @@ const PharmacyNameUpdate = (props) => {
     useEffect(() => {
         dispatch(getCurrentPharmacyName(id))
         dispatch(clearMessage())
-    }, [])
+    }, [dispatch, id])
 
     const formOfIssueHandler = (e) => {
         dispatch(updateCurrentInputPharmacyName(e.target.value))

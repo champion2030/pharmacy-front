@@ -42,14 +42,10 @@ const TypeOfPropertyFormWindow = ({active, setActive}) => {
     useEffect(() => {
         dispatch(clearMessage());
         setFormValid(false)
-    }, [active]);
+    }, [dispatch, active]);
 
     const bluerHandler = (e) => {
-        switch (e.target.name) {
-            case 'typeOfProperty':
-                setTypeOfPropertyDirty(true)
-                break
-        }
+        setTypeOfPropertyDirty(true)
     }
 
     const formOfIssueHandler = (e) => {
@@ -97,7 +93,8 @@ const TypeOfPropertyFormWindow = ({active, setActive}) => {
                     onBlur={event => bluerHandler(event)}
                     onChange={e => formOfIssueHandler(e)}
                 />
-                {(typeOfPropertyError && typeOfPropertyDirty) && <div style={{color: 'red'}}>{typeOfPropertyError}</div>}
+                {(typeOfPropertyError && typeOfPropertyDirty) &&
+                <div style={{color: 'red'}}>{typeOfPropertyError}</div>}
 
                 {!successful && message && (
                     <div className="form-group">

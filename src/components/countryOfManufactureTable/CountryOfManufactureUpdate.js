@@ -36,7 +36,7 @@ const CountryOfManufactureUpdate = (props) => {
     useEffect(() => {
         dispatch(getCurrentCountry(id))
         dispatch(clearMessage())
-    }, [])
+    }, [dispatch, id])
 
     const formOfIssueHandler = (e) => {
         dispatch(updateCurrentInputCountry(e.target.value))

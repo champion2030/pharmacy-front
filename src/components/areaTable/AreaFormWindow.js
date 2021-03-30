@@ -42,14 +42,10 @@ const AreaFormWindow = ({active, setActive}) => {
     useEffect(() => {
         dispatch(clearMessage());
         setFormValid(false)
-    }, [active]);
+    }, [dispatch, active]);
 
     const bluerHandler = (e) => {
-        switch (e.target.name) {
-            case 'area':
-                setAreaDirty(true)
-                break
-        }
+        setAreaDirty(true)
     }
 
     const formOfIssueHandler = (e) => {

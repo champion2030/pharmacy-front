@@ -37,7 +37,7 @@ const FormOfIssueUpdate = (props) => {
     useEffect(() => {
         dispatch(getCurrentFormOfIssue(id))
         dispatch(clearMessage())
-    }, [])
+    }, [dispatch, id])
 
     const formOfIssueHandler = (e) => {
         dispatch(updateCurrentInputFormOfIssue(e.target.value))

@@ -107,7 +107,7 @@ const TypeOfPropertyTable = () => {
                                         <TableCell>{item.name_of_property}</TableCell>
 
                                         <TableCell>
-                                            <NavLink to="/users">
+                                            <NavLink to={`/currentTypeOfProperty/${item.id}`}>
                                                 <Controls.ActionButton color="primary">
                                                     <EditOutlinedIcon fontSize="small"/>
                                                 </Controls.ActionButton>

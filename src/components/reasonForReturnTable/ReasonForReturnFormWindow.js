@@ -42,14 +42,10 @@ const ReasonForReturnFormWindow = ({active, setActive}) => {
     useEffect(() => {
         dispatch(clearMessage());
         setFormValid(false)
-    }, [active]);
+    }, [dispatch, active]);
 
     const bluerHandler = (e) => {
-        switch (e.target.name) {
-            case 'reasonForReturn':
-                setReasonForReturnDirty(true)
-                break
-        }
+        setReasonForReturnDirty(true)
     }
 
     const formOfIssueHandler = (e) => {
@@ -97,7 +93,8 @@ const ReasonForReturnFormWindow = ({active, setActive}) => {
                     onBlur={event => bluerHandler(event)}
                     onChange={e => formOfIssueHandler(e)}
                 />
-                {(reasonForReturnError && reasonForReturnDirty) && <div style={{color: 'red'}}>{reasonForReturnError}</div>}
+                {(reasonForReturnError && reasonForReturnDirty) &&
+                <div style={{color: 'red'}}>{reasonForReturnError}</div>}
 
                 {!successful && message && (
                     <div className="form-group">
