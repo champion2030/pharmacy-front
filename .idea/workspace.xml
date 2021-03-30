@@ -1,0 +1,289 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="e0de64aa-80a1-43a0-bc39-5202a49cf082" name="Default Changelist" comment="Directory tables can change values now" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="JavaScript File" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectId" id="1p7MskMaYzB7Bo0S0ejL8cMdSv4" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="1" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../Pharmacy" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.standard" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.path.for.package.standard" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.standard" value="" />
+    <property name="nodejs_interpreter_path" value="node" />
+    <property name="nodejs_package_manager_path" value="npm" />
+    <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
+    <property name="ts.external.directory.path" value="D:\WebStorm 2020.2.3\plugins\JavaScriptLanguage\jsLanguageServicesImpl\external" />
+    <property name="vue.rearranger.settings.migration" value="true" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\Универ\Второй курс\Четвёртый семестр\БД\pharmacy-front\src\components\coomonComponents" />
+      <recent name="D:\Универ\Второй курс\Четвёртый семестр\БД\pharmacy-front\src\components\formOfIssueTable\ModalWindow" />
+      <recent name="D:\Универ\Второй курс\Четвёртый семестр\БД\pharmacy-front\src\components\formOfIssueTable" />
+      <recent name="D:\Второй курс\Четвёртый семестр\БД\pharmacy-front\src\components\usersTable" />
+      <recent name="D:\Второй курс\Четвёртый семестр\БД\pharmacy-front\src\components\controls" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\Универ\Второй курс\Четвёртый семестр\БД\pharmacy-front\src\components\coomonComponents" />
+      <recent name="D:\Универ\Второй курс\Четвёртый семестр\БД\pharmacy-front\src\components" />
+      <recent name="D:\Второй курс\Четвёртый семестр\БД\pharmacy-front\src\components\usersTable" />
+    </key>
+  </component>
+  <component name="RunManager" selected="npm.npm start">
+    <configuration name="Debug Application" type="JavascriptDebugType" uri="http://localhost:3000">
+      <method v="2" />
+    </configuration>
+    <configuration name="npm start" type="js.build_tools.npm">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="start" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="e0de64aa-80a1-43a0-bc39-5202a49cf082" name="Default Changelist" comment="" />
+      <created>1614529883860</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1614529883860</updated>
+      <workItem from="1614529884957" duration="16989000" />
+      <workItem from="1614614183305" duration="7763000" />
+      <workItem from="1614636955731" duration="25000" />
+      <workItem from="1614680440856" duration="16956000" />
+      <workItem from="1614792737170" duration="250000" />
+      <workItem from="1614802662631" duration="1274000" />
+      <workItem from="1615061294881" duration="203000" />
+      <workItem from="1615137783896" duration="2825000" />
+      <workItem from="1615226655438" duration="42000" />
+      <workItem from="1615405791385" duration="3678000" />
+      <workItem from="1615473226998" duration="713000" />
+      <workItem from="1615475379622" duration="8829000" />
+      <workItem from="1615551922207" duration="2230000" />
+      <workItem from="1615627133732" duration="467000" />
+      <workItem from="1615660404462" duration="4684000" />
+      <workItem from="1615732011769" duration="9197000" />
+      <workItem from="1615819300212" duration="18155000" />
+      <workItem from="1615903013431" duration="21767000" />
+      <workItem from="1616011483719" duration="681000" />
+      <workItem from="1616081922803" duration="379000" />
+      <workItem from="1616087020588" duration="1406000" />
+      <workItem from="1616188426191" duration="1966000" />
+      <workItem from="1616196456537" duration="958000" />
+      <workItem from="1616243951398" duration="5040000" />
+      <workItem from="1616317333487" duration="1784000" />
+      <workItem from="1616433579343" duration="8996000" />
+      <workItem from="1616493761057" duration="2491000" />
+      <workItem from="1616516031930" duration="1217000" />
+      <workItem from="1616602887843" duration="7416000" />
+      <workItem from="1616683275463" duration="611000" />
+      <workItem from="1616771141430" duration="2395000" />
+      <workItem from="1616850060671" duration="2050000" />
+      <workItem from="1616918875610" duration="18765000" />
+      <workItem from="1617007066659" duration="22933000" />
+      <workItem from="1617052522973" duration="36000" />
+      <workItem from="1617105521670" duration="8264000" />
+    </task>
+    <task id="LOCAL-00001" summary="User Registration and Login">
+      <created>1614707057660</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1614707057660</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Users Table">
+      <created>1614803336253</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1614803336253</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Users Table">
+      <created>1615061485587</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1615061485587</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Users Table">
+      <created>1615149261348</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1615149261348</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Users Table">
+      <created>1615409140578</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1615409140578</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Users Table">
+      <created>1615494039722</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1615494039722</updated>
+    </task>
+    <task id="LOCAL-00007" summary="Users Table">
+      <created>1615669116369</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1615669116370</updated>
+    </task>
+    <task id="LOCAL-00008" summary="Users Table Pagination, Modal Window">
+      <created>1615754434913</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1615754434913</updated>
+    </task>
+    <task id="LOCAL-00009" summary="Users Table Pagination, Modal Window">
+      <created>1615754471097</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1615754471097</updated>
+    </task>
+    <task id="LOCAL-00010" summary="Users Table Pagination, Modal Window">
+      <created>1615840921597</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1615840921597</updated>
+    </task>
+    <task id="LOCAL-00011" summary="Modal Window">
+      <created>1615841859758</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1615841859758</updated>
+    </task>
+    <task id="LOCAL-00012" summary="Modal Window">
+      <created>1615926507360</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1615926507360</updated>
+    </task>
+    <task id="LOCAL-00013" summary="Modal Window">
+      <created>1616011563785</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1616011563785</updated>
+    </task>
+    <task id="LOCAL-00014" summary="Modal Window">
+      <created>1616453621273</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1616453621273</updated>
+    </task>
+    <task id="LOCAL-00015" summary="Modal Window">
+      <created>1616621792429</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1616621792429</updated>
+    </task>
+    <task id="LOCAL-00016" summary="form of issue">
+      <created>1616960070818</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1616960070818</updated>
+    </task>
+    <task id="LOCAL-00017" summary="Directory tables can change values now">
+      <created>1617050566138</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1617050566138</updated>
+    </task>
+    <task id="LOCAL-00018" summary="Directory tables can change values now">
+      <created>1617051331964</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1617051331964</updated>
+    </task>
+    <task id="LOCAL-00019" summary="Directory tables can change values now">
+      <created>1617120357763</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1617120357763</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="User Registration and Login" />
+    <MESSAGE value="Users Table" />
+    <MESSAGE value="Users Table Pagination, Modal Window" />
+    <MESSAGE value="Modal Window" />
+    <MESSAGE value="form of issue" />
+    <MESSAGE value="Directory tables can change values now" />
+    <option name="LAST_COMMIT_MESSAGE" value="Directory tables can change values now" />
+  </component>
+</project>
