@@ -25,6 +25,10 @@ import PharmacologicalGroupUpdate from "./components/pharmacologicalGroupTable/P
 import PharmacyNameUpdate from "./components/pharmacyName/PharmacyNameUpdate";
 import ReasonForReturnUpdate from "./components/reasonForReturnTable/ReasonForReturnUpdate";
 import TypeOfPropertyUpdate from "./components/typeOfPropertyTable/TypeOfPropertyUpdate";
+import ManufacturerFirmTable from "./components/manufacturerFirmTable/ManufacturerFirmTable";
+import MedicineTable from "./components/medicineTable/MedicineTable";
+import PharmacyTable from "./components/pharmacyTable/PharmacyTable";
+import EmployeeTable from "./components/employeeTable/EmployeeTable";
 
 
 const theme = createMuiTheme({
@@ -119,6 +123,26 @@ const App = () => {
                                     ReasonForReturnTable
                                 </Link>
                             </li>
+                            <li className="nav-item">
+                                <Link to={"/manufacturerFirms"} className="nav-link">
+                                    ManufacturerFirmsTable
+                                </Link>
+                            </li>
+                            <li className="nav-item">
+                                <Link to={"/medicines"} className="nav-link">
+                                    Medicine
+                                </Link>
+                            </li>
+                            <li className="nav-item">
+                                <Link to={"/pharmacy"} className="nav-link">
+                                    Pharmacy
+                                </Link>
+                            </li>
+                            <li className="nav-item">
+                                <Link to={"/employee"} className="nav-link">
+                                    Employee
+                                </Link>
+                            </li>
 
 
                             {currentUser && (
@@ -174,6 +198,10 @@ const App = () => {
                             <Route exact path="/pharmacyName" component={PharmacyNameTable}/>
                             <Route exact path="/area" component={AreaTable}/>
                             <Route exact path="/reasonForReturn" component={ReasonForReturnTable}/>
+                            <Route exact path="/manufacturerFirms" component={ManufacturerFirmTable}/>
+                            <Route exact path="/medicines" component={MedicineTable}/>
+                            <Route exact path="/pharmacy" component={PharmacyTable}/>
+                            <Route exact path="/employee" component={EmployeeTable}/>
                             <Route exact path="/currentArea/:id" component={AreaUpdate}/>
                             <Route exact path="/currentCountry/:id" component={CountryOfManufactureUpdate}/>
                             <Route exact path="/currentFormOfIssue/:id" component={FormOfIssueUpdate}/>

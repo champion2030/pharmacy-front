@@ -10,7 +10,16 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e0de64aa-80a1-43a0-bc39-5202a49cf082" name="Default Changelist" comment="Directory tables can change values now" />
+    <list default="true" id="e0de64aa-80a1-43a0-bc39-5202a49cf082" name="Default Changelist" comment="Directory tables can change values now">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/actions/getUsers.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/actions/getUsers.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/actions/types.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/actions/types.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/usersTable/UsersTable.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/usersTable/UsersTable.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/usersTable/UsersTableHead.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/usersTable/UsersTableHead.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/reducers/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/reducers/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/reducers/usersTableReducer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/reducers/usersTableReducer.js" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -26,6 +35,13 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GithubPullRequestsUISettings">
+    <option name="hiddenUrls">
+      <set>
+        <option value="https://github.com/champion2030/pharmacy-front" />
+      </set>
+    </option>
+  </component>
   <component name="ProjectId" id="1p7MskMaYzB7Bo0S0ejL8cMdSv4" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="1" id="Add" />
@@ -39,7 +55,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../Pharmacy" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.standard" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -124,7 +140,10 @@
       <workItem from="1616918875610" duration="18765000" />
       <workItem from="1617007066659" duration="22933000" />
       <workItem from="1617052522973" duration="36000" />
-      <workItem from="1617105521670" duration="8264000" />
+      <workItem from="1617105521670" duration="8633000" />
+      <workItem from="1617121196042" duration="2750000" />
+      <workItem from="1617132197109" duration="3000" />
+      <workItem from="1617528503518" duration="16549000" />
     </task>
     <task id="LOCAL-00001" summary="User Registration and Login">
       <created>1614707057660</created>
@@ -259,7 +278,14 @@
       <option name="project" value="LOCAL" />
       <updated>1617120357763</updated>
     </task>
-    <option name="localTasksCounter" value="20" />
+    <task id="LOCAL-00020" summary="Directory tables can change values now">
+      <created>1617121062333</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1617121062333</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

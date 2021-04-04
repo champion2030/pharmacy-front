@@ -1,6 +1,5 @@
 import React, {useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
-import {getAllUsers, getUsers} from "../../actions/getUsers";
 import {
     InputAdornment,
     makeStyles,
@@ -15,16 +14,15 @@ import {
 import Controls from "../controls/Controls";
 import EditOutlinedIcon from "@material-ui/icons/EditOutlined";
 import CloseIcon from "@material-ui/icons/Close";
-import UsersTableHead from "./UsersTableHead";
 import TablePagination from "@material-ui/core/TablePagination";
-import {setCurrentPage} from "../../reducers/usersTableReducer";
+import {setCurrentPage} from "../../reducers/medicineTableReducer";
 import {Search} from "@material-ui/icons";
 import AddIcon from "@material-ui/icons/Add";
-import UserFormWindow from "./UserFormWindow";
-import ConfirmDialog from "../commonComponents/ConfirmDialog";
-import UniversalModalWindow from "../ModalWindow/UniversalModalWindow";
 import Checkbox from "../controls/Checkbox";
-
+import ConfirmDialog from "../commonComponents/ConfirmDialog";
+import Notification from "../commonComponents/Notification";
+import MedicineTableHead from "./MedicineTableHead";
+import {deleteMedicine, getMedicines} from "../../actions/getMedicine";
 
 const useStyles = makeStyles(theme => ({
     pageContent: {
@@ -61,19 +59,30 @@ const useStyles = makeStyles(theme => ({
     }
 }))
 
-const UsersTable = () => {
+const MedicineTable = () => {
 
     const classes = useStyles();
     const dispatch = useDispatch()
-    const users = useSelector(state => state.userReducer.users)
-    let currentPage = useSelector(state => state.userReducer.currentPage)
-    let totalCount = useSelector(state => state.userReducer.totalCount)
+    const medicines = useSelector(state => state.medicineReducer.medicines)
+    let currentPage = useSelector(state => state.medicineReducer.currentPage)
+    let totalCount = useSelector(state => state.medicineReducer.totalCount)
     const [value, setValue] = useState('')
     const [rowsPerPage, setRowsPerPage] = useState(5);
-    const [modalActive, setModalActive] = useState(false)
     const [confirmDialog, setConfirmDialog] = useState({isOpen: false, title: '', subTitle: ''})
     const [notify, setNotify] = useState({isOpen: false, message: '', type: ''})
 
+    const onDelete = id => {
+        setConfirmDialog({
+            ...confirmDialog,
+            isOpen: false
+        })
+        dispatch(deleteMedicine(id))
+        setNotify({
+            isOpen: true,
+            message: 'Deleted Successfully',
+            type: 'error'
+        })
+    }
 
     const handleChangePage = (event, newPage) => {
         dispatch(setCurrentPage(newPage + 1))
@@ -84,21 +93,9 @@ const UsersTable = () => {
         dispatch(setCurrentPage(1))
     };
 
-    const onDelete = id => {
-        setConfirmDialog({
-            ...confirmDialog,
-            isOpen: false
-        })
-        setNotify({
-            isOpen: true,
-            message: 'Deleted Successfully',
-            type: 'error'
-        })
-    }
-
     useEffect(() => {
-        dispatch(getUsers(value, currentPage, rowsPerPage))
-    }, [currentPage, dispatch, rowsPerPage, modalActive, value])
+        dispatch(getMedicines(value, currentPage, rowsPerPage))
+    }, [currentPage, dispatch, rowsPerPage, value, medicines])
 
     return (
         <div>
@@ -106,7 +103,7 @@ const UsersTable = () => {
                 <Toolbar>
                     <TextField
                         variant="outlined"
-                        label="Search Employees"
+                        label="Search medicine"
                         className={classes.searchInput}
                         value={value}
                         onChange={(event) => setValue(event.target.value)}
@@ -123,26 +120,27 @@ const UsersTable = () => {
                         variant="outlined"
                         startIcon={<AddIcon/>}
                         className={classes.newButton}
-                        onClick={() => setModalActive(true)}
+                        //onClick={() => setModalActive(true)}
                     />
                 </Toolbar>
 
                 <Table className={classes.table}>
-                    <UsersTableHead/>
+                    <MedicineTableHead/>
                     <TableBody>
                         {
-                            users.map(item =>
+                            medicines.map(item =>
                                 (
                                     <TableRow key={item.id}>
                                         <TableCell padding="checkbox">
-                                            <Checkbox
-                                                //checked={isItemSelected}
-                                                //inputProps={{ 'aria-labelledby': labelId }}
+                                            <Checkbox//checked={isItemSelected}//inputProps={{ 'aria-labelledby': labelId }}
                                             />
                                         </TableCell>
-                                        <TableCell>{item.username}</TableCell>
-                                        <TableCell>{item.email}</TableCell>
-
+                                        <TableCell>{item.form_of_issue}</TableCell>
+                                        <TableCell>{item.pharmacological_group}</TableCell>
+                                        <TableCell>{item.firm_name}</TableCell>
+                                        <TableCell>{item.medicine_name}</TableCell>
+                                        <TableCell width="500">{item.instruction}</TableCell>
+                                        <TableCell>{item.barcode}</TableCell>
                                         <TableCell>
                                             <Controls.ActionButton
                                                 color="primary"
@@ -186,9 +184,10 @@ const UsersTable = () => {
                     />
                 }
             </Paper>
-            <UniversalModalWindow active={modalActive}>
-                <UserFormWindow active={modalActive} setActive={setModalActive}/>
-            </UniversalModalWindow>
+            <Notification
+                notify={notify}
+                setNotify={setNotify}
+            />
             <ConfirmDialog
                 confirmDialog={confirmDialog}
                 setConfirmDialog={setConfirmDialog}
@@ -197,4 +196,4 @@ const UsersTable = () => {
     )
 };
 
-export default UsersTable;
+export default MedicineTable;

@@ -3,12 +3,15 @@ import {TableHead, TableRow, TableCell} from '@material-ui/core'
 
 const headCells = [
     {id: 'checkbox', label: ''},
-    {id: 'fullName', label: 'User Name'},
-    {id: 'email', label: 'Email Address'},
+    {id: 'name', label: 'Pharmacy name'},
+    {id: 'name_of_area', label: 'Name of area'},
+    {id: 'name_of_property', label: 'Name of property'},
+    {id: 'telephone', label: 'Telephone'},
+    {id: 'address', label: 'Address'},
     {id: 'actions', label: 'Actions', disableSorting: true}
 ]
 
-const UsersTableHead = () => {
+const PharmacyTableHead = () => {
 
     return (
         <TableHead>
@@ -17,11 +20,10 @@ const UsersTableHead = () => {
                     headCells.map(headCell => (
                         <TableCell key={headCell.id}>
                             {headCell.label}
-
                         </TableCell>))
                 }
             </TableRow>
         </TableHead>)
 }
 
-export default UsersTableHead;
+export default PharmacyTableHead;

@@ -1,19 +1,15 @@
 import axios from "axios";
-import {setAllUsers, setIsFetching, setUsers} from "../reducers/usersTableReducer";
+import {setIsFetching, setUsers} from "../reducers/usersTableReducer";
 
 const API_URL = "http://localhost:8080/api/";
 
-export const getUsers = (currentPage, perPage) => {
+export const getUsers = (searchQuery, currentPage, perPage) => {
+    if (searchQuery === 1){
+        searchQuery = "default"
+    }
     return async (dispatch) => {
         dispatch(setIsFetching(true))
-        const users = await axios.get(API_URL + `users?page=${currentPage}&limit=${perPage}`);
+        const users = await axios.get(API_URL + `users?searchQuery=${searchQuery}&page=${currentPage}&limit=${perPage}`);
         dispatch(setUsers(users.data))
-    }
-};
-
-export const getAllUsers = () => {
-    return async (dispatch) => {
-        const users = await axios.get(API_URL + `allUsers`);
-        dispatch(setAllUsers(users.data))
     }
 };

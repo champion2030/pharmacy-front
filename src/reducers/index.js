@@ -9,6 +9,10 @@ import pharmacyNameReducer from "./pharmacyNameTableReducer";
 import areaReducer from "./areaTableReducer";
 import reasonForReturnReducer from "./reasonForReturnTablereducer";
 import pharmacologicalGroupReducer from "./pharmacologicalGroupTableReducer";
+import manufacturerFirmReducer from "./manufacturerFirmTableReducer";
+import medicineReducer from "./medicineTableReducer";
+import pharmacyReducer from "./pharmacyTableReducer";
+import employeeReducer from "./employeeTableReducer";
 
 export default combineReducers({
     auth,
@@ -20,5 +24,9 @@ export default combineReducers({
     typesOfPropertyReducer,
     pharmacyNameReducer,
     areaReducer,
-    reasonForReturnReducer
+    reasonForReturnReducer,
+    manufacturerFirmReducer,
+    medicineReducer,
+    pharmacyReducer,
+    employeeReducer
 });
