@@ -13,6 +13,7 @@ import manufacturerFirmReducer from "./manufacturerFirmTableReducer";
 import medicineReducer from "./medicineTableReducer";
 import pharmacyReducer from "./pharmacyTableReducer";
 import employeeReducer from "./employeeTableReducer";
+import deliveriesReducer from "./deliveriesTableReducer";
 
 export default combineReducers({
     auth,
@@ -28,5 +29,6 @@ export default combineReducers({
     manufacturerFirmReducer,
     medicineReducer,
     pharmacyReducer,
-    employeeReducer
+    employeeReducer,
+    deliveriesReducer
 });

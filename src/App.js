@@ -29,6 +29,7 @@ import ManufacturerFirmTable from "./components/manufacturerFirmTable/Manufactur
 import MedicineTable from "./components/medicineTable/MedicineTable";
 import PharmacyTable from "./components/pharmacyTable/PharmacyTable";
 import EmployeeTable from "./components/employeeTable/EmployeeTable";
+import DeliveriesTable from "./components/deliveriesTable/DeliveriesTable";
 
 
 const theme = createMuiTheme({
@@ -143,6 +144,11 @@ const App = () => {
                                     Employee
                                 </Link>
                             </li>
+                            <li className="nav-item">
+                                <Link to={"/deliveries"} className="nav-link">
+                                    Deliveries
+                                </Link>
+                            </li>
 
 
                             {currentUser && (
@@ -202,6 +208,7 @@ const App = () => {
                             <Route exact path="/medicines" component={MedicineTable}/>
                             <Route exact path="/pharmacy" component={PharmacyTable}/>
                             <Route exact path="/employee" component={EmployeeTable}/>
+                            <Route exact path="/deliveries" component={DeliveriesTable}/>
                             <Route exact path="/currentArea/:id" component={AreaUpdate}/>
                             <Route exact path="/currentCountry/:id" component={CountryOfManufactureUpdate}/>
                             <Route exact path="/currentFormOfIssue/:id" component={FormOfIssueUpdate}/>
