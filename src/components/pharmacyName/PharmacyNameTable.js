@@ -81,7 +81,7 @@ const PharmacyNameTable = () => {
 
     useEffect(() => {
         dispatch(getNames())
-    }, [dispatch, modalActive, names])
+    }, [dispatch, modalActive])
 
 
     return (

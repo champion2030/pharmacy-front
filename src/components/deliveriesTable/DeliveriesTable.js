@@ -76,7 +76,7 @@ const DeliveriesTable = () => {
             ...confirmDialog,
             isOpen: false
         })
-        dispatch(deleteDeliver(id))
+        dispatch(deleteDeliver(id, value, currentPage, rowsPerPage))
         setNotify({
             isOpen: true,
             message: 'Deleted Successfully',
@@ -95,7 +95,7 @@ const DeliveriesTable = () => {
 
     useEffect(() => {
         dispatch(getDeliveries(value, currentPage, rowsPerPage))
-    }, [currentPage, dispatch, rowsPerPage, value, deliveries])
+    }, [currentPage, dispatch, rowsPerPage, value])
 
     return (
         <div>

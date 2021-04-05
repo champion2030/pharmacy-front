@@ -17,7 +17,7 @@ import {
     Typography,
     IconButton,
     Toolbar,
-    makeStyles, Drawer, Divider, List, ListItem, ListItemText, Breadcrumbs, Badge
+    makeStyles, Drawer, Divider, List, ListItem, ListItemText, Badge
 } from '@material-ui/core';
 import SignIn from "./components/Login";
 import FormOfIssueTable from "./components/formOfIssueTable/FormOfIssueTable";
@@ -44,7 +44,6 @@ import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import clsx from "clsx";
 import {AccountCircle} from "@material-ui/icons";
-import MailIcon from '@material-ui/icons/Mail';
 import ExitToAppTwoToneIcon from '@material-ui/icons/ExitToAppTwoTone';
 import HowToRegIcon from '@material-ui/icons/HowToReg';
 import VpnKeyIcon from '@material-ui/icons/VpnKey';
@@ -199,7 +198,6 @@ const App = () => {
                                     >
                                         <AccountCircle/>
                                     </IconButton>
-
                                     <IconButton
                                         color="secondary"
                                         onClick={logOut}
@@ -255,6 +253,7 @@ const App = () => {
                                 <ListItemText primary={"Profile"}/>
                             </ListItem>
                         )}
+                        <Divider/>
                         <ListItem button component={Link} to="/users">
                             <ListItemText primary={"Users"}/>
                         </ListItem>
@@ -304,29 +303,29 @@ const App = () => {
                     <div className={classes.drawerHeader}/>
                     <Switch>
                         <Route exact path={["/", "/users"]} component={UsersTable}/>
-                        <Route exact path="/login" component={SignIn}/>
-                        <Route exact path="/register" component={Register}/>
-                        <Route exact path="/profile" component={Profile}/>
-                        <Route exact path="/users" component={UsersTable}/>
-                        <Route exact path="/formOfIssue" component={FormOfIssueTable}/>
-                        <Route exact path="/pharmacologicalGroup" component={PharmacologicalGroupTable}/>
-                        <Route exact path="/countryOfManufacture" component={CountryOfManufactureTable}/>
-                        <Route exact path="/typeOfProperty" component={TypeOfPropertyTable}/>
-                        <Route exact path="/pharmacyName" component={PharmacyNameTable}/>
-                        <Route exact path="/area" component={AreaTable}/>
-                        <Route exact path="/reasonForReturn" component={ReasonForReturnTable}/>
-                        <Route exact path="/manufacturerFirms" component={ManufacturerFirmTable}/>
-                        <Route exact path="/medicines" component={MedicineTable}/>
-                        <Route exact path="/pharmacy" component={PharmacyTable}/>
-                        <Route exact path="/employee" component={EmployeeTable}/>
-                        <Route exact path="/deliveries" component={DeliveriesTable}/>
-                        <Route exact path="/currentArea/:id" component={AreaUpdate}/>
-                        <Route exact path="/currentCountry/:id" component={CountryOfManufactureUpdate}/>
-                        <Route exact path="/currentFormOfIssue/:id" component={FormOfIssueUpdate}/>
-                        <Route exact path="/currentPharmacologicalGroup/:id" component={PharmacologicalGroupUpdate}/>
-                        <Route exact path="/currentPharmacyName/:id" component={PharmacyNameUpdate}/>
-                        <Route exact path="/currentReasonForReturn/:id" component={ReasonForReturnUpdate}/>
-                        <Route exact path="/currentTypeOfProperty/:id" component={TypeOfPropertyUpdate}/>
+                        <Route path="/login" component={SignIn}/>
+                        <Route path="/register" component={Register}/>
+                        <Route path="/profile" component={Profile}/>
+                        <Route path="/users" component={UsersTable}/>
+                        <Route path="/formOfIssue" component={FormOfIssueTable}/>
+                        <Route path="/pharmacologicalGroup" component={PharmacologicalGroupTable}/>
+                        <Route path="/countryOfManufacture" component={CountryOfManufactureTable}/>
+                        <Route path="/typeOfProperty" component={TypeOfPropertyTable}/>
+                        <Route path="/pharmacyName" component={PharmacyNameTable}/>
+                        <Route path="/area" component={AreaTable}/>
+                        <Route path="/reasonForReturn" component={ReasonForReturnTable}/>
+                        <Route path="/manufacturerFirms" component={ManufacturerFirmTable}/>
+                        <Route path="/medicines" component={MedicineTable}/>
+                        <Route path="/pharmacy" component={PharmacyTable}/>
+                        <Route path="/employee" component={EmployeeTable}/>
+                        <Route path="/deliveries" component={DeliveriesTable}/>
+                        <Route path="/currentArea/:id" component={AreaUpdate}/>
+                        <Route path="/currentCountry/:id" component={CountryOfManufactureUpdate}/>
+                        <Route path="/currentFormOfIssue/:id" component={FormOfIssueUpdate}/>
+                        <Route path="/currentPharmacologicalGroup/:id" component={PharmacologicalGroupUpdate}/>
+                        <Route path="/currentPharmacyName/:id" component={PharmacyNameUpdate}/>
+                        <Route path="/currentReasonForReturn/:id" component={ReasonForReturnUpdate}/>
+                        <Route path="/currentTypeOfProperty/:id" component={TypeOfPropertyUpdate}/>
                         <Redirect to="/"/>
                     </Switch>
                 </main>

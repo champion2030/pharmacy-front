@@ -66,6 +66,7 @@ const AreaTable = () => {
     const [confirmDialog, setConfirmDialog] = useState({isOpen: false, title: '', subTitle: ''})
     const [notify, setNotify] = useState({isOpen: false, message: '', type: ''})
 
+
     const onDelete = id => {
         setConfirmDialog({
             ...confirmDialog,
@@ -81,7 +82,7 @@ const AreaTable = () => {
 
     useEffect(() => {
         dispatch(getAreas())
-    }, [dispatch, modalActive, areas])
+    }, [dispatch, modalActive])
 
     return (
         <div>

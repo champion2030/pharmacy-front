@@ -39,6 +39,8 @@ export const createNewName = (name) => (dispatch) => {
 export const deletePharmacyName = (id) => async (dispatch) => {
     dispatch(setIsFetching(true))
     await axios.delete(API_URL + `deletePharmacyName/${id}`)
+    const names = await axios.get(API_URL + `getPharmacyName`);
+    dispatch(setNames(names.data))
 }
 
 export const getCurrentPharmacyName = (id) => {

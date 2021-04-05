@@ -76,7 +76,7 @@ const MedicineTable = () => {
             ...confirmDialog,
             isOpen: false
         })
-        dispatch(deleteMedicine(id))
+        dispatch(deleteMedicine(id, value, currentPage, rowsPerPage))
         setNotify({
             isOpen: true,
             message: 'Deleted Successfully',
@@ -95,7 +95,7 @@ const MedicineTable = () => {
 
     useEffect(() => {
         dispatch(getMedicines(value, currentPage, rowsPerPage))
-    }, [currentPage, dispatch, rowsPerPage, value, medicines])
+    }, [currentPage, dispatch, rowsPerPage, value])
 
     return (
         <div>

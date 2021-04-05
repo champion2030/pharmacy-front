@@ -40,6 +40,8 @@ export const createNewCountry = (country) => (dispatch) => {
 export const deleteCountryOfManufacture = (id) => async (dispatch) => {
     dispatch(setIsFetching(true))
     await axios.delete(API_URL + `deleteCountryOfManufacture/${id}`)
+    const countries = await axios.get(API_URL + `getCountryOfManufacture`);
+    dispatch(setCountries(countries.data))
 }
 
 export const getCurrentCountry = (id) => {

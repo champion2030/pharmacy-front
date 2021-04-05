@@ -43,6 +43,8 @@ export const createNewType = (name_of_property) => (dispatch) => {
 export const deleteTypeOfProperty = (id) => async (dispatch) => {
     dispatch(setIsFetching(true))
     await axios.delete(API_URL + `deleteTypeOfProperty/${id}`)
+    const types = await axios.get(API_URL + `getTypeOfProperty`);
+    dispatch(setTypes(types.data))
 }
 
 export const getCurrentTypeOfProperty = (id) => {

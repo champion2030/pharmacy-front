@@ -81,7 +81,7 @@ const ReasonForReturnTable = () => {
 
     useEffect(() => {
         dispatch(getReasons())
-    }, [dispatch, modalActive, reasons])
+    }, [dispatch, modalActive])
 
 
     return (

@@ -43,6 +43,8 @@ export const createNewGroup = (pharmacological_group) => (dispatch) => {
 export const deletePharmacologicalGroup = (id) => async (dispatch) => {
     dispatch(setIsFetching(true))
     await axios.delete(API_URL + `deletePharmacologicalGroup/${id}`)
+    const groups = await axios.get(API_URL + `getPharmacologicalGroup`);
+    dispatch(setGroups(groups.data))
 }
 
 export const getCurrentPharmacologicalGroup = (id) => {

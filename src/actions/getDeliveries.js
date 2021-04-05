@@ -14,7 +14,9 @@ export const getDeliveries = (searchQuery, currentPage, perPage) => {
     }
 }
 
-export const deleteDeliver = (id) => async (dispatch) => {
+export const deleteDeliver = (id, searchQuery, currentPage, perPage) => async (dispatch) => {
     dispatch(setIsFetching(true))
     await axios.delete(API_URL + `deleteDeliver/${id}`)
+    const deliveries = await axios.get(API_URL + `getDeliveries?searchQuery=${searchQuery}&page=${currentPage}&limit=${perPage}`);
+    dispatch(setDeliveries(deliveries.data))
 }

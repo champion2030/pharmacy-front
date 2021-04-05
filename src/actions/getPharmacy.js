@@ -14,7 +14,9 @@ export const getPharmacies = (searchQuery, currentPage, perPage) => {
     }
 }
 
-export const deletePharmacy = (id) => async (dispatch) => {
+export const deletePharmacy = (id, searchQuery, currentPage, perPage) => async (dispatch) => {
     dispatch(setIsFetching(true))
     await axios.delete(API_URL + `deletePharmacy/${id}`)
+    const pharmacies = await axios.get(API_URL + `getPharmacy?searchQuery=${searchQuery}&page=${currentPage}&limit=${perPage}`);
+    dispatch(setPharmacies(pharmacies.data))
 }

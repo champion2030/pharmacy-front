@@ -81,7 +81,7 @@ const TypeOfPropertyTable = () => {
 
     useEffect(() => {
         dispatch(getTypes())
-    }, [dispatch, modalActive, types])
+    }, [dispatch, modalActive])
 
 
     return (

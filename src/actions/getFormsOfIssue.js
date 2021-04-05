@@ -43,6 +43,8 @@ export const createNewForm = (form_of_issue) => (dispatch) => {
 export const deleteFormOfIssue = (id) => async (dispatch) => {
     dispatch(setIsFetching(true))
     await axios.delete(API_URL + `deleteFormOfIssue/${id}`)
+    const forms = await axios.get(API_URL + `getFormOfIssue`);
+    dispatch(setForms(forms.data))
 }
 
 export const getCurrentFormOfIssue = (id) => {

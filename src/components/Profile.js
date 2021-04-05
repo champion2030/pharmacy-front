@@ -13,18 +13,18 @@ const Profile = () => {
         <div className="container">
             <header className="jumbotron">
                 <h3>
-                    <strong>{currentUser.username}</strong> Profile
+                    <strong>{currentUser.data.username}</strong> Profile
                 </h3>
             </header>
-            {/*<p>*/}
-            {/*    <strong>Token:</strong> {currentUser.token.substring(0, 20)} ...{" "}*/}
-            {/*    {currentUser.token.substr(currentUser.token.length - 20)}*/}
-            {/*</p>*/}
             <p>
-                <strong>Id:</strong> {currentUser.id}
+                <strong>Token:</strong> {currentUser.data.accessToken.substring(0, 20)} ...{" "}
+                {currentUser.data.accessToken.substr(currentUser.data.accessToken.length - 20)}
             </p>
             <p>
-                <strong>Email:</strong> {currentUser.email}
+                <strong>Id:</strong> {currentUser.data.id}
+            </p>
+            <p>
+                <strong>Email:</strong> {currentUser.data.email}
             </p>
         </div>
     );

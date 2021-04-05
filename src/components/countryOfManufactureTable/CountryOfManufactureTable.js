@@ -81,7 +81,7 @@ const CountryOfManufactureTable = () => {
 
     useEffect(() => {
         dispatch(getCountries())
-    }, [dispatch, modalActive, countries])
+    }, [dispatch, modalActive])
 
 
     return (

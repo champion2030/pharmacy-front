@@ -39,6 +39,8 @@ export const createNewArea = (name_of_area) => (dispatch) => {
 export const deleteArea = (id) => async (dispatch) => {
     dispatch(setIsFetching(true))
     await axios.delete(API_URL + `deleteArea/${id}`)
+    const areas = await axios.get(API_URL + `getArea`);
+    dispatch(setAreas(areas.data))
 }
 
 export const getCurrentArea = (id) => {

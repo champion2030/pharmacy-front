@@ -14,7 +14,9 @@ export const getEmployees = (searchQuery, currentPage, perPage) => {
     }
 }
 
-export const deleteEmployee = (id) => async (dispatch) => {
+export const deleteEmployee = (id, searchQuery, currentPage, perPage) => async (dispatch) => {
     dispatch(setIsFetching(true))
     await axios.delete(API_URL + `deleteEmployee/${id}`)
+    const employees = await axios.get(API_URL + `getEmployee?searchQuery=${searchQuery}&page=${currentPage}&limit=${perPage}`);
+    dispatch(setEmployees(employees.data))
 }

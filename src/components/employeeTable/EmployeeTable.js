@@ -76,7 +76,7 @@ const EmployeeTable = () => {
             ...confirmDialog,
             isOpen: false
         })
-        dispatch(deleteEmployee(id))
+        dispatch(deleteEmployee(id, value, currentPage, rowsPerPage))
         setNotify({
             isOpen: true,
             message: 'Deleted Successfully',
@@ -95,7 +95,7 @@ const EmployeeTable = () => {
 
     useEffect(() => {
         dispatch(getEmployees(value, currentPage, rowsPerPage))
-    }, [currentPage, dispatch, rowsPerPage, value, employees])
+    }, [currentPage, dispatch, rowsPerPage, value])
 
     return (
         <div>

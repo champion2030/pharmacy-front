@@ -80,7 +80,7 @@ const PharmacologicalGroupTable = () => {
 
     useEffect(() => {
         dispatch(getGroups())
-    }, [dispatch, modalActive, groups])
+    }, [dispatch, modalActive])
 
 
     return (

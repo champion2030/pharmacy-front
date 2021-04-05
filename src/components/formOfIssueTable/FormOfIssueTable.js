@@ -81,7 +81,7 @@ const FormOfIssueTable = () => {
 
     useEffect(() => {
         dispatch(getForms())
-    }, [dispatch, modalActive, forms])
+    }, [dispatch, modalActive])
 
 
     return (

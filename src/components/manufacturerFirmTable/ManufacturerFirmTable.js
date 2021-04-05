@@ -76,7 +76,7 @@ const ManufacturerFirmTable = () => {
             ...confirmDialog,
             isOpen: false
         })
-        dispatch(deleteFirm(id))
+        dispatch(deleteFirm(id, value, currentPage, rowsPerPage))
         setNotify({
             isOpen: true,
             message: 'Deleted Successfully',
@@ -95,7 +95,7 @@ const ManufacturerFirmTable = () => {
 
     useEffect(() => {
         dispatch(getFirms(value, currentPage, rowsPerPage))
-    }, [currentPage, dispatch, rowsPerPage, value, manufacturerFirms])
+    }, [currentPage, dispatch, rowsPerPage, value])
 
     return (
         <div>

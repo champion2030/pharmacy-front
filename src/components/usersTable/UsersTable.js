@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
-import {getAllUsers, getUsers} from "../../actions/getUsers";
+import {getUsers} from "../../actions/getUsers";
 import {
     InputAdornment,
     makeStyles,

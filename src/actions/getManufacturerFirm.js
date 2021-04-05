@@ -14,7 +14,9 @@ export const getFirms = (searchQuery, currentPage, perPage) => {
     }
 }
 
-export const deleteFirm = (id) => async (dispatch) => {
+export const deleteFirm = (id, searchQuery, currentPage, perPage) => async (dispatch) => {
     dispatch(setIsFetching(true))
     await axios.delete(API_URL + `deleteManufacturerFirm/${id}`)
+    const firms = await axios.get(API_URL + `getManufacturerFirm?searchQuery=${searchQuery}&page=${currentPage}&limit=${perPage}`);
+    dispatch(setFirms(firms.data))
 }
