@@ -1,5 +1,5 @@
 import axios from "axios";
-import {setCurrentPage, setDeliveries, setIsFetching} from "../reducers/deliveriesTableReducer";
+import {setDeliveries, setIsFetching} from "../reducers/deliveriesTableReducer";
 
 const API_URL = "http://localhost:8080/api/";
 
