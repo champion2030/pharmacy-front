@@ -47,6 +47,7 @@ import {AccountCircle} from "@material-ui/icons";
 import ExitToAppTwoToneIcon from '@material-ui/icons/ExitToAppTwoTone';
 import HowToRegIcon from '@material-ui/icons/HowToReg';
 import VpnKeyIcon from '@material-ui/icons/VpnKey';
+import ManufactureFirmAddOrEdit from "./components/manufacturerFirmTable/ManufactureFirmAddOrEdit";
 
 const theme = createMuiTheme({
     palette: {
@@ -326,6 +327,7 @@ const App = () => {
                         <Route path="/currentPharmacyName/:id" component={PharmacyNameUpdate}/>
                         <Route path="/currentReasonForReturn/:id" component={ReasonForReturnUpdate}/>
                         <Route path="/currentTypeOfProperty/:id" component={TypeOfPropertyUpdate}/>
+                        <Route path="/currentFirm/:id" component={ManufactureFirmAddOrEdit}/>
                         <Redirect to="/"/>
                     </Switch>
                 </main>

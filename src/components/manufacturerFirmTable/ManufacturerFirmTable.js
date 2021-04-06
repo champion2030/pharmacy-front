@@ -23,6 +23,7 @@ import ManufacturerFirmTableHead from "./ManufacturerFirmTableHead";
 import {deleteFirm, getFirms} from "../../actions/getManufacturerFirm";
 import ConfirmDialog from "../commonComponents/ConfirmDialog";
 import Notification from "../commonComponents/Notification";
+import {NavLink} from "react-router-dom";
 
 const useStyles = makeStyles(theme => ({
     pageContent: {
@@ -71,6 +72,10 @@ const ManufacturerFirmTable = () => {
     const [confirmDialog, setConfirmDialog] = useState({isOpen: false, title: '', subTitle: ''})
     const [notify, setNotify] = useState({isOpen: false, message: '', type: ''})
 
+    useEffect(() => {
+        dispatch(getFirms(value, currentPage, rowsPerPage))
+    }, [currentPage, dispatch, rowsPerPage, value])
+
     const onDelete = id => {
         setConfirmDialog({
             ...confirmDialog,
@@ -93,10 +98,6 @@ const ManufacturerFirmTable = () => {
         dispatch(setCurrentPage(1))
     };
 
-    useEffect(() => {
-        dispatch(getFirms(value, currentPage, rowsPerPage))
-    }, [currentPage, dispatch, rowsPerPage, value])
-
     return (
         <div>
             <Paper className={classes.pageContent}>
@@ -115,6 +116,7 @@ const ManufacturerFirmTable = () => {
                             )
                         }}
                     />
+
                     <Controls.Button
                         text="Add New"
                         variant="outlined"
@@ -141,14 +143,11 @@ const ManufacturerFirmTable = () => {
                                         <TableCell>{item.address}</TableCell>
                                         <TableCell>{item.year_open}</TableCell>
                                         <TableCell>
-                                            <Controls.ActionButton
-                                                color="primary"
-                                                // onClick={() => {
-                                                //     openInPopup(item)
-                                                // }}
-                                            >
-                                                <EditOutlinedIcon fontSize="small"/>
-                                            </Controls.ActionButton>
+                                            <NavLink to={`/currentFirm/${item.id}`}>
+                                                <Controls.ActionButton color="primary">
+                                                    <EditOutlinedIcon fontSize="small"/>
+                                                </Controls.ActionButton>
+                                            </NavLink>
                                             <Controls.ActionButton
                                                 color="secondary"
                                                 onClick={() => {

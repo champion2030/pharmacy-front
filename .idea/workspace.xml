@@ -10,35 +10,16 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e0de64aa-80a1-43a0-bc39-5202a49cf082" name="Default Changelist" comment="All tables with method delete">
+    <list default="true" id="e0de64aa-80a1-43a0-bc39-5202a49cf082" name="Default Changelist" comment="Fixed render page">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/actions/getAreas.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/actions/getAreas.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/actions/getCountriesOfManufacture.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/actions/getCountriesOfManufacture.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/actions/getDeliveries.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/actions/getDeliveries.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/actions/getEmployee.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/actions/getEmployee.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/actions/getFormsOfIssue.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/actions/getFormsOfIssue.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/actions/getManufacturerFirm.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/actions/getManufacturerFirm.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/actions/getMedicine.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/actions/getMedicine.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/actions/getPharmacologicalGroups.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/actions/getPharmacologicalGroups.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/actions/getPharmacy.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/actions/getPharmacy.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/actions/getPharmacyNames.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/actions/getPharmacyNames.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/actions/getReasonsForReturn.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/actions/getReasonsForReturn.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/actions/getTypesOfProperty.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/actions/getTypesOfProperty.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Profile.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Profile.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/areaTable/AreaTable.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/areaTable/AreaTable.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/countryOfManufactureTable/CountryOfManufactureTable.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/countryOfManufactureTable/CountryOfManufactureTable.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/deliveriesTable/DeliveriesTable.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/deliveriesTable/DeliveriesTable.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/employeeTable/EmployeeTable.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/employeeTable/EmployeeTable.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/formOfIssueTable/FormOfIssueTable.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/formOfIssueTable/FormOfIssueTable.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/actions/types.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/actions/types.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/manufacturerFirmTable/ManufactureFirmAddOrEdit.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/manufacturerFirmTable/ManufactureFirmAddOrEdit.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/manufacturerFirmTable/ManufacturerFirmTable.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/manufacturerFirmTable/ManufacturerFirmTable.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/medicineTable/MedicineTable.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/medicineTable/MedicineTable.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/pharmacologicalGroupTable/PharmacologicalGroupTable.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/pharmacologicalGroupTable/PharmacologicalGroupTable.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/pharmacyName/PharmacyNameTable.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/pharmacyName/PharmacyNameTable.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/pharmacyTable/PharmacyTable.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/pharmacyTable/PharmacyTable.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/reasonForReturnTable/ReasonForReturnTable.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/reasonForReturnTable/ReasonForReturnTable.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/typeOfPropertyTable/TypeOfPropertyTable.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/typeOfPropertyTable/TypeOfPropertyTable.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/usersTable/UsersTable.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/usersTable/UsersTable.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/reducers/manufacturerFirmTableReducer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/reducers/manufacturerFirmTableReducer.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -48,8 +29,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="JavaScript File" />
         <option value="Less File" />
+        <option value="JavaScript File" />
       </list>
     </option>
   </component>
@@ -76,7 +57,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../../../../nice" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../../../../React/Comfy/ComfyProject/firts-project" />
     <property name="list.type.of.created.stylesheet" value="Less" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.standard" value="true" />
@@ -168,7 +149,8 @@
       <workItem from="1617528503518" duration="16682000" />
       <workItem from="1617564636253" duration="3260000" />
       <workItem from="1617615086516" duration="13109000" />
-      <workItem from="1617631401550" duration="10135000" />
+      <workItem from="1617631401550" duration="15905000" />
+      <workItem from="1617695627038" duration="31569000" />
     </task>
     <task id="LOCAL-00001" summary="User Registration and Login">
       <created>1614707057660</created>
@@ -331,7 +313,14 @@
       <option name="project" value="LOCAL" />
       <updated>1617628227818</updated>
     </task>
-    <option name="localTasksCounter" value="24" />
+    <task id="LOCAL-00024" summary="Fixed render page">
+      <created>1617654701353</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1617654701353</updated>
+    </task>
+    <option name="localTasksCounter" value="25" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -357,6 +346,7 @@
     <MESSAGE value="form of issue" />
     <MESSAGE value="Directory tables can change values now" />
     <MESSAGE value="All tables with method delete" />
-    <option name="LAST_COMMIT_MESSAGE" value="All tables with method delete" />
+    <MESSAGE value="Fixed render page" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fixed render page" />
   </component>
 </project>

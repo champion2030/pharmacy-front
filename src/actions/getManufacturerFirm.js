@@ -1,5 +1,6 @@
 import axios from "axios";
 import {setFirms, setIsFetching} from "../reducers/manufacturerFirmTableReducer";
+import {SET_MESSAGE} from "./types";
 
 const API_URL = "http://localhost:8080/api/";
 
@@ -20,3 +21,35 @@ export const deleteFirm = (id, searchQuery, currentPage, perPage) => async (disp
     const firms = await axios.get(API_URL + `getManufacturerFirm?searchQuery=${searchQuery}&page=${currentPage}&limit=${perPage}`);
     dispatch(setFirms(firms.data))
 }
+
+export const getCurrentFirm = async (id, setCountryOfManufacture, setFirm, setEmail, setAddress, setSelectedDate) => {
+    const firm = await axios.get(API_URL + `getCurrentManufacturerFirm/${id}`)
+    setCountryOfManufacture(firm.data.country_of_manufacture_id)
+    setFirm(firm.data.firm_name)
+    setEmail(firm.data.email)
+    setAddress(firm.data.address)
+    setSelectedDate(firm.data.year_open)
+}
+
+export const updateCurrentFirm = (country_of_manufacture_id, firm_name, email, address, year_open, id) => (dispatch) => {
+    dispatch(setIsFetching(true))
+    const updatedFirm = axios.put(API_URL + `updateManufacturerFirm/${id}`, {country_of_manufacture_id, firm_name, email, address, year_open, id})
+    return updatedFirm.then(
+        () => {
+            dispatch({
+                type: SET_MESSAGE,
+                payload: "Firm updated successful!",
+            });
+            return Promise.resolve();
+        },
+        (error) => {
+            const message = error.response.data.error
+
+            dispatch({
+                type: SET_MESSAGE,
+                payload: message,
+            });
+            return Promise.reject();
+        }
+    );
+};
