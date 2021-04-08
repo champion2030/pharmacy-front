@@ -29,9 +29,14 @@ export const getCurrentFirm = async (id, setCountryOfManufacture, setFirm, setEm
     setEmail(firm.data.email)
     setAddress(firm.data.address)
     setSelectedDate(firm.data.year_open)
+    console.log(firm.data)
 }
 
 export const updateCurrentFirm = (country_of_manufacture_id, firm_name, email, address, year_open, id) => (dispatch) => {
+    // const dateChange = new Date(year_open);
+    // const isoDate = dateChange.toISOString();
+    // year_open = isoDate.substr(0, 10)
+    console.log(year_open)
     dispatch(setIsFetching(true))
     const updatedFirm = axios.put(API_URL + `updateManufacturerFirm/${id}`, {country_of_manufacture_id, firm_name, email, address, year_open, id})
     return updatedFirm.then(
@@ -39,6 +44,29 @@ export const updateCurrentFirm = (country_of_manufacture_id, firm_name, email, a
             dispatch({
                 type: SET_MESSAGE,
                 payload: "Firm updated successful!",
+            });
+            return Promise.resolve();
+        },
+        (error) => {
+            const message = error.response.data.error
+
+            dispatch({
+                type: SET_MESSAGE,
+                payload: message,
+            });
+            return Promise.reject();
+        }
+    );
+};
+
+export const createNewFirm = (country_of_manufacture_id, firm_name, email, address, year_open) => (dispatch) => {
+    dispatch(setIsFetching(true))
+    const newFirm = axios.post(API_URL + `createManufacturerFirm`, {country_of_manufacture_id, firm_name, email, address, year_open})
+    return newFirm.then(
+        () => {
+            dispatch({
+                type: SET_MESSAGE,
+                payload: "Firm created successful!",
             });
             return Promise.resolve();
         },

@@ -9,12 +9,11 @@ import {
     Paper,
     Select,
     TextField,
-    useTheme
 } from "@material-ui/core";
 import {useParams} from "react-router-dom"
 import Controls from "../controls/Controls";
 import {clearMessage} from "../../actions/message";
-import {getCurrentFirm, updateCurrentFirm} from "../../actions/getManufacturerFirm";
+import {createNewFirm, getCurrentFirm, updateCurrentFirm} from "../../actions/getManufacturerFirm";
 import DateFnsUtils from '@date-io/date-fns';
 import {KeyboardDatePicker, MuiPickersUtilsProvider} from "@material-ui/pickers";
 import {getCountries} from "../../actions/getCountriesOfManufacture";
@@ -62,26 +61,17 @@ const MenuProps = {
     },
 };
 
-function getStyles(name, personName, theme) {
-    return {
-        fontWeight:
-            personName.indexOf(name) === -1
-                ? theme.typography.fontWeightRegular
-                : theme.typography.fontWeightMedium,
-    };
-}
-
 const ManufactureFirmAddOrEdit = (props) => {
 
     const dispatch = useDispatch()
 
     const classes = useStyles();
     const {id} = useParams()
-    const [countryOfManufacture, setCountryOfManufacture] = useState([]);
+    const [countryOfManufacture, setCountryOfManufacture] = useState('')
     const [firm, setFirm] = useState("")
     const [email, setEmail] = useState("")
     const [address, setAddress] = useState("")
-    const [selectedDate, setSelectedDate] = useState(new Date('2014-08-18T21:11:54'));
+    const [selectedDate, setSelectedDate] = useState(new Date())
     const [successful, setSuccessful] = useState(false);
     const {message} = useSelector(state => state.message);
     const countries = useSelector(state => state.countryOfManufactureReducer.countries)
@@ -121,16 +111,24 @@ const ManufactureFirmAddOrEdit = (props) => {
 
 
     useEffect(() => {
-        if (id !== 0) {
+        if (Number(id) !== 0) {
             getCurrentFirm(id, setCountryOfManufacture, setFirm, setEmail, setAddress, setSelectedDate)
         }
         dispatch(getCountries())
         dispatch(clearMessage())
+
     }, [dispatch, id])
 
     const handleSubmit = () => {
-        if (id === 0) {
-
+        if (Number(id) === 0) {
+            dispatch(createNewFirm(countryOfManufacture, firm, email, address, selectedDate))
+                .then(() => {
+                    setSuccessful(true);
+                    props.history.goBack()
+                })
+                .catch(() => {
+                    setSuccessful(false);
+                });
         } else {
             dispatch(updateCurrentFirm(countryOfManufacture, firm, email, address, selectedDate, id))
                 .then(() => {
@@ -146,7 +144,7 @@ const ManufactureFirmAddOrEdit = (props) => {
     return (
         <Paper className={classes.pageContent}>
             <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                <Grid container spacing={3} align="center" justify="center" alignItems="center">
+                <Grid container align="center" justify="center" alignItems="center">
                     <Grid item xs={3}>
                         <FormControl className={classes.formControl}>
                             <InputLabel id="demo-controlled-open-select-label">Country of manufacture</InputLabel>
@@ -156,7 +154,7 @@ const ManufactureFirmAddOrEdit = (props) => {
                                 open={open}
                                 onClose={handleClose}
                                 onOpen={handleOpen}
-                                value={countryOfManufacture}
+                                value={countryOfManufacture ? countryOfManufacture : ''}
                                 onChange={handleChange}
                                 MenuProps={MenuProps}
                             >
@@ -172,7 +170,7 @@ const ManufactureFirmAddOrEdit = (props) => {
                         <TextField
                             variant="outlined"
                             name="firmName"
-                            value={firm}
+                            value={firm || ""}
                             onChange={e => onChangeFirmName(e)}
                             helperText="Firm name"
                         />
@@ -180,9 +178,8 @@ const ManufactureFirmAddOrEdit = (props) => {
                     <Grid item xs={3}>
                         <TextField
                             variant="outlined"
-                            label="Email"
                             name="email"
-                            value={email}
+                            value={email || ""}
                             onChange={e => onChangeEmail(e)}
                             helperText="Email"
                         />
@@ -191,7 +188,7 @@ const ManufactureFirmAddOrEdit = (props) => {
                         <TextField
                             variant="outlined"
                             name="address"
-                            value={address}
+                            value={address || ""}
                             onChange={e => onChangeAddress(e)}
                             helperText="Address"
                         />
@@ -200,10 +197,9 @@ const ManufactureFirmAddOrEdit = (props) => {
                         <KeyboardDatePicker
                             disableToolbar
                             variant="inline"
-                            format="MM/dd/yyyy"
+                            format="dd/MM/yyyy"
                             margin="normal"
                             id="date-picker-inline"
-                            label="Date picker inline"
                             value={selectedDate}
                             onChange={handleDateChange}
                             KeyboardButtonProps={{
@@ -222,7 +218,7 @@ const ManufactureFirmAddOrEdit = (props) => {
                 </div>
             )}
 
-            <Grid align="center" justify="center" alignItems="center">
+            <Grid container align="center" justify="center" alignItems="center">
                 <div className={classes.buttons}>
                     <Controls.Button
                         type="submit"

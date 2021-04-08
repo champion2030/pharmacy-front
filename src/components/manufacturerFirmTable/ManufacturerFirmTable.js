@@ -24,6 +24,8 @@ import {deleteFirm, getFirms} from "../../actions/getManufacturerFirm";
 import ConfirmDialog from "../commonComponents/ConfirmDialog";
 import Notification from "../commonComponents/Notification";
 import {NavLink} from "react-router-dom";
+import VisibilityIcon from '@material-ui/icons/Visibility';
+import Moment from 'react-moment';
 
 const useStyles = makeStyles(theme => ({
     pageContent: {
@@ -98,6 +100,11 @@ const ManufacturerFirmTable = () => {
         dispatch(setCurrentPage(1))
     };
 
+    Date.prototype.addHours = function(h) {
+        this.setTime(this.getTime() + (h*60*60*1000));
+        return this;
+    }
+
     return (
         <div>
             <Paper className={classes.pageContent}>
@@ -116,14 +123,14 @@ const ManufacturerFirmTable = () => {
                             )
                         }}
                     />
-
-                    <Controls.Button
-                        text="Add New"
-                        variant="outlined"
-                        startIcon={<AddIcon/>}
-                        className={classes.newButton}
-                        //onClick={() => setModalActive(true)}
-                    />
+                    <NavLink to={`/currentFirm/${0}`}>
+                        <Controls.Button
+                            text="Add New"
+                            variant="outlined"
+                            startIcon={<AddIcon/>}
+                            className={classes.newButton}
+                        />
+                    </NavLink>
                 </Toolbar>
 
                 <Table className={classes.table}>
@@ -141,8 +148,17 @@ const ManufacturerFirmTable = () => {
                                         <TableCell>{item.firm_name}</TableCell>
                                         <TableCell>{item.email}</TableCell>
                                         <TableCell>{item.address}</TableCell>
-                                        <TableCell>{item.year_open}</TableCell>
                                         <TableCell>
+                                            <Moment format="DD/MM/YYYY" add={{ hours: 3 }}>
+                                                {item.year_open}
+                                            </Moment>
+                                        </TableCell>
+                                        <TableCell>
+                                            <NavLink to={`/currentFirm/${item.id}`}>
+                                                <Controls.ActionButton color="primary">
+                                                    <VisibilityIcon fontSize="small"/>
+                                                </Controls.ActionButton>
+                                            </NavLink>
                                             <NavLink to={`/currentFirm/${item.id}`}>
                                                 <Controls.ActionButton color="primary">
                                                     <EditOutlinedIcon fontSize="small"/>
@@ -155,9 +171,7 @@ const ManufacturerFirmTable = () => {
                                                         isOpen: true,
                                                         title: 'Are you sure to delete this record?',
                                                         subTitle: "You can't undo this operation",
-                                                        onConfirm: () => {
-                                                            onDelete(item.id)
-                                                        }
+                                                        onConfirm: () => {onDelete(item.id)}
                                                     })
                                                 }}
                                             >
