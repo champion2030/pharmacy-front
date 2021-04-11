@@ -1,16 +1,6 @@
 import React, {useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
-import {
-    InputAdornment,
-    makeStyles,
-    Paper,
-    Table,
-    TableBody,
-    TableCell,
-    TableRow,
-    TextField,
-    Toolbar
-} from "@material-ui/core";
+import {InputAdornment, makeStyles, Paper, Table, TableBody, TableCell, TableRow, TextField, Toolbar} from "@material-ui/core";
 import Controls from "../controls/Controls";
 import EditOutlinedIcon from "@material-ui/icons/EditOutlined";
 import CloseIcon from "@material-ui/icons/Close";
@@ -100,11 +90,6 @@ const ManufacturerFirmTable = () => {
         dispatch(setCurrentPage(1))
     };
 
-    Date.prototype.addHours = function(h) {
-        this.setTime(this.getTime() + (h*60*60*1000));
-        return this;
-    }
-
     return (
         <div>
             <Paper className={classes.pageContent}>
@@ -123,7 +108,7 @@ const ManufacturerFirmTable = () => {
                             )
                         }}
                     />
-                    <NavLink to={`/currentFirm/${0}`}>
+                    <NavLink to={`/currentFirm/${0}/addNew`}>
                         <Controls.Button
                             text="Add New"
                             variant="outlined"
@@ -154,12 +139,12 @@ const ManufacturerFirmTable = () => {
                                             </Moment>
                                         </TableCell>
                                         <TableCell>
-                                            <NavLink to={`/currentFirm/${item.id}`}>
+                                            <NavLink to={`/currentFirm/${item.id}/see`}>
                                                 <Controls.ActionButton color="primary">
                                                     <VisibilityIcon fontSize="small"/>
                                                 </Controls.ActionButton>
                                             </NavLink>
-                                            <NavLink to={`/currentFirm/${item.id}`}>
+                                            <NavLink to={`/currentFirm/${item.id}/edit`}>
                                                 <Controls.ActionButton color="primary">
                                                     <EditOutlinedIcon fontSize="small"/>
                                                 </Controls.ActionButton>

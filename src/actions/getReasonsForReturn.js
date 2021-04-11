@@ -1,11 +1,7 @@
 import axios from "axios";
 import {setIsFetching} from "../reducers/countryOfManufactureTableReducer";
 import {SET_MESSAGE} from "./types";
-import {
-    setCurrentReasonForReturn,
-    setReasons,
-    updateInputReasonForReturn
-} from "../reducers/reasonForReturnTablereducer";
+import {setCurrentReasonForReturn, setReasons, updateInputReasonForReturn} from "../reducers/reasonForReturnTablereducer";
 
 const API_URL = "http://localhost:8080/api/";
 

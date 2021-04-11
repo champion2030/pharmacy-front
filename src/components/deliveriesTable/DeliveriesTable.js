@@ -1,16 +1,6 @@
 import React, {useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
-import {
-    InputAdornment,
-    makeStyles,
-    Paper,
-    Table,
-    TableBody,
-    TableCell,
-    TableRow,
-    TextField,
-    Toolbar
-} from "@material-ui/core";
+import {Checkbox, InputAdornment, makeStyles, Paper, Table, TableBody, TableCell, TableRow, TextField, Toolbar} from "@material-ui/core";
 import Controls from "../controls/Controls";
 import EditOutlinedIcon from "@material-ui/icons/EditOutlined";
 import CloseIcon from "@material-ui/icons/Close";
@@ -18,11 +8,14 @@ import TablePagination from "@material-ui/core/TablePagination";
 import {setCurrentPage} from "../../reducers/deliveriesTableReducer";
 import {Search} from "@material-ui/icons";
 import AddIcon from "@material-ui/icons/Add";
-import Checkbox from "../controls/Checkbox";
 import ConfirmDialog from "../commonComponents/ConfirmDialog";
 import Notification from "../commonComponents/Notification";
 import DeliveriesTableHead from "./DeliveriesTableHead";
 import {deleteDeliver, getDeliveries} from "../../actions/getDeliveries";
+import {NavLink} from "react-router-dom";
+import VisibilityIcon from "@material-ui/icons/Visibility";
+import Moment from "react-moment";
+import AttachMoneyIcon from '@material-ui/icons/AttachMoney';
 
 const useStyles = makeStyles(theme => ({
     pageContent: {
@@ -115,13 +108,14 @@ const DeliveriesTable = () => {
                             )
                         }}
                     />
-                    <Controls.Button
-                        text="Add New"
-                        variant="outlined"
-                        startIcon={<AddIcon/>}
-                        className={classes.newButton}
-                        //onClick={() => setModalActive(true)}
-                    />
+                    <NavLink to={`/currentDeliver/${0}/addNew`}>
+                        <Controls.Button
+                            text="Add New"
+                            variant="outlined"
+                            startIcon={<AddIcon/>}
+                            className={classes.newButton}
+                        />
+                    </NavLink>
                 </Toolbar>
 
                 <Table className={classes.table}>
@@ -136,25 +130,45 @@ const DeliveriesTable = () => {
                                             />
                                         </TableCell>
                                         <TableCell>{item.medicine_name}</TableCell>
-                                        <TableCell>{item.name}</TableCell>
+                                        <TableCell>{item.full_name}</TableCell>
                                         <TableCell width="100">{item.reason_for_return}</TableCell>
-                                        <TableCell>{item.receipt_date}</TableCell>
+                                        <TableCell>
+                                            <Moment format="DD/MM/YYYY" add={{ hours: 3 }}>
+                                                {item.receipt_date}
+                                            </Moment>
+                                        </TableCell>
                                         <TableCell>{item.number_of_packages}</TableCell>
-                                        <TableCell>{item.presence_of_defect ? "true" : "false"}</TableCell>
-                                        <TableCell>{item.supplier_price}</TableCell>
-                                        <TableCell>{item.pharmacy_price}</TableCell>
-                                        <TableCell>{item.expiry_start_date}</TableCell>
-                                        <TableCell>{item.expiration_date}</TableCell>
+                                        <TableCell>
+                                            <Checkbox
+                                                disabled
+                                                checked={item.presence_of_defect || false}
+                                                inputProps={{ 'aria-label': 'disabled checked checkbox' }}
+                                            />
+                                        </TableCell>
+                                        <TableCell>{item.supplier_price}<AttachMoneyIcon fontSize="small"/></TableCell>
+                                        <TableCell>{item.pharmacy_price}<AttachMoneyIcon fontSize="small"/></TableCell>
+                                        <TableCell>
+                                            <Moment format="DD/MM/YYYY" add={{ hours: 3 }}>
+                                                {item.expiry_start_date}
+                                            </Moment>
+                                        </TableCell>
+                                        <TableCell>
+                                            <Moment format="DD/MM/YYYY" add={{ hours: 3 }}>
+                                                {item.expiration_date}
+                                            </Moment>
+                                        </TableCell>
                                         <TableCell>{item.batch_number}</TableCell>
                                         <TableCell>
-                                            <Controls.ActionButton
-                                                color="primary"
-                                                // onClick={() => {
-                                                //     openInPopup(item)
-                                                // }}
-                                            >
-                                                <EditOutlinedIcon fontSize="small"/>
-                                            </Controls.ActionButton>
+                                            <NavLink to={`/currentDeliver/${item.id}/see`}>
+                                                <Controls.ActionButton color="primary">
+                                                    <VisibilityIcon fontSize="small"/>
+                                                </Controls.ActionButton>
+                                            </NavLink>
+                                            <NavLink to={`/currentDeliver/${item.id}/edit`}>
+                                                <Controls.ActionButton color="primary">
+                                                    <EditOutlinedIcon fontSize="small"/>
+                                                </Controls.ActionButton>
+                                            </NavLink>
                                             <Controls.ActionButton
                                                 color="secondary"
                                                 onClick={() => {
@@ -162,9 +176,7 @@ const DeliveriesTable = () => {
                                                         isOpen: true,
                                                         title: 'Are you sure to delete this record?',
                                                         subTitle: "You can't undo this operation",
-                                                        onConfirm: () => {
-                                                            onDelete(item.id)
-                                                        }
+                                                        onConfirm: () => {onDelete(item.id)}
                                                     })
                                                 }}
                                             >

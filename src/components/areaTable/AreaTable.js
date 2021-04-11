@@ -1,14 +1,6 @@
 import React, {useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
-import {
-    makeStyles,
-    Paper,
-    Table,
-    TableBody,
-    TableCell,
-    TableRow,
-    Toolbar
-} from "@material-ui/core";
+import {makeStyles, Paper, Table, TableBody, TableCell, TableRow, Toolbar} from "@material-ui/core";
 import Controls from "../controls/Controls";
 import EditOutlinedIcon from "@material-ui/icons/EditOutlined";
 import CloseIcon from "@material-ui/icons/Close";
@@ -20,7 +12,6 @@ import {deleteArea, getAreas} from "../../actions/getAreas";
 import AreaFormWindow from "./AreaFormWindow";
 import Notification from "../commonComponents/Notification";
 import {NavLink} from "react-router-dom";
-
 
 const useStyles = makeStyles(theme => ({
     pageContent: {

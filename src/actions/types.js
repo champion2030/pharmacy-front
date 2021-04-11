@@ -3,14 +3,11 @@ export const REGISTER_FAIL = "REGISTER_FAIL";
 export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
 export const LOGIN_FAIL = "LOGIN_FAIL";
 export const LOGOUT = "LOGOUT";
-
 export const SET_MESSAGE = "SET_MESSAGE";
 export const CLEAR_MESSAGE = "CLEAR_MESSAGE";
-
 export const SET_USERS = "SET_USERS"
 export const SET_IS_FETCHING = "SET_IS_FETCHING"
 export const SET_CURRENT_PAGE = "SET_CURRENT_PAGE"
-
 export const SET_FORMS = "SET_FORMS"
 export const SET_GROUPS = "SET_GROUPS"
 export const SET_COUNTRIES = "SET_COUNTRIES"
@@ -37,3 +34,7 @@ export const SET_MEDICINE = "SET_MEDICINE"
 export const SET_PHARMACIES = "SET_PHARMACIES"
 export const SET_EMPLOYEES = "SET_EMPLOYEES"
 export const SET_DELIVERIES = "SET_DELIVERIES"
+export const SET_ALL_FIRMS = "SET_ALL_FIRMS"
+export const SET_ALL_PHARMACIES = "SET_ALL_PHARMACIES"
+export const SET_ALL_MEDICINE = "SET_ALL_MEDICINE"
+export const SET_ALL_EMPLOYEES = "SET_ALL_EMPLOYEES"

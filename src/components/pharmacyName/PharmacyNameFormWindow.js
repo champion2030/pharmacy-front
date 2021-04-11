@@ -18,17 +18,11 @@ const PharmacyNameFormWindow = ({active, setActive}) => {
     const classes = useStyles()
 
     const dispatch = useDispatch();
-
     const {message} = useSelector(state => state.message);
-
     const [pharmacyName, setPharmacyName] = useState('')
-
     const [pharmacyNameDirty, setPharmacyNameDirty] = useState(false)
-
     const [pharmacyNameError, setPharmacyNameError] = useState('Pharmacy name can not be empty')
-
     const [formValid, setFormValid] = useState(false)
-
     const [successful, setSuccessful] = useState(false);
 
     useEffect(() => {
@@ -58,7 +52,6 @@ const PharmacyNameFormWindow = ({active, setActive}) => {
             setPharmacyNameError("")
         }
     }
-
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -94,7 +87,6 @@ const PharmacyNameFormWindow = ({active, setActive}) => {
                     onChange={e => formOfIssueHandler(e)}
                 />
                 {(pharmacyNameError && pharmacyNameDirty) && <div style={{color: 'red'}}>{pharmacyNameError}</div>}
-
                 {!successful && message && (
                     <div className="form-group">
                         <div className="alert alert-danger" role="alert">
@@ -102,7 +94,6 @@ const PharmacyNameFormWindow = ({active, setActive}) => {
                         </div>
                     </div>
                 )}
-
                 <div>
                     <Controls.Button
                         text="Submit"
@@ -119,7 +110,6 @@ const PharmacyNameFormWindow = ({active, setActive}) => {
             </Grid>
         </form>
     )
-
 }
 
 export default PharmacyNameFormWindow;

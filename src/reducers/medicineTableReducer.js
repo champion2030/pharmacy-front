@@ -1,7 +1,8 @@
-import {SET_CURRENT_PAGE, SET_IS_FETCHING, SET_MEDICINE} from "../actions/types";
+import {SET_ALL_MEDICINE, SET_CURRENT_PAGE, SET_IS_FETCHING, SET_MEDICINE} from "../actions/types";
 
 const defaultState = {
     medicines: [],
+    allMedicines: [],
     totalCount: 0,
     currentPage: 1,
     isFetching: true
@@ -14,6 +15,12 @@ export default function medicineReducer(state = defaultState, action) {
                 ...state,
                 medicines: action.payload.medicines,
                 totalCount: action.payload.totalCount,
+                isFetching: false
+            }
+        case SET_ALL_MEDICINE:
+            return {
+                ...state,
+                allMedicines: action.payload,
                 isFetching: false
             }
         case SET_CURRENT_PAGE:
@@ -34,3 +41,4 @@ export default function medicineReducer(state = defaultState, action) {
 export const setMedicine = (medicines) => ({type: SET_MEDICINE, payload: medicines})
 export const setIsFetching = (bool) => ({type: SET_IS_FETCHING, payload: bool})
 export const setCurrentPage = (page) => ({type: SET_CURRENT_PAGE, payload: page})
+export const setAllMedicine = (allMedicines) => ({type: SET_ALL_MEDICINE, payload: allMedicines})

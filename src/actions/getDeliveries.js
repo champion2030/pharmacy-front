@@ -1,5 +1,6 @@
 import axios from "axios";
 import {setDeliveries, setIsFetching} from "../reducers/deliveriesTableReducer";
+import {SET_MESSAGE} from "./types";
 
 const API_URL = "http://localhost:8080/api/";
 
@@ -20,3 +21,84 @@ export const deleteDeliver = (id, searchQuery, currentPage, perPage) => async (d
     const deliveries = await axios.get(API_URL + `getDeliveries?searchQuery=${searchQuery}&page=${currentPage}&limit=${perPage}`);
     dispatch(setDeliveries(deliveries.data))
 }
+
+export const getCurrentDeliver = async (id, setMedicine, setEmployee, setCause, setReceiptDate, setNumberOfPackages, setPresentOfDefect, setSupplierPrice, setPharmacyPrice, setExpiryStartDate, setExpirationDate, setBatchNumber) => {
+    const deliver = await axios.get(API_URL + `getCurrentDeliver/${id}`)
+    setMedicine(deliver.data.medicine_id)
+    setEmployee(deliver.data.employee_id)
+    setCause(deliver.data.cause_id)
+    setReceiptDate(deliver.data.receipt_date)
+    setNumberOfPackages(deliver.data.number_of_packages)
+    setPresentOfDefect(deliver.data.presence_of_defect)
+    setSupplierPrice(deliver.data.supplier_price)
+    setPharmacyPrice(deliver.data.pharmacy_price)
+    setExpiryStartDate(deliver.data.expiry_start_date)
+    setExpirationDate(deliver.data.expiration_date)
+    setBatchNumber(deliver.data.batch_number)
+}
+
+export const updateCurrentDeliver = (medicine_id, employee_id, cause_id, receipt_date, number_of_packages, presence_of_defect, supplier_price, pharmacy_price, expiry_start_date, expiration_date, id) => (dispatch) => {
+    dispatch(setIsFetching(true))
+    const updatedDeliver = axios.put(API_URL + `updateDeliver/${id}`, {
+        medicine_id,
+        employee_id,
+        cause_id,
+        receipt_date,
+        number_of_packages,
+        presence_of_defect,
+        supplier_price,
+        pharmacy_price,
+        expiry_start_date,
+        expiration_date
+    })
+    return updatedDeliver.then(
+        () => {
+            dispatch({
+                type: SET_MESSAGE,
+                payload: "Deliver updated successful!",
+            });
+            return Promise.resolve();
+        },
+        (error) => {
+            const message = error.response.data.error
+            dispatch({
+                type: SET_MESSAGE,
+                payload: message,
+            });
+            return Promise.reject();
+        }
+    );
+};
+
+export const createNewDeliver = (medicine_id, employee_id, cause_id, receipt_date, number_of_packages, presence_of_defect, supplier_price, pharmacy_price, expiry_start_date, expiration_date) => (dispatch) => {
+    dispatch(setIsFetching(true))
+    const newDeliver = axios.post(API_URL + `createDeliver`, {
+        medicine_id,
+        employee_id,
+        cause_id,
+        receipt_date,
+        number_of_packages,
+        presence_of_defect,
+        supplier_price,
+        pharmacy_price,
+        expiry_start_date,
+        expiration_date
+    })
+    return newDeliver.then(
+        () => {
+            dispatch({
+                type: SET_MESSAGE,
+                payload: "Deliver created successful!",
+            });
+            return Promise.resolve();
+        },
+        (error) => {
+            const message = error.response.data.error
+            dispatch({
+                type: SET_MESSAGE,
+                payload: message,
+            });
+            return Promise.reject();
+        }
+    );
+};

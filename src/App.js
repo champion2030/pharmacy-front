@@ -9,16 +9,7 @@ import {logout} from "./actions/auth";
 import {clearMessage} from "./actions/message";
 import {history} from "./helpers/history";
 import UsersTable from "./components/usersTable/UsersTable";
-import {
-    CssBaseline,
-    createMuiTheme,
-    ThemeProvider,
-    AppBar,
-    Typography,
-    IconButton,
-    Toolbar,
-    makeStyles, Drawer, Divider, List, ListItem, ListItemText, Badge
-} from '@material-ui/core';
+import {CssBaseline, createMuiTheme, ThemeProvider, AppBar, Typography, IconButton, Toolbar, makeStyles, Drawer, Divider, List, ListItem, ListItemText, Badge} from '@material-ui/core';
 import SignIn from "./components/Login";
 import FormOfIssueTable from "./components/formOfIssueTable/FormOfIssueTable";
 import PharmacologicalGroupTable from "./components/pharmacologicalGroupTable/PharmacologicalGroupTable";
@@ -48,6 +39,10 @@ import ExitToAppTwoToneIcon from '@material-ui/icons/ExitToAppTwoTone';
 import HowToRegIcon from '@material-ui/icons/HowToReg';
 import VpnKeyIcon from '@material-ui/icons/VpnKey';
 import ManufactureFirmAddOrEdit from "./components/manufacturerFirmTable/ManufactureFirmAddOrEdit";
+import MedicineAddOrEdit from "./components/medicineTable/MedicineAddOrEdit";
+import PharmacyAddOrEdit from "./components/pharmacyTable/PharmacyAddOrEdit";
+import EmployeeAddOrEdit from "./components/employeeTable/EmployeeAddOrEdit";
+import DeliveriesAddOrEdit from "./components/deliveriesTable/DeliveriesAddOrEdit";
 
 const theme = createMuiTheme({
     palette: {
@@ -144,13 +139,9 @@ const App = () => {
     const classes = useStyles();
     const [open, setOpen] = useState(false);
 
-    const handleDrawerOpen = () => {
-        setOpen(true);
-    };
+    const handleDrawerOpen = () => {setOpen(true);};
 
-    const handleDrawerClose = () => {
-        setOpen(false);
-    };
+    const handleDrawerClose = () => {setOpen(false);};
 
     useEffect(() => {
         history.listen((location) => {
@@ -327,7 +318,11 @@ const App = () => {
                         <Route path="/currentPharmacyName/:id" component={PharmacyNameUpdate}/>
                         <Route path="/currentReasonForReturn/:id" component={ReasonForReturnUpdate}/>
                         <Route path="/currentTypeOfProperty/:id" component={TypeOfPropertyUpdate}/>
-                        <Route path="/currentFirm/:id" component={ManufactureFirmAddOrEdit}/>
+                        <Route path="/currentFirm/:id/:action" component={ManufactureFirmAddOrEdit}/>
+                        <Route path="/currentMedicine/:id/:action" component={MedicineAddOrEdit}/>
+                        <Route path="/currentPharmacy/:id/:action" component={PharmacyAddOrEdit}/>
+                        <Route path="/currentEmployee/:id/:action" component={EmployeeAddOrEdit}/>
+                        <Route path="/currentDeliver/:id/:action" component={DeliveriesAddOrEdit}/>
                         <Redirect to="/"/>
                     </Switch>
                 </main>

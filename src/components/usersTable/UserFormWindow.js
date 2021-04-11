@@ -19,21 +19,16 @@ const UserFormWindow = ({active, setActive}) => {
 
     const dispatch = useDispatch();
     const {message} = useSelector(state => state.message);
-
     const [username, setUsername] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
-
     const [usernameDirty, setUsernameDirty] = useState(false)
     const [emailDirty, setEmailDirty] = useState(false)
     const [passwordDirty, setPasswordDirty] = useState(false)
-
     const [usernameError, setUsernameError] = useState('Username can not be empty')
     const [emailError, setEmailError] = useState('Email can not be empty')
     const [passwordError, setPasswordError] = useState('Password can not be empty')
-
     const [formValid, setFormValid] = useState(false)
-
     const [successful, setSuccessful] = useState(false);
 
     useEffect(() => {

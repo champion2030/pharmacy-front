@@ -1,16 +1,6 @@
 import React, {useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
-import {
-    InputAdornment,
-    makeStyles,
-    Paper,
-    Table,
-    TableBody,
-    TableCell,
-    TableRow,
-    TextField,
-    Toolbar
-} from "@material-ui/core";
+import {InputAdornment, makeStyles, Paper, Table, TableBody, TableCell, TableRow, TextField, Toolbar} from "@material-ui/core";
 import Controls from "../controls/Controls";
 import EditOutlinedIcon from "@material-ui/icons/EditOutlined";
 import CloseIcon from "@material-ui/icons/Close";
@@ -23,6 +13,8 @@ import ConfirmDialog from "../commonComponents/ConfirmDialog";
 import Notification from "../commonComponents/Notification";
 import MedicineTableHead from "./MedicineTableHead";
 import {deleteMedicine, getMedicines} from "../../actions/getMedicine";
+import {NavLink} from "react-router-dom";
+import VisibilityIcon from "@material-ui/icons/Visibility";
 
 const useStyles = makeStyles(theme => ({
     pageContent: {
@@ -115,15 +107,15 @@ const MedicineTable = () => {
                             )
                         }}
                     />
-                    <Controls.Button
-                        text="Add New"
-                        variant="outlined"
-                        startIcon={<AddIcon/>}
-                        className={classes.newButton}
-                        //onClick={() => setModalActive(true)}
-                    />
+                    <NavLink to={`/currentMedicine/${0}/addNew`}>
+                        <Controls.Button
+                            text="Add New"
+                            variant="outlined"
+                            startIcon={<AddIcon/>}
+                            className={classes.newButton}
+                        />
+                    </NavLink>
                 </Toolbar>
-
                 <Table className={classes.table}>
                     <MedicineTableHead/>
                     <TableBody>
@@ -142,14 +134,16 @@ const MedicineTable = () => {
                                         <TableCell width="500">{item.instruction}</TableCell>
                                         <TableCell>{item.barcode}</TableCell>
                                         <TableCell>
-                                            <Controls.ActionButton
-                                                color="primary"
-                                                // onClick={() => {
-                                                //     openInPopup(item)
-                                                // }}
-                                            >
-                                                <EditOutlinedIcon fontSize="small"/>
-                                            </Controls.ActionButton>
+                                            <NavLink to={`/currentMedicine/${item.id}/see`}>
+                                                <Controls.ActionButton color="primary">
+                                                    <VisibilityIcon fontSize="small"/>
+                                                </Controls.ActionButton>
+                                            </NavLink>
+                                            <NavLink to={`/currentMedicine/${item.id}/edit`}>
+                                                <Controls.ActionButton color="primary">
+                                                    <EditOutlinedIcon fontSize="small"/>
+                                                </Controls.ActionButton>
+                                            </NavLink>
                                             <Controls.ActionButton
                                                 color="secondary"
                                                 onClick={() => {
@@ -157,9 +151,7 @@ const MedicineTable = () => {
                                                         isOpen: true,
                                                         title: 'Are you sure to delete this record?',
                                                         subTitle: "You can't undo this operation",
-                                                        onConfirm: () => {
-                                                            onDelete(item.id)
-                                                        }
+                                                        onConfirm: () => {onDelete(item.id)}
                                                     })
                                                 }}
                                             >
