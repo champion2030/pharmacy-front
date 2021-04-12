@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
-import {FormControl, Grid, InputLabel, makeStyles, MenuItem, Paper, Select, TextField,} from "@material-ui/core";
+import {Grid, makeStyles, Paper, TextField,} from "@material-ui/core";
 import {useParams} from "react-router-dom"
 import Controls from "../controls/Controls";
 import {clearMessage} from "../../actions/message";
@@ -8,6 +8,7 @@ import {createNewFirm, getCurrentFirm, updateCurrentFirm} from "../../actions/ge
 import DateFnsUtils from '@date-io/date-fns';
 import {KeyboardDatePicker, MuiPickersUtilsProvider} from "@material-ui/pickers";
 import {getCountries} from "../../actions/getCountriesOfManufacture";
+import {Autocomplete} from "@material-ui/lab";
 
 const useStyles = makeStyles(theme => ({
     pageContent: {
@@ -40,22 +41,12 @@ const useStyles = makeStyles(theme => ({
     },
 }))
 
-const ITEM_HEIGHT = 48;
-const ITEM_PADDING_TOP = 8;
-const MenuProps = {
-    PaperProps: {
-        style: {
-            maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
-            width: 250,
-        },
-    },
-};
-
 const ManufactureFirmAddOrEdit = (props) => {
 
     const dispatch = useDispatch()
     const classes = useStyles();
     const {id, action} = useParams()
+    const [countryOfManufactureId, setCountryOfManufactureId] = useState('')
     const [countryOfManufacture, setCountryOfManufacture] = useState('')
     const [firm, setFirm] = useState("")
     const [email, setEmail] = useState("")
@@ -64,17 +55,10 @@ const ManufactureFirmAddOrEdit = (props) => {
     const [successful, setSuccessful] = useState(false);
     const {message} = useSelector(state => state.message);
     const countries = useSelector(state => state.countryOfManufactureReducer.countries)
-    const [open, setOpen] = useState(false);
 
-    const handleChange = (event) => {
-        setCountryOfManufacture(event.target.value);
+    const handleDateChange = (date) => {
+        setSelectedDate(date)
     };
-
-    const handleClose = () => {setOpen(false);};
-
-    const handleOpen = () => {setOpen(true);};
-
-    const handleDateChange = (date) => {setSelectedDate(date)};
 
     const onChangeFirmName = (e) => {
         const firmName = e.target.value;
@@ -94,7 +78,7 @@ const ManufactureFirmAddOrEdit = (props) => {
 
     useEffect(() => {
         if (Number(id) !== 0) {
-            getCurrentFirm(id, setCountryOfManufacture, setFirm, setEmail, setAddress, setSelectedDate)
+            getCurrentFirm(id, setCountryOfManufactureId, setCountryOfManufacture, setFirm, setEmail, setAddress, setSelectedDate)
         }
         if (action !== 'see') {
             dispatch(getCountries())
@@ -105,7 +89,7 @@ const ManufactureFirmAddOrEdit = (props) => {
 
     const handleSubmit = () => {
         if (Number(id) === 0) {
-            dispatch(createNewFirm(countryOfManufacture, firm, email, address, selectedDate))
+            dispatch(createNewFirm(countryOfManufactureId, firm, email, address, selectedDate))
                 .then(() => {
                     setSuccessful(true);
                     props.history.goBack()
@@ -114,7 +98,7 @@ const ManufactureFirmAddOrEdit = (props) => {
                     setSuccessful(false);
                 });
         } else {
-            dispatch(updateCurrentFirm(countryOfManufacture, firm, email, address, selectedDate, id))
+            dispatch(updateCurrentFirm(countryOfManufactureId, firm, email, address, selectedDate, id))
                 .then(() => {
                     setSuccessful(true);
                     props.history.goBack()
@@ -130,26 +114,24 @@ const ManufactureFirmAddOrEdit = (props) => {
             <MuiPickersUtilsProvider utils={DateFnsUtils}>
                 <Grid container align="center" justify="center" alignItems="center">
                     <Grid item xs={3}>
-                        <FormControl className={classes.formControl}>
-                            <InputLabel id="demo-controlled-open-select-label">Country of manufacture</InputLabel>
-                            <Select
-                                labelId="demo-controlled-open-select-label"
-                                id="demo-controlled-open-select"
-                                open={open}
-                                onClose={handleClose}
-                                onOpen={handleOpen}
-                                value={countryOfManufacture ? countryOfManufacture : ''}
-                                onChange={handleChange}
-                                MenuProps={MenuProps}
-                                disabled={action === 'see'}
-                            >
-                                {countries.map((country) => (
-                                    <MenuItem key={country.id} value={country.id}>
-                                        {country.country}
-                                    </MenuItem>
-                                ))}
-                            </Select>
-                        </FormControl>
+                        <Autocomplete
+                            id="combo-box-demo1"
+                            options={countries}
+                            disableClearable
+                            disabled={action === 'see'}
+                            getOptionLabel={(option) => option.country}
+                            style={{width: 300, marginBottom: 20}}
+                            onChange={(event, newValue) => {
+                                setCountryOfManufactureId(newValue.id)
+                                setCountryOfManufacture(newValue.country)
+                            }}
+                            renderInput={(params) =>
+                                <TextField
+                                    {...params}
+                                    label={action === 'addNew' ? "Country of manufacture" : countryOfManufacture}
+                                    variant="outlined"
+                                />}
+                        />
                     </Grid>
                     <Grid item xs={3}>
                         <TextField

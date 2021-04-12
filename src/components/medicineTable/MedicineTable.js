@@ -5,7 +5,7 @@ import Controls from "../controls/Controls";
 import EditOutlinedIcon from "@material-ui/icons/EditOutlined";
 import CloseIcon from "@material-ui/icons/Close";
 import TablePagination from "@material-ui/core/TablePagination";
-import {setCurrentPage} from "../../reducers/medicineTableReducer";
+import {setCurrentPageMedicine} from "../../reducers/medicineTableReducer";
 import {Search} from "@material-ui/icons";
 import AddIcon from "@material-ui/icons/Add";
 import Checkbox from "../controls/Checkbox";
@@ -56,7 +56,7 @@ const MedicineTable = () => {
     const classes = useStyles();
     const dispatch = useDispatch()
     const medicines = useSelector(state => state.medicineReducer.medicines)
-    let currentPage = useSelector(state => state.medicineReducer.currentPage)
+    let currentPageMedicine = useSelector(state => state.medicineReducer.currentPageMedicine)
     let totalCount = useSelector(state => state.medicineReducer.totalCount)
     const [value, setValue] = useState('')
     const [rowsPerPage, setRowsPerPage] = useState(5);
@@ -68,7 +68,7 @@ const MedicineTable = () => {
             ...confirmDialog,
             isOpen: false
         })
-        dispatch(deleteMedicine(id, value, currentPage, rowsPerPage))
+        dispatch(deleteMedicine(id, value, currentPageMedicine, rowsPerPage))
         setNotify({
             isOpen: true,
             message: 'Deleted Successfully',
@@ -77,17 +77,18 @@ const MedicineTable = () => {
     }
 
     const handleChangePage = (event, newPage) => {
-        dispatch(setCurrentPage(newPage + 1))
+        dispatch(setCurrentPageMedicine(newPage + 1))
     };
 
     const handleChangeRowsPerPage = (event) => {
         setRowsPerPage(+event.target.value);
-        dispatch(setCurrentPage(1))
+        dispatch(setCurrentPageMedicine(1))
     };
 
     useEffect(() => {
-        dispatch(getMedicines(value, currentPage, rowsPerPage))
-    }, [currentPage, dispatch, rowsPerPage, value])
+        if (value !== '') dispatch(setCurrentPageMedicine(1))
+        dispatch(getMedicines(value, currentPageMedicine, rowsPerPage))
+    }, [currentPageMedicine, dispatch, rowsPerPage, value])
 
     return (
         <div>
@@ -151,7 +152,9 @@ const MedicineTable = () => {
                                                         isOpen: true,
                                                         title: 'Are you sure to delete this record?',
                                                         subTitle: "You can't undo this operation",
-                                                        onConfirm: () => {onDelete(item.id)}
+                                                        onConfirm: () => {
+                                                            onDelete(item.id)
+                                                        }
                                                     })
                                                 }}
                                             >
@@ -164,17 +167,15 @@ const MedicineTable = () => {
                         }
                     </TableBody>
                 </Table>
-                {
-                    <TablePagination
-                        rowsPerPageOptions={[5, 10, 50]}
-                        component="div"
-                        count={totalCount}
-                        rowsPerPage={rowsPerPage}
-                        page={currentPage - 1}
-                        onChangePage={handleChangePage}
-                        onChangeRowsPerPage={handleChangeRowsPerPage}
-                    />
-                }
+                <TablePagination
+                    rowsPerPageOptions={[5, 10, 50]}
+                    component="div"
+                    count={totalCount}
+                    rowsPerPage={rowsPerPage}
+                    page={currentPageMedicine - 1}
+                    onChangePage={handleChangePage}
+                    onChangeRowsPerPage={handleChangeRowsPerPage}
+                />
             </Paper>
             <Notification
                 notify={notify}

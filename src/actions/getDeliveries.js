@@ -22,11 +22,14 @@ export const deleteDeliver = (id, searchQuery, currentPage, perPage) => async (d
     dispatch(setDeliveries(deliveries.data))
 }
 
-export const getCurrentDeliver = async (id, setMedicine, setEmployee, setCause, setReceiptDate, setNumberOfPackages, setPresentOfDefect, setSupplierPrice, setPharmacyPrice, setExpiryStartDate, setExpirationDate, setBatchNumber) => {
+export const getCurrentDeliver = async (id, setMedicineId, setMedicineName, setEmployeeId, setEmployeeFullName, setCauseId, setCause, setReceiptDate, setNumberOfPackages, setPresentOfDefect, setSupplierPrice, setPharmacyPrice, setExpiryStartDate, setExpirationDate, setBatchNumber) => {
     const deliver = await axios.get(API_URL + `getCurrentDeliver/${id}`)
-    setMedicine(deliver.data.medicine_id)
-    setEmployee(deliver.data.employee_id)
-    setCause(deliver.data.cause_id)
+    setMedicineId(deliver.data.medicine_id)
+    setMedicineName(deliver.data.medicine_name)
+    setEmployeeId(deliver.data.employee_id)
+    setEmployeeFullName(deliver.data.employee_full_name)
+    setCauseId(deliver.data.cause_id)
+    setCause(deliver.data.reason_for_return)
     setReceiptDate(deliver.data.receipt_date)
     setNumberOfPackages(deliver.data.number_of_packages)
     setPresentOfDefect(deliver.data.presence_of_defect)

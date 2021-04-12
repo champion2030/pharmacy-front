@@ -30,11 +30,14 @@ export const deletePharmacy = (id, searchQuery, currentPage, perPage) => async (
     dispatch(setPharmacies(pharmacies.data))
 }
 
-export const getCurrentPharmacy = async (id, setPharmacyName, setArea, setTypeOfProperty, setTelephone, setAddress) => {
-    const pharmacy = await axios.get(API_URL + `getCurrentPharmacy/${id}`);
-    setPharmacyName(pharmacy.data.name_id)
-    setArea(pharmacy.data.area_id)
-    setTypeOfProperty(pharmacy.data.type_of_property_id)
+export const getCurrentPharmacy = async (id, setPharmacyNameId, setPharmacyName, setAreaId, setArea, setTypeOfPropertyId, setTypeOfProperty, setTelephone, setAddress) => {
+    const pharmacy = await axios.get(API_URL + `getCurrentPharmacy/${id}`)
+    setPharmacyNameId(pharmacy.data.name_id)
+    setPharmacyName(pharmacy.data.name)
+    setAreaId(pharmacy.data.area_id)
+    setArea(pharmacy.data.name_of_area)
+    setTypeOfPropertyId(pharmacy.data.type_of_property_id)
+    setTypeOfProperty(pharmacy.data.name_of_property)
     setTelephone(pharmacy.data.telephone)
     setAddress(pharmacy.data.address)
 }

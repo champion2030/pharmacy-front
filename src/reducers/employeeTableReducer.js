@@ -1,10 +1,10 @@
-import {SET_ALL_EMPLOYEES, SET_CURRENT_PAGE, SET_EMPLOYEES, SET_IS_FETCHING} from "../actions/types";
+import {SET_ALL_EMPLOYEES, SET_CURRENT_PAGE_EMPLOYEE, SET_EMPLOYEES, SET_IS_FETCHING} from "../actions/types";
 
 const defaultState = {
     employees: [],
     allEmployees: [],
     totalCount: 0,
-    currentPage: 1,
+    currentPageEmployee: 1,
     isFetching: true
 }
 
@@ -23,10 +23,10 @@ export default function employeeReducer(state = defaultState, action) {
                 allEmployees: action.payload,
                 isFetching: false
             }
-        case SET_CURRENT_PAGE:
+        case SET_CURRENT_PAGE_EMPLOYEE:
             return {
                 ...state,
-                currentPage: action.payload
+                currentPageEmployee: action.payload
             }
         case SET_IS_FETCHING:
             return {
@@ -40,5 +40,5 @@ export default function employeeReducer(state = defaultState, action) {
 
 export const setEmployees = (employees) => ({type: SET_EMPLOYEES, payload: employees})
 export const setIsFetching = (bool) => ({type: SET_IS_FETCHING, payload: bool})
-export const setCurrentPage = (page) => ({type: SET_CURRENT_PAGE, payload: page})
+export const setCurrentPageEmployee = (page) => ({type: SET_CURRENT_PAGE_EMPLOYEE, payload: page})
 export const setAllEmployees = (allEmployees) => ({type: SET_ALL_EMPLOYEES, payload: allEmployees})

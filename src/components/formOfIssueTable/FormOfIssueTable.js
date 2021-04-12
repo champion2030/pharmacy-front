@@ -74,7 +74,6 @@ const FormOfIssueTable = () => {
         dispatch(getForms())
     }, [dispatch, modalActive])
 
-
     return (
         <div>
             <Paper className={classes.pageContent}>

@@ -5,7 +5,7 @@ import Controls from "../controls/Controls";
 import EditOutlinedIcon from "@material-ui/icons/EditOutlined";
 import CloseIcon from "@material-ui/icons/Close";
 import TablePagination from "@material-ui/core/TablePagination";
-import {setCurrentPage} from "../../reducers/employeeTableReducer";
+import {setCurrentPageEmployee} from "../../reducers/employeeTableReducer";
 import {Search} from "@material-ui/icons";
 import AddIcon from "@material-ui/icons/Add";
 import Checkbox from "../controls/Checkbox";
@@ -56,7 +56,7 @@ const EmployeeTable = () => {
     const classes = useStyles();
     const dispatch = useDispatch()
     const employees = useSelector(state => state.employeeReducer.employees)
-    let currentPage = useSelector(state => state.employeeReducer.currentPage)
+    let currentPageEmployee = useSelector(state => state.employeeReducer.currentPageEmployee)
     let totalCount = useSelector(state => state.employeeReducer.totalCount)
     const [value, setValue] = useState('')
     const [rowsPerPage, setRowsPerPage] = useState(5);
@@ -68,7 +68,7 @@ const EmployeeTable = () => {
             ...confirmDialog,
             isOpen: false
         })
-        dispatch(deleteEmployee(id, value, currentPage, rowsPerPage))
+        dispatch(deleteEmployee(id, value, currentPageEmployee, rowsPerPage))
         setNotify({
             isOpen: true,
             message: 'Deleted Successfully',
@@ -77,17 +77,18 @@ const EmployeeTable = () => {
     }
 
     const handleChangePage = (event, newPage) => {
-        dispatch(setCurrentPage(newPage + 1))
+        dispatch(setCurrentPageEmployee(newPage + 1))
     };
 
     const handleChangeRowsPerPage = (event) => {
         setRowsPerPage(+event.target.value);
-        dispatch(setCurrentPage(1))
+        dispatch(setCurrentPageEmployee(1))
     };
 
     useEffect(() => {
-        dispatch(getEmployees(value, currentPage, rowsPerPage))
-    }, [currentPage, dispatch, rowsPerPage, value])
+        if (value !== '') dispatch(setCurrentPageEmployee(1))
+        dispatch(getEmployees(value, currentPageEmployee, rowsPerPage))
+    }, [currentPageEmployee, dispatch, rowsPerPage, value])
 
     return (
         <div>
@@ -163,17 +164,15 @@ const EmployeeTable = () => {
                         }
                     </TableBody>
                 </Table>
-                {
                     <TablePagination
                         rowsPerPageOptions={[5, 10, 50]}
                         component="div"
                         count={totalCount}
                         rowsPerPage={rowsPerPage}
-                        page={currentPage - 1}
+                        page={currentPageEmployee - 1}
                         onChangePage={handleChangePage}
                         onChangeRowsPerPage={handleChangeRowsPerPage}
                     />
-                }
             </Paper>
             <Notification
                 notify={notify}

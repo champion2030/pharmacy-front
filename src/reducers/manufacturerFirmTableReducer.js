@@ -1,10 +1,10 @@
-import {SET_ALL_FIRMS, SET_CURRENT_PAGE, SET_FIRMS, SET_IS_FETCHING} from "../actions/types";
+import {SET_ALL_FIRMS, SET_CURRENT_PAGE_FIRM, SET_FIRMS, SET_IS_FETCHING} from "../actions/types";
 
 const defaultState = {
     manufacturerFirms: [],
     allManufacturerFirms: [],
     totalCount: 0,
-    currentPage: 1,
+    currentPageFirm: 1,
     isFetching: true
 }
 
@@ -23,10 +23,10 @@ export default function manufacturerFirmReducer(state = defaultState, action) {
                 allManufacturerFirms: action.payload,
                 isFetching: false
             }
-        case SET_CURRENT_PAGE:
+        case SET_CURRENT_PAGE_FIRM:
             return {
                 ...state,
-                currentPage: action.payload
+                currentPageFirm: action.payload
             }
         case SET_IS_FETCHING:
             return {
@@ -41,4 +41,4 @@ export default function manufacturerFirmReducer(state = defaultState, action) {
 export const setFirms = (manufacturerFirms) => ({type: SET_FIRMS, payload: manufacturerFirms})
 export const setAllFirms = (allManufacturerFirms) => ({type: SET_ALL_FIRMS, payload: allManufacturerFirms})
 export const setIsFetching = (bool) => ({type: SET_IS_FETCHING, payload: bool})
-export const setCurrentPage = (page) => ({type: SET_CURRENT_PAGE, payload: page})
+export const setCurrentPageFirm = (page) => ({type: SET_CURRENT_PAGE_FIRM, payload: page})

@@ -30,9 +30,10 @@ export const deleteFirm = (id, searchQuery, currentPage, perPage) => async (disp
     dispatch(setFirms(firms.data))
 }
 
-export const getCurrentFirm = async (id, setCountryOfManufacture, setFirm, setEmail, setAddress, setSelectedDate) => {
+export const getCurrentFirm = async (id, setCountryOfManufactureId, setCountryOfManufacture, setFirm, setEmail, setAddress, setSelectedDate) => {
     const firm = await axios.get(API_URL + `getCurrentManufacturerFirm/${id}`)
-    setCountryOfManufacture(firm.data.country_of_manufacture_id)
+    setCountryOfManufactureId(firm.data.country_of_manufacture_id)
+    setCountryOfManufacture(firm.data.country)
     setFirm(firm.data.firm_name)
     setEmail(firm.data.email)
     setAddress(firm.data.address)

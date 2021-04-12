@@ -5,7 +5,7 @@ import Controls from "../controls/Controls";
 import EditOutlinedIcon from "@material-ui/icons/EditOutlined";
 import CloseIcon from "@material-ui/icons/Close";
 import TablePagination from "@material-ui/core/TablePagination";
-import {setCurrentPage} from "../../reducers/pharmacyTableReducer";
+import {setCurrentPagePharmacy} from "../../reducers/pharmacyTableReducer";
 import {Search} from "@material-ui/icons";
 import AddIcon from "@material-ui/icons/Add";
 import Checkbox from "../controls/Checkbox";
@@ -56,7 +56,7 @@ const PharmacyTable = () => {
     const classes = useStyles();
     const dispatch = useDispatch()
     const pharmacies = useSelector(state => state.pharmacyReducer.pharmacies)
-    let currentPage = useSelector(state => state.pharmacyReducer.currentPage)
+    let currentPagePharmacy = useSelector(state => state.pharmacyReducer.currentPagePharmacy)
     let totalCount = useSelector(state => state.pharmacyReducer.totalCount)
     const [value, setValue] = useState('')
     const [rowsPerPage, setRowsPerPage] = useState(5);
@@ -68,7 +68,7 @@ const PharmacyTable = () => {
             ...confirmDialog,
             isOpen: false
         })
-        dispatch(deletePharmacy(id, value, currentPage, rowsPerPage))
+        dispatch(deletePharmacy(id, value, currentPagePharmacy, rowsPerPage))
         setNotify({
             isOpen: true,
             message: 'Deleted Successfully',
@@ -77,17 +77,18 @@ const PharmacyTable = () => {
     }
 
     const handleChangePage = (event, newPage) => {
-        dispatch(setCurrentPage(newPage + 1))
+        dispatch(setCurrentPagePharmacy(newPage + 1))
     };
 
     const handleChangeRowsPerPage = (event) => {
         setRowsPerPage(+event.target.value);
-        dispatch(setCurrentPage(1))
+        dispatch(setCurrentPagePharmacy(1))
     };
 
     useEffect(() => {
-        dispatch(getPharmacies(value, currentPage, rowsPerPage))
-    }, [currentPage, dispatch, rowsPerPage, value])
+        if (value !== '') dispatch(setCurrentPagePharmacy(1))
+        dispatch(getPharmacies(value, currentPagePharmacy, rowsPerPage))
+    }, [currentPagePharmacy, dispatch, rowsPerPage, value])
 
     return (
         <div>
@@ -151,7 +152,9 @@ const PharmacyTable = () => {
                                                         isOpen: true,
                                                         title: 'Are you sure to delete this record?',
                                                         subTitle: "You can't undo this operation",
-                                                        onConfirm: () => {onDelete(item.id)}
+                                                        onConfirm: () => {
+                                                            onDelete(item.id)
+                                                        }
                                                     })
                                                 }}
                                             >
@@ -164,17 +167,15 @@ const PharmacyTable = () => {
                         }
                     </TableBody>
                 </Table>
-                {
-                    <TablePagination
-                        rowsPerPageOptions={[5, 10, 50]}
-                        component="div"
-                        count={totalCount}
-                        rowsPerPage={rowsPerPage}
-                        page={currentPage - 1}
-                        onChangePage={handleChangePage}
-                        onChangeRowsPerPage={handleChangeRowsPerPage}
-                    />
-                }
+                <TablePagination
+                    rowsPerPageOptions={[5, 10, 50]}
+                    component="div"
+                    count={totalCount}
+                    rowsPerPage={rowsPerPage}
+                    page={currentPagePharmacy - 1}
+                    onChangePage={handleChangePage}
+                    onChangeRowsPerPage={handleChangeRowsPerPage}
+                />
             </Paper>
             <Notification
                 notify={notify}

@@ -30,12 +30,13 @@ export const deleteEmployee = (id, searchQuery, currentPage, perPage) => async (
     dispatch(setEmployees(employees.data))
 }
 
-export const getCurrentEmployee = async (id, setName, setSurname, setPatronymic, setPharmacy) => {
+export const getCurrentEmployee = async (id, setName, setSurname, setPatronymic, setPharmacyId, setPharmacy) => {
     const employee = await axios.get(API_URL + `getCurrentEmployee/${id}`)
     setName(employee.data.name)
     setSurname(employee.data.surname)
     setPatronymic(employee.data.patronymic)
-    setPharmacy(employee.data.pharmacy_id)
+    setPharmacyId(employee.data.pharmacy_id)
+    setPharmacy(employee.data.pharmacy_name)
 }
 
 export const updateCurrentEmployee = (pharmacy_id, name, surname, patronymic, id) => (dispatch) => {

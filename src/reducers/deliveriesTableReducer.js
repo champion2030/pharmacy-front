@@ -1,9 +1,9 @@
-import {SET_CURRENT_PAGE, SET_DELIVERIES, SET_IS_FETCHING} from "../actions/types";
+import {SET_CURRENT_PAGE_DELIVERS, SET_DELIVERIES, SET_IS_FETCHING} from "../actions/types";
 
 const defaultState = {
     deliveries: [],
     totalCount: 0,
-    currentPage: 1,
+    currentPageDelivers: 1,
     isFetching: true
 }
 
@@ -16,10 +16,10 @@ export default function deliveriesReducer(state = defaultState, action) {
                 totalCount: action.payload.totalCount,
                 isFetching: false
             }
-        case SET_CURRENT_PAGE:
+        case SET_CURRENT_PAGE_DELIVERS:
             return {
                 ...state,
-                currentPage: action.payload
+                currentPageDelivers: action.payload
             }
         case SET_IS_FETCHING:
             return {
@@ -33,4 +33,4 @@ export default function deliveriesReducer(state = defaultState, action) {
 
 export const setDeliveries = (deliveries) => ({type: SET_DELIVERIES, payload: deliveries})
 export const setIsFetching = (bool) => ({type: SET_IS_FETCHING, payload: bool})
-export const setCurrentPage = (page) => ({type: SET_CURRENT_PAGE, payload: page})
+export const setCurrentPageDelivers = (page) => ({type: SET_CURRENT_PAGE_DELIVERS, payload: page})

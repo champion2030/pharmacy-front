@@ -1,11 +1,12 @@
 import React, {useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
-import {FormControl, Grid, InputLabel, makeStyles, MenuItem, Paper, Select, TextField,} from "@material-ui/core";
+import {Grid, makeStyles, Paper, TextField,} from "@material-ui/core";
 import {useParams} from "react-router-dom"
 import Controls from "../controls/Controls";
 import {clearMessage} from "../../actions/message";
 import {getAllPharmacies} from "../../actions/getPharmacy";
 import {createNewEmployee, getCurrentEmployee, updateCurrentEmployee} from "../../actions/getEmployee";
+import {Autocomplete} from "@material-ui/lab";
 
 const useStyles = makeStyles(theme => ({
     pageContent: {
@@ -38,17 +39,6 @@ const useStyles = makeStyles(theme => ({
     },
 }))
 
-const ITEM_HEIGHT = 48;
-const ITEM_PADDING_TOP = 8;
-const MenuProps = {
-    PaperProps: {
-        style: {
-            maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
-            width: 250,
-        },
-    },
-};
-
 const EmployeeAddOrEdit = (props) => {
 
     const dispatch = useDispatch()
@@ -57,33 +47,21 @@ const EmployeeAddOrEdit = (props) => {
     const [name, setName] = useState('')
     const [surname, setSurname] = useState('')
     const [patronymic, setPatronymic] = useState('')
+    const [pharmacyId, setPharmacyId] = useState('')
     const [pharmacy, setPharmacy] = useState('')
     const [successful, setSuccessful] = useState(false);
     const {message} = useSelector(state => state.message);
     const allPharmacies = useSelector(state => state.pharmacyReducer.allPharmacies)
-    const [openPharmacy, setOpenPharmacy] = useState(false);
-
 
     useEffect(() => {
         if (Number(id) !== 0) {
-            getCurrentEmployee(id, setName, setSurname, setPatronymic, setPharmacy)
+            getCurrentEmployee(id, setName, setSurname, setPatronymic, setPharmacyId, setPharmacy)
         }
         if (action !== 'see') {
             dispatch(getAllPharmacies())
         }
         dispatch(clearMessage())
     }, [dispatch, id, action])
-
-    const handleChange = (e) => {
-        setPharmacy(e.target.value)
-    };
-
-    const handleClosePharmacy = () => {
-        setOpenPharmacy(false)
-    }
-    const handleOpenPharmacy = () => {
-        setOpenPharmacy(true)
-    }
 
     const onChangeName = (e) => {
         const name = e.target.value;
@@ -102,7 +80,7 @@ const EmployeeAddOrEdit = (props) => {
 
     const handleSubmit = () => {
         if (Number(id) === 0) {
-            dispatch(createNewEmployee(pharmacy, name, surname, patronymic))
+            dispatch(createNewEmployee(pharmacyId, name, surname, patronymic))
                 .then(() => {
                     setSuccessful(true);
                     props.history.goBack()
@@ -111,7 +89,7 @@ const EmployeeAddOrEdit = (props) => {
                     setSuccessful(false);
                 });
         } else {
-            dispatch(updateCurrentEmployee(pharmacy, name, surname, patronymic, id))
+            dispatch(updateCurrentEmployee(pharmacyId, name, surname, patronymic, id))
                 .then(() => {
                     setSuccessful(true);
                     props.history.goBack()
@@ -156,27 +134,24 @@ const EmployeeAddOrEdit = (props) => {
                     />
                 </Grid>
                 <Grid item xs={3}>
-                    <FormControl className={classes.formControl}>
-                        <InputLabel id="demo-controlled-open-select-label">Pharmacy</InputLabel>
-                        <Select
-                            labelId="demo-controlled-open-select-label"
-                            id="demo-controlled-open-select"
-                            open={openPharmacy}
-                            name="pharmacy"
-                            onClose={handleClosePharmacy}
-                            onOpen={handleOpenPharmacy}
-                            value={pharmacy || ''}
-                            onChange={handleChange}
-                            MenuProps={MenuProps}
-                            disabled={action === 'see'}
-                        >
-                            {allPharmacies.map((pharmacy) => (
-                                <MenuItem key={pharmacy.id} value={pharmacy.id}>
-                                    {pharmacy.id}, {pharmacy.name}
-                                </MenuItem>
-                            ))}
-                        </Select>
-                    </FormControl>
+                    <Autocomplete
+                        id="combo-box-demo3"
+                        options={allPharmacies}
+                        disableClearable
+                        disabled={action === 'see'}
+                        getOptionLabel={(option) => option.id + ' , ' + option.name}
+                        style={{width: 300, marginBottom: 20}}
+                        onChange={(event, newValue) => {
+                            setPharmacyId(newValue.id)
+                            setPharmacy(newValue.name)
+                        }}
+                        renderInput={(params) =>
+                            <TextField
+                                {...params}
+                                label={action === 'addNew' ? "Pharmacy" : pharmacyId + ' , ' + pharmacy}
+                                variant="outlined"
+                            />}
+                    />
                 </Grid>
             </Grid>
             {!successful && message && (

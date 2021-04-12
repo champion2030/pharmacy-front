@@ -5,7 +5,7 @@ import Controls from "../controls/Controls";
 import EditOutlinedIcon from "@material-ui/icons/EditOutlined";
 import CloseIcon from "@material-ui/icons/Close";
 import TablePagination from "@material-ui/core/TablePagination";
-import {setCurrentPage} from "../../reducers/manufacturerFirmTableReducer";
+import {setCurrentPageFirm} from "../../reducers/manufacturerFirmTableReducer";
 import {Search} from "@material-ui/icons";
 import AddIcon from "@material-ui/icons/Add";
 import Checkbox from "../controls/Checkbox";
@@ -57,7 +57,7 @@ const ManufacturerFirmTable = () => {
     const classes = useStyles();
     const dispatch = useDispatch()
     const manufacturerFirms = useSelector(state => state.manufacturerFirmReducer.manufacturerFirms)
-    let currentPage = useSelector(state => state.manufacturerFirmReducer.currentPage)
+    let currentPageFirm = useSelector(state => state.manufacturerFirmReducer.currentPageFirm)
     let totalCount = useSelector(state => state.manufacturerFirmReducer.totalCount)
     const [value, setValue] = useState('')
     const [rowsPerPage, setRowsPerPage] = useState(5);
@@ -65,15 +65,16 @@ const ManufacturerFirmTable = () => {
     const [notify, setNotify] = useState({isOpen: false, message: '', type: ''})
 
     useEffect(() => {
-        dispatch(getFirms(value, currentPage, rowsPerPage))
-    }, [currentPage, dispatch, rowsPerPage, value])
+        if (value !== '') dispatch(setCurrentPageFirm(1))
+        dispatch(getFirms(value, currentPageFirm, rowsPerPage))
+    }, [currentPageFirm, dispatch, rowsPerPage, value])
 
     const onDelete = id => {
         setConfirmDialog({
             ...confirmDialog,
             isOpen: false
         })
-        dispatch(deleteFirm(id, value, currentPage, rowsPerPage))
+        dispatch(deleteFirm(id, value, currentPageFirm, rowsPerPage))
         setNotify({
             isOpen: true,
             message: 'Deleted Successfully',
@@ -82,12 +83,12 @@ const ManufacturerFirmTable = () => {
     }
 
     const handleChangePage = (event, newPage) => {
-        dispatch(setCurrentPage(newPage + 1))
+        dispatch(setCurrentPageFirm(newPage + 1))
     };
 
     const handleChangeRowsPerPage = (event) => {
         setRowsPerPage(+event.target.value);
-        dispatch(setCurrentPage(1))
+        dispatch(setCurrentPageFirm(1))
     };
 
     return (
@@ -134,7 +135,7 @@ const ManufacturerFirmTable = () => {
                                         <TableCell>{item.email}</TableCell>
                                         <TableCell>{item.address}</TableCell>
                                         <TableCell>
-                                            <Moment format="DD/MM/YYYY" add={{ hours: 3 }}>
+                                            <Moment format="DD/MM/YYYY" add={{hours: 3}}>
                                                 {item.year_open}
                                             </Moment>
                                         </TableCell>
@@ -156,7 +157,9 @@ const ManufacturerFirmTable = () => {
                                                         isOpen: true,
                                                         title: 'Are you sure to delete this record?',
                                                         subTitle: "You can't undo this operation",
-                                                        onConfirm: () => {onDelete(item.id)}
+                                                        onConfirm: () => {
+                                                            onDelete(item.id)
+                                                        }
                                                     })
                                                 }}
                                             >
@@ -169,17 +172,15 @@ const ManufacturerFirmTable = () => {
                         }
                     </TableBody>
                 </Table>
-                {
-                    <TablePagination
-                        rowsPerPageOptions={[5, 10, 50]}
-                        component="div"
-                        count={totalCount}
-                        rowsPerPage={rowsPerPage}
-                        page={currentPage - 1}
-                        onChangePage={handleChangePage}
-                        onChangeRowsPerPage={handleChangeRowsPerPage}
-                    />
-                }
+                <TablePagination
+                    rowsPerPageOptions={[5, 10, 50]}
+                    component="div"
+                    count={totalCount}
+                    rowsPerPage={rowsPerPage}
+                    page={currentPageFirm - 1}
+                    onChangePage={handleChangePage}
+                    onChangeRowsPerPage={handleChangeRowsPerPage}
+                />
             </Paper>
             <Notification
                 notify={notify}

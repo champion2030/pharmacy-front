@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
-import {Checkbox, FormControl, Grid, InputLabel, makeStyles, MenuItem, Paper, Select, TextField} from "@material-ui/core";
+import {Checkbox, Grid, makeStyles, Paper, TextField} from "@material-ui/core";
 import {useParams} from "react-router-dom"
 import Controls from "../controls/Controls";
 import {clearMessage} from "../../actions/message";
@@ -11,6 +11,7 @@ import {MuiPickersUtilsProvider, KeyboardDatePicker} from "@material-ui/pickers"
 import DateFnsUtils from "@date-io/date-fns";
 import {createNewDeliver, getCurrentDeliver, updateCurrentDeliver} from "../../actions/getDeliveries";
 import {SET_MESSAGE} from "../../actions/types";
+import {Autocomplete} from "@material-ui/lab";
 
 const useStyles = makeStyles(theme => ({
     pageContent: {
@@ -43,24 +44,17 @@ const useStyles = makeStyles(theme => ({
     },
 }))
 
-const ITEM_HEIGHT = 48;
-const ITEM_PADDING_TOP = 8;
-const MenuProps = {
-    PaperProps: {
-        style: {
-            maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
-            width: 250,
-        },
-    },
-};
 const DeliveriesAddOrEdit = (props) => {
 
     const dispatch = useDispatch()
     const classes = useStyles();
     const {id, action} = useParams()
-    const [medicine, setMedicine] = useState('')
-    const [employee, setEmployee] = useState('')
-    const [cause, setCause] = useState('')
+    const [medicineId, setMedicineId] = useState('')
+    const [medicineName, setMedicineName] = useState('')
+    const [employeeId, setEmployeeId] = useState('')
+    const [employeeFullName, setEmployeeFullName] = useState('')
+    const [causeId, setCauseId] = useState(null)
+    const [cause, setCause] = useState(null)
     const [receiptDate, setReceiptDate] = useState(new Date())
     const [numberOfPackages, setNumberOfPackages] = useState()
     const [presentOfDefect, setPresentOfDefect] = useState(false)
@@ -74,16 +68,11 @@ const DeliveriesAddOrEdit = (props) => {
     const allEmployees = useSelector(state => state.employeeReducer.allEmployees)
     const [successful, setSuccessful] = useState(false);
     const {message} = useSelector(state => state.message);
-    const [openReasonsForReturn, setOpenReasonsForReturn] = useState(false);
-    const [openMedicine, setOpenMedicine] = useState(false);
-    const [openEmployees, setOpenEmployees] = useState(false);
-
 
     useEffect(() => {
         if (Number(id) !== 0) {
-            getCurrentDeliver(id, setMedicine, setEmployee, setCause, setReceiptDate, setNumberOfPackages, setPresentOfDefect, setSupplierPrice, setPharmacyPrice, setExpiryStartDate, setExpirationDate, setBatchNumber)
-        }
-        if (action !== 'see') {
+            getCurrentDeliver(id, setMedicineId, setMedicineName, setEmployeeId, setEmployeeFullName, setCauseId, setCause, setReceiptDate, setNumberOfPackages, setPresentOfDefect, setSupplierPrice, setPharmacyPrice, setExpiryStartDate, setExpirationDate, setBatchNumber)
+        } if (action !== 'see') {
             dispatch(getAllMedicines())
             dispatch(getAllEmployees())
             dispatch(getReasons())
@@ -91,35 +80,21 @@ const DeliveriesAddOrEdit = (props) => {
         dispatch(clearMessage())
     }, [dispatch, id, action])
 
-    const handleChange = (e) => {
-        switch (e.target.name) {
-            case 'medicine':
-                setMedicine(e.target.value)
-                break
-            case 'employees':
-                setEmployee(e.target.value)
-                break
-            case 'reasonForReturn':
-                setCause(e.target.value)
-                break
-            default:
-                break
-        }
+    const handleChangeReceiptDate = (date) => {
+        setReceiptDate(date)
+    };
+    const handleChangeExpiryStartDate = (date) => {
+        setExpiryStartDate(date)
+    };
+    const handleChangeExpirationDate = (date) => {
+        setExpirationDate(date)
     };
 
-    const handleCloseMedicine = () => {setOpenMedicine(false)}
-    const handleOpenMedicine = () => {setOpenMedicine(true)}
-    const handleCloseEmployees = () => {setOpenEmployees(false)}
-    const handleOpenEmployees = () => {setOpenEmployees(true)}
-    const handleCloseReasonsForReturn = () => {setOpenReasonsForReturn(false)}
-    const handleOpenReasonsForReturn = () => {setOpenReasonsForReturn(true)}
-
-    const handleChangeReceiptDate = (date) => {setReceiptDate(date)};
-    const handleChangeExpiryStartDate = (date) => {setExpiryStartDate(date)};
-    const handleChangeExpirationDate = (date) => {setExpirationDate(date)};
-
     const handleChangePresentOfDefect = (event) => {
-        if (!event.target.checked) setCause('')
+        if (!event.target.checked) {
+            setCause(null)
+            setCauseId(null)
+        }
         setPresentOfDefect(event.target.checked);
     };
 
@@ -136,12 +111,12 @@ const DeliveriesAddOrEdit = (props) => {
     };
 
     const handleSubmit = () => {
-        if (presentOfDefect && cause == null){
+        if (presentOfDefect && cause == null) {
             dispatch({type: SET_MESSAGE, payload: "Choose reason for return!"})
             setSuccessful(false);
         } else {
             if (Number(id) === 0) {
-                dispatch(createNewDeliver(medicine, employee, cause ? cause : null, receiptDate, numberOfPackages, presentOfDefect, supplierPrice, pharmacyPrice, expiryStartDate, expirationDate))
+                dispatch(createNewDeliver(medicineId, employeeId, causeId ? causeId : null, receiptDate, numberOfPackages, presentOfDefect, supplierPrice, pharmacyPrice, expiryStartDate, expirationDate))
                     .then(() => {
                         setSuccessful(true);
                         props.history.goBack()
@@ -150,7 +125,7 @@ const DeliveriesAddOrEdit = (props) => {
                         setSuccessful(false);
                     });
             } else {
-                dispatch(updateCurrentDeliver(medicine, employee, cause ? cause : null, receiptDate, numberOfPackages, presentOfDefect, supplierPrice, pharmacyPrice, expiryStartDate, expirationDate, id))
+                dispatch(updateCurrentDeliver(medicineId, employeeId, causeId ? causeId : null, receiptDate, numberOfPackages, presentOfDefect, supplierPrice, pharmacyPrice, expiryStartDate, expirationDate, id))
                     .then(() => {
                         setSuccessful(true);
                         props.history.goBack()
@@ -167,71 +142,64 @@ const DeliveriesAddOrEdit = (props) => {
             <MuiPickersUtilsProvider utils={DateFnsUtils}>
                 <Grid container align="center" justify="center" alignItems="center">
                     <Grid item xs={3}>
-                            <InputLabel id="demo-controlled-open-select-label">Medicine</InputLabel>
-                            <Select
-                                labelId="demo-controlled-open-select-label"
-                                id="demo-controlled-open-select"
-                                open={openMedicine}
-                                name="medicine"
-                                onClose={handleCloseMedicine}
-                                onOpen={handleOpenMedicine}
-                                value={medicine || ''}
-                                onChange={handleChange}
-                                MenuProps={MenuProps}
-                                disabled={action === 'see'}
-                            >
-                                {allMedicines.map((medicine) => (
-                                    <MenuItem key={medicine.id} value={medicine.id}>
-                                        {medicine.medicine_name}
-                                    </MenuItem>
-                                ))}
-                            </Select>
+                        <Autocomplete
+                            id="combo-box-demo1"
+                            options={allMedicines}
+                            disableClearable
+                            disabled={action === 'see'}
+                            getOptionLabel={(option) => option.medicine_name}
+                            style={{width: 300, marginBottom: 20}}
+                            onChange={(event, newValue) => {
+                                setMedicineId(newValue.id)
+                                setMedicineName(newValue.medicine_name)
+                            }}
+                            renderInput={(params) =>
+                                <TextField
+                                    {...params}
+                                    label={action === 'addNew' ? "Medicine name" : medicineName}
+                                    variant="outlined"
+                                />}
+                        />
                     </Grid>
                     <Grid item xs={3}>
-                        <FormControl className={classes.formControl}>
-                            <InputLabel id="demo-controlled-open-select-label">Employees</InputLabel>
-                            <Select
-                                labelId="demo-controlled-open-select-label"
-                                id="demo-controlled-open-select"
-                                open={openEmployees}
-                                name="employees"
-                                onClose={handleCloseEmployees}
-                                onOpen={handleOpenEmployees}
-                                value={employee || ''}
-                                onChange={handleChange}
-                                MenuProps={MenuProps}
-                                disabled={action === 'see'}
-                            >
-                                {allEmployees.map((employee) => (
-                                    <MenuItem key={employee.id} value={employee.id}>
-                                        {employee.full_name}, {employee.pharmacy_name}
-                                    </MenuItem>
-                                ))}
-                            </Select>
-                        </FormControl>
+                        <Autocomplete
+                            id="combo-box-demo2"
+                            options={allEmployees}
+                            disableClearable
+                            disabled={action === 'see'}
+                            getOptionLabel={(option) => option.full_name}
+                            style={{width: 300, marginBottom: 20}}
+                            onChange={(event, newValue) => {
+                                    setEmployeeId(newValue.id)
+                                    setEmployeeFullName(newValue.full_name)
+                            }}
+                            renderInput={(params) =>
+                                <TextField
+                                    {...params}
+                                    label={action === 'addNew' ? "Employee name" : employeeFullName}
+                                    variant="outlined"
+                                />}
+                        />
                     </Grid>
                     <Grid item xs={3}>
-                        <FormControl className={classes.formControl}>
-                            <InputLabel id="demo-controlled-open-select-label">Reason for return</InputLabel>
-                            <Select
-                                labelId="demo-controlled-open-select-label"
-                                id="demo-controlled-open-select"
-                                open={openReasonsForReturn}
-                                name="reasonForReturn"
-                                onClose={handleCloseReasonsForReturn}
-                                onOpen={handleOpenReasonsForReturn}
-                                value={cause || ''}
-                                onChange={handleChange}
-                                MenuProps={MenuProps}
-                                disabled={action === 'see' || !presentOfDefect}
-                            >
-                                {reasons.map((reason) => (
-                                    <MenuItem key={reason.id} value={reason.id}>
-                                        {reason.reason_for_return}
-                                    </MenuItem>
-                                ))}
-                            </Select>
-                        </FormControl>
+                        <Autocomplete
+                            id="combo-box-demo3"
+                            options={reasons}
+                            disableClearable
+                            disabled={action === 'see' || !presentOfDefect}
+                            getOptionLabel={(option) => option.reason_for_return}
+                            style={{width: 500, marginBottom: 20}}
+                            onChange={(event, newValue) => {
+                                    setCauseId(newValue.id)
+                                    setCause(newValue.reason_for_return)
+                            }}
+                            renderInput={(params) =>
+                                <TextField
+                                    {...params}
+                                    label={action === 'addNew' || !presentOfDefect ? "Reason for return" : cause}
+                                    variant="outlined"
+                                />}
+                        />
                     </Grid>
                     <Grid item xs={3}>
                         <KeyboardDatePicker
@@ -336,31 +304,29 @@ const DeliveriesAddOrEdit = (props) => {
                 </Grid>
             </MuiPickersUtilsProvider>
             {!successful && message && (
-                    <div className="form-group">
-                        <div className="alert alert-danger" role="alert">
-                            {message}
-                        </div>
+                <div className="form-group">
+                    <div className="alert alert-danger" role="alert">
+                        {message}
                     </div>
-                )}
-                <Grid container align="center" justify="center" alignItems="center">
-                    <div className={classes.buttons}>
-                        <Controls.Button
-                            type="submit"
-                            text="Submit"
-                            disabled={action === 'see'}
-                            onClick={handleSubmit}
-                        />
-                        <Controls.Button
-                            text="Reset"
-                            color="default"
-                            onClick={() => props.history.goBack()}
-                        />
-                    </div>
-                </Grid>
+                </div>
+            )}
+            <Grid container align="center" justify="center" alignItems="center">
+                <div className={classes.buttons}>
+                    <Controls.Button
+                        type="submit"
+                        text="Submit"
+                        disabled={action === 'see'}
+                        onClick={handleSubmit}
+                    />
+                    <Controls.Button
+                        text="Reset"
+                        color="default"
+                        onClick={() => props.history.goBack()}
+                    />
+                </div>
+            </Grid>
         </Paper>
     )
 };
 
 export default DeliveriesAddOrEdit;
-
-
