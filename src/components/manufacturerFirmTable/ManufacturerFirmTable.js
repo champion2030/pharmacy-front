@@ -65,9 +65,13 @@ const ManufacturerFirmTable = () => {
     const [notify, setNotify] = useState({isOpen: false, message: '', type: ''})
 
     useEffect(() => {
-        if (value !== '') dispatch(setCurrentPageFirm(1))
         dispatch(getFirms(value, currentPageFirm, rowsPerPage))
-    }, [currentPageFirm, dispatch, rowsPerPage, value])
+    }, [currentPageFirm, dispatch, rowsPerPage])
+
+    useEffect(() => {
+        dispatch(setCurrentPageFirm(1))
+        dispatch(getFirms(value, currentPageFirm, rowsPerPage))
+    }, [value])
 
     const onDelete = id => {
         setConfirmDialog({
@@ -177,7 +181,7 @@ const ManufacturerFirmTable = () => {
                     component="div"
                     count={totalCount}
                     rowsPerPage={rowsPerPage}
-                    page={currentPageFirm - 1}
+                    page={(currentPageFirm - 1) > Math.ceil(totalCount / rowsPerPage) ? currentPageFirm - 2 : currentPageFirm - 1}
                     onChangePage={handleChangePage}
                     onChangeRowsPerPage={handleChangeRowsPerPage}
                 />

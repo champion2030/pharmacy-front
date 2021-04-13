@@ -1,5 +1,5 @@
 import axios from "axios";
-import {setAllFirms, setFirms, setIsFetching} from "../reducers/manufacturerFirmTableReducer";
+import {setAllFirms, setCurrentPageFirm, setFirms, setIsFetching} from "../reducers/manufacturerFirmTableReducer";
 import {SET_MESSAGE} from "./types";
 
 const API_URL = "http://localhost:8080/api/";
@@ -27,6 +27,12 @@ export const deleteFirm = (id, searchQuery, currentPage, perPage) => async (disp
     dispatch(setIsFetching(true))
     await axios.delete(API_URL + `deleteManufacturerFirm/${id}`)
     const firms = await axios.get(API_URL + `getManufacturerFirm?searchQuery=${searchQuery}&page=${currentPage}&limit=${perPage}`);
+    if (currentPage > firms.data.totalPages && firms.data.totalPages !== 0){
+        dispatch(setCurrentPageFirm(firms.data.totalPages))
+    }
+    else if (firms.data.totalPages === 0){
+        dispatch(setCurrentPageFirm(1))
+    }
     dispatch(setFirms(firms.data))
 }
 

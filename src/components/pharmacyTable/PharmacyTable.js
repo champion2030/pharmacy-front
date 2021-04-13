@@ -86,9 +86,13 @@ const PharmacyTable = () => {
     };
 
     useEffect(() => {
-        if (value !== '') dispatch(setCurrentPagePharmacy(1))
         dispatch(getPharmacies(value, currentPagePharmacy, rowsPerPage))
-    }, [currentPagePharmacy, dispatch, rowsPerPage, value])
+    }, [currentPagePharmacy, dispatch, rowsPerPage])
+
+    useEffect(() => {
+        dispatch(setCurrentPagePharmacy(1))
+        dispatch(getPharmacies(value, currentPagePharmacy, rowsPerPage))
+    }, [value])
 
     return (
         <div>

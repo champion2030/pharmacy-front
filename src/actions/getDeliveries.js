@@ -1,5 +1,5 @@
 import axios from "axios";
-import {setDeliveries, setIsFetching} from "../reducers/deliveriesTableReducer";
+import {setCurrentPageDelivers, setDeliveries, setIsFetching} from "../reducers/deliveriesTableReducer";
 import {SET_MESSAGE} from "./types";
 
 const API_URL = "http://localhost:8080/api/";
@@ -19,6 +19,12 @@ export const deleteDeliver = (id, searchQuery, currentPage, perPage) => async (d
     dispatch(setIsFetching(true))
     await axios.delete(API_URL + `deleteDeliver/${id}`)
     const deliveries = await axios.get(API_URL + `getDeliveries?searchQuery=${searchQuery}&page=${currentPage}&limit=${perPage}`);
+    if (currentPage > deliveries.data.totalPages && deliveries.data.totalPages !== 0){
+        dispatch(setCurrentPageDelivers(deliveries.data.totalPages))
+    }
+    else if (deliveries.data.totalPages === 0){
+        dispatch(setCurrentPageDelivers(1))
+    }
     dispatch(setDeliveries(deliveries.data))
 }
 

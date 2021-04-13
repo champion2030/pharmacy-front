@@ -86,9 +86,13 @@ const EmployeeTable = () => {
     };
 
     useEffect(() => {
-        if (value !== '') dispatch(setCurrentPageEmployee(1))
         dispatch(getEmployees(value, currentPageEmployee, rowsPerPage))
-    }, [currentPageEmployee, dispatch, rowsPerPage, value])
+    }, [currentPageEmployee, dispatch, rowsPerPage])
+
+    useEffect(() => {
+        dispatch(setCurrentPageEmployee(1))
+        dispatch(getEmployees(value, currentPageEmployee, rowsPerPage))
+    }, [value])
 
     return (
         <div>

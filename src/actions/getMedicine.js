@@ -1,5 +1,5 @@
 import axios from "axios";
-import {setAllMedicine, setIsFetching, setMedicine} from "../reducers/medicineTableReducer";
+import {setAllMedicine, setCurrentPageMedicine, setIsFetching, setMedicine} from "../reducers/medicineTableReducer";
 import {SET_MESSAGE} from "./types";
 
 const API_URL = "http://localhost:8080/api/";
@@ -27,6 +27,12 @@ export const deleteMedicine = (id, searchQuery, currentPage, perPage) => async (
     dispatch(setIsFetching(true))
     await axios.delete(API_URL + `deleteMedicine/${id}`)
     const medicines = await axios.get(API_URL + `getMedicine?searchQuery=${searchQuery}&page=${currentPage}&limit=${perPage}`);
+    if (currentPage > medicines.data.totalPages && medicines.data.totalPages !== 0){
+        dispatch(setCurrentPageMedicine(medicines.data.totalPages))
+    }
+    else if (medicines.data.totalPages === 0){
+        dispatch(setCurrentPageMedicine(1))
+    }
     dispatch(setMedicine(medicines.data))
 }
 

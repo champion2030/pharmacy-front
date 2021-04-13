@@ -87,9 +87,13 @@ const DeliveriesTable = () => {
     };
 
     useEffect(() => {
-        if (value !== '') dispatch(setCurrentPageDelivers(1))
         dispatch(getDeliveries(value, currentPageDelivers, rowsPerPage))
-    }, [currentPageDelivers, dispatch, rowsPerPage, value])
+    }, [currentPageDelivers, dispatch, rowsPerPage])
+
+    useEffect(() => {
+        dispatch(setCurrentPageDelivers(1))
+        dispatch(getDeliveries(value, currentPageDelivers, rowsPerPage))
+    }, [value])
 
     return (
         <div>

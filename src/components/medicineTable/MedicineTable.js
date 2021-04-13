@@ -86,9 +86,13 @@ const MedicineTable = () => {
     };
 
     useEffect(() => {
-        if (value !== '') dispatch(setCurrentPageMedicine(1))
         dispatch(getMedicines(value, currentPageMedicine, rowsPerPage))
-    }, [currentPageMedicine, dispatch, rowsPerPage, value])
+    }, [currentPageMedicine, dispatch, rowsPerPage])
+
+    useEffect(() => {
+        dispatch(setCurrentPageMedicine(1))
+        dispatch(getMedicines(value, currentPageMedicine, rowsPerPage))
+    }, [value])
 
     return (
         <div>
