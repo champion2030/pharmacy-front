@@ -1,5 +1,10 @@
 import axios from "axios";
-import {setCurrentPageDelivers, setDeliveries, setIsFetching} from "../reducers/deliveriesTableReducer";
+import {
+    setCurrentPageDelivers,
+    setDeliveries,
+    setDeliversForCurrentPharmacy,
+    setIsFetching
+} from "../reducers/deliveriesTableReducer";
 import {SET_MESSAGE} from "./types";
 
 const API_URL = "http://localhost:8080/api/";
@@ -110,4 +115,14 @@ export const createNewDeliver = (medicine_id, employee_id, cause_id, receipt_dat
             return Promise.reject();
         }
     );
-};
+}
+
+export const getDeliversForCurrentPharmacy = (id, currentPage, perPage) => {
+    return async (dispatch) => {
+        console.log(1)
+        dispatch(setIsFetching(true))
+        const deliveries = await axios.get(API_URL + `getDeliveriesForCurrentPharmacy/${id}?page=${currentPage}&limit=${perPage}`);
+        dispatch(setDeliversForCurrentPharmacy(deliveries.data))
+    }
+}
+

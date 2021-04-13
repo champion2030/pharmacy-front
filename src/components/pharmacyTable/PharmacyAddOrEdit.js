@@ -9,16 +9,13 @@ import {getTypes} from "../../actions/getTypesOfProperty";
 import {getNames} from "../../actions/getPharmacyNames";
 import {getAreas} from "../../actions/getAreas";
 import {Autocomplete} from "@material-ui/lab";
+import {getDeliversForCurrentPharmacy} from "../../actions/getDeliveries";
+import {DataGrid} from '@material-ui/data-grid';
 
 const useStyles = makeStyles(theme => ({
     pageContent: {
         margin: theme.spacing(5),
         padding: theme.spacing(3),
-    },
-    container: {
-        display: 'grid',
-        gridTemplateColumns: 'repeat(12, 1fr)',
-        gridGap: theme.spacing(3),
     },
     buttons: {
         marginTop: "30px"
@@ -41,6 +38,20 @@ const useStyles = makeStyles(theme => ({
     },
 }))
 
+const columns = [
+    {field: 'medicine_name', headerName: 'Medicine name', width: 250},
+    {field: 'full_name', headerName: 'Full name', width: 250},
+    {field: 'reason_for_return', headerName: 'Reason for return', width: 350},
+    {field: 'receipt_date', headerName: 'Receipt date', width: 250},
+    {field: 'number_of_packages', headerName: 'Number of packages', width: 190},
+    {field: 'presence_of_defect', headerName: 'Present od defect', width: 170},
+    {field: 'supplier_price', headerName: 'Supplier price', width: 150},
+    {field: 'pharmacy_price', headerName: 'Pharmacy price', width: 170},
+    {field: 'expiry_start_date', headerName: 'Expiry start date', width: 250},
+    {field: 'expiration_date', headerName: 'Expiration date', width: 250},
+    {field: 'batch_number', headerName: 'Batch number', width: 150},
+]
+
 const PharmacyAddOrEdit = (props) => {
 
     const dispatch = useDispatch()
@@ -57,6 +68,7 @@ const PharmacyAddOrEdit = (props) => {
     const types = useSelector(state => state.typesOfPropertyReducer.types)
     const names = useSelector(state => state.pharmacyNameReducer.names)
     const areas = useSelector(state => state.areaReducer.areas)
+    const deliversForCurrentPharmacy = useSelector(state => state.deliveriesReducer.deliversForCurrentPharmacy)
     const {message} = useSelector(state => state.message);
     const [successful, setSuccessful] = useState(false);
 
@@ -69,8 +81,13 @@ const PharmacyAddOrEdit = (props) => {
             dispatch(getNames())
             dispatch(getAreas())
         }
+        if (action === 'see') {
+            dispatch(getDeliversForCurrentPharmacy(id))
+        }
         dispatch(clearMessage())
+        console.log(2)
     }, [dispatch, id, action])
+
 
     const onChangeAddress = (e) => {
         const address = e.target.value;
@@ -210,7 +227,16 @@ const PharmacyAddOrEdit = (props) => {
                     />
                 </div>
             </Grid>
+            {
+                action === 'see'
+                    ?
+                    <DataGrid rows={deliversForCurrentPharmacy} columns={columns} pageSize={2} autoHeight={true}
+                              disableSelectionOnClick={true}/>
+                    :
+                    null
+            }
         </Paper>
+
     )
 };
 

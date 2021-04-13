@@ -132,6 +132,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
+
 const App = () => {
 
     const currentUser = useSelector((state) => state.auth.user);

@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
-import {InputAdornment, makeStyles, Paper, Table, TableBody, TableCell, TableRow, TextField, Toolbar} from "@material-ui/core";
+import {Checkbox, InputAdornment, makeStyles, Paper, Table, TableBody, TableCell, TableRow, TextField, Toolbar} from "@material-ui/core";
 import Controls from "../controls/Controls";
 import EditOutlinedIcon from "@material-ui/icons/EditOutlined";
 import CloseIcon from "@material-ui/icons/Close";
@@ -8,7 +8,6 @@ import TablePagination from "@material-ui/core/TablePagination";
 import {setCurrentPageFirm} from "../../reducers/manufacturerFirmTableReducer";
 import {Search} from "@material-ui/icons";
 import AddIcon from "@material-ui/icons/Add";
-import Checkbox from "../controls/Checkbox";
 import ManufacturerFirmTableHead from "./ManufacturerFirmTableHead";
 import {deleteFirm, getFirms} from "../../actions/getManufacturerFirm";
 import ConfirmDialog from "../commonComponents/ConfirmDialog";
@@ -16,6 +15,7 @@ import Notification from "../commonComponents/Notification";
 import {NavLink} from "react-router-dom";
 import VisibilityIcon from '@material-ui/icons/Visibility';
 import Moment from 'react-moment';
+import CommonTableToolbar from "../commonComponents/CommonToolBar";
 
 const useStyles = makeStyles(theme => ({
     pageContent: {
@@ -27,7 +27,8 @@ const useStyles = makeStyles(theme => ({
     },
     newButton: {
         position: 'absolute',
-        right: '10px'
+        right: '10px',
+        bottom: '8px'
     },
     table: {
         marginTop: theme.spacing(3),
@@ -61,6 +62,7 @@ const ManufacturerFirmTable = () => {
     let totalCount = useSelector(state => state.manufacturerFirmReducer.totalCount)
     const [value, setValue] = useState('')
     const [rowsPerPage, setRowsPerPage] = useState(5);
+    const [selected, setSelected] = React.useState([]);
     const [confirmDialog, setConfirmDialog] = useState({isOpen: false, title: '', subTitle: ''})
     const [notify, setNotify] = useState({isOpen: false, message: '', type: ''})
 
@@ -72,6 +74,22 @@ const ManufacturerFirmTable = () => {
         dispatch(setCurrentPageFirm(1))
         dispatch(getFirms(value, currentPageFirm, rowsPerPage))
     }, [value])
+
+    const handleSelectAllClick = (event) => {
+        if (event.target.checked) {
+            let newSelecteds = manufacturerFirms.map((n) => n.id)
+            let arr = []
+            newSelecteds.forEach((item) => {
+                if (selected.indexOf(item) === -1) {
+                    arr.push(item)
+                }
+            })
+            arr.push.apply(arr, selected)
+            setSelected(arr);
+            return;
+        }
+        setSelected([]);
+    };
 
     const onDelete = id => {
         setConfirmDialog({
@@ -86,6 +104,8 @@ const ManufacturerFirmTable = () => {
         })
     }
 
+    const isSelected = (id) => selected.indexOf(id) !== -1;
+
     const handleChangePage = (event, newPage) => {
         dispatch(setCurrentPageFirm(newPage + 1))
     };
@@ -95,9 +115,29 @@ const ManufacturerFirmTable = () => {
         dispatch(setCurrentPageFirm(1))
     };
 
+    const handleClick = (event, name) => {
+        const selectedIndex = selected.indexOf(name);
+        let newSelected = [];
+
+        if (selectedIndex === -1) {
+            newSelected = newSelected.concat(selected, name);
+        } else if (selectedIndex === 0) {
+            newSelected = newSelected.concat(selected.slice(1));
+        } else if (selectedIndex === selected.length - 1) {
+            newSelected = newSelected.concat(selected.slice(0, -1));
+        } else if (selectedIndex > 0) {
+            newSelected = newSelected.concat(
+                selected.slice(0, selectedIndex),
+                selected.slice(selectedIndex + 1),
+            );
+        }
+        setSelected(newSelected);
+    };
+
     return (
         <div>
             <Paper className={classes.pageContent}>
+                <CommonTableToolbar numSelected={selected.length} tableName={'Manufacture firms'}/>
                 <Toolbar>
                     <TextField
                         variant="outlined"
@@ -122,16 +162,29 @@ const ManufacturerFirmTable = () => {
                         />
                     </NavLink>
                 </Toolbar>
-
                 <Table className={classes.table}>
-                    <ManufacturerFirmTableHead/>
+                    <ManufacturerFirmTableHead
+                        numSelected={selected.length}
+                        onSelectAllClick={handleSelectAllClick}
+                        rowCount={totalCount}
+                    />
                     <TableBody>
                         {
                             manufacturerFirms.map(item =>
                                 (
-                                    <TableRow key={item.id}>
+                                    <TableRow
+                                        hover
+                                        onClick={(event) => handleClick(event, item.id)}
+                                        role="checkbox"
+                                        aria-checked={isSelected(item.id)}
+                                        tabIndex={-1}
+                                        key={item.id}
+                                        selected={isSelected(item.id)}
+                                    >
                                         <TableCell padding="checkbox">
-                                            <Checkbox//checked={isItemSelected}//inputProps={{ 'aria-labelledby': labelId }}
+                                            <Checkbox
+                                                checked={isSelected(item.id)}
+                                                inputProps={{'aria-labelledby': item.id}}
                                             />
                                         </TableCell>
                                         <TableCell>{item.country}</TableCell>

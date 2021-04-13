@@ -26,7 +26,8 @@ const useStyles = makeStyles(theme => ({
     },
     newButton: {
         position: 'absolute',
-        right: '10px'
+        right: '10px',
+        bottom: '8px'
     },
     table: {
         marginTop: theme.spacing(3),
