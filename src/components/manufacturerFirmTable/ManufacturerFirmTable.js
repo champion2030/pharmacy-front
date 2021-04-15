@@ -96,6 +96,11 @@ const ManufacturerFirmTable = () => {
             ...confirmDialog,
             isOpen: false
         })
+        if(selected.indexOf(id) !== -1) {
+            let newSelected = selected
+            newSelected.splice(selected.indexOf(id), 1)
+            setSelected(newSelected)
+        }
         dispatch(deleteFirm(id, value, currentPageFirm, rowsPerPage))
         setNotify({
             isOpen: true,
@@ -174,7 +179,6 @@ const ManufacturerFirmTable = () => {
                                 (
                                     <TableRow
                                         hover
-                                        onClick={(event) => handleClick(event, item.id)}
                                         role="checkbox"
                                         aria-checked={isSelected(item.id)}
                                         tabIndex={-1}
@@ -183,6 +187,7 @@ const ManufacturerFirmTable = () => {
                                     >
                                         <TableCell padding="checkbox">
                                             <Checkbox
+                                                onClick={(event) => handleClick(event, item.id)}
                                                 checked={isSelected(item.id)}
                                                 inputProps={{'aria-labelledby': item.id}}
                                             />
@@ -230,11 +235,11 @@ const ManufacturerFirmTable = () => {
                     </TableBody>
                 </Table>
                 <TablePagination
-                    rowsPerPageOptions={[5, 10, 50]}
+                    rowsPerPageOptions={[5, 10, 50, totalCount]}
                     component="div"
                     count={totalCount}
                     rowsPerPage={rowsPerPage}
-                    page={(currentPageFirm - 1) > Math.ceil(totalCount / rowsPerPage) ? currentPageFirm - 2 : currentPageFirm - 1}
+                    page={currentPageFirm - 1}
                     onChangePage={handleChangePage}
                     onChangeRowsPerPage={handleChangeRowsPerPage}
                 />

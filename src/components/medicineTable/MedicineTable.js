@@ -15,6 +15,8 @@ import MedicineTableHead from "./MedicineTableHead";
 import {deleteMedicine, getMedicines} from "../../actions/getMedicine";
 import {NavLink} from "react-router-dom";
 import VisibilityIcon from "@material-ui/icons/Visibility";
+import CommonTableToolbar from "../commonComponents/CommonToolBar";
+import ManufacturerFirmTableHead from "../manufacturerFirmTable/ManufacturerFirmTableHead";
 
 const useStyles = makeStyles(theme => ({
     pageContent: {
@@ -61,6 +63,7 @@ const MedicineTable = () => {
     let totalCount = useSelector(state => state.medicineReducer.totalCount)
     const [value, setValue] = useState('')
     const [rowsPerPage, setRowsPerPage] = useState(5);
+    const [selected, setSelected] = React.useState([]);
     const [confirmDialog, setConfirmDialog] = useState({isOpen: false, title: '', subTitle: ''})
     const [notify, setNotify] = useState({isOpen: false, message: '', type: ''})
 
@@ -69,6 +72,11 @@ const MedicineTable = () => {
             ...confirmDialog,
             isOpen: false
         })
+        if(selected.indexOf(id) !== -1) {
+            let newSelected = selected
+            newSelected.splice(selected.indexOf(id), 1)
+            setSelected(newSelected)
+        }
         dispatch(deleteMedicine(id, value, currentPageMedicine, rowsPerPage))
         setNotify({
             isOpen: true,
@@ -76,6 +84,24 @@ const MedicineTable = () => {
             type: 'error'
         })
     }
+
+    const handleSelectAllClick = (event) => {
+        if (event.target.checked) {
+            let newSelecteds = medicines.map((n) => n.id)
+            let arr = []
+            newSelecteds.forEach((item) => {
+                if (selected.indexOf(item) === -1) {
+                    arr.push(item)
+                }
+            })
+            arr.push.apply(arr, selected)
+            setSelected(arr);
+            return;
+        }
+        setSelected([]);
+    };
+
+    const isSelected = (id) => selected.indexOf(id) !== -1;
 
     const handleChangePage = (event, newPage) => {
         dispatch(setCurrentPageMedicine(newPage + 1))
@@ -95,9 +121,29 @@ const MedicineTable = () => {
         dispatch(getMedicines(value, currentPageMedicine, rowsPerPage))
     }, [value])
 
+    const handleClick = (event, name) => {
+        const selectedIndex = selected.indexOf(name);
+        let newSelected = [];
+
+        if (selectedIndex === -1) {
+            newSelected = newSelected.concat(selected, name);
+        } else if (selectedIndex === 0) {
+            newSelected = newSelected.concat(selected.slice(1));
+        } else if (selectedIndex === selected.length - 1) {
+            newSelected = newSelected.concat(selected.slice(0, -1));
+        } else if (selectedIndex > 0) {
+            newSelected = newSelected.concat(
+                selected.slice(0, selectedIndex),
+                selected.slice(selectedIndex + 1),
+            );
+        }
+        setSelected(newSelected);
+    };
+
     return (
         <div>
             <Paper className={classes.pageContent}>
+                <CommonTableToolbar numSelected={selected.length} tableName={'Medicine'}/>
                 <Toolbar>
                     <TextField
                         variant="outlined"
@@ -123,14 +169,28 @@ const MedicineTable = () => {
                     </NavLink>
                 </Toolbar>
                 <Table className={classes.table}>
-                    <MedicineTableHead/>
+                    <MedicineTableHead
+                        numSelected={selected.length}
+                        onSelectAllClick={handleSelectAllClick}
+                        rowCount={totalCount}
+                    />
                     <TableBody>
                         {
                             medicines.map(item =>
                                 (
-                                    <TableRow key={item.id}>
+                                    <TableRow
+                                        hover
+                                        role="checkbox"
+                                        aria-checked={isSelected(item.id)}
+                                        tabIndex={-1}
+                                        key={item.id}
+                                        selected={isSelected(item.id)}
+                                    >
                                         <TableCell padding="checkbox">
-                                            <Checkbox//checked={isItemSelected}//inputProps={{ 'aria-labelledby': labelId }}
+                                            <Checkbox
+                                                onClick={(event) => handleClick(event, item.id)}
+                                                checked={isSelected(item.id)}
+                                                inputProps={{'aria-labelledby': item.id}}
                                             />
                                         </TableCell>
                                         <TableCell>{item.form_of_issue}</TableCell>
@@ -173,7 +233,7 @@ const MedicineTable = () => {
                     </TableBody>
                 </Table>
                 <TablePagination
-                    rowsPerPageOptions={[5, 10, 50]}
+                    rowsPerPageOptions={[5, 10, 50, totalCount]}
                     component="div"
                     count={totalCount}
                     rowsPerPage={rowsPerPage}
