@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
-import {InputAdornment, makeStyles, Paper, Table, TableBody, TableCell, TableRow, TextField, Toolbar} from "@material-ui/core";
+import {Checkbox, InputAdornment, makeStyles, Paper, Table, TableBody, TableCell, TableRow, TextField, Toolbar} from "@material-ui/core";
 import Controls from "../controls/Controls";
 import EditOutlinedIcon from "@material-ui/icons/EditOutlined";
 import CloseIcon from "@material-ui/icons/Close";
@@ -8,13 +8,13 @@ import TablePagination from "@material-ui/core/TablePagination";
 import {setCurrentPageEmployee} from "../../reducers/employeeTableReducer";
 import {Search} from "@material-ui/icons";
 import AddIcon from "@material-ui/icons/Add";
-import Checkbox from "../controls/Checkbox";
 import ConfirmDialog from "../commonComponents/ConfirmDialog";
 import Notification from "../commonComponents/Notification";
 import EmployeeTableHead from "./EmployeeTableHead";
 import {deleteEmployee, getEmployees} from "../../actions/getEmployee";
 import {NavLink} from "react-router-dom";
 import VisibilityIcon from "@material-ui/icons/Visibility";
+import CommonTableToolbar from "../commonComponents/CommonToolBar";
 
 const useStyles = makeStyles(theme => ({
     pageContent: {
@@ -60,6 +60,7 @@ const EmployeeTable = () => {
     let currentPageEmployee = useSelector(state => state.employeeReducer.currentPageEmployee)
     let totalCount = useSelector(state => state.employeeReducer.totalCount)
     const [value, setValue] = useState('')
+    const [selected, setSelected] = React.useState([]);
     const [rowsPerPage, setRowsPerPage] = useState(5);
     const [confirmDialog, setConfirmDialog] = useState({isOpen: false, title: '', subTitle: ''})
     const [notify, setNotify] = useState({isOpen: false, message: '', type: ''})
@@ -69,6 +70,11 @@ const EmployeeTable = () => {
             ...confirmDialog,
             isOpen: false
         })
+        if(selected.indexOf(id) !== -1) {
+            let newSelected = selected
+            newSelected.splice(selected.indexOf(id), 1)
+            setSelected(newSelected)
+        }
         dispatch(deleteEmployee(id, value, currentPageEmployee, rowsPerPage))
         setNotify({
             isOpen: true,
@@ -76,6 +82,43 @@ const EmployeeTable = () => {
             type: 'error'
         })
     }
+
+    const handleSelectAllClick = (event) => {
+        if (event.target.checked) {
+            let newSelecteds = employees.map((n) => n.id)
+            let arr = []
+            newSelecteds.forEach((item) => {
+                if (selected.indexOf(item) === -1) {
+                    arr.push(item)
+                }
+            })
+            arr.push.apply(arr, selected)
+            setSelected(arr);
+            return;
+        }
+        setSelected([]);
+    };
+
+    const isSelected = (id) => selected.indexOf(id) !== -1;
+
+    const handleClick = (event, name) => {
+        const selectedIndex = selected.indexOf(name);
+        let newSelected = [];
+
+        if (selectedIndex === -1) {
+            newSelected = newSelected.concat(selected, name);
+        } else if (selectedIndex === 0) {
+            newSelected = newSelected.concat(selected.slice(1));
+        } else if (selectedIndex === selected.length - 1) {
+            newSelected = newSelected.concat(selected.slice(0, -1));
+        } else if (selectedIndex > 0) {
+            newSelected = newSelected.concat(
+                selected.slice(0, selectedIndex),
+                selected.slice(selectedIndex + 1),
+            );
+        }
+        setSelected(newSelected);
+    };
 
     const handleChangePage = (event, newPage) => {
         dispatch(setCurrentPageEmployee(newPage + 1))
@@ -98,6 +141,7 @@ const EmployeeTable = () => {
     return (
         <div>
             <Paper className={classes.pageContent}>
+                <CommonTableToolbar numSelected={selected.length} tableName={'Employee'}/>
                 <Toolbar>
                     <TextField
                         variant="outlined"
@@ -123,14 +167,28 @@ const EmployeeTable = () => {
                     </NavLink>
                 </Toolbar>
                 <Table className={classes.table}>
-                    <EmployeeTableHead/>
+                    <EmployeeTableHead
+                        numSelected={selected.length}
+                        onSelectAllClick={handleSelectAllClick}
+                        rowCount={totalCount}
+                    />
                     <TableBody>
                         {
                             employees.map(item =>
                                 (
-                                    <TableRow key={item.id}>
+                                    <TableRow
+                                        hover
+                                        role="checkbox"
+                                        aria-checked={isSelected(item.id)}
+                                        tabIndex={-1}
+                                        key={item.id}
+                                        selected={isSelected(item.id)}
+                                    >
                                         <TableCell padding="checkbox">
-                                            <Checkbox//checked={isItemSelected}//inputProps={{ 'aria-labelledby': labelId }}
+                                            <Checkbox
+                                                onClick={(event) => handleClick(event, item.id)}
+                                                checked={isSelected(item.id)}
+                                                inputProps={{'aria-labelledby': item.id}}
                                             />
                                         </TableCell>
                                         <TableCell>{item.pharmacy_id}</TableCell>
@@ -170,7 +228,7 @@ const EmployeeTable = () => {
                     </TableBody>
                 </Table>
                     <TablePagination
-                        rowsPerPageOptions={[5, 10, 50]}
+                        rowsPerPageOptions={[5, 10, 50, totalCount]}
                         component="div"
                         count={totalCount}
                         rowsPerPage={rowsPerPage}

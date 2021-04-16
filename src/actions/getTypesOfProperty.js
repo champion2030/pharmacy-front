@@ -1,9 +1,5 @@
 import axios from "axios";
-import {
-    setCurrentTypeOfProperty,
-    setIsFetching,
-    updateInputTypeOfProperty
-} from "../reducers/typeOfPropertyTableReducer";
+import {setCurrentTypeOfProperty, setIsFetching, updateInputTypeOfProperty} from "../reducers/typeOfPropertyTableReducer";
 import {SET_MESSAGE} from "./types";
 import {setTypes} from "../reducers/typeOfPropertyTableReducer";
 

@@ -16,6 +16,8 @@ import {NavLink} from "react-router-dom";
 import VisibilityIcon from "@material-ui/icons/Visibility";
 import Moment from "react-moment";
 import AttachMoneyIcon from '@material-ui/icons/AttachMoney';
+import CommonTableToolbar from "../commonComponents/CommonToolBar";
+import MedicineTableHead from "../medicineTable/MedicineTableHead";
 
 const useStyles = makeStyles(theme => ({
     pageContent: {
@@ -62,6 +64,7 @@ const DeliveriesTable = () => {
     let totalCount = useSelector(state => state.deliveriesReducer.totalCount)
     const [value, setValue] = useState('')
     const [rowsPerPage, setRowsPerPage] = useState(5);
+    const [selected, setSelected] = React.useState([]);
     const [confirmDialog, setConfirmDialog] = useState({isOpen: false, title: '', subTitle: ''})
     const [notify, setNotify] = useState({isOpen: false, message: '', type: ''})
 
@@ -70,6 +73,11 @@ const DeliveriesTable = () => {
             ...confirmDialog,
             isOpen: false
         })
+        if(selected.indexOf(id) !== -1) {
+            let newSelected = selected
+            newSelected.splice(selected.indexOf(id), 1)
+            setSelected(newSelected)
+        }
         dispatch(deleteDeliver(id, value, currentPageDelivers, rowsPerPage))
         setNotify({
             isOpen: true,
@@ -77,6 +85,43 @@ const DeliveriesTable = () => {
             type: 'error'
         })
     }
+
+    const handleSelectAllClick = (event) => {
+        if (event.target.checked) {
+            let newSelecteds = deliveries.map((n) => n.id)
+            let arr = []
+            newSelecteds.forEach((item) => {
+                if (selected.indexOf(item) === -1) {
+                    arr.push(item)
+                }
+            })
+            arr.push.apply(arr, selected)
+            setSelected(arr);
+            return;
+        }
+        setSelected([]);
+    };
+
+    const isSelected = (id) => selected.indexOf(id) !== -1;
+
+    const handleClick = (event, name) => {
+        const selectedIndex = selected.indexOf(name);
+        let newSelected = [];
+
+        if (selectedIndex === -1) {
+            newSelected = newSelected.concat(selected, name);
+        } else if (selectedIndex === 0) {
+            newSelected = newSelected.concat(selected.slice(1));
+        } else if (selectedIndex === selected.length - 1) {
+            newSelected = newSelected.concat(selected.slice(0, -1));
+        } else if (selectedIndex > 0) {
+            newSelected = newSelected.concat(
+                selected.slice(0, selectedIndex),
+                selected.slice(selectedIndex + 1),
+            );
+        }
+        setSelected(newSelected);
+    };
 
     const handleChangePage = (event, newPage) => {
         dispatch(setCurrentPageDelivers(newPage + 1))
@@ -99,6 +144,7 @@ const DeliveriesTable = () => {
     return (
         <div>
             <Paper className={classes.pageContent}>
+                <CommonTableToolbar numSelected={selected.length} tableName={'Delivers'}/>
                 <Toolbar>
                     <TextField
                         variant="outlined"
@@ -125,14 +171,28 @@ const DeliveriesTable = () => {
                 </Toolbar>
 
                 <Table className={classes.table}>
-                    <DeliveriesTableHead/>
+                    <DeliveriesTableHead
+                        numSelected={selected.length}
+                        onSelectAllClick={handleSelectAllClick}
+                        rowCount={totalCount}
+                    />
                     <TableBody>
                         {
                             deliveries.map(item =>
                                 (
-                                    <TableRow key={item.id}>
+                                    <TableRow
+                                        hover
+                                        role="checkbox"
+                                        aria-checked={isSelected(item.id)}
+                                        tabIndex={-1}
+                                        key={item.id}
+                                        selected={isSelected(item.id)}
+                                    >
                                         <TableCell padding="checkbox">
-                                            <Checkbox//checked={isItemSelected}//inputProps={{ 'aria-labelledby': labelId }}
+                                            <Checkbox
+                                                onClick={(event) => handleClick(event, item.id)}
+                                                checked={isSelected(item.id)}
+                                                inputProps={{'aria-labelledby': item.id}}
                                             />
                                         </TableCell>
                                         <TableCell>{item.medicine_name}</TableCell>
@@ -198,7 +258,7 @@ const DeliveriesTable = () => {
                     </TableBody>
                 </Table>
                 <TablePagination
-                    rowsPerPageOptions={[5, 10, 50]}
+                    rowsPerPageOptions={[5, 10, 50, totalCount]}
                     component="div"
                     count={totalCount}
                     rowsPerPage={rowsPerPage}

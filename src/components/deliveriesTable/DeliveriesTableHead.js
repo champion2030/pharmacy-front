@@ -1,8 +1,7 @@
 import React from 'react'
-import {TableHead, TableRow, TableCell} from '@material-ui/core'
+import {TableHead, TableRow, TableCell, Checkbox} from '@material-ui/core'
 
 const headCells = [
-    {id: 'checkbox', label: ''},
     {id: 'medicine_name', label: 'Medicine name'},
     {id: 'name', label: 'Employee name'},
     {id: 'reason_for_return', label: 'Reason for return'},
@@ -17,11 +16,20 @@ const headCells = [
     {id: 'actions', label: 'Actions', disableSorting: true}
 ]
 
-const DeliveriesTableHead = () => {
+const DeliveriesTableHead = (props) => {
+    const { onSelectAllClick, numSelected, rowCount } = props;
 
     return (
         <TableHead>
             <TableRow>
+                <TableCell padding="checkbox">
+                    <Checkbox
+                        indeterminate={numSelected > 0 && numSelected < rowCount}
+                        checked={rowCount > 0 && numSelected === rowCount}
+                        onChange={onSelectAllClick}
+                        inputProps={{ 'aria-label': 'select all desserts' }}
+                    />
+                </TableCell>
                 {
                     headCells.map(headCell => (
                         <TableCell key={headCell.id}>

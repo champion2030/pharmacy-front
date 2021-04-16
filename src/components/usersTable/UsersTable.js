@@ -2,6 +2,7 @@ import React, {useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {getUsers} from "../../actions/getUsers";
 import {
+    Checkbox,
     InputAdornment,
     makeStyles,
     Paper,
@@ -23,7 +24,6 @@ import AddIcon from "@material-ui/icons/Add";
 import UserFormWindow from "./UserFormWindow";
 import ConfirmDialog from "../commonComponents/ConfirmDialog";
 import UniversalModalWindow from "../ModalWindow/UniversalModalWindow";
-import Checkbox from "../controls/Checkbox";
 
 
 const useStyles = makeStyles(theme => ({

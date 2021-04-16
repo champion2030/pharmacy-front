@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
-import {InputAdornment, makeStyles, Paper, Table, TableBody, TableCell, TableRow, TextField, Toolbar} from "@material-ui/core";
+import {Checkbox, InputAdornment, makeStyles, Paper, Table, TableBody, TableCell, TableRow, TextField, Toolbar} from "@material-ui/core";
 import Controls from "../controls/Controls";
 import EditOutlinedIcon from "@material-ui/icons/EditOutlined";
 import CloseIcon from "@material-ui/icons/Close";
@@ -8,13 +8,13 @@ import TablePagination from "@material-ui/core/TablePagination";
 import {setCurrentPagePharmacy} from "../../reducers/pharmacyTableReducer";
 import {Search} from "@material-ui/icons";
 import AddIcon from "@material-ui/icons/Add";
-import Checkbox from "../controls/Checkbox";
 import ConfirmDialog from "../commonComponents/ConfirmDialog";
 import Notification from "../commonComponents/Notification";
 import PharmacyTableHead from "./PharmacyTableHead";
 import {deletePharmacy, getPharmacies} from "../../actions/getPharmacy";
 import {NavLink} from "react-router-dom";
 import VisibilityIcon from "@material-ui/icons/Visibility";
+import CommonTableToolbar from "../commonComponents/CommonToolBar";
 
 const useStyles = makeStyles(theme => ({
     pageContent: {
@@ -60,6 +60,7 @@ const PharmacyTable = () => {
     let currentPagePharmacy = useSelector(state => state.pharmacyReducer.currentPagePharmacy)
     let totalCount = useSelector(state => state.pharmacyReducer.totalCount)
     const [value, setValue] = useState('')
+    const [selected, setSelected] = useState([]);
     const [rowsPerPage, setRowsPerPage] = useState(5);
     const [confirmDialog, setConfirmDialog] = useState({isOpen: false, title: '', subTitle: ''})
     const [notify, setNotify] = useState({isOpen: false, message: '', type: ''})
@@ -69,6 +70,11 @@ const PharmacyTable = () => {
             ...confirmDialog,
             isOpen: false
         })
+        if(selected.indexOf(id) !== -1) {
+            let newSelected = selected
+            newSelected.splice(selected.indexOf(id), 1)
+            setSelected(newSelected)
+        }
         dispatch(deletePharmacy(id, value, currentPagePharmacy, rowsPerPage))
         setNotify({
             isOpen: true,
@@ -76,6 +82,43 @@ const PharmacyTable = () => {
             type: 'error'
         })
     }
+
+    const handleSelectAllClick = (event) => {
+        if (event.target.checked) {
+            let newSelecteds = pharmacies.map((n) => n.id)
+            let arr = []
+            newSelecteds.forEach((item) => {
+                if (selected.indexOf(item) === -1) {
+                    arr.push(item)
+                }
+            })
+            arr.push.apply(arr, selected)
+            setSelected(arr);
+            return;
+        }
+        setSelected([]);
+    };
+
+    const isSelected = (id) => selected.indexOf(id) !== -1;
+
+    const handleClick = (event, name) => {
+        const selectedIndex = selected.indexOf(name);
+        let newSelected = [];
+
+        if (selectedIndex === -1) {
+            newSelected = newSelected.concat(selected, name);
+        } else if (selectedIndex === 0) {
+            newSelected = newSelected.concat(selected.slice(1));
+        } else if (selectedIndex === selected.length - 1) {
+            newSelected = newSelected.concat(selected.slice(0, -1));
+        } else if (selectedIndex > 0) {
+            newSelected = newSelected.concat(
+                selected.slice(0, selectedIndex),
+                selected.slice(selectedIndex + 1),
+            );
+        }
+        setSelected(newSelected);
+    };
 
     const handleChangePage = (event, newPage) => {
         dispatch(setCurrentPagePharmacy(newPage + 1))
@@ -98,6 +141,7 @@ const PharmacyTable = () => {
     return (
         <div>
             <Paper className={classes.pageContent}>
+                <CommonTableToolbar numSelected={selected.length} tableName={'Pharmacy'}/>
                 <Toolbar>
                     <TextField
                         variant="outlined"
@@ -124,14 +168,28 @@ const PharmacyTable = () => {
                 </Toolbar>
 
                 <Table className={classes.table}>
-                    <PharmacyTableHead/>
+                    <PharmacyTableHead
+                        numSelected={selected.length}
+                        onSelectAllClick={handleSelectAllClick}
+                        rowCount={totalCount}
+                    />
                     <TableBody>
                         {
                             pharmacies.map(item =>
                                 (
-                                    <TableRow key={item.id}>
+                                    <TableRow
+                                        hover
+                                        role="checkbox"
+                                        aria-checked={isSelected(item.id)}
+                                        tabIndex={-1}
+                                        key={item.id}
+                                        selected={isSelected(item.id)}
+                                    >
                                         <TableCell padding="checkbox">
-                                            <Checkbox//checked={isItemSelected}//inputProps={{ 'aria-labelledby': labelId }}
+                                            <Checkbox
+                                                onClick={(event) => handleClick(event, item.id)}
+                                                checked={isSelected(item.id)}
+                                                inputProps={{'aria-labelledby': item.id}}
                                             />
                                         </TableCell>
                                         <TableCell>{item.name}</TableCell>
@@ -173,7 +231,7 @@ const PharmacyTable = () => {
                     </TableBody>
                 </Table>
                 <TablePagination
-                    rowsPerPageOptions={[5, 10, 50]}
+                    rowsPerPageOptions={[5, 10, 50, totalCount]}
                     component="div"
                     count={totalCount}
                     rowsPerPage={rowsPerPage}

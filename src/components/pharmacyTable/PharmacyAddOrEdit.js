@@ -85,7 +85,6 @@ const PharmacyAddOrEdit = (props) => {
             dispatch(getDeliversForCurrentPharmacy(id))
         }
         dispatch(clearMessage())
-        console.log(2)
     }, [dispatch, id, action])
 
 
@@ -230,7 +229,7 @@ const PharmacyAddOrEdit = (props) => {
             {
                 action === 'see'
                     ?
-                    <DataGrid rows={deliversForCurrentPharmacy} columns={columns} pageSize={2} autoHeight={true}
+                    <DataGrid rows={deliversForCurrentPharmacy} columns={columns} pageSize={5} autoHeight={true}
                               disableSelectionOnClick={true}/>
                     :
                     null

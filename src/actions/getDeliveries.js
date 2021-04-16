@@ -119,7 +119,6 @@ export const createNewDeliver = (medicine_id, employee_id, cause_id, receipt_dat
 
 export const getDeliversForCurrentPharmacy = (id, currentPage, perPage) => {
     return async (dispatch) => {
-        console.log(1)
         dispatch(setIsFetching(true))
         const deliveries = await axios.get(API_URL + `getDeliveriesForCurrentPharmacy/${id}?page=${currentPage}&limit=${perPage}`);
         dispatch(setDeliversForCurrentPharmacy(deliveries.data))

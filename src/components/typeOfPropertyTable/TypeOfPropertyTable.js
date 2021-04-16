@@ -1,14 +1,6 @@
 import React, {useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
-import {
-    makeStyles,
-    Paper,
-    Table,
-    TableBody,
-    TableCell,
-    TableRow,
-    Toolbar
-} from "@material-ui/core";
+import {makeStyles, Paper, Table, TableBody, TableCell, TableRow, Toolbar} from "@material-ui/core";
 import Controls from "../controls/Controls";
 import EditOutlinedIcon from "@material-ui/icons/EditOutlined";
 import CloseIcon from "@material-ui/icons/Close";
@@ -20,7 +12,6 @@ import {deleteTypeOfProperty, getTypes} from "../../actions/getTypesOfProperty";
 import TypeOfPropertyFormWindow from "./TypeOfPropertyFormWindow";
 import Notification from "../commonComponents/Notification";
 import {NavLink} from "react-router-dom";
-
 
 const useStyles = makeStyles(theme => ({
     pageContent: {
@@ -82,7 +73,6 @@ const TypeOfPropertyTable = () => {
     useEffect(() => {
         dispatch(getTypes())
     }, [dispatch, modalActive])
-
 
     return (
         <div>

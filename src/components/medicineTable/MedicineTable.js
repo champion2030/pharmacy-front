@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
-import {InputAdornment, makeStyles, Paper, Table, TableBody, TableCell, TableRow, TextField, Toolbar} from "@material-ui/core";
+import {Checkbox, InputAdornment, makeStyles, Paper, Table, TableBody, TableCell, TableRow, TextField, Toolbar} from "@material-ui/core";
 import Controls from "../controls/Controls";
 import EditOutlinedIcon from "@material-ui/icons/EditOutlined";
 import CloseIcon from "@material-ui/icons/Close";
@@ -8,7 +8,6 @@ import TablePagination from "@material-ui/core/TablePagination";
 import {setCurrentPageMedicine} from "../../reducers/medicineTableReducer";
 import {Search} from "@material-ui/icons";
 import AddIcon from "@material-ui/icons/Add";
-import Checkbox from "../controls/Checkbox";
 import ConfirmDialog from "../commonComponents/ConfirmDialog";
 import Notification from "../commonComponents/Notification";
 import MedicineTableHead from "./MedicineTableHead";
@@ -16,7 +15,6 @@ import {deleteMedicine, getMedicines} from "../../actions/getMedicine";
 import {NavLink} from "react-router-dom";
 import VisibilityIcon from "@material-ui/icons/Visibility";
 import CommonTableToolbar from "../commonComponents/CommonToolBar";
-import ManufacturerFirmTableHead from "../manufacturerFirmTable/ManufacturerFirmTableHead";
 
 const useStyles = makeStyles(theme => ({
     pageContent: {
