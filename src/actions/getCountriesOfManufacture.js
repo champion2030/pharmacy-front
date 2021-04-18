@@ -1,5 +1,10 @@
 import axios from "axios";
-import {setCurrentCountry, setIsFetching, updateInputCountry} from "../reducers/countryOfManufactureTableReducer";
+import {
+    setCurrentCountry,
+    setIsFetching,
+    setPotentialDataToDeleteByCountry,
+    updateInputCountry
+} from "../reducers/countryOfManufactureTableReducer";
 import {SET_MESSAGE} from "./types";
 import {setCountries} from "../reducers/countryOfManufactureTableReducer";
 
@@ -80,3 +85,8 @@ export const updateCurrentCountry = (country, id) => (dispatch) => {
         }
     );
 };
+
+export const getDeleteCountryInfo = (id) => async (dispatch) => {
+    const info = await axios.get(API_URL + `deleteCountryOfManufactureInfo/${id}`);
+    dispatch(setPotentialDataToDeleteByCountry(info.data))
+}

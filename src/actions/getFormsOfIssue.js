@@ -2,7 +2,7 @@ import axios from "axios";
 import {
     setCurrentFormOfIssue,
     setForms,
-    setIsFetching,
+    setIsFetching, setPotentialDataToDeleteByFormOfIssue,
     updateInputFormOfIssue
 } from "../reducers/formOfIssueTableReducer";
 import {SET_MESSAGE} from "./types";
@@ -82,4 +82,9 @@ export const updateCurrentFormOfIssue = (form_of_issue, id) => (dispatch) => {
             return Promise.reject();
         }
     );
-};
+}
+
+export const getDeleteFormOfIssueInfo = (id) => async (dispatch) => {
+    const info = await axios.get(API_URL + `getDeleteFormOfIssueInfo/${id}`);
+    dispatch(setPotentialDataToDeleteByFormOfIssue(info.data))
+}

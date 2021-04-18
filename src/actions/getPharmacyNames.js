@@ -1,5 +1,10 @@
 import axios from "axios";
-import {setCurrentPharmacyName, setIsFetching, updateInputPharmacyName} from "../reducers/pharmacyNameTableReducer";
+import {
+    setCurrentPharmacyName,
+    setIsFetching,
+    setPotentialDataToDeleteByPharmacyName,
+    updateInputPharmacyName
+} from "../reducers/pharmacyNameTableReducer";
 import {SET_MESSAGE} from "./types";
 import {setNames} from "../reducers/pharmacyNameTableReducer";
 
@@ -78,4 +83,9 @@ export const updateCurrentPharmacyName = (name, id) => (dispatch) => {
             return Promise.reject();
         }
     );
-};
+}
+
+export const getDeletePharmacyNameInfo = (id) => async (dispatch) => {
+    const info = await axios.get(API_URL + `deletePharmacyNameInfo/${id}`);
+    dispatch(setPotentialDataToDeleteByPharmacyName(info.data))
+}

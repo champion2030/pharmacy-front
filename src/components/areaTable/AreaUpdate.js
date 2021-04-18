@@ -48,7 +48,7 @@ const AreaUpdate = (props) => {
                 <Grid item xs={3}>
                     <TextField
                         variant="outlined"
-                        label="Area"
+                        label="Район"
                         name="area"
                         value={name_of_area}
                         onChange={e => formOfIssueHandler(e)}
@@ -64,12 +64,12 @@ const AreaUpdate = (props) => {
             )}
             <Grid container align="center" justify="center" alignItems="center">
                 <Controls.Button
-                    text="Submit"
+                    text="Изменить"
                     type="Submit"
                     onClick={handleSubmit}
                 />
                 <Controls.Button
-                    text="Reset"
+                    text="Отмена"
                     color="default"
                     onClick={() => props.history.goBack()}
                 />

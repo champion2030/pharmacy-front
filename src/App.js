@@ -43,6 +43,9 @@ import MedicineAddOrEdit from "./components/medicineTable/MedicineAddOrEdit";
 import PharmacyAddOrEdit from "./components/pharmacyTable/PharmacyAddOrEdit";
 import EmployeeAddOrEdit from "./components/employeeTable/EmployeeAddOrEdit";
 import DeliveriesAddOrEdit from "./components/deliveriesTable/DeliveriesAddOrEdit";
+import FirstRequestTable from "./components/requestsTables/firstRequest/FirstRequestTable";
+import SecondRequestTable from "./components/requestsTables/secondRequest/SecondRequestTable";
+import ThirdRequestTable from "./components/requestsTables/thirdRequest/ThirdRequestTable";
 
 const theme = createMuiTheme({
     palette: {
@@ -140,9 +143,13 @@ const App = () => {
     const classes = useStyles();
     const [open, setOpen] = useState(false);
 
-    const handleDrawerOpen = () => {setOpen(true);};
+    const handleDrawerOpen = () => {
+        setOpen(true);
+    };
 
-    const handleDrawerClose = () => {setOpen(false);};
+    const handleDrawerClose = () => {
+        setOpen(false);
+    };
 
     useEffect(() => {
         history.listen((location) => {
@@ -290,6 +297,18 @@ const App = () => {
                             <ListItemText primary={"Deliveries"}/>
                         </ListItem>
                     </List>
+                    <Divider/>
+                    <List>
+                        <ListItem button component={Link} to="/firstRequest">
+                            <ListItemText primary={"First request"}/>
+                        </ListItem>
+                        <ListItem button component={Link} to="/secondRequest">
+                            <ListItemText primary={"Second request"}/>
+                        </ListItem>
+                        <ListItem button component={Link} to="/thirdRequest">
+                            <ListItemText primary={"Third request"}/>
+                        </ListItem>
+                    </List>
                 </Drawer>
 
                 <main>
@@ -324,6 +343,9 @@ const App = () => {
                         <Route path="/currentPharmacy/:id/:action" component={PharmacyAddOrEdit}/>
                         <Route path="/currentEmployee/:id/:action" component={EmployeeAddOrEdit}/>
                         <Route path="/currentDeliver/:id/:action" component={DeliveriesAddOrEdit}/>
+                        <Route path="/firstRequest" component={FirstRequestTable}/>
+                        <Route path="/secondRequest" component={SecondRequestTable}/>
+                        <Route path="/thirdRequest" component={ThirdRequestTable}/>
                         <Redirect to="/"/>
                     </Switch>
                 </main>

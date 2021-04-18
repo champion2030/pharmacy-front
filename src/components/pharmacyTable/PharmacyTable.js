@@ -8,13 +8,13 @@ import TablePagination from "@material-ui/core/TablePagination";
 import {setCurrentPagePharmacy} from "../../reducers/pharmacyTableReducer";
 import {Search} from "@material-ui/icons";
 import AddIcon from "@material-ui/icons/Add";
-import ConfirmDialog from "../commonComponents/ConfirmDialog";
 import Notification from "../commonComponents/Notification";
 import PharmacyTableHead from "./PharmacyTableHead";
-import {deletePharmacy, getPharmacies} from "../../actions/getPharmacy";
+import {deletePharmacy, getDeletePharmacyInfo, getPharmacies} from "../../actions/getPharmacy";
 import {NavLink} from "react-router-dom";
 import VisibilityIcon from "@material-ui/icons/Visibility";
 import CommonTableToolbar from "../commonComponents/CommonToolBar";
+import ConfirmDeleteDialogPharmacy from "./ConfirmDeleteDialogPharmacy";
 
 const useStyles = makeStyles(theme => ({
     pageContent: {
@@ -211,6 +211,7 @@ const PharmacyTable = () => {
                                             <Controls.ActionButton
                                                 color="secondary"
                                                 onClick={() => {
+                                                    dispatch(getDeletePharmacyInfo(item.id))
                                                     setConfirmDialog({
                                                         isOpen: true,
                                                         title: 'Are you sure to delete this record?',
@@ -244,7 +245,7 @@ const PharmacyTable = () => {
                 notify={notify}
                 setNotify={setNotify}
             />
-            <ConfirmDialog
+            <ConfirmDeleteDialogPharmacy
                 confirmDialog={confirmDialog}
                 setConfirmDialog={setConfirmDialog}
             />

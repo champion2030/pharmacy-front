@@ -5,13 +5,13 @@ import Controls from "../controls/Controls";
 import EditOutlinedIcon from "@material-ui/icons/EditOutlined";
 import CloseIcon from "@material-ui/icons/Close";
 import AddIcon from "@material-ui/icons/Add";
-import ConfirmDialog from "../commonComponents/ConfirmDialog";
 import UniversalModalWindow from "../ModalWindow/UniversalModalWindow";
 import TypeOfPropertyTableHead from "./TypeOfPropertyTableHead";
-import {deleteTypeOfProperty, getTypes} from "../../actions/getTypesOfProperty";
+import {deleteTypeOfProperty, getDeleteTypeOfPropertyInfo, getTypes} from "../../actions/getTypesOfProperty";
 import TypeOfPropertyFormWindow from "./TypeOfPropertyFormWindow";
 import Notification from "../commonComponents/Notification";
 import {NavLink} from "react-router-dom";
+import ConfirmDeleteDialogTypeOfProperty from "./ConfirmDeleteDialogTypeOfProperty";
 
 const useStyles = makeStyles(theme => ({
     pageContent: {
@@ -105,6 +105,7 @@ const TypeOfPropertyTable = () => {
                                             <Controls.ActionButton
                                                 color="secondary"
                                                 onClick={() => {
+                                                    dispatch(getDeleteTypeOfPropertyInfo(item.id))
                                                     setConfirmDialog({
                                                         isOpen: true,
                                                         title: 'Are you sure to delete this record?',
@@ -132,7 +133,7 @@ const TypeOfPropertyTable = () => {
                 notify={notify}
                 setNotify={setNotify}
             />
-            <ConfirmDialog
+            <ConfirmDeleteDialogTypeOfProperty
                 confirmDialog={confirmDialog}
                 setConfirmDialog={setConfirmDialog}
             />

@@ -1,5 +1,10 @@
 import axios from "axios";
-import {setCurrentTypeOfProperty, setIsFetching, updateInputTypeOfProperty} from "../reducers/typeOfPropertyTableReducer";
+import {
+    setCurrentTypeOfProperty,
+    setIsFetching,
+    setPotentialDataToDeleteByTypeOfProperty,
+    updateInputTypeOfProperty
+} from "../reducers/typeOfPropertyTableReducer";
 import {SET_MESSAGE} from "./types";
 import {setTypes} from "../reducers/typeOfPropertyTableReducer";
 
@@ -78,4 +83,9 @@ export const updateCurrentTypeOfProperty = (name_of_property, id) => (dispatch) 
             return Promise.reject();
         }
     );
-};
+}
+
+export const getDeleteTypeOfPropertyInfo = (id) => async (dispatch) => {
+    const info = await axios.get(API_URL + `deleteTypeOfPropertyInfo/${id}`);
+    dispatch(setPotentialDataToDeleteByTypeOfProperty(info.data))
+}

@@ -5,13 +5,13 @@ import Controls from "../controls/Controls";
 import EditOutlinedIcon from "@material-ui/icons/EditOutlined";
 import CloseIcon from "@material-ui/icons/Close";
 import AddIcon from "@material-ui/icons/Add";
-import ConfirmDialog from "../commonComponents/ConfirmDialog";
 import UniversalModalWindow from "../ModalWindow/UniversalModalWindow";
 import PharmacologicalGroupTableHead from "./PharmacologicalGroupTableHead";
 import PharmacologicalGroupFormWindow from "./PharmacologicalGroupFormWindow";
-import {deletePharmacologicalGroup, getGroups} from "../../actions/getPharmacologicalGroups";
+import {deletePharmacologicalGroup, getDeletePharmacologicalGroupInfo, getGroups} from "../../actions/getPharmacologicalGroups";
 import Notification from "../commonComponents/Notification";
 import {NavLink} from "react-router-dom";
+import ConfirmDeleteDialogPharmacologicalGroup from "./ConfirmDeleteDialogPharmacologicalGroup";
 
 const useStyles = makeStyles(theme => ({
     pageContent: {
@@ -74,7 +74,6 @@ const PharmacologicalGroupTable = () => {
         dispatch(getGroups())
     }, [dispatch, modalActive])
 
-
     return (
         <div>
             <Paper className={classes.pageContent}>
@@ -106,6 +105,7 @@ const PharmacologicalGroupTable = () => {
                                             <Controls.ActionButton
                                                 color="secondary"
                                                 onClick={() => {
+                                                    dispatch(getDeletePharmacologicalGroupInfo(item.id))
                                                     setConfirmDialog({
                                                         isOpen: true,
                                                         title: 'Are you sure to delete this record?',
@@ -133,7 +133,7 @@ const PharmacologicalGroupTable = () => {
                 notify={notify}
                 setNotify={setNotify}
             />
-            <ConfirmDialog
+            <ConfirmDeleteDialogPharmacologicalGroup
                 confirmDialog={confirmDialog}
                 setConfirmDialog={setConfirmDialog}
             />

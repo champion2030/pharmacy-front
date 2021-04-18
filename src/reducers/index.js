@@ -14,6 +14,7 @@ import medicineReducer from "./medicineTableReducer";
 import pharmacyReducer from "./pharmacyTableReducer";
 import employeeReducer from "./employeeTableReducer";
 import deliveriesReducer from "./deliveriesTableReducer";
+import requestsReducer from "./requestTableReducer";
 
 export default combineReducers({
     auth,
@@ -30,5 +31,6 @@ export default combineReducers({
     medicineReducer,
     pharmacyReducer,
     employeeReducer,
-    deliveriesReducer
+    deliveriesReducer,
+    requestsReducer
 });

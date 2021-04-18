@@ -8,13 +8,13 @@ import TablePagination from "@material-ui/core/TablePagination";
 import {setCurrentPageEmployee} from "../../reducers/employeeTableReducer";
 import {Search} from "@material-ui/icons";
 import AddIcon from "@material-ui/icons/Add";
-import ConfirmDialog from "../commonComponents/ConfirmDialog";
 import Notification from "../commonComponents/Notification";
 import EmployeeTableHead from "./EmployeeTableHead";
-import {deleteEmployee, getEmployees} from "../../actions/getEmployee";
+import {deleteEmployee, getDeleteEmployeeInfo, getEmployees} from "../../actions/getEmployee";
 import {NavLink} from "react-router-dom";
 import VisibilityIcon from "@material-ui/icons/Visibility";
 import CommonTableToolbar from "../commonComponents/CommonToolBar";
+import ConfirmDeleteDialogEmployee from "./ConfirmDeleteDialogEmployee";
 
 const useStyles = makeStyles(theme => ({
     pageContent: {
@@ -210,6 +210,7 @@ const EmployeeTable = () => {
                                             <Controls.ActionButton
                                                 color="secondary"
                                                 onClick={() => {
+                                                    dispatch(getDeleteEmployeeInfo(item.id))
                                                     setConfirmDialog({
                                                         isOpen: true,
                                                         title: 'Are you sure to delete this record?',
@@ -241,7 +242,7 @@ const EmployeeTable = () => {
                 notify={notify}
                 setNotify={setNotify}
             />
-            <ConfirmDialog
+            <ConfirmDeleteDialogEmployee
                 confirmDialog={confirmDialog}
                 setConfirmDialog={setConfirmDialog}
             />

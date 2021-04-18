@@ -18,17 +18,11 @@ const AreaFormWindow = ({active, setActive}) => {
     const classes = useStyles()
 
     const dispatch = useDispatch();
-
     const {message} = useSelector(state => state.message);
-
     const [area, setArea] = useState('')
-
     const [areaDirty, setAreaDirty] = useState(false)
-
-    const [areaError, setAreaError] = useState('Area can not be empty')
-
+    const [areaError, setAreaError] = useState('Поле не может быть пустым')
     const [formValid, setFormValid] = useState(false)
-
     const [successful, setSuccessful] = useState(false);
 
     useEffect(() => {
@@ -51,9 +45,9 @@ const AreaFormWindow = ({active, setActive}) => {
     const formOfIssueHandler = (e) => {
         setArea(e.target.value)
         if (e.target.value.length === 0) {
-            setAreaError('This field is required!')
+            setAreaError('Поле не может быть пустым!')
         } else if (e.target.value.length < 4 || e.target.value.length > 20) {
-            setAreaError('The area must be between 3 and 20 characters!')
+            setAreaError('Длина района должна быть от 3 до 20 символов!')
         } else {
             setAreaError("")
         }
@@ -87,7 +81,7 @@ const AreaFormWindow = ({active, setActive}) => {
             <Grid>
                 <TextField
                     variant="outlined"
-                    label="Area"
+                    label="Район"
                     name="area"
                     value={area}
                     onBlur={event => bluerHandler(event)}
@@ -105,12 +99,12 @@ const AreaFormWindow = ({active, setActive}) => {
 
                 <div>
                     <Controls.Button
-                        text="Submit"
+                        text="Добавить"
                         disabled={!formValid}
                         onClick={handleSubmit}
                     />
                     <Controls.Button
-                        text="Reset"
+                        text="Отмена"
                         color="default"
                         onClick={handleReset}
                     />

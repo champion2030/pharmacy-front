@@ -1,5 +1,11 @@
 import axios from "axios";
-import {setAllMedicine, setCurrentPageMedicine, setIsFetching, setMedicine} from "../reducers/medicineTableReducer";
+import {
+    setAllMedicine,
+    setCurrentPageMedicine,
+    setIsFetching,
+    setMedicine,
+    setPotentialDataToDeleteByMedicine
+} from "../reducers/medicineTableReducer";
 import {SET_MESSAGE} from "./types";
 
 const API_URL = "http://localhost:8080/api/";
@@ -107,4 +113,9 @@ export const createNewMedicine = (form_of_issue_id, pharmacological_group_id, ma
             return Promise.reject();
         }
     );
-};
+}
+
+export const getDeleteMedicineInfo = (id) => async (dispatch) => {
+    const info = await axios.get(API_URL + `deleteMedicineInfo/${id}`);
+    dispatch(setPotentialDataToDeleteByMedicine(info.data))
+}

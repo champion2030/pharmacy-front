@@ -9,13 +9,13 @@ import {setCurrentPageFirm} from "../../reducers/manufacturerFirmTableReducer";
 import {Search} from "@material-ui/icons";
 import AddIcon from "@material-ui/icons/Add";
 import ManufacturerFirmTableHead from "./ManufacturerFirmTableHead";
-import {deleteFirm, getFirms} from "../../actions/getManufacturerFirm";
-import ConfirmDialog from "../commonComponents/ConfirmDialog";
+import {deleteFirm, getDeleteFirmInfo, getFirms} from "../../actions/getManufacturerFirm";
 import Notification from "../commonComponents/Notification";
 import {NavLink} from "react-router-dom";
 import VisibilityIcon from '@material-ui/icons/Visibility';
 import Moment from 'react-moment';
 import CommonTableToolbar from "../commonComponents/CommonToolBar";
+import ConfirmDeleteDialogFirm from "./ConfirmDeleteDialogFirm";
 
 const useStyles = makeStyles(theme => ({
     pageContent: {
@@ -215,6 +215,7 @@ const ManufacturerFirmTable = () => {
                                             <Controls.ActionButton
                                                 color="secondary"
                                                 onClick={() => {
+                                                    dispatch(getDeleteFirmInfo(item.id))
                                                     setConfirmDialog({
                                                         isOpen: true,
                                                         title: 'Are you sure to delete this record?',
@@ -248,7 +249,7 @@ const ManufacturerFirmTable = () => {
                 notify={notify}
                 setNotify={setNotify}
             />
-            <ConfirmDialog
+            <ConfirmDeleteDialogFirm
                 confirmDialog={confirmDialog}
                 setConfirmDialog={setConfirmDialog}
             />

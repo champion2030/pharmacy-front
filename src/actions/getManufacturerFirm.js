@@ -1,5 +1,11 @@
 import axios from "axios";
-import {setAllFirms, setCurrentPageFirm, setFirms, setIsFetching} from "../reducers/manufacturerFirmTableReducer";
+import {
+    setAllFirms,
+    setCurrentPageFirm,
+    setFirms,
+    setIsFetching,
+    setPotentialDataToDeleteByFirm
+} from "../reducers/manufacturerFirmTableReducer";
 import {SET_MESSAGE} from "./types";
 
 const API_URL = "http://localhost:8080/api/";
@@ -102,4 +108,9 @@ export const createNewFirm = (country_of_manufacture_id, firm_name, email, addre
             return Promise.reject();
         }
     );
-};
+}
+
+export const getDeleteFirmInfo = (id) => async (dispatch) => {
+    const info = await axios.get(API_URL + `deleteManufacturerFirmInfo/${id}`);
+    dispatch(setPotentialDataToDeleteByFirm(info.data))
+}

@@ -1,5 +1,11 @@
 import axios from "axios";
-import {setAllEmployees, setCurrentPageEmployee, setEmployees, setIsFetching} from "../reducers/employeeTableReducer";
+import {
+    setAllEmployees,
+    setCurrentPageEmployee,
+    setEmployees,
+    setIsFetching,
+    setPotentialDataToDeleteByEmployee
+} from "../reducers/employeeTableReducer";
 import {SET_MESSAGE} from "./types";
 
 const API_URL = "http://localhost:8080/api/";
@@ -97,4 +103,9 @@ export const createNewEmployee = (pharmacy_id, name, surname, patronymic) => (di
             return Promise.reject();
         }
     );
-};
+}
+
+export const getDeleteEmployeeInfo = (id) => async (dispatch) => {
+    const info = await axios.get(API_URL + `deleteEmployeeInfo/${id}`);
+    dispatch(setPotentialDataToDeleteByEmployee(info.data))
+}

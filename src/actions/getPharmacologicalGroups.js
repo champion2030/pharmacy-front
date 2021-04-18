@@ -1,8 +1,6 @@
 import axios from "axios";
-import {
-    setCurrentPharmacologicalGroup,
-    setGroups,
-    setIsFetching,
+import {setCurrentPharmacologicalGroup, setGroups,
+    setIsFetching, setPotentialDataToDeleteByPharmacologicalGroup,
     updateInputPharmacologicalGroup
 } from "../reducers/pharmacologicalGroupTableReducer";
 import {SET_MESSAGE} from "./types";
@@ -82,4 +80,9 @@ export const updateCurrentPharmacologicalGroup = (pharmacological_group, id) => 
             return Promise.reject();
         }
     );
-};
+}
+
+export const getDeletePharmacologicalGroupInfo = (id) => async (dispatch) => {
+    const info = await axios.get(API_URL + `getDeletePharmacologicalGroupInfo/${id}`);
+    dispatch(setPotentialDataToDeleteByPharmacologicalGroup(info.data))
+}

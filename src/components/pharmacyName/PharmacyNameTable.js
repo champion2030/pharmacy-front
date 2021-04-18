@@ -1,26 +1,17 @@
 import React, {useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
-import {
-    makeStyles,
-    Paper,
-    Table,
-    TableBody,
-    TableCell,
-    TableRow,
-    Toolbar
-} from "@material-ui/core";
+import {makeStyles, Paper, Table, TableBody, TableCell, TableRow, Toolbar} from "@material-ui/core";
 import Controls from "../controls/Controls";
 import EditOutlinedIcon from "@material-ui/icons/EditOutlined";
 import CloseIcon from "@material-ui/icons/Close";
 import AddIcon from "@material-ui/icons/Add";
-import ConfirmDialog from "../commonComponents/ConfirmDialog";
 import UniversalModalWindow from "../ModalWindow/UniversalModalWindow";
-import {deletePharmacyName, getNames} from "../../actions/getPharmacyNames";
+import {deletePharmacyName, getDeletePharmacyNameInfo, getNames} from "../../actions/getPharmacyNames";
 import PharmacyNameTableHead from "./PharmacyNameTableHead";
 import PharmacyNameFormWindow from "./PharmacyNameFormWindow";
 import Notification from "../commonComponents/Notification";
 import {NavLink} from "react-router-dom";
-
+import ConfirmDeleteDialogPharmacyName from "./ConfirmDeleteDialogPharmacyName";
 
 const useStyles = makeStyles(theme => ({
     pageContent: {
@@ -83,7 +74,6 @@ const PharmacyNameTable = () => {
         dispatch(getNames())
     }, [dispatch, modalActive])
 
-
     return (
         <div>
             <Paper className={classes.pageContent}>
@@ -96,7 +86,6 @@ const PharmacyNameTable = () => {
                         onClick={() => setModalActive(true)}
                     />
                 </Toolbar>
-
                 <Table className={classes.table}>
                     <PharmacyNameTableHead/>
                     <TableBody>
@@ -115,6 +104,7 @@ const PharmacyNameTable = () => {
                                             <Controls.ActionButton
                                                 color="secondary"
                                                 onClick={() => {
+                                                    dispatch(getDeletePharmacyNameInfo(item.id))
                                                     setConfirmDialog({
                                                         isOpen: true,
                                                         title: 'Are you sure to delete this record?',
@@ -142,7 +132,7 @@ const PharmacyNameTable = () => {
                 notify={notify}
                 setNotify={setNotify}
             />
-            <ConfirmDialog
+            <ConfirmDeleteDialogPharmacyName
                 confirmDialog={confirmDialog}
                 setConfirmDialog={setConfirmDialog}
             />

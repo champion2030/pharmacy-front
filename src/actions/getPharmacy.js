@@ -1,5 +1,11 @@
 import axios from "axios";
-import {setPharmacies, setIsFetching, setAllPharmacies, setCurrentPagePharmacy} from "../reducers/pharmacyTableReducer";
+import {
+    setPharmacies,
+    setIsFetching,
+    setAllPharmacies,
+    setCurrentPagePharmacy,
+    setPotentialDataToDeleteByPharmacy
+} from "../reducers/pharmacyTableReducer";
 import {SET_MESSAGE} from "./types";
 
 const API_URL = "http://localhost:8080/api/";
@@ -104,4 +110,9 @@ export const createNewPharmacy = (name_id, area_id, type_of_property_id, telepho
             return Promise.reject();
         }
     );
-};
+}
+
+export const getDeletePharmacyInfo = (id) => async (dispatch) => {
+    const info = await axios.get(API_URL + `deletePharmacyInfo/${id}`);
+    dispatch(setPotentialDataToDeleteByPharmacy(info.data))
+}

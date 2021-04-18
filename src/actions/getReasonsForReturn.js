@@ -1,7 +1,12 @@
 import axios from "axios";
 import {setIsFetching} from "../reducers/countryOfManufactureTableReducer";
 import {SET_MESSAGE} from "./types";
-import {setCurrentReasonForReturn, setReasons, updateInputReasonForReturn} from "../reducers/reasonForReturnTablereducer";
+import {
+    setCurrentReasonForReturn,
+    setPotentialDataToDeleteByReasonForReturn,
+    setReasons,
+    updateInputReasonForReturn
+} from "../reducers/reasonForReturnTablereducer";
 
 const API_URL = "http://localhost:8080/api/";
 
@@ -79,4 +84,9 @@ export const updateCurrentReasonForReturn = (reason_for_return, id) => (dispatch
             return Promise.reject();
         }
     );
-};
+}
+
+export const getDeleteReasonForReturnInfo = (id) => async (dispatch) => {
+    const info = await axios.get(API_URL + `deleteReasonForReturnInfo/${id}`);
+    dispatch(setPotentialDataToDeleteByReasonForReturn(info.data))
+}

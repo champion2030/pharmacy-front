@@ -1,7 +1,7 @@
 import axios from "axios";
 import {setIsFetching} from "../reducers/countryOfManufactureTableReducer";
 import {SET_MESSAGE} from "./types";
-import {setAreas, setCurrentArea, updateInput} from "../reducers/areaTableReducer";
+import {setAreas, setCurrentArea, setPotentialDataToDeleteByArea, updateInput} from "../reducers/areaTableReducer";
 
 const API_URL = "http://localhost:8080/api/";
 
@@ -11,7 +11,7 @@ export const getAreas = () => {
         const areas = await axios.get(API_URL + `getArea`);
         dispatch(setAreas(areas.data))
     }
-};
+}
 
 export const createNewArea = (name_of_area) => (dispatch) => {
     dispatch(setIsFetching(true))
@@ -34,7 +34,7 @@ export const createNewArea = (name_of_area) => (dispatch) => {
             return Promise.reject();
         }
     );
-};
+}
 
 export const deleteArea = (id) => async (dispatch) => {
     dispatch(setIsFetching(true))
@@ -49,13 +49,13 @@ export const getCurrentArea = (id) => {
         const area = await axios.get(API_URL + `getCurrentArea/${id}`);
         dispatch(setCurrentArea(area.data.name_of_area))
     }
-};
+}
 
 export const updateCurrentInput = (input) => {
     return async (dispatch) => {
         dispatch(updateInput(input))
     }
-};
+}
 
 export const updateCurrentArea = (name_of_area, id) => (dispatch) => {
     dispatch(setIsFetching(true))
@@ -78,4 +78,9 @@ export const updateCurrentArea = (name_of_area, id) => (dispatch) => {
             return Promise.reject();
         }
     );
-};
+}
+
+export const getDeleteAreaInfo = (id) => async (dispatch) => {
+    const info = await axios.get(API_URL + `deleteAreaInfo/${id}`);
+    dispatch(setPotentialDataToDeleteByArea(info.data))
+}

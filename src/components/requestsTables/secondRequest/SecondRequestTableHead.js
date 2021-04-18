@@ -2,11 +2,13 @@ import React from 'react'
 import {TableHead, TableRow, TableCell} from '@material-ui/core'
 
 const headCells = [
-    {id: 'area', label: 'Район'},
-    {id: 'actions', label: 'Действия', disableSorting: true}
+    {id: 'count', label: 'Количество аптек'},
+    {id: 'name_of_property', label: 'Тип собственности'},
+    {id: 'name_of_area', label: 'Район'}
 ]
 
-const AreaTableHead = () => {
+const SecondRequestTableHead = () => {
+
     return (
         <TableHead>
             <TableRow>
@@ -14,11 +16,10 @@ const AreaTableHead = () => {
                     headCells.map(headCell => (
                         <TableCell key={headCell.id}>
                             {headCell.label}
-
                         </TableCell>))
                 }
             </TableRow>
         </TableHead>)
 }
 
-export default AreaTableHead;
+export default SecondRequestTableHead;

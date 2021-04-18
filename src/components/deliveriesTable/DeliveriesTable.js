@@ -8,7 +8,6 @@ import TablePagination from "@material-ui/core/TablePagination";
 import {setCurrentPageDelivers} from "../../reducers/deliveriesTableReducer";
 import {Search} from "@material-ui/icons";
 import AddIcon from "@material-ui/icons/Add";
-import ConfirmDialog from "../commonComponents/ConfirmDialog";
 import Notification from "../commonComponents/Notification";
 import DeliveriesTableHead from "./DeliveriesTableHead";
 import {deleteDeliver, getDeliveries} from "../../actions/getDeliveries";
@@ -17,7 +16,7 @@ import VisibilityIcon from "@material-ui/icons/Visibility";
 import Moment from "react-moment";
 import AttachMoneyIcon from '@material-ui/icons/AttachMoney';
 import CommonTableToolbar from "../commonComponents/CommonToolBar";
-import MedicineTableHead from "../medicineTable/MedicineTableHead";
+import ConfirmDeleteDialogDeliveries from "./ConfirmDeleteDialogDeliveries";
 
 const useStyles = makeStyles(theme => ({
     pageContent: {
@@ -271,7 +270,7 @@ const DeliveriesTable = () => {
                 notify={notify}
                 setNotify={setNotify}
             />
-            <ConfirmDialog
+            <ConfirmDeleteDialogDeliveries
                 confirmDialog={confirmDialog}
                 setConfirmDialog={setConfirmDialog}
             />

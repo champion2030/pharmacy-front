@@ -1,18 +1,7 @@
 import React, {useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {getUsers} from "../../actions/getUsers";
-import {
-    Checkbox,
-    InputAdornment,
-    makeStyles,
-    Paper,
-    Table,
-    TableBody,
-    TableCell,
-    TableRow,
-    TextField,
-    Toolbar
-} from "@material-ui/core";
+import {Checkbox, InputAdornment, makeStyles, Paper, Table, TableBody, TableCell, TableRow, TextField, Toolbar} from "@material-ui/core";
 import Controls from "../controls/Controls";
 import EditOutlinedIcon from "@material-ui/icons/EditOutlined";
 import CloseIcon from "@material-ui/icons/Close";
@@ -22,7 +11,6 @@ import {setCurrentPage} from "../../reducers/usersTableReducer";
 import {Search} from "@material-ui/icons";
 import AddIcon from "@material-ui/icons/Add";
 import UserFormWindow from "./UserFormWindow";
-import ConfirmDialog from "../commonComponents/ConfirmDialog";
 import UniversalModalWindow from "../ModalWindow/UniversalModalWindow";
 
 
@@ -189,10 +177,10 @@ const UsersTable = () => {
             <UniversalModalWindow active={modalActive}>
                 <UserFormWindow active={modalActive} setActive={setModalActive}/>
             </UniversalModalWindow>
-            <ConfirmDialog
-                confirmDialog={confirmDialog}
-                setConfirmDialog={setConfirmDialog}
-            />
+            {/*<ConfirmDialog*/}
+            {/*    confirmDialog={confirmDialog}*/}
+            {/*    setConfirmDialog={setConfirmDialog}*/}
+            {/*/>*/}
         </div>
     )
 };

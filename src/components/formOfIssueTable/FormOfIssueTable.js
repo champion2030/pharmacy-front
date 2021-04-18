@@ -7,11 +7,11 @@ import CloseIcon from "@material-ui/icons/Close";
 import FormOfIssueTableHead from "./FormOfIssueTableHead";
 import AddIcon from "@material-ui/icons/Add";
 import FormOfIssueFormWindow from "./FormOfIssueFormWindow";
-import ConfirmDialog from "../commonComponents/ConfirmDialog";
-import {deleteFormOfIssue, getForms} from "../../actions/getFormsOfIssue";
+import {deleteFormOfIssue, getDeleteFormOfIssueInfo, getForms} from "../../actions/getFormsOfIssue";
 import UniversalModalWindow from "../ModalWindow/UniversalModalWindow";
 import Notification from "../commonComponents/Notification";
 import {NavLink} from "react-router-dom";
+import ConfirmDeleteDialogFormOfIssue from "./ConfirmDeleteDialogFormOfIssue";
 
 const useStyles = makeStyles(theme => ({
     pageContent: {
@@ -105,6 +105,7 @@ const FormOfIssueTable = () => {
                                             <Controls.ActionButton
                                                 color="secondary"
                                                 onClick={() => {
+                                                    dispatch(getDeleteFormOfIssueInfo(item.id))
                                                     setConfirmDialog({
                                                         isOpen: true,
                                                         title: 'Are you sure to delete this record?',
@@ -132,7 +133,7 @@ const FormOfIssueTable = () => {
                 notify={notify}
                 setNotify={setNotify}
             />
-            <ConfirmDialog
+            <ConfirmDeleteDialogFormOfIssue
                 confirmDialog={confirmDialog}
                 setConfirmDialog={setConfirmDialog}
             />

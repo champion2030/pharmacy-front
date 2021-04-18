@@ -5,13 +5,13 @@ import Controls from "../controls/Controls";
 import EditOutlinedIcon from "@material-ui/icons/EditOutlined";
 import CloseIcon from "@material-ui/icons/Close";
 import AddIcon from "@material-ui/icons/Add";
-import ConfirmDialog from "../commonComponents/ConfirmDialog";
 import UniversalModalWindow from "../ModalWindow/UniversalModalWindow";
 import ReasonForReturnTableHead from "./ReasonForReturnTableHead";
-import {deleteReasonForReturn, getReasons} from "../../actions/getReasonsForReturn";
+import {deleteReasonForReturn, getDeleteReasonForReturnInfo, getReasons} from "../../actions/getReasonsForReturn";
 import ReasonForReturnFormWindow from "./ReasonForReturnFormWindow";
 import Notification from "../commonComponents/Notification";
 import {NavLink} from "react-router-dom";
+import ConfirmDeleteDialogReasonForReturn from "./ConfirmDeleteDialogReasonForReturn";
 
 const useStyles = makeStyles(theme => ({
     pageContent: {
@@ -74,7 +74,6 @@ const ReasonForReturnTable = () => {
         dispatch(getReasons())
     }, [dispatch, modalActive])
 
-
     return (
         <div>
             <Paper className={classes.pageContent}>
@@ -87,7 +86,6 @@ const ReasonForReturnTable = () => {
                         onClick={() => setModalActive(true)}
                     />
                 </Toolbar>
-
                 <Table className={classes.table}>
                     <ReasonForReturnTableHead/>
                     <TableBody>
@@ -106,6 +104,7 @@ const ReasonForReturnTable = () => {
                                             <Controls.ActionButton
                                                 color="secondary"
                                                 onClick={() => {
+                                                    dispatch(getDeleteReasonForReturnInfo(item.id))
                                                     setConfirmDialog({
                                                         isOpen: true,
                                                         title: 'Are you sure to delete this record?',
@@ -133,7 +132,7 @@ const ReasonForReturnTable = () => {
                 notify={notify}
                 setNotify={setNotify}
             />
-            <ConfirmDialog
+            <ConfirmDeleteDialogReasonForReturn
                 confirmDialog={confirmDialog}
                 setConfirmDialog={setConfirmDialog}
             />

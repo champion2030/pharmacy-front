@@ -2,7 +2,7 @@ import React from 'react'
 import { Dialog, DialogTitle, DialogContent, DialogActions, Typography, makeStyles, IconButton } from '@material-ui/core'
 import Controls from "../controls/Controls";
 import NotListedLocationIcon from '@material-ui/icons/NotListedLocation';
-
+import {useSelector} from "react-redux";
 
 const useStyles = makeStyles(theme => ({
     dialog: {
@@ -32,10 +32,11 @@ const useStyles = makeStyles(theme => ({
     }
 }))
 
-export default function ConfirmDialog(props) {
-
+export default function ConfirmDeleteDialogArea(props) {
     const { confirmDialog, setConfirmDialog } = props;
     const classes = useStyles()
+
+    const potentialDataToDeleteByArea = useSelector((state) => state.areaReducer.potentialDataToDeleteByArea)
 
     return (
         <Dialog open={confirmDialog.isOpen} classes={{ paper: classes.dialog }}>
@@ -50,6 +51,12 @@ export default function ConfirmDialog(props) {
                 </Typography>
                 <Typography variant="subtitle2">
                     {confirmDialog.subTitle}
+                </Typography>
+                <Typography variant="subtitle2">
+                    При удалении данного района из данных таблиц удалится: <br/>
+                    Из таблицы Аптека: {potentialDataToDeleteByArea.pharmacy} записей <br/>
+                    Из таблицы Сотрудники: {potentialDataToDeleteByArea.employee} записей <br/>
+                    Из таблицы Поставки: {potentialDataToDeleteByArea.deliveries} записей<br/>
                 </Typography>
             </DialogContent>
             <DialogActions className={classes.dialogAction}>

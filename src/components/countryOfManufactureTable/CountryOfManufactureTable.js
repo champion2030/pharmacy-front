@@ -1,26 +1,17 @@
 import React, {useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
-import {
-    makeStyles,
-    Paper,
-    Table,
-    TableBody,
-    TableCell,
-    TableRow,
-    Toolbar
-} from "@material-ui/core";
+import {makeStyles, Paper, Table, TableBody, TableCell, TableRow, Toolbar} from "@material-ui/core";
 import Controls from "../controls/Controls";
 import EditOutlinedIcon from "@material-ui/icons/EditOutlined";
 import CloseIcon from "@material-ui/icons/Close";
 import AddIcon from "@material-ui/icons/Add";
-import ConfirmDialog from "../commonComponents/ConfirmDialog";
 import UniversalModalWindow from "../ModalWindow/UniversalModalWindow";
 import CountryOfManufactureTableHead from "./CountryOfManufactureTableHead";
-import {deleteCountryOfManufacture, getCountries} from "../../actions/getCountriesOfManufacture";
+import {deleteCountryOfManufacture, getCountries, getDeleteCountryInfo} from "../../actions/getCountriesOfManufacture";
 import CountryOfManufactureFormWindow from "./CountryOfManufactureFormWindow";
 import Notification from "../commonComponents/Notification";
 import {NavLink} from "react-router-dom";
-
+import ConfirmDeleteDialogCountry from "./ConfirmDeleteDialogCountry";
 
 const useStyles = makeStyles(theme => ({
     pageContent: {
@@ -83,7 +74,6 @@ const CountryOfManufactureTable = () => {
         dispatch(getCountries())
     }, [dispatch, modalActive])
 
-
     return (
         <div>
             <Paper className={classes.pageContent}>
@@ -96,7 +86,6 @@ const CountryOfManufactureTable = () => {
                         onClick={() => setModalActive(true)}
                     />
                 </Toolbar>
-
                 <Table className={classes.table}>
                     <CountryOfManufactureTableHead/>
                     <TableBody>
@@ -105,7 +94,6 @@ const CountryOfManufactureTable = () => {
                                 (
                                     <TableRow key={item.id}>
                                         <TableCell>{item.country}</TableCell>
-
                                         <TableCell>
                                             <NavLink to={`/currentCountry/${item.id}`}>
                                                 <Controls.ActionButton color="primary">
@@ -115,6 +103,7 @@ const CountryOfManufactureTable = () => {
                                             <Controls.ActionButton
                                                 color="secondary"
                                                 onClick={() => {
+                                                    dispatch(getDeleteCountryInfo(item.id))
                                                     setConfirmDialog({
                                                         isOpen: true,
                                                         title: 'Are you sure to delete this record?',
@@ -138,7 +127,7 @@ const CountryOfManufactureTable = () => {
             <UniversalModalWindow active={modalActive}>
                 <CountryOfManufactureFormWindow active={modalActive} setActive={setModalActive}/>
             </UniversalModalWindow>
-            <ConfirmDialog
+            <ConfirmDeleteDialogCountry
                 confirmDialog={confirmDialog}
                 setConfirmDialog={setConfirmDialog}
             />
