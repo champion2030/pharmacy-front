@@ -39,17 +39,17 @@ const useStyles = makeStyles(theme => ({
 }))
 
 const columns = [
-    {field: 'medicine_name', headerName: 'Medicine name', width: 250},
-    {field: 'full_name', headerName: 'Full name', width: 250},
-    {field: 'reason_for_return', headerName: 'Reason for return', width: 350},
-    {field: 'receipt_date', headerName: 'Receipt date', width: 250},
-    {field: 'number_of_packages', headerName: 'Number of packages', width: 190},
-    {field: 'presence_of_defect', headerName: 'Present od defect', width: 170},
-    {field: 'supplier_price', headerName: 'Supplier price', width: 150},
-    {field: 'pharmacy_price', headerName: 'Pharmacy price', width: 170},
-    {field: 'expiry_start_date', headerName: 'Expiry start date', width: 250},
-    {field: 'expiration_date', headerName: 'Expiration date', width: 250},
-    {field: 'batch_number', headerName: 'Batch number', width: 150},
+    {field: 'medicine_name', headerName: 'Название лекарства', width: 250},
+    {field: 'full_name', headerName: 'Сотрудник', width: 250},
+    {field: 'reason_for_return', headerName: 'Причина возврата', width: 350},
+    {field: 'receipt_date', headerName: 'Дата поступления', width: 250},
+    {field: 'number_of_packages', headerName: 'Количество упаковок', width: 190},
+    {field: 'presence_of_defect', headerName: 'Наличие деффекта', width: 170},
+    {field: 'supplier_price', headerName: 'Цена (производитель)', width: 150},
+    {field: 'pharmacy_price', headerName: 'Цена (аптека)', width: 170},
+    {field: 'expiry_start_date', headerName: 'Начало строка годности', width: 250},
+    {field: 'expiration_date', headerName: 'Конец срока годности', width: 250},
+    {field: 'batch_number', headerName: 'Номер партии', width: 150},
 ]
 
 const PharmacyAddOrEdit = (props) => {
@@ -129,7 +129,7 @@ const PharmacyAddOrEdit = (props) => {
                         name="address"
                         value={address || ""}
                         onChange={e => onChangeAddress(e)}
-                        helperText="Address"
+                        helperText="Адресс"
                         disabled={action === 'see'}
                     />
                 </Grid>
@@ -139,7 +139,7 @@ const PharmacyAddOrEdit = (props) => {
                         name="telephone"
                         value={telephone || ""}
                         onChange={e => onChangeTelephone(e)}
-                        helperText="Telephone"
+                        helperText="Телефон"
                         disabled={action === 'see'}
                     />
                 </Grid>
@@ -158,7 +158,7 @@ const PharmacyAddOrEdit = (props) => {
                         renderInput={(params) =>
                             <TextField
                                 {...params}
-                                label={action === 'addNew' ? "Pharmacy name" : pharmacyName}
+                                label={action === 'addNew' ? "Название аптеки" : pharmacyName}
                                 variant="outlined"
                             />}
                     />
@@ -178,7 +178,7 @@ const PharmacyAddOrEdit = (props) => {
                         renderInput={(params) =>
                             <TextField
                                 {...params}
-                                label={action === 'addNew' ? "Area" : area}
+                                label={action === 'addNew' ? "Район" : area}
                                 variant="outlined"
                             />}
                     />
@@ -198,7 +198,7 @@ const PharmacyAddOrEdit = (props) => {
                         renderInput={(params) =>
                             <TextField
                                 {...params}
-                                label={action === 'addNew' ? "Type of property" : typeOfProperty}
+                                label={action === 'addNew' ? "Тип собственности" : typeOfProperty}
                                 variant="outlined"
                             />}
                     />
@@ -215,12 +215,12 @@ const PharmacyAddOrEdit = (props) => {
                 <div className={classes.buttons}>
                     <Controls.Button
                         type="submit"
-                        text="Submit"
+                        text="Добавить/Обновить"
                         disabled={action === 'see'}
                         onClick={handleSubmit}
                     />
                     <Controls.Button
-                        text="Reset"
+                        text="Отмена"
                         color="default"
                         onClick={() => props.history.goBack()}
                     />

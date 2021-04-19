@@ -21,7 +21,7 @@ const PharmacyNameFormWindow = ({active, setActive}) => {
     const {message} = useSelector(state => state.message);
     const [pharmacyName, setPharmacyName] = useState('')
     const [pharmacyNameDirty, setPharmacyNameDirty] = useState(false)
-    const [pharmacyNameError, setPharmacyNameError] = useState('Pharmacy name can not be empty')
+    const [pharmacyNameError, setPharmacyNameError] = useState('Название аптеки не может быть пустым')
     const [formValid, setFormValid] = useState(false)
     const [successful, setSuccessful] = useState(false);
 
@@ -45,9 +45,9 @@ const PharmacyNameFormWindow = ({active, setActive}) => {
     const formOfIssueHandler = (e) => {
         setPharmacyName(e.target.value)
         if (e.target.value.length === 0) {
-            setPharmacyNameError('This field is required!')
+            setPharmacyNameError('Название аптеки не может быть пустым!')
         } else if (e.target.value.length < 4 || e.target.value.length > 20) {
-            setPharmacyNameError('The pharmacy name must be between 3 and 20 characters!')
+            setPharmacyNameError('Название аптеки должно быть от 3 до 20 символов!')
         } else {
             setPharmacyNameError("")
         }
@@ -80,7 +80,7 @@ const PharmacyNameFormWindow = ({active, setActive}) => {
             <Grid>
                 <TextField
                     variant="outlined"
-                    label="Pharmacy name"
+                    label="Название аптеки"
                     name="pharmacyName"
                     value={pharmacyName}
                     onBlur={event => bluerHandler(event)}
@@ -96,12 +96,12 @@ const PharmacyNameFormWindow = ({active, setActive}) => {
                 )}
                 <div>
                     <Controls.Button
-                        text="Submit"
+                        text="Добавить"
                         disabled={!formValid}
                         onClick={handleSubmit}
                     />
                     <Controls.Button
-                        text="Reset"
+                        text="Отмена"
                         color="default"
                         onClick={handleReset}
                     />

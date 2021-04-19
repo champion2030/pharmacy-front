@@ -17,6 +17,7 @@ import Moment from "react-moment";
 import AttachMoneyIcon from '@material-ui/icons/AttachMoney';
 import CommonTableToolbar from "../commonComponents/CommonToolBar";
 import ConfirmDeleteDialogDeliveries from "./ConfirmDeleteDialogDeliveries";
+import '../commonComponents/LoadingAnimation.css'
 
 const useStyles = makeStyles(theme => ({
     pageContent: {
@@ -59,8 +60,9 @@ const DeliveriesTable = () => {
     const classes = useStyles();
     const dispatch = useDispatch()
     const deliveries = useSelector(state => state.deliveriesReducer.deliveries)
-    let currentPageDelivers = useSelector(state => state.deliveriesReducer.currentPageDelivers)
-    let totalCount = useSelector(state => state.deliveriesReducer.totalCount)
+    const currentPageDelivers = useSelector(state => state.deliveriesReducer.currentPageDelivers)
+    const totalCount = useSelector(state => state.deliveriesReducer.totalCount)
+    const isFetchingDeliveries = useSelector(state => state.deliveriesReducer.isFetchingDeliveries)
     const [value, setValue] = useState('')
     const [rowsPerPage, setRowsPerPage] = useState(5);
     const [selected, setSelected] = React.useState([]);
@@ -72,7 +74,7 @@ const DeliveriesTable = () => {
             ...confirmDialog,
             isOpen: false
         })
-        if(selected.indexOf(id) !== -1) {
+        if (selected.indexOf(id) !== -1) {
             let newSelected = selected
             newSelected.splice(selected.indexOf(id), 1)
             setSelected(newSelected)
@@ -80,7 +82,7 @@ const DeliveriesTable = () => {
         dispatch(deleteDeliver(id, value, currentPageDelivers, rowsPerPage))
         setNotify({
             isOpen: true,
-            message: 'Deleted Successfully',
+            message: 'Удалено успешно',
             type: 'error'
         })
     }
@@ -143,11 +145,11 @@ const DeliveriesTable = () => {
     return (
         <div>
             <Paper className={classes.pageContent}>
-                <CommonTableToolbar numSelected={selected.length} tableName={'Delivers'}/>
+                <CommonTableToolbar numSelected={selected.length} tableName={'Поставки'}/>
                 <Toolbar>
                     <TextField
                         variant="outlined"
-                        label="Search deliver"
+                        label="Поиск поставок"
                         className={classes.searchInput}
                         value={value}
                         onChange={(event) => setValue(event.target.value)}
@@ -161,103 +163,113 @@ const DeliveriesTable = () => {
                     />
                     <NavLink to={`/currentDeliver/${0}/addNew`}>
                         <Controls.Button
-                            text="Add New"
+                            text="Добавить новую"
                             variant="outlined"
                             startIcon={<AddIcon/>}
                             className={classes.newButton}
                         />
                     </NavLink>
                 </Toolbar>
-
-                <Table className={classes.table}>
-                    <DeliveriesTableHead
-                        numSelected={selected.length}
-                        onSelectAllClick={handleSelectAllClick}
-                        rowCount={totalCount}
-                    />
-                    <TableBody>
-                        {
-                            deliveries.map(item =>
-                                (
-                                    <TableRow
-                                        hover
-                                        role="checkbox"
-                                        aria-checked={isSelected(item.id)}
-                                        tabIndex={-1}
-                                        key={item.id}
-                                        selected={isSelected(item.id)}
-                                    >
-                                        <TableCell padding="checkbox">
-                                            <Checkbox
-                                                onClick={(event) => handleClick(event, item.id)}
-                                                checked={isSelected(item.id)}
-                                                inputProps={{'aria-labelledby': item.id}}
-                                            />
-                                        </TableCell>
-                                        <TableCell>{item.medicine_name}</TableCell>
-                                        <TableCell>{item.full_name}</TableCell>
-                                        <TableCell width="100">{item.reason_for_return}</TableCell>
-                                        <TableCell>
-                                            <Moment format="DD/MM/YYYY" add={{hours: 3}}>
-                                                {item.receipt_date}
-                                            </Moment>
-                                        </TableCell>
-                                        <TableCell>{item.number_of_packages}</TableCell>
-                                        <TableCell>
-                                            <Checkbox
-                                                disabled
-                                                checked={item.presence_of_defect || false}
-                                                inputProps={{'aria-label': 'disabled checked checkbox'}}
-                                            />
-                                        </TableCell>
-                                        <TableCell>{item.supplier_price}<AttachMoneyIcon fontSize="small"/></TableCell>
-                                        <TableCell>{item.pharmacy_price}<AttachMoneyIcon fontSize="small"/></TableCell>
-                                        <TableCell>
-                                            <Moment format="DD/MM/YYYY" add={{hours: 3}}>
-                                                {item.expiry_start_date}
-                                            </Moment>
-                                        </TableCell>
-                                        <TableCell>
-                                            <Moment format="DD/MM/YYYY" add={{hours: 3}}>
-                                                {item.expiration_date}
-                                            </Moment>
-                                        </TableCell>
-                                        <TableCell>{item.batch_number}</TableCell>
-                                        <TableCell>
-                                            <NavLink to={`/currentDeliver/${item.id}/see`}>
-                                                <Controls.ActionButton color="primary">
-                                                    <VisibilityIcon fontSize="small"/>
-                                                </Controls.ActionButton>
-                                            </NavLink>
-                                            <NavLink to={`/currentDeliver/${item.id}/edit`}>
-                                                <Controls.ActionButton color="primary">
-                                                    <EditOutlinedIcon fontSize="small"/>
-                                                </Controls.ActionButton>
-                                            </NavLink>
-                                            <Controls.ActionButton
-                                                color="secondary"
-                                                onClick={() => {
-                                                    setConfirmDialog({
-                                                        isOpen: true,
-                                                        title: 'Are you sure to delete this record?',
-                                                        subTitle: "You can't undo this operation",
-                                                        onConfirm: () => {
-                                                            onDelete(item.id)
-                                                        }
-                                                    })
-                                                }}
+                {
+                    isFetchingDeliveries === false
+                        ?
+                        <Table className={classes.table}>
+                            <DeliveriesTableHead
+                                numSelected={selected.length}
+                                onSelectAllClick={handleSelectAllClick}
+                                rowCount={totalCount}
+                            />
+                            <TableBody>
+                                {
+                                    deliveries.map(item =>
+                                        (
+                                            <TableRow
+                                                hover
+                                                role="checkbox"
+                                                aria-checked={isSelected(item.id)}
+                                                tabIndex={-1}
+                                                key={item.id}
+                                                selected={isSelected(item.id)}
                                             >
-                                                <CloseIcon fontSize="small"/>
-                                            </Controls.ActionButton>
-                                        </TableCell>
-                                    </TableRow>
-                                )
-                            )
-                        }
-                    </TableBody>
-                </Table>
+                                                <TableCell padding="checkbox">
+                                                    <Checkbox
+                                                        onClick={(event) => handleClick(event, item.id)}
+                                                        checked={isSelected(item.id)}
+                                                        inputProps={{'aria-labelledby': item.id}}
+                                                    />
+                                                </TableCell>
+                                                <TableCell>{item.medicine_name}</TableCell>
+                                                <TableCell>{item.full_name}</TableCell>
+                                                <TableCell width="100">{item.reason_for_return}</TableCell>
+                                                <TableCell>
+                                                    <Moment format="DD/MM/YYYY" add={{hours: 3}}>
+                                                        {item.receipt_date}
+                                                    </Moment>
+                                                </TableCell>
+                                                <TableCell>{item.number_of_packages}</TableCell>
+                                                <TableCell>
+                                                    <Checkbox
+                                                        disabled
+                                                        checked={item.presence_of_defect || false}
+                                                        inputProps={{'aria-label': 'disabled checked checkbox'}}
+                                                    />
+                                                </TableCell>
+                                                <TableCell>{item.supplier_price}<AttachMoneyIcon
+                                                    fontSize="small"/></TableCell>
+                                                <TableCell>{item.pharmacy_price}<AttachMoneyIcon
+                                                    fontSize="small"/></TableCell>
+                                                <TableCell>
+                                                    <Moment format="DD/MM/YYYY" add={{hours: 3}}>
+                                                        {item.expiry_start_date}
+                                                    </Moment>
+                                                </TableCell>
+                                                <TableCell>
+                                                    <Moment format="DD/MM/YYYY" add={{hours: 3}}>
+                                                        {item.expiration_date}
+                                                    </Moment>
+                                                </TableCell>
+                                                <TableCell>{item.batch_number}</TableCell>
+                                                <TableCell>
+                                                    <NavLink to={`/currentDeliver/${item.id}/see`}>
+                                                        <Controls.ActionButton color="primary">
+                                                            <VisibilityIcon fontSize="small"/>
+                                                        </Controls.ActionButton>
+                                                    </NavLink>
+                                                    <NavLink to={`/currentDeliver/${item.id}/edit`}>
+                                                        <Controls.ActionButton color="primary">
+                                                            <EditOutlinedIcon fontSize="small"/>
+                                                        </Controls.ActionButton>
+                                                    </NavLink>
+                                                    <Controls.ActionButton
+                                                        color="secondary"
+                                                        onClick={() => {
+                                                            setConfirmDialog({
+                                                                isOpen: true,
+                                                                title: 'Вы уверены что хотите удалить эту запись?',
+                                                                subTitle: "Вы не сможете отменить эту операцию",
+                                                                onConfirm: () => {
+                                                                    onDelete(item.id)
+                                                                }
+                                                            })
+                                                        }}
+                                                    >
+                                                        <CloseIcon fontSize="small"/>
+                                                    </Controls.ActionButton>
+                                                </TableCell>
+                                            </TableRow>
+                                        )
+                                    )
+                                }
+                            </TableBody>
+
+                        </Table>
+                        :
+                        <div className="fetching">
+
+                        </div>
+                }
                 <TablePagination
-                    rowsPerPageOptions={[5, 10, 50, totalCount]}
+                    rowsPerPageOptions={[5, 10, 50, 100, 200]}
                     component="div"
                     count={totalCount}
                     rowsPerPage={rowsPerPage}

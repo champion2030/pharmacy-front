@@ -2,18 +2,18 @@ import React from 'react'
 import {TableHead, TableRow, TableCell, Checkbox} from '@material-ui/core'
 
 const headCells = [
-    {id: 'medicine_name', label: 'Medicine name'},
-    {id: 'name', label: 'Employee name'},
-    {id: 'reason_for_return', label: 'Reason for return'},
-    {id: 'receipt_date', label: 'Receipt date'},
-    {id: 'number_of_packages', label: 'Number of packages'},
-    {id: 'presence_of_defect', label: 'Presence of defect'},
-    {id: 'supplier_price', label: 'Supplier price'},
-    {id: 'pharmacy_price', label: 'Pharmacy price'},
-    {id: 'expiry_start_date', label: 'Expiry start date'},
-    {id: 'expiration_date', label: 'Expiration date'},
-    {id: 'batch_number', label: 'Batch number'},
-    {id: 'actions', label: 'Actions', disableSorting: true}
+    {id: 'medicine_name', label: 'Название лекарства'},
+    {id: 'name', label: 'Сотрудник'},
+    {id: 'reason_for_return', label: 'Прична возврата'},
+    {id: 'receipt_date', label: 'Дата поставки'},
+    {id: 'number_of_packages', label: 'Количество упаковок'},
+    {id: 'presence_of_defect', label: 'Наличие деффекта'},
+    {id: 'supplier_price', label: 'Цена (производитель)'},
+    {id: 'pharmacy_price', label: 'Цена (аптека)'},
+    {id: 'expiry_start_date', label: 'Начало срока годности'},
+    {id: 'expiration_date', label: 'Конец срока годности'},
+    {id: 'batch_number', label: 'Номер партии'},
+    {id: 'actions', label: 'Действия', disableSorting: true}
 ]
 
 const DeliveriesTableHead = (props) => {

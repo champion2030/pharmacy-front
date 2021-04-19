@@ -4,12 +4,7 @@ import {Grid, makeStyles, Paper, TextField,} from "@material-ui/core";
 import {useParams} from "react-router-dom"
 import Controls from "../controls/Controls";
 import {clearMessage} from "../../actions/message";
-
-import {
-    getCurrentFormOfIssue,
-    updateCurrentFormOfIssue,
-    updateCurrentInputFormOfIssue
-} from "../../actions/getFormsOfIssue";
+import {getCurrentFormOfIssue, updateCurrentFormOfIssue, updateCurrentInputFormOfIssue} from "../../actions/getFormsOfIssue";
 
 const useStyles = makeStyles(theme => ({
     pageContent: {
@@ -55,7 +50,7 @@ const FormOfIssueUpdate = (props) => {
                 <Grid item xs={3}>
                     <TextField
                         variant="outlined"
-                        label="Form of issue"
+                        label="Форма выпуска"
                         name="formOfIssue"
                         value={form_of_issue}
                         onChange={e => formOfIssueHandler(e)}
@@ -72,12 +67,12 @@ const FormOfIssueUpdate = (props) => {
 
             <Grid container align="center" justify="center" alignItems="center">
                     <Controls.Button
-                        text="Submit"
+                        text="Обновить"
                         type="Submit"
                         onClick={handleSubmit}
                     />
                     <Controls.Button
-                        text="Reset"
+                        text="Отмена"
                         color="default"
                         onClick={() => props.history.goBack()}
                     />

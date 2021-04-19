@@ -15,6 +15,7 @@ import {NavLink} from "react-router-dom";
 import VisibilityIcon from "@material-ui/icons/Visibility";
 import CommonTableToolbar from "../commonComponents/CommonToolBar";
 import ConfirmDeleteDialogMedicine from "./ConfirmDeleteDialogMedicine";
+import '../commonComponents/LoadingAnimation.css'
 
 const useStyles = makeStyles(theme => ({
     pageContent: {
@@ -64,13 +65,14 @@ const MedicineTable = () => {
     const [selected, setSelected] = React.useState([]);
     const [confirmDialog, setConfirmDialog] = useState({isOpen: false, title: '', subTitle: ''})
     const [notify, setNotify] = useState({isOpen: false, message: '', type: ''})
+    const isFetchingMedicine = useSelector(state => state.medicineReducer.isFetchingMedicine)
 
     const onDelete = id => {
         setConfirmDialog({
             ...confirmDialog,
             isOpen: false
         })
-        if(selected.indexOf(id) !== -1) {
+        if (selected.indexOf(id) !== -1) {
             let newSelected = selected
             newSelected.splice(selected.indexOf(id), 1)
             setSelected(newSelected)
@@ -78,7 +80,7 @@ const MedicineTable = () => {
         dispatch(deleteMedicine(id, value, currentPageMedicine, rowsPerPage))
         setNotify({
             isOpen: true,
-            message: 'Deleted Successfully',
+            message: 'Удалено успешно',
             type: 'error'
         })
     }
@@ -141,11 +143,11 @@ const MedicineTable = () => {
     return (
         <div>
             <Paper className={classes.pageContent}>
-                <CommonTableToolbar numSelected={selected.length} tableName={'Medicine'}/>
+                <CommonTableToolbar numSelected={selected.length} tableName={'Лекарства'}/>
                 <Toolbar>
                     <TextField
                         variant="outlined"
-                        label="Search medicine"
+                        label="Искать лекарства"
                         className={classes.searchInput}
                         value={value}
                         onChange={(event) => setValue(event.target.value)}
@@ -159,80 +161,88 @@ const MedicineTable = () => {
                     />
                     <NavLink to={`/currentMedicine/${0}/addNew`}>
                         <Controls.Button
-                            text="Add New"
+                            text="Добавить новое"
                             variant="outlined"
                             startIcon={<AddIcon/>}
                             className={classes.newButton}
                         />
                     </NavLink>
                 </Toolbar>
-                <Table className={classes.table}>
-                    <MedicineTableHead
-                        numSelected={selected.length}
-                        onSelectAllClick={handleSelectAllClick}
-                        rowCount={totalCount}
-                    />
-                    <TableBody>
-                        {
-                            medicines.map(item =>
-                                (
-                                    <TableRow
-                                        hover
-                                        role="checkbox"
-                                        aria-checked={isSelected(item.id)}
-                                        tabIndex={-1}
-                                        key={item.id}
-                                        selected={isSelected(item.id)}
-                                    >
-                                        <TableCell padding="checkbox">
-                                            <Checkbox
-                                                onClick={(event) => handleClick(event, item.id)}
-                                                checked={isSelected(item.id)}
-                                                inputProps={{'aria-labelledby': item.id}}
-                                            />
-                                        </TableCell>
-                                        <TableCell>{item.form_of_issue}</TableCell>
-                                        <TableCell>{item.pharmacological_group}</TableCell>
-                                        <TableCell>{item.firm_name}</TableCell>
-                                        <TableCell>{item.medicine_name}</TableCell>
-                                        <TableCell width="500">{item.instruction}</TableCell>
-                                        <TableCell>{item.barcode}</TableCell>
-                                        <TableCell>
-                                            <NavLink to={`/currentMedicine/${item.id}/see`}>
-                                                <Controls.ActionButton color="primary">
-                                                    <VisibilityIcon fontSize="small"/>
-                                                </Controls.ActionButton>
-                                            </NavLink>
-                                            <NavLink to={`/currentMedicine/${item.id}/edit`}>
-                                                <Controls.ActionButton color="primary">
-                                                    <EditOutlinedIcon fontSize="small"/>
-                                                </Controls.ActionButton>
-                                            </NavLink>
-                                            <Controls.ActionButton
-                                                color="secondary"
-                                                onClick={() => {
-                                                    dispatch(getDeleteMedicineInfo(item.id))
-                                                    setConfirmDialog({
-                                                        isOpen: true,
-                                                        title: 'Are you sure to delete this record?',
-                                                        subTitle: "You can't undo this operation",
-                                                        onConfirm: () => {
-                                                            onDelete(item.id)
-                                                        }
-                                                    })
-                                                }}
+                {
+                    isFetchingMedicine === false
+                        ?
+                        <Table className={classes.table}>
+                            <MedicineTableHead
+                                numSelected={selected.length}
+                                onSelectAllClick={handleSelectAllClick}
+                                rowCount={totalCount}
+                            />
+                            <TableBody>
+                                {
+                                    medicines.map(item =>
+                                        (
+                                            <TableRow
+                                                hover
+                                                role="checkbox"
+                                                aria-checked={isSelected(item.id)}
+                                                tabIndex={-1}
+                                                key={item.id}
+                                                selected={isSelected(item.id)}
                                             >
-                                                <CloseIcon fontSize="small"/>
-                                            </Controls.ActionButton>
-                                        </TableCell>
-                                    </TableRow>
-                                )
-                            )
-                        }
-                    </TableBody>
-                </Table>
+                                                <TableCell padding="checkbox">
+                                                    <Checkbox
+                                                        onClick={(event) => handleClick(event, item.id)}
+                                                        checked={isSelected(item.id)}
+                                                        inputProps={{'aria-labelledby': item.id}}
+                                                    />
+                                                </TableCell>
+                                                <TableCell>{item.form_of_issue}</TableCell>
+                                                <TableCell>{item.pharmacological_group}</TableCell>
+                                                <TableCell>{item.firm_name}</TableCell>
+                                                <TableCell>{item.medicine_name}</TableCell>
+                                                <TableCell width="500">{item.instruction}</TableCell>
+                                                <TableCell>{item.barcode}</TableCell>
+                                                <TableCell>
+                                                    <NavLink to={`/currentMedicine/${item.id}/see`}>
+                                                        <Controls.ActionButton color="primary">
+                                                            <VisibilityIcon fontSize="small"/>
+                                                        </Controls.ActionButton>
+                                                    </NavLink>
+                                                    <NavLink to={`/currentMedicine/${item.id}/edit`}>
+                                                        <Controls.ActionButton color="primary">
+                                                            <EditOutlinedIcon fontSize="small"/>
+                                                        </Controls.ActionButton>
+                                                    </NavLink>
+                                                    <Controls.ActionButton
+                                                        color="secondary"
+                                                        onClick={() => {
+                                                            dispatch(getDeleteMedicineInfo(item.id))
+                                                            setConfirmDialog({
+                                                                isOpen: true,
+                                                                title: 'Вы уверены что хотите удалить эту запись?',
+                                                                subTitle: "Вы не сможете отменить это действие",
+                                                                onConfirm: () => {
+                                                                    onDelete(item.id)
+                                                                }
+                                                            })
+                                                        }}
+                                                    >
+                                                        <CloseIcon fontSize="small"/>
+                                                    </Controls.ActionButton>
+                                                </TableCell>
+                                            </TableRow>
+                                        )
+                                    )
+                                }
+                            </TableBody>
+                        </Table>
+                        :
+                        <div className="fetching">
+
+                        </div>
+                }
                 <TablePagination
-                    rowsPerPageOptions={[5, 10, 50, totalCount]}
+                    rowsPerPageOptions={[5, 10, 50, 200]}
                     component="div"
                     count={totalCount}
                     rowsPerPage={rowsPerPage}

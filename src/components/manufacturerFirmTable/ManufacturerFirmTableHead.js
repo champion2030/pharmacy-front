@@ -2,12 +2,12 @@ import React from 'react'
 import {TableHead, TableRow, TableCell, Checkbox} from '@material-ui/core'
 
 const headCells = [
-    {id: 'country', label: 'Country'},
-    {id: 'firm_name', label: 'Firm Name'},
+    {id: 'country', label: 'Страна'},
+    {id: 'firm_name', label: 'Название фирмы'},
     {id: 'email', label: 'Email'},
-    {id: 'address', label: 'Address'},
-    {id: 'year_open', label: 'Year open'},
-    {id: 'actions', label: 'Actions', disableSorting: true}
+    {id: 'address', label: 'Адресс'},
+    {id: 'year_open', label: 'Год открытия'},
+    {id: 'actions', label: 'Действия', disableSorting: true}
 ]
 
 const ManufactureFirmTableHead = (props) => {

@@ -2,7 +2,7 @@ import axios from "axios";
 import {
     setAllMedicine,
     setCurrentPageMedicine,
-    setIsFetching,
+    setIsFetchingMedicine,
     setMedicine,
     setPotentialDataToDeleteByMedicine
 } from "../reducers/medicineTableReducer";
@@ -15,7 +15,7 @@ export const getMedicines = (searchQuery, currentPage, perPage) => {
         searchQuery = "default"
     }
     return async (dispatch) => {
-        dispatch(setIsFetching(true))
+        dispatch(setIsFetchingMedicine(true))
         const medicines = await axios.get(API_URL + `getMedicine?searchQuery=${searchQuery}&page=${currentPage}&limit=${perPage}`);
         dispatch(setMedicine(medicines.data))
     }
@@ -23,14 +23,13 @@ export const getMedicines = (searchQuery, currentPage, perPage) => {
 
 export const getAllMedicines = () => {
     return async (dispatch) => {
-        dispatch(setIsFetching(true))
         const medicines = await axios.get(API_URL + `getAllMedicine`);
         dispatch(setAllMedicine(medicines.data))
     }
 }
 
 export const deleteMedicine = (id, searchQuery, currentPage, perPage) => async (dispatch) => {
-    dispatch(setIsFetching(true))
+    dispatch(setIsFetchingMedicine(true))
     await axios.delete(API_URL + `deleteMedicine/${id}`)
     const medicines = await axios.get(API_URL + `getMedicine?searchQuery=${searchQuery}&page=${currentPage}&limit=${perPage}`);
     if (currentPage > medicines.data.totalPages && medicines.data.totalPages !== 0){
@@ -56,7 +55,6 @@ export const getCurrentMedicine = async (id, setMedicineName, setFormOfIssueId, 
 }
 
 export const updateCurrentMedicine = (form_of_issue_id, pharmacological_group_id, manufacture_firm_id, medicine_name, instruction, barcode, id) => (dispatch) => {
-    dispatch(setIsFetching(true))
     const updatedMedicine = axios.put(API_URL + `updateMedicine/${id}`, {
         form_of_issue_id,
         pharmacological_group_id,
@@ -86,7 +84,6 @@ export const updateCurrentMedicine = (form_of_issue_id, pharmacological_group_id
 };
 
 export const createNewMedicine = (form_of_issue_id, pharmacological_group_id, manufacture_firm_id, medicine_name, instruction, barcode) => (dispatch) => {
-    dispatch(setIsFetching(true))
     const newMedicine = axios.post(API_URL + `createMedicine`, {
         form_of_issue_id,
         pharmacological_group_id,

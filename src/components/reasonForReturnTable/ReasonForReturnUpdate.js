@@ -48,7 +48,7 @@ const ReasonForReturnUpdate = (props) => {
                 <Grid item xs={3}>
                     <TextField
                         variant="outlined"
-                        label="Reason for return"
+                        label="Прична возврата"
                         name="reasonForReturn"
                         value={reason_for_return}
                         onChange={e => formOfIssueHandler(e)}
@@ -64,12 +64,12 @@ const ReasonForReturnUpdate = (props) => {
             )}
             <Grid container align="center" justify="center" alignItems="center">
                 <Controls.Button
-                    text="Submit"
+                    text="Обновить"
                     type="Submit"
                     onClick={handleSubmit}
                 />
                 <Controls.Button
-                    text="Reset"
+                    text="Отмена"
                     color="default"
                     onClick={() => props.history.goBack()}
                 />

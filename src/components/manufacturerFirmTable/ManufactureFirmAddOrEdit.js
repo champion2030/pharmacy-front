@@ -107,105 +107,106 @@ const ManufactureFirmAddOrEdit = (props) => {
                     setSuccessful(false);
                 });
         }
-    };
+    }
 
     return (
         <Paper className={classes.pageContent}>
-            <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                <Grid container align="center" justify="center" alignItems="center">
-                    <Grid item xs={3}>
-                        <Autocomplete
-                            id="combo-box-demo1"
-                            options={countries}
-                            disableClearable
-                            disabled={action === 'see'}
-                            getOptionLabel={(option) => option.country}
-                            style={{width: 300, marginBottom: 20}}
-                            onChange={(event, newValue) => {
-                                setCountryOfManufactureId(newValue.id)
-                                setCountryOfManufacture(newValue.country)
-                            }}
-                            renderInput={(params) =>
-                                <TextField
-                                    {...params}
-                                    label={action === 'addNew' ? "Country of manufacture" : countryOfManufacture}
-                                    variant="outlined"
-                                />}
-                        />
+            <div>
+                <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                    <Grid container align="center" justify="center" alignItems="center">
+                        <Grid item xs={3}>
+                            <Autocomplete
+                                id="combo-box-demo1"
+                                options={countries}
+                                disableClearable
+                                disabled={action === 'see'}
+                                getOptionLabel={(option) => option.country}
+                                style={{width: 300, marginBottom: 20}}
+                                onChange={(event, newValue) => {
+                                    setCountryOfManufactureId(newValue.id)
+                                    setCountryOfManufacture(newValue.country)
+                                }}
+                                renderInput={(params) =>
+                                    <TextField
+                                        {...params}
+                                        label={action === 'addNew' ? "Страна производитель" : countryOfManufacture}
+                                        variant="outlined"
+                                    />}
+                            />
+                        </Grid>
+                        <Grid item xs={3}>
+                            <TextField
+                                variant="outlined"
+                                name="firmName"
+                                value={firm || ""}
+                                onChange={e => onChangeFirmName(e)}
+                                helperText="Название фирмы"
+                                disabled={action === 'see'}
+                            />
+                        </Grid>
+                        <Grid item xs={3}>
+                            <TextField
+                                variant="outlined"
+                                name="email"
+                                value={email || ""}
+                                onChange={e => onChangeEmail(e)}
+                                helperText="Email"
+                                disabled={action === 'see'}
+                            />
+                        </Grid>
+                        <Grid item xs={3}>
+                            <TextField
+                                variant="outlined"
+                                name="address"
+                                value={address || ""}
+                                onChange={e => onChangeAddress(e)}
+                                helperText="Адресс"
+                                disabled={action === 'see'}
+                            />
+                        </Grid>
+                        <Grid item xs={8}>
+                            <KeyboardDatePicker
+                                disableToolbar
+                                variant="inline"
+                                format="dd/MM/yyyy"
+                                margin="normal"
+                                id="date-picker-inline"
+                                value={selectedDate}
+                                onChange={handleDateChange}
+                                KeyboardButtonProps={{
+                                    'aria-label': 'change date',
+                                }}
+                                disabled={action === 'see'}
+                            />
+                        </Grid>
                     </Grid>
-                    <Grid item xs={3}>
-                        <TextField
-                            variant="outlined"
-                            name="firmName"
-                            value={firm || ""}
-                            onChange={e => onChangeFirmName(e)}
-                            helperText="Firm name"
-                            disabled={action === 'see'}
-                        />
-                    </Grid>
-                    <Grid item xs={3}>
-                        <TextField
-                            variant="outlined"
-                            name="email"
-                            value={email || ""}
-                            onChange={e => onChangeEmail(e)}
-                            helperText="Email"
-                            disabled={action === 'see'}
-                        />
-                    </Grid>
-                    <Grid item xs={3}>
-                        <TextField
-                            variant="outlined"
-                            name="address"
-                            value={address || ""}
-                            onChange={e => onChangeAddress(e)}
-                            helperText="Address"
-                            disabled={action === 'see'}
-                        />
-                    </Grid>
-                    <Grid item xs={8}>
-                        <KeyboardDatePicker
-                            disableToolbar
-                            variant="inline"
-                            format="dd/MM/yyyy"
-                            margin="normal"
-                            id="date-picker-inline"
-                            value={selectedDate}
-                            onChange={handleDateChange}
-                            KeyboardButtonProps={{
-                                'aria-label': 'change date',
-                            }}
-                            disabled={action === 'see'}
-                        />
-                    </Grid>
-                </Grid>
-            </MuiPickersUtilsProvider>
-            {!successful && message && (
-                <div className="form-group">
-                    <div className="alert alert-danger" role="alert">
-                        {message}
+                </MuiPickersUtilsProvider>
+                {!successful && message && (
+                    <div className="form-group">
+                        <div className="alert alert-danger" role="alert">
+                            {message}
+                        </div>
                     </div>
-                </div>
-            )}
+                )}
 
-            <Grid container align="center" justify="center" alignItems="center">
-                <div className={classes.buttons}>
-                    <Controls.Button
-                        type="submit"
-                        text="Submit"
-                        disabled={action === 'see'}
-                        onClick={handleSubmit}
-                    />
-                    <Controls.Button
-                        text="Reset"
-                        color="default"
-                        onClick={() => props.history.goBack()}
-                    />
-                </div>
-            </Grid>
+                <Grid container align="center" justify="center" alignItems="center">
+                    <div className={classes.buttons}>
+                        <Controls.Button
+                            type="submit"
+                            text="Добавить/Обновить"
+                            disabled={action === 'see'}
+                            onClick={handleSubmit}
+                        />
+                        <Controls.Button
+                            text="Отмена"
+                            color="default"
+                            onClick={() => props.history.goBack()}
+                        />
+                    </div>
+                </Grid>
+            </div>
         </Paper>
-
     )
-};
+}
 
 export default ManufactureFirmAddOrEdit;

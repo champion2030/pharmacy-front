@@ -48,7 +48,7 @@ const CountryOfManufactureUpdate = (props) => {
                 <Grid item xs={3}>
                     <TextField
                         variant="outlined"
-                        label="Country of manufacture"
+                        label="Страна производитель"
                         name="country"
                         value={country}
                         onChange={e => formOfIssueHandler(e)}
@@ -64,12 +64,12 @@ const CountryOfManufactureUpdate = (props) => {
             )}
             <Grid container align="center" justify="center" alignItems="center">
                 <Controls.Button
-                    text="Submit"
+                    text="Обновить"
                     type="Submit"
                     onClick={handleSubmit}
                 />
                 <Controls.Button
-                    text="Reset"
+                    text="Отмена"
                     color="default"
                     onClick={() => props.history.goBack()}
                 />

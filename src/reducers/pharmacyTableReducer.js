@@ -2,7 +2,7 @@ import {
     GET_POTENTIAL_DATA_TO_DELETE_BY_PHARMACY,
     SET_ALL_PHARMACIES,
     SET_CURRENT_PAGE_PHARMACY,
-    SET_IS_FETCHING,
+    SET_IS_FETCHING_PHARMACY,
     SET_PHARMACIES
 } from "../actions/types";
 
@@ -11,7 +11,7 @@ const defaultState = {
     allPharmacies: [],
     totalCount: 0,
     currentPagePharmacy: 1,
-    isFetching: true,
+    isFetchingPharmacy: true,
     potentialDataToDeleteByPharmacy: {
         employee: 0,
         deliveries: 0
@@ -25,23 +25,22 @@ export default function pharmacyReducer(state = defaultState, action) {
                 ...state,
                 pharmacies: action.payload.pharmacies,
                 totalCount: action.payload.totalCount,
-                isFetching: false
+                isFetchingPharmacy: false
             }
         case SET_ALL_PHARMACIES:
             return {
                 ...state,
                 allPharmacies: action.payload,
-                isFetching: false
             }
         case SET_CURRENT_PAGE_PHARMACY:
             return {
                 ...state,
                 currentPagePharmacy: action.payload
             }
-        case SET_IS_FETCHING:
+        case SET_IS_FETCHING_PHARMACY:
             return {
                 ...state,
-                isFetching: action.payload
+                isFetchingPharmacy: action.payload
             }
         case GET_POTENTIAL_DATA_TO_DELETE_BY_PHARMACY:
             return {
@@ -54,7 +53,7 @@ export default function pharmacyReducer(state = defaultState, action) {
 }
 
 export const setPharmacies = (pharmacies) => ({type: SET_PHARMACIES, payload: pharmacies})
-export const setIsFetching = (bool) => ({type: SET_IS_FETCHING, payload: bool})
+export const setIsFetchingPharmacy = (bool) => ({type: SET_IS_FETCHING_PHARMACY, payload: bool})
 export const setCurrentPagePharmacy = (page) => ({type: SET_CURRENT_PAGE_PHARMACY, payload: page})
 export const setAllPharmacies = (allPharmacies) => ({type: SET_ALL_PHARMACIES, payload: allPharmacies})
 export const setPotentialDataToDeleteByPharmacy = (potentialDataToDeleteByPharmacy) => ({

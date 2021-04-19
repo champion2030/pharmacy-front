@@ -48,7 +48,7 @@ const PharmacologicalGroupUpdate = (props) => {
                 <Grid item xs={3}>
                     <TextField
                         variant="outlined"
-                        label="Form of issue"
+                        label="Форма выпуска"
                         name="formOfIssue"
                         value={pharmacological_group}
                         onChange={e => formOfIssueHandler(e)}
@@ -64,12 +64,12 @@ const PharmacologicalGroupUpdate = (props) => {
             )}
             <Grid container align="center" justify="center" alignItems="center">
                 <Controls.Button
-                    text="Submit"
+                    text="Обновить"
                     type="Submit"
                     onClick={handleSubmit}
                 />
                 <Controls.Button
-                    text="Reset"
+                    text="Отмена"
                     color="default"
                     onClick={() => props.history.goBack()}
                 />

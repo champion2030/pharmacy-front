@@ -65,7 +65,7 @@ const TypeOfPropertyTable = () => {
         dispatch(deleteTypeOfProperty(id))
         setNotify({
             isOpen: true,
-            message: 'Deleted Successfully',
+            message: 'Удалено успешно',
             type: 'error'
         })
     }
@@ -79,7 +79,7 @@ const TypeOfPropertyTable = () => {
             <Paper className={classes.pageContent}>
                 <Toolbar>
                     <Controls.Button
-                        text="Add New"
+                        text="Добавиь новый"
                         variant="outlined"
                         startIcon={<AddIcon/>}
                         className={classes.newButton}
@@ -108,8 +108,8 @@ const TypeOfPropertyTable = () => {
                                                     dispatch(getDeleteTypeOfPropertyInfo(item.id))
                                                     setConfirmDialog({
                                                         isOpen: true,
-                                                        title: 'Are you sure to delete this record?',
-                                                        subTitle: "You can't undo this operation",
+                                                        title: 'Вы уверены что хотите удалить эту запись?',
+                                                        subTitle: "Вы не сможете отменить это действие",
                                                         onConfirm: () => {
                                                             onDelete(item.id)
                                                         }

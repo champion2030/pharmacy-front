@@ -18,17 +18,11 @@ const ReasonForReturnFormWindow = ({active, setActive}) => {
     const classes = useStyles()
 
     const dispatch = useDispatch();
-
     const {message} = useSelector(state => state.message);
-
     const [reasonForReturn, setReasonForReturn] = useState('')
-
     const [reasonForReturnDirty, setReasonForReturnDirty] = useState(false)
-
-    const [reasonForReturnError, setReasonForReturnError] = useState('Reason for return can not be empty')
-
+    const [reasonForReturnError, setReasonForReturnError] = useState('Причина возврата не может быть пустой')
     const [formValid, setFormValid] = useState(false)
-
     const [successful, setSuccessful] = useState(false);
 
     useEffect(() => {
@@ -51,9 +45,9 @@ const ReasonForReturnFormWindow = ({active, setActive}) => {
     const formOfIssueHandler = (e) => {
         setReasonForReturn(e.target.value)
         if (e.target.value.length === 0) {
-            setReasonForReturnError('This field is required!')
+            setReasonForReturnError('Причина возврата не может быть пустой!')
         } else if (e.target.value.length < 4 || e.target.value.length > 50) {
-            setReasonForReturnError('The reason must be between 3 and 50 characters!')
+            setReasonForReturnError('Причина возврата должно быть от 3 до 50 символов!')
         } else {
             setReasonForReturnError("")
         }
@@ -87,7 +81,7 @@ const ReasonForReturnFormWindow = ({active, setActive}) => {
             <Grid>
                 <TextField
                     variant="outlined"
-                    label="Reason for return"
+                    label="Причина возврата"
                     name="reasonForReturn"
                     value={reasonForReturn}
                     onBlur={event => bluerHandler(event)}
@@ -106,12 +100,12 @@ const ReasonForReturnFormWindow = ({active, setActive}) => {
 
                 <div>
                     <Controls.Button
-                        text="Submit"
+                        text="Добавить"
                         disabled={!formValid}
                         onClick={handleSubmit}
                     />
                     <Controls.Button
-                        text="Reset"
+                        text="Отмена"
                         color="default"
                         onClick={handleReset}
                     />

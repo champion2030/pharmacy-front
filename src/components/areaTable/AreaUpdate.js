@@ -64,7 +64,7 @@ const AreaUpdate = (props) => {
             )}
             <Grid container align="center" justify="center" alignItems="center">
                 <Controls.Button
-                    text="Изменить"
+                    text="Обновить"
                     type="Submit"
                     onClick={handleSubmit}
                 />

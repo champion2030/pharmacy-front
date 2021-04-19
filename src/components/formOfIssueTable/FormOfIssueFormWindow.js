@@ -18,17 +18,11 @@ const FormOfIssueFormWindow = ({active, setActive}) => {
     const classes = useStyles()
 
     const dispatch = useDispatch();
-
     const {message} = useSelector(state => state.message);
-
     const [formOfIssue, setFormOfIssue] = useState('')
-
     const [formOfIssueDirty, setFormOfIssueDirty] = useState(false)
-
-    const [formOfIssueError, setFormOfIssueError] = useState('Form Of Issue can not be empty')
-
+    const [formOfIssueError, setFormOfIssueError] = useState('Форма выпуска не может быть пустой')
     const [formValid, setFormValid] = useState(false)
-
     const [successful, setSuccessful] = useState(false);
 
     useEffect(() => {
@@ -51,9 +45,9 @@ const FormOfIssueFormWindow = ({active, setActive}) => {
     const formOfIssueHandler = (e) => {
         setFormOfIssue(e.target.value)
         if (e.target.value.length === 0) {
-            setFormOfIssueError('This field is required!')
+            setFormOfIssueError('Форма выпуска не может быть пустой!')
         } else if (e.target.value.length < 4 || e.target.value.length > 20) {
-            setFormOfIssueError('The form of issue must be between 3 and 20 characters!')
+            setFormOfIssueError('Форма выпуска должна быть от 3 до 20 символов!')
         } else {
             setFormOfIssueError("")
         }
@@ -87,7 +81,7 @@ const FormOfIssueFormWindow = ({active, setActive}) => {
             <Grid>
                 <TextField
                     variant="outlined"
-                    label="Form Of Issue"
+                    label="Форма выпуска"
                     name="formOfIssue"
                     value={formOfIssue}
                     onBlur={event => bluerHandler(event)}
@@ -105,12 +99,12 @@ const FormOfIssueFormWindow = ({active, setActive}) => {
 
                 <div>
                     <Controls.Button
-                        text="Submit"
+                        text="Добавить"
                         disabled={!formValid}
                         onClick={handleSubmit}
                     />
                     <Controls.Button
-                        text="Reset"
+                        text="Отмена"
                         color="default"
                         onClick={handleReset}
                     />

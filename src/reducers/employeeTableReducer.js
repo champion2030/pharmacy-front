@@ -3,7 +3,7 @@ import {
     SET_ALL_EMPLOYEES,
     SET_CURRENT_PAGE_EMPLOYEE,
     SET_EMPLOYEES,
-    SET_IS_FETCHING
+    SET_IS_FETCHING_EMPLOYEE
 } from "../actions/types";
 
 const defaultState = {
@@ -11,7 +11,7 @@ const defaultState = {
     allEmployees: [],
     totalCount: 0,
     currentPageEmployee: 1,
-    isFetching: true,
+    isFetchingEmployee: true,
     potentialDataToDeleteByEmployee: {
         deliveries: 0
     }
@@ -24,23 +24,22 @@ export default function employeeReducer(state = defaultState, action) {
                 ...state,
                 employees: action.payload.employees,
                 totalCount: action.payload.totalCount,
-                isFetching: false
+                isFetchingEmployee: false
             }
         case SET_ALL_EMPLOYEES:
             return {
                 ...state,
                 allEmployees: action.payload,
-                isFetching: false
             }
         case SET_CURRENT_PAGE_EMPLOYEE:
             return {
                 ...state,
                 currentPageEmployee: action.payload
             }
-        case SET_IS_FETCHING:
+        case SET_IS_FETCHING_EMPLOYEE:
             return {
                 ...state,
-                isFetching: action.payload
+                isFetchingEmployee: action.payload
             }
         case GET_POTENTIAL_DATA_TO_DELETE_BY_EMPLOYEE:
             return {
@@ -53,7 +52,7 @@ export default function employeeReducer(state = defaultState, action) {
 }
 
 export const setEmployees = (employees) => ({type: SET_EMPLOYEES, payload: employees})
-export const setIsFetching = (bool) => ({type: SET_IS_FETCHING, payload: bool})
+export const setIsFetchingEmployee = (bool) => ({type: SET_IS_FETCHING_EMPLOYEE, payload: bool})
 export const setCurrentPageEmployee = (page) => ({type: SET_CURRENT_PAGE_EMPLOYEE, payload: page})
 export const setAllEmployees = (allEmployees) => ({type: SET_ALL_EMPLOYEES, payload: allEmployees})
 export const setPotentialDataToDeleteByEmployee = (potentialDataToDeleteByEmployee) => ({

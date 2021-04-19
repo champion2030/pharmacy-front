@@ -3,7 +3,7 @@ import {
     setCurrentPageDelivers,
     setDeliveries,
     setDeliversForCurrentPharmacy,
-    setIsFetching
+    setIsFetchingDeliveries
 } from "../reducers/deliveriesTableReducer";
 import {SET_MESSAGE} from "./types";
 
@@ -14,14 +14,14 @@ export const getDeliveries = (searchQuery, currentPage, perPage) => {
         searchQuery = "default"
     }
     return async (dispatch) => {
-        dispatch(setIsFetching(true))
+        dispatch(setIsFetchingDeliveries(true))
         const deliveries = await axios.get(API_URL + `getDeliveries?searchQuery=${searchQuery}&page=${currentPage}&limit=${perPage}`);
         dispatch(setDeliveries(deliveries.data))
     }
 }
 
 export const deleteDeliver = (id, searchQuery, currentPage, perPage) => async (dispatch) => {
-    dispatch(setIsFetching(true))
+    dispatch(setIsFetchingDeliveries(true))
     await axios.delete(API_URL + `deleteDeliver/${id}`)
     const deliveries = await axios.get(API_URL + `getDeliveries?searchQuery=${searchQuery}&page=${currentPage}&limit=${perPage}`);
     if (currentPage > deliveries.data.totalPages && deliveries.data.totalPages !== 0){
@@ -52,7 +52,6 @@ export const getCurrentDeliver = async (id, setMedicineId, setMedicineName, setE
 }
 
 export const updateCurrentDeliver = (medicine_id, employee_id, cause_id, receipt_date, number_of_packages, presence_of_defect, supplier_price, pharmacy_price, expiry_start_date, expiration_date, id) => (dispatch) => {
-    dispatch(setIsFetching(true))
     const updatedDeliver = axios.put(API_URL + `updateDeliver/${id}`, {
         medicine_id,
         employee_id,
@@ -85,7 +84,6 @@ export const updateCurrentDeliver = (medicine_id, employee_id, cause_id, receipt
 };
 
 export const createNewDeliver = (medicine_id, employee_id, cause_id, receipt_date, number_of_packages, presence_of_defect, supplier_price, pharmacy_price, expiry_start_date, expiration_date) => (dispatch) => {
-    dispatch(setIsFetching(true))
     const newDeliver = axios.post(API_URL + `createDeliver`, {
         medicine_id,
         employee_id,
@@ -119,7 +117,7 @@ export const createNewDeliver = (medicine_id, employee_id, cause_id, receipt_dat
 
 export const getDeliversForCurrentPharmacy = (id, currentPage, perPage) => {
     return async (dispatch) => {
-        dispatch(setIsFetching(true))
+        dispatch(setIsFetchingDeliveries(true))
         const deliveries = await axios.get(API_URL + `getDeliveriesForCurrentPharmacy/${id}?page=${currentPage}&limit=${perPage}`);
         dispatch(setDeliversForCurrentPharmacy(deliveries.data))
     }

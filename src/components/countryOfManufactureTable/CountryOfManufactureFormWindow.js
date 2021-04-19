@@ -18,17 +18,11 @@ const CountryOfManufactureFormWindow = ({active, setActive}) => {
     const classes = useStyles()
 
     const dispatch = useDispatch();
-
     const {message} = useSelector(state => state.message);
-
     const [countryOfManufacture, setCountryOfManufacture] = useState('')
-
     const [countryOfManufactureDirty, setCountryOfManufactureDirty] = useState(false)
-
-    const [countryOfManufactureError, setCountryOfManufactureError] = useState('Country of manufacture can not be empty')
-
+    const [countryOfManufactureError, setCountryOfManufactureError] = useState('Страна производитель не может быть пустой')
     const [formValid, setFormValid] = useState(false)
-
     const [successful, setSuccessful] = useState(false);
 
     useEffect(() => {
@@ -51,9 +45,9 @@ const CountryOfManufactureFormWindow = ({active, setActive}) => {
     const formOfIssueHandler = (e) => {
         setCountryOfManufacture(e.target.value)
         if (e.target.value.length === 0) {
-            setCountryOfManufactureError('This field is required!')
+            setCountryOfManufactureError('Страна производитель не может быть пустой!')
         } else if (e.target.value.length < 4 || e.target.value.length > 20) {
-            setCountryOfManufactureError('The country must be between 3 and 20 characters!')
+            setCountryOfManufactureError('Название страны должно быть от 3 до 20 символов!')
         } else {
             setCountryOfManufactureError("")
         }
@@ -87,7 +81,7 @@ const CountryOfManufactureFormWindow = ({active, setActive}) => {
             <Grid>
                 <TextField
                     variant="outlined"
-                    label="Country of manufacture"
+                    label="Страна производитель"
                     name="countryOfManufacture"
                     value={countryOfManufacture}
                     onBlur={event => bluerHandler(event)}
@@ -106,12 +100,12 @@ const CountryOfManufactureFormWindow = ({active, setActive}) => {
 
                 <div>
                     <Controls.Button
-                        text="Submit"
+                        text="Добавить"
                         disabled={!formValid}
                         onClick={handleSubmit}
                     />
                     <Controls.Button
-                        text="Reset"
+                        text="Отмена"
                         color="default"
                         onClick={handleReset}
                     />

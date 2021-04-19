@@ -10,50 +10,66 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e0de64aa-80a1-43a0-bc39-5202a49cf082" name="Default Changelist" comment="All tables done">
+    <list default="true" id="e0de64aa-80a1-43a0-bc39-5202a49cf082" name="Default Changelist" comment="All tables with a delete warning form">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/actions/getAreas.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/actions/getAreas.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/actions/getCountriesOfManufacture.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/actions/getCountriesOfManufacture.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/actions/getDeliveries.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/actions/getDeliveries.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/actions/getEmployee.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/actions/getEmployee.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/actions/getFormsOfIssue.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/actions/getFormsOfIssue.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/actions/getManufacturerFirm.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/actions/getManufacturerFirm.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/actions/getMedicine.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/actions/getMedicine.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/actions/getPharmacologicalGroups.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/actions/getPharmacologicalGroups.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/actions/getPharmacy.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/actions/getPharmacy.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/actions/getPharmacyNames.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/actions/getPharmacyNames.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/actions/getReasonsForReturn.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/actions/getReasonsForReturn.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/actions/getTypesOfProperty.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/actions/getTypesOfProperty.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/actions/types.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/actions/types.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/areaTable/AreaFormWindow.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/areaTable/AreaFormWindow.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/areaTable/AreaTable.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/areaTable/AreaTable.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/areaTable/AreaTableHead.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/areaTable/AreaTableHead.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/areaTable/AreaUpdate.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/areaTable/AreaUpdate.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/commonComponents/ConfirmDialog.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/areaTable/ConfirmDeleteDialogArea.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/areaTable/ConfirmDeleteDialogArea.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/controls/Controls.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/controls/Controls.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/controls/RadioGroup.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/controls/Select.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/countryOfManufactureTable/CountryOfManufactureFormWindow.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/countryOfManufactureTable/CountryOfManufactureFormWindow.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/countryOfManufactureTable/CountryOfManufactureTable.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/countryOfManufactureTable/CountryOfManufactureTable.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/countryOfManufactureTable/CountryOfManufactureTableHead.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/countryOfManufactureTable/CountryOfManufactureTableHead.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/countryOfManufactureTable/CountryOfManufactureUpdate.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/countryOfManufactureTable/CountryOfManufactureUpdate.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/deliveriesTable/DeliveriesAddOrEdit.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/deliveriesTable/DeliveriesAddOrEdit.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/deliveriesTable/DeliveriesTable.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/deliveriesTable/DeliveriesTable.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/deliveriesTable/DeliveriesTableHead.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/deliveriesTable/DeliveriesTableHead.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/employeeTable/EmployeeAddOrEdit.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/employeeTable/EmployeeAddOrEdit.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/employeeTable/EmployeeTable.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/employeeTable/EmployeeTable.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/employeeTable/EmployeeTableHead.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/employeeTable/EmployeeTableHead.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/formOfIssueTable/FormOfIssueFormWindow.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/formOfIssueTable/FormOfIssueFormWindow.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/formOfIssueTable/FormOfIssueTable.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/formOfIssueTable/FormOfIssueTable.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/formOfIssueTable/FormOfIssueTableHead.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/formOfIssueTable/FormOfIssueTableHead.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/formOfIssueTable/FormOfIssueUpdate.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/formOfIssueTable/FormOfIssueUpdate.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/manufacturerFirmTable/ConfirmDeleteDialogFirm.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/manufacturerFirmTable/ConfirmDeleteDialogFirm.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/manufacturerFirmTable/ManufactureFirmAddOrEdit.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/manufacturerFirmTable/ManufactureFirmAddOrEdit.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/manufacturerFirmTable/ManufacturerFirmTable.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/manufacturerFirmTable/ManufacturerFirmTable.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/manufacturerFirmTable/ManufacturerFirmTableHead.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/manufacturerFirmTable/ManufacturerFirmTableHead.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/medicineTable/MedicineAddOrEdit.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/medicineTable/MedicineAddOrEdit.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/medicineTable/MedicineTable.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/medicineTable/MedicineTable.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/medicineTable/MedicineTableHead.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/medicineTable/MedicineTableHead.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/pharmacologicalGroupTable/PharmacologicalGroupFormWindow.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/pharmacologicalGroupTable/PharmacologicalGroupFormWindow.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/pharmacologicalGroupTable/PharmacologicalGroupTable.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/pharmacologicalGroupTable/PharmacologicalGroupTable.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/pharmacologicalGroupTable/PharmacologicalGroupTableHead.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/pharmacologicalGroupTable/PharmacologicalGroupTableHead.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/pharmacologicalGroupTable/PharmacologicalGroupUpdate.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/pharmacologicalGroupTable/PharmacologicalGroupUpdate.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/pharmacyName/PharmacyNameFormWindow.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/pharmacyName/PharmacyNameFormWindow.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/pharmacyName/PharmacyNameTable.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/pharmacyName/PharmacyNameTable.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/pharmacyName/PharmacyNameTableHead.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/pharmacyName/PharmacyNameTableHead.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/pharmacyName/PharmacyNameUpdate.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/pharmacyName/PharmacyNameUpdate.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/pharmacyTable/PharmacyAddOrEdit.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/pharmacyTable/PharmacyAddOrEdit.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/pharmacyTable/PharmacyTable.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/pharmacyTable/PharmacyTable.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/pharmacyTable/PharmacyTableHead.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/pharmacyTable/PharmacyTableHead.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/reasonForReturnTable/ReasonForReturnFormWindow.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/reasonForReturnTable/ReasonForReturnFormWindow.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/reasonForReturnTable/ReasonForReturnTable.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/reasonForReturnTable/ReasonForReturnTable.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/reasonForReturnTable/ReasonForReturnTableHead.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/reasonForReturnTable/ReasonForReturnTableHead.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/reasonForReturnTable/ReasonForReturnUpdate.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/reasonForReturnTable/ReasonForReturnUpdate.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/requestsTables/firstRequest/FirstRequestTable.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/requestsTables/firstRequest/FirstRequestTable.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/typeOfPropertyTable/TypeOfPropertyFormWindow.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/typeOfPropertyTable/TypeOfPropertyFormWindow.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/typeOfPropertyTable/TypeOfPropertyTable.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/typeOfPropertyTable/TypeOfPropertyTable.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/usersTable/UsersTable.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/usersTable/UsersTable.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/reducers/areaTableReducer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/reducers/areaTableReducer.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/reducers/countryOfManufactureTableReducer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/reducers/countryOfManufactureTableReducer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/typeOfPropertyTable/TypeOfPropertyTableHead.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/typeOfPropertyTable/TypeOfPropertyTableHead.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/typeOfPropertyTable/TypeOfPropertyUpdate.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/typeOfPropertyTable/TypeOfPropertyUpdate.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/reducers/deliveriesTableReducer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/reducers/deliveriesTableReducer.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/reducers/employeeTableReducer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/reducers/employeeTableReducer.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/reducers/formOfIssueTableReducer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/reducers/formOfIssueTableReducer.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/reducers/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/reducers/index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/reducers/manufacturerFirmTableReducer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/reducers/manufacturerFirmTableReducer.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/reducers/medicineTableReducer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/reducers/medicineTableReducer.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/reducers/pharmacologicalGroupTableReducer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/reducers/pharmacologicalGroupTableReducer.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/reducers/pharmacyNameTableReducer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/reducers/pharmacyNameTableReducer.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/reducers/pharmacyTableReducer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/reducers/pharmacyTableReducer.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/reducers/reasonForReturnTablereducer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/reducers/reasonForReturnTablereducer.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/reducers/typeOfPropertyTableReducer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/reducers/typeOfPropertyTableReducer.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -63,8 +79,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Less File" />
         <option value="JavaScript File" />
+        <option value="Less File" />
       </list>
     </option>
   </component>
@@ -91,7 +107,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/components/deliveriesTable" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="list.type.of.created.stylesheet" value="Less" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.standard" value="true" />
@@ -203,7 +219,9 @@
       <workItem from="1618609194097" duration="135000" />
       <workItem from="1618664849227" duration="2917000" />
       <workItem from="1618692181115" duration="9148000" />
-      <workItem from="1618736485899" duration="25153000" />
+      <workItem from="1618736485899" duration="25635000" />
+      <workItem from="1618776105476" duration="4053000" />
+      <workItem from="1618821336462" duration="14957000" />
     </task>
     <task id="LOCAL-00001" summary="User Registration and Login">
       <created>1614707057660</created>
@@ -436,7 +454,14 @@
       <option name="project" value="LOCAL" />
       <updated>1618605625208</updated>
     </task>
-    <option name="localTasksCounter" value="34" />
+    <task id="LOCAL-00034" summary="All tables with a delete warning form">
+      <created>1618768180814</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1618768180814</updated>
+    </task>
+    <option name="localTasksCounter" value="35" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -479,6 +504,7 @@
     <MESSAGE value="Fixed table pagination" />
     <MESSAGE value="Checkbox item take done" />
     <MESSAGE value="All tables done" />
-    <option name="LAST_COMMIT_MESSAGE" value="All tables done" />
+    <MESSAGE value="All tables with a delete warning form" />
+    <option name="LAST_COMMIT_MESSAGE" value="All tables with a delete warning form" />
   </component>
 </project>

@@ -1,7 +1,7 @@
 import axios from "axios";
 import {
     setPharmacies,
-    setIsFetching,
+    setIsFetchingPharmacy,
     setAllPharmacies,
     setCurrentPagePharmacy,
     setPotentialDataToDeleteByPharmacy
@@ -15,7 +15,7 @@ export const getPharmacies = (searchQuery, currentPage, perPage) => {
         searchQuery = "default"
     }
     return async (dispatch) => {
-        dispatch(setIsFetching(true))
+        dispatch(setIsFetchingPharmacy(true))
         const pharmacies = await axios.get(API_URL + `getPharmacy?searchQuery=${searchQuery}&page=${currentPage}&limit=${perPage}`);
         dispatch(setPharmacies(pharmacies.data))
     }
@@ -23,14 +23,13 @@ export const getPharmacies = (searchQuery, currentPage, perPage) => {
 
 export const getAllPharmacies = () => {
     return async (dispatch) => {
-        dispatch(setIsFetching(true))
         const pharmacies = await axios.get(API_URL + `getAllPharmacy`);
         dispatch(setAllPharmacies(pharmacies.data))
     }
 }
 
 export const deletePharmacy = (id, searchQuery, currentPage, perPage) => async (dispatch) => {
-    dispatch(setIsFetching(true))
+    dispatch(setIsFetchingPharmacy(true))
     await axios.delete(API_URL + `deletePharmacy/${id}`)
     const pharmacies = await axios.get(API_URL + `getPharmacy?searchQuery=${searchQuery}&page=${currentPage}&limit=${perPage}`);
     if (currentPage > pharmacies.data.totalPages && pharmacies.data.totalPages !== 0){
@@ -55,7 +54,6 @@ export const getCurrentPharmacy = async (id, setPharmacyNameId, setPharmacyName,
 }
 
 export const updateCurrentPharmacy = (name_id, area_id, type_of_property_id, telephone, address, id) => (dispatch) => {
-    dispatch(setIsFetching(true))
     const updatedPharmacy = axios.put(API_URL + `updatePharmacy/${id}`, {
         name_id,
         area_id,
@@ -84,7 +82,6 @@ export const updateCurrentPharmacy = (name_id, area_id, type_of_property_id, tel
 };
 
 export const createNewPharmacy = (name_id, area_id, type_of_property_id, telephone, address) => (dispatch) => {
-    dispatch(setIsFetching(true))
     const newPharmacy = axios.post(API_URL + `createPharmacy`, {
         name_id,
         area_id,

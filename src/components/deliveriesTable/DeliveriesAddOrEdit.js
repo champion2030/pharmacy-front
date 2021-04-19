@@ -112,7 +112,7 @@ const DeliveriesAddOrEdit = (props) => {
 
     const handleSubmit = () => {
         if (presentOfDefect && cause == null) {
-            dispatch({type: SET_MESSAGE, payload: "Choose reason for return!"})
+            dispatch({type: SET_MESSAGE, payload: "Выберите причину возврата!"})
             setSuccessful(false);
         } else {
             if (Number(id) === 0) {
@@ -156,7 +156,7 @@ const DeliveriesAddOrEdit = (props) => {
                             renderInput={(params) =>
                                 <TextField
                                     {...params}
-                                    label={action === 'addNew' ? "Medicine name" : medicineName}
+                                    label={action === 'addNew' ? "Название лекарства" : medicineName}
                                     variant="outlined"
                                 />}
                         />
@@ -176,7 +176,7 @@ const DeliveriesAddOrEdit = (props) => {
                             renderInput={(params) =>
                                 <TextField
                                     {...params}
-                                    label={action === 'addNew' ? "Employee name" : employeeFullName}
+                                    label={action === 'addNew' ? "Сотрудник" : employeeFullName}
                                     variant="outlined"
                                 />}
                         />
@@ -196,7 +196,7 @@ const DeliveriesAddOrEdit = (props) => {
                             renderInput={(params) =>
                                 <TextField
                                     {...params}
-                                    label={action === 'addNew' || !presentOfDefect ? "Reason for return" : cause}
+                                    label={action === 'addNew' || !presentOfDefect ? "Причина возврата" : cause}
                                     variant="outlined"
                                 />}
                         />
@@ -223,14 +223,14 @@ const DeliveriesAddOrEdit = (props) => {
                             type="number"
                             value={numberOfPackages || ""}
                             onChange={e => onChangeNumberOfPackages(e)}
-                            helperText="Number of packages"
+                            helperText="Количество упаковок"
                             disabled={action === 'see'}
                         />
                     </Grid>
                     <Grid item xs={3}>
                         <Checkbox
                             checked={presentOfDefect}
-                            label="Present of defect"
+                            label="Наличие деффекта"
                             onChange={handleChangePresentOfDefect}
                             inputProps={{'aria-label': 'primary checkbox'}}
                             disabled={action === 'see'}
@@ -243,7 +243,7 @@ const DeliveriesAddOrEdit = (props) => {
                             type="number"
                             value={supplierPrice || ""}
                             onChange={e => onChangeSupplierPrice(e)}
-                            helperText="Supplier price"
+                            helperText="Цена упаковки(производитель)"
                             disabled={action === 'see'}
                         />
                     </Grid>
@@ -254,7 +254,7 @@ const DeliveriesAddOrEdit = (props) => {
                             type="number"
                             value={pharmacyPrice || ""}
                             onChange={e => onChangePharmacyPrice(e)}
-                            helperText="Pharmacy price"
+                            helperText="Цена упаковки(аптека)"
                             disabled={action === 'see'}
                         />
                     </Grid>
@@ -294,7 +294,7 @@ const DeliveriesAddOrEdit = (props) => {
                                 variant="outlined"
                                 name="batchNumber"
                                 value={batchNumber || ""}
-                                helperText="Batch number"
+                                helperText="Номер партии"
                                 disabled
                             />
                         </Grid>
@@ -314,12 +314,12 @@ const DeliveriesAddOrEdit = (props) => {
                 <div className={classes.buttons}>
                     <Controls.Button
                         type="submit"
-                        text="Submit"
+                        text="Добавить/Обновить"
                         disabled={action === 'see'}
                         onClick={handleSubmit}
                     />
                     <Controls.Button
-                        text="Reset"
+                        text="Отмена"
                         color="default"
                         onClick={() => props.history.goBack()}
                     />

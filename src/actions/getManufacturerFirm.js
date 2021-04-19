@@ -1,11 +1,5 @@
 import axios from "axios";
-import {
-    setAllFirms,
-    setCurrentPageFirm,
-    setFirms,
-    setIsFetching,
-    setPotentialDataToDeleteByFirm
-} from "../reducers/manufacturerFirmTableReducer";
+import {setAllFirms, setCurrentPageFirm, setFirms, setIsFetchingFirm, setPotentialDataToDeleteByFirm} from "../reducers/manufacturerFirmTableReducer";
 import {SET_MESSAGE} from "./types";
 
 const API_URL = "http://localhost:8080/api/";
@@ -15,7 +9,7 @@ export const getFirms = (searchQuery, currentPage, perPage) => {
         searchQuery = "default"
     }
     return async (dispatch) => {
-        dispatch(setIsFetching(true))
+        dispatch(setIsFetchingFirm(true))
         const firms = await axios.get(API_URL + `getManufacturerFirm?searchQuery=${searchQuery}&page=${currentPage}&limit=${perPage}`);
         dispatch(setFirms(firms.data))
     }
@@ -23,14 +17,13 @@ export const getFirms = (searchQuery, currentPage, perPage) => {
 
 export const getAllFirms = () => {
     return async (dispatch) => {
-        dispatch(setIsFetching(true))
         const firms = await axios.get(API_URL + `getAllManufacturerFirm`);
         dispatch(setAllFirms(firms.data))
     }
 }
 
 export const deleteFirm = (id, searchQuery, currentPage, perPage) => async (dispatch) => {
-    dispatch(setIsFetching(true))
+    dispatch(setIsFetchingFirm(true))
     await axios.delete(API_URL + `deleteManufacturerFirm/${id}`)
     const firms = await axios.get(API_URL + `getManufacturerFirm?searchQuery=${searchQuery}&page=${currentPage}&limit=${perPage}`);
     if (currentPage > firms.data.totalPages && firms.data.totalPages !== 0){
@@ -52,8 +45,9 @@ export const getCurrentFirm = async (id, setCountryOfManufactureId, setCountryOf
     setSelectedDate(firm.data.year_open)
 }
 
+
 export const updateCurrentFirm = (country_of_manufacture_id, firm_name, email, address, year_open, id) => (dispatch) => {
-    dispatch(setIsFetching(true))
+    dispatch(setIsFetchingFirm(true))
     const updatedFirm = axios.put(API_URL + `updateManufacturerFirm/${id}`, {
         country_of_manufacture_id,
         firm_name,
@@ -82,7 +76,6 @@ export const updateCurrentFirm = (country_of_manufacture_id, firm_name, email, a
 };
 
 export const createNewFirm = (country_of_manufacture_id, firm_name, email, address, year_open) => (dispatch) => {
-    dispatch(setIsFetching(true))
     const newFirm = axios.post(API_URL + `createManufacturerFirm`, {
         country_of_manufacture_id,
         firm_name,

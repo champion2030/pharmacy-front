@@ -48,7 +48,7 @@ const TypeOfPropertyUpdate = (props) => {
                 <Grid item xs={3}>
                     <TextField
                         variant="outlined"
-                        label="Type of property"
+                        label="Тип собственности"
                         name="typeOfProperty"
                         value={name_of_property}
                         onChange={e => formOfIssueHandler(e)}
@@ -64,12 +64,12 @@ const TypeOfPropertyUpdate = (props) => {
             )}
             <Grid container align="center" justify="center" alignItems="center">
                 <Controls.Button
-                    text="Submit"
+                    text="Обновить"
                     type="Submit"
                     onClick={handleSubmit}
                 />
                 <Controls.Button
-                    text="Reset"
+                    text="Отмена"
                     color="default"
                     onClick={() => props.history.goBack()}
                 />

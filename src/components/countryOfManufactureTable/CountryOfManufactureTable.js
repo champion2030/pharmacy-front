@@ -65,7 +65,7 @@ const CountryOfManufactureTable = () => {
         dispatch(deleteCountryOfManufacture(id))
         setNotify({
             isOpen: true,
-            message: 'Deleted Successfully',
+            message: 'Удалено успешно',
             type: 'error'
         })
     }
@@ -79,7 +79,7 @@ const CountryOfManufactureTable = () => {
             <Paper className={classes.pageContent}>
                 <Toolbar>
                     <Controls.Button
-                        text="Add New"
+                        text="Добавить новую"
                         variant="outlined"
                         startIcon={<AddIcon/>}
                         className={classes.newButton}
@@ -106,8 +106,8 @@ const CountryOfManufactureTable = () => {
                                                     dispatch(getDeleteCountryInfo(item.id))
                                                     setConfirmDialog({
                                                         isOpen: true,
-                                                        title: 'Are you sure to delete this record?',
-                                                        subTitle: "You can't undo this operation",
+                                                        title: 'Вы уверены что хотите удалить эту запись?',
+                                                        subTitle: "вы не сможете отменить эту операцию",
                                                         onConfirm: () => {
                                                             onDelete(item.id)
                                                         }

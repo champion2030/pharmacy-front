@@ -87,7 +87,7 @@ const FirstRequestTable = () => {
                         </Grid>
                         <Grid item xs={3}>
                             <Controls.Button
-                                text="Search"
+                                text="Найти"
                                 variant="outlined"
                                 startIcon={<Search/>}
                                 className={classes.newButton}
@@ -131,7 +131,7 @@ const FirstRequestTable = () => {
                         </Grid>
                         <Grid item xs={3}>
                     <Controls.Button
-                        text="Search"
+                        text="Найти"
                         variant="outlined"
                         startIcon={<Search/>}
                         className={classes.newButton}

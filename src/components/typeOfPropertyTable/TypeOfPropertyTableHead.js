@@ -2,8 +2,8 @@ import React from 'react'
 import {TableHead, TableRow, TableCell} from '@material-ui/core'
 
 const headCells = [
-    {id: 'typeOfProperty', label: 'Type of Property'},
-    {id: 'actions', label: 'Actions', disableSorting: true}
+    {id: 'typeOfProperty', label: 'Тип собственности'},
+    {id: 'actions', label: 'Действия', disableSorting: true}
 ]
 
 const TypeOfPropertyTableHead = () => {

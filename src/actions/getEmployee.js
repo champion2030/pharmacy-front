@@ -3,7 +3,7 @@ import {
     setAllEmployees,
     setCurrentPageEmployee,
     setEmployees,
-    setIsFetching,
+    setIsFetchingEmployee,
     setPotentialDataToDeleteByEmployee
 } from "../reducers/employeeTableReducer";
 import {SET_MESSAGE} from "./types";
@@ -15,7 +15,7 @@ export const getEmployees = (searchQuery, currentPage, perPage) => {
         searchQuery = "default"
     }
     return async (dispatch) => {
-        dispatch(setIsFetching(true))
+        dispatch(setIsFetchingEmployee(true))
         const employees = await axios.get(API_URL + `getEmployee?searchQuery=${searchQuery}&page=${currentPage}&limit=${perPage}`);
         dispatch(setEmployees(employees.data))
     }
@@ -23,14 +23,13 @@ export const getEmployees = (searchQuery, currentPage, perPage) => {
 
 export const getAllEmployees = () => {
     return async (dispatch) => {
-        dispatch(setIsFetching(true))
         const employees = await axios.get(API_URL + `getAllEmployee`);
         dispatch(setAllEmployees(employees.data))
     }
 }
 
 export const deleteEmployee = (id, searchQuery, currentPage, perPage) => async (dispatch) => {
-    dispatch(setIsFetching(true))
+    dispatch(setIsFetchingEmployee(true))
     await axios.delete(API_URL + `deleteEmployee/${id}`)
     const employees = await axios.get(API_URL + `getEmployee?searchQuery=${searchQuery}&page=${currentPage}&limit=${perPage}`);
     if (currentPage > employees.data.totalPages && employees.data.totalPages !== 0){
@@ -52,7 +51,6 @@ export const getCurrentEmployee = async (id, setName, setSurname, setPatronymic,
 }
 
 export const updateCurrentEmployee = (pharmacy_id, name, surname, patronymic, id) => (dispatch) => {
-    dispatch(setIsFetching(true))
     const updatedEmployee = axios.put(API_URL + `updateEmployee/${id}`, {
         pharmacy_id,
         name,
@@ -79,7 +77,6 @@ export const updateCurrentEmployee = (pharmacy_id, name, surname, patronymic, id
 };
 
 export const createNewEmployee = (pharmacy_id, name, surname, patronymic) => (dispatch) => {
-    dispatch(setIsFetching(true))
     const newEmployee = axios.post(API_URL + `createEmployee`, {
         pharmacy_id,
         name,

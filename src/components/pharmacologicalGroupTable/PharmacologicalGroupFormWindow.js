@@ -18,17 +18,11 @@ const PharmacologicalGroupFormWindow = ({active, setActive}) => {
     const classes = useStyles()
 
     const dispatch = useDispatch();
-
     const {message} = useSelector(state => state.message);
-
     const [pharmacologicalGroup, setPharmacologicalGroup] = useState('')
-
     const [pharmacologicalGroupDirty, setPharmacologicalGroupDirty] = useState(false)
-
-    const [pharmacologicalGroupError, setPharmacologicalGroupError] = useState('Pharmacological Group can not be empty')
-
+    const [pharmacologicalGroupError, setPharmacologicalGroupError] = useState('Фармакологическая группа не может быть пустой')
     const [formValid, setFormValid] = useState(false)
-
     const [successful, setSuccessful] = useState(false);
 
     useEffect(() => {
@@ -51,14 +45,13 @@ const PharmacologicalGroupFormWindow = ({active, setActive}) => {
     const formOfIssueHandler = (e) => {
         setPharmacologicalGroup(e.target.value)
         if (e.target.value.length === 0) {
-            setPharmacologicalGroupError('This field is required!')
+            setPharmacologicalGroupError('Фармакологическая группа не может быть пустой!')
         } else if (e.target.value.length < 4 || e.target.value.length > 35) {
-            setPharmacologicalGroupError('The pharmacological group must be between 3 and 35 characters!')
+            setPharmacologicalGroupError('Фармакологическая группа должна быть от 3 до 20 символов!')
         } else {
             setPharmacologicalGroupError("")
         }
     }
-
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -87,7 +80,7 @@ const PharmacologicalGroupFormWindow = ({active, setActive}) => {
             <Grid>
                 <TextField
                     variant="outlined"
-                    label="Pharmacological group"
+                    label="Фармакологическая группа"
                     name="pharmacologicalGroup"
                     value={pharmacologicalGroup}
                     onBlur={event => bluerHandler(event)}
@@ -106,12 +99,12 @@ const PharmacologicalGroupFormWindow = ({active, setActive}) => {
 
                 <div>
                     <Controls.Button
-                        text="Submit"
+                        text="Добавить"
                         disabled={!formValid}
                         onClick={handleSubmit}
                     />
                     <Controls.Button
-                        text="Reset"
+                        text="Отмена"
                         color="default"
                         onClick={handleReset}
                     />

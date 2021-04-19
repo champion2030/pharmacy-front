@@ -18,17 +18,11 @@ const TypeOfPropertyFormWindow = ({active, setActive}) => {
     const classes = useStyles()
 
     const dispatch = useDispatch();
-
     const {message} = useSelector(state => state.message);
-
     const [typeOfProperty, setTypeOfProperty] = useState('')
-
     const [typeOfPropertyDirty, setTypeOfPropertyDirty] = useState(false)
-
-    const [typeOfPropertyError, setTypeOfPropertyError] = useState('Type of property can not be empty')
-
+    const [typeOfPropertyError, setTypeOfPropertyError] = useState('Тип собственности не может быть пустым')
     const [formValid, setFormValid] = useState(false)
-
     const [successful, setSuccessful] = useState(false);
 
     useEffect(() => {
@@ -51,9 +45,9 @@ const TypeOfPropertyFormWindow = ({active, setActive}) => {
     const formOfIssueHandler = (e) => {
         setTypeOfProperty(e.target.value)
         if (e.target.value.length === 0) {
-            setTypeOfPropertyError('This field is required!')
+            setTypeOfPropertyError('Тип собственности не может быть пустым!')
         } else if (e.target.value.length < 4 || e.target.value.length > 20) {
-            setTypeOfPropertyError('The pharmacological group must be between 3 and 20 characters!')
+            setTypeOfPropertyError('Тип собственности должен быть от 3 до 20 символов!')
         } else {
             setTypeOfPropertyError("")
         }
@@ -87,7 +81,7 @@ const TypeOfPropertyFormWindow = ({active, setActive}) => {
             <Grid>
                 <TextField
                     variant="outlined"
-                    label="Type of property"
+                    label="Тип собственности"
                     name="typeOfProperty"
                     value={typeOfProperty}
                     onBlur={event => bluerHandler(event)}
@@ -106,12 +100,12 @@ const TypeOfPropertyFormWindow = ({active, setActive}) => {
 
                 <div>
                     <Controls.Button
-                        text="Submit"
+                        text="Добавить"
                         disabled={!formValid}
                         onClick={handleSubmit}
                     />
                     <Controls.Button
-                        text="Reset"
+                        text="Отмена"
                         color="default"
                         onClick={handleReset}
                     />

@@ -119,7 +119,7 @@ const MedicineAddOrEdit = (props) => {
                         name="medicineName"
                         value={medicineName || ""}
                         onChange={e => onChangeMedicineName(e)}
-                        helperText="Medicine name"
+                        helperText="Название лекарства"
                         disabled={action === 'see'}
                     />
                 </Grid>
@@ -130,7 +130,7 @@ const MedicineAddOrEdit = (props) => {
                         type="number"
                         value={barcode || ""}
                         onChange={e => onChangeBarcode(e)}
-                        helperText="Barcode"
+                        helperText="Штрих-код"
                         disabled={action === 'see'}
                     />
                 </Grid>
@@ -141,7 +141,7 @@ const MedicineAddOrEdit = (props) => {
                         style={{width: 400}}
                         value={instruction || ""}
                         onChange={e => onChangeInstruction(e)}
-                        helperText="Instruction"
+                        helperText="Инструкция"
                         multiline
                         rows={6}
                         rowsMax={6}
@@ -163,7 +163,7 @@ const MedicineAddOrEdit = (props) => {
                         renderInput={(params) =>
                             <TextField
                                 {...params}
-                                label={action === 'addNew' ? "Form of issue" : formOfIssue}
+                                label={action === 'addNew' ? "Форма выпуска" : formOfIssue}
                                 variant="outlined"
                             />}
                     />
@@ -183,7 +183,7 @@ const MedicineAddOrEdit = (props) => {
                         renderInput={(params) =>
                             <TextField
                                 {...params}
-                                label={action === 'addNew' ? "Pharmacological group" : pharmacologicalGroup}
+                                label={action === 'addNew' ? "Фармакологическая группа" : pharmacologicalGroup}
                                 variant="outlined"
                             />}
                     />
@@ -203,7 +203,7 @@ const MedicineAddOrEdit = (props) => {
                         renderInput={(params) =>
                             <TextField
                                 {...params}
-                                label={action === 'addNew' ? "Manufacturer firm" : manufacturerFirm}
+                                label={action === 'addNew' ? "Фирма производитель" : manufacturerFirm}
                                 variant="outlined"
                             />}
                     />
@@ -220,12 +220,12 @@ const MedicineAddOrEdit = (props) => {
                 <div className={classes.buttons}>
                     <Controls.Button
                         type="submit"
-                        text="Submit"
+                        text="Добавить/Обновить"
                         disabled={action === 'see'}
                         onClick={handleSubmit}
                     />
                     <Controls.Button
-                        text="Reset"
+                        text="Отмена"
                         color="default"
                         onClick={() => props.history.goBack()}
                     />

@@ -2,8 +2,8 @@ import React from 'react'
 import {TableHead, TableRow, TableCell} from '@material-ui/core'
 
 const headCells = [
-    {id: 'pharmacyName', label: 'Pharmacy name'},
-    {id: 'actions', label: 'Actions', disableSorting: true}
+    {id: 'pharmacyName', label: 'Название аптеки'},
+    {id: 'actions', label: 'Действия', disableSorting: true}
 ]
 
 const PharmacyNameTableHead = () => {

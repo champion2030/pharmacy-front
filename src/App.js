@@ -182,7 +182,7 @@ const App = () => {
                             <MenuIcon/>
                         </IconButton>
                         <Typography className={classes.title} variant="h6" noWrap>
-                            Pharmacy
+                            Аптеки
                         </Typography>
                         <div className={classes.grow}/>
                         <div className={classes.sectionDesktop}>
@@ -250,63 +250,63 @@ const App = () => {
                     <List>
                         {currentUser && (
                             <ListItem button component={Link} to="/profile">
-                                <ListItemText primary={"Profile"}/>
+                                <ListItemText primary={"Профиль"}/>
                             </ListItem>
                         )}
                         <Divider/>
                         <ListItem button component={Link} to="/users">
-                            <ListItemText primary={"Users"}/>
+                            <ListItemText primary={"Пользователи"}/>
                         </ListItem>
                         <ListItem button component={Link} to="/formOfIssue">
-                            <ListItemText primary={"Form of issue"}/>
+                            <ListItemText primary={"Формы выпуска"}/>
                         </ListItem>
                         <ListItem button component={Link} to="/pharmacologicalGroup">
-                            <ListItemText primary={"Pharmacological group"}/>
+                            <ListItemText primary={"Фармакологические группы"}/>
                         </ListItem>
                         <ListItem button component={Link} to="/area">
-                            <ListItemText primary={"Area"}/>
+                            <ListItemText primary={"Районы"}/>
                         </ListItem>
                         <ListItem button component={Link} to="/reasonForReturn">
-                            <ListItemText primary={"Reason for return"}/>
+                            <ListItemText primary={"Причины возврата"}/>
                         </ListItem>
                         <ListItem button component={Link} to="/pharmacyName">
-                            <ListItemText primary={"Pharmacy name"}/>
+                            <ListItemText primary={"Названия аптек"}/>
                         </ListItem>
                         <ListItem button component={Link} to="/typeOfProperty">
-                            <ListItemText primary={"Type of property"}/>
+                            <ListItemText primary={"Типы собственности"}/>
                         </ListItem>
                         <ListItem button component={Link} to="/countryOfManufacture">
-                            <ListItemText primary={"Country of manufacture"}/>
+                            <ListItemText primary={"Страны производители"}/>
                         </ListItem>
                     </List>
                     <Divider/>
                     <List>
                         <ListItem button component={Link} to="/manufacturerFirms">
-                            <ListItemText primary={"Manufacturer firms"}/>
+                            <ListItemText primary={"Фирмы производители"}/>
                         </ListItem>
                         <ListItem button component={Link} to="/medicines">
-                            <ListItemText primary={"Medicine"}/>
+                            <ListItemText primary={"Лекарства"}/>
                         </ListItem>
                         <ListItem button component={Link} to="/pharmacy">
-                            <ListItemText primary={"Pharmacy"}/>
+                            <ListItemText primary={"Аптеки"}/>
                         </ListItem>
                         <ListItem button component={Link} to="/employee">
-                            <ListItemText primary={"Employee"}/>
+                            <ListItemText primary={"Сотрудники"}/>
                         </ListItem>
                         <ListItem button component={Link} to="/deliveries">
-                            <ListItemText primary={"Deliveries"}/>
+                            <ListItemText primary={"Поставки"}/>
                         </ListItem>
                     </List>
                     <Divider/>
                     <List>
                         <ListItem button component={Link} to="/firstRequest">
-                            <ListItemText primary={"First request"}/>
+                            <ListItemText primary={"Первый запрос"}/>
                         </ListItem>
                         <ListItem button component={Link} to="/secondRequest">
-                            <ListItemText primary={"Second request"}/>
+                            <ListItemText primary={"Второй запрос"}/>
                         </ListItem>
                         <ListItem button component={Link} to="/thirdRequest">
-                            <ListItemText primary={"Third request"}/>
+                            <ListItemText primary={"Трейтий запрос"}/>
                         </ListItem>
                     </List>
                 </Drawer>

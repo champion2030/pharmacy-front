@@ -109,7 +109,7 @@ const EmployeeAddOrEdit = (props) => {
                         name="name"
                         value={name || ""}
                         onChange={e => onChangeName(e)}
-                        helperText="Employee name"
+                        helperText="Имя сотрудника"
                         disabled={action === 'see'}
                     />
                 </Grid>
@@ -119,7 +119,7 @@ const EmployeeAddOrEdit = (props) => {
                         name="surname"
                         value={surname || ""}
                         onChange={e => onChangeSurname(e)}
-                        helperText="Employee surname"
+                        helperText="Фамилия сотрудника"
                         disabled={action === 'see'}
                     />
                 </Grid>
@@ -129,7 +129,7 @@ const EmployeeAddOrEdit = (props) => {
                         name="patronymic"
                         value={patronymic || ""}
                         onChange={e => onChangePatronymic(e)}
-                        helperText="Employee patronymic"
+                        helperText="Отчество сотрудника"
                         disabled={action === 'see'}
                     />
                 </Grid>
@@ -148,7 +148,7 @@ const EmployeeAddOrEdit = (props) => {
                         renderInput={(params) =>
                             <TextField
                                 {...params}
-                                label={action === 'addNew' ? "Pharmacy" : pharmacyId + ' , ' + pharmacy}
+                                label={action === 'addNew' ? "Аптека" : pharmacyId + ' , ' + pharmacy}
                                 variant="outlined"
                             />}
                     />
@@ -165,12 +165,12 @@ const EmployeeAddOrEdit = (props) => {
                 <div className={classes.buttons}>
                     <Controls.Button
                         type="submit"
-                        text="Submit"
+                        text="Добавить/Обновить"
                         disabled={action === 'see'}
                         onClick={handleSubmit}
                     />
                     <Controls.Button
-                        text="Reset"
+                        text="Отмена"
                         color="default"
                         onClick={() => props.history.goBack()}
                     />
