@@ -1,62 +1,41 @@
 import React, {useState, useRef} from "react";
 import {useDispatch, useSelector} from "react-redux";
-
-import Form from "react-validation/build/form";
-import Input from "react-validation/build/input";
-import CheckButton from "react-validation/build/button";
-import {isEmail} from "validator";
-
+import {Avatar, Container, CssBaseline, Grid, makeStyles, TextField, Typography} from "@material-ui/core";
+import {NavLink} from "react-router-dom";
+import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
+import Controls from "../components/controls/Controls";
 import {register} from "../actions/auth";
+import {setMessage} from "../actions/message";
+import {SET_MESSAGE} from "../actions/types";
 
-const required = (value) => {
-    if (!value) {
-        return (
-            <div className="alert alert-danger" role="alert">
-                This field is required!
-            </div>
-        );
-    }
-};
+const useStyles = makeStyles((theme) => ({
+    paper: {
+        marginTop: theme.spacing(8),
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+    },
+    avatar: {
+        margin: theme.spacing(1),
+        backgroundColor: theme.palette.secondary.main,
+    },
+    form: {
+        marginTop: theme.spacing(3),
+    },
+    submit: {
+        margin: theme.spacing(3, 0, 2),
+        width: 500
+    },
+}));
 
-const validEmail = (value) => {
-    if (!isEmail(value)) {
-        return (
-            <div className="alert alert-danger" role="alert">
-                This is not a valid email.
-            </div>
-        );
-    }
-};
-
-const vusername = (value) => {
-    if (value.length < 3 || value.length > 20) {
-        return (
-            <div className="alert alert-danger" role="alert">
-                The username must be between 3 and 20 characters.
-            </div>
-        );
-    }
-};
-
-const vpassword = (value) => {
-    if (value.length < 6 || value.length > 40) {
-        return (
-            <div className="alert alert-danger" role="alert">
-                The password must be between 6 and 40 characters.
-            </div>
-        );
-    }
-};
 
 const Register = () => {
-    const form = useRef();
-    const checkBtn = useRef();
+    const classes = useStyles();
 
     const [username, setUsername] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [successful, setSuccessful] = useState(false);
-
     const {message} = useSelector(state => state.message);
     const dispatch = useDispatch();
 
@@ -77,90 +56,104 @@ const Register = () => {
 
     const handleRegister = (e) => {
         e.preventDefault();
+        dispatch(register(username, email, password))
+            .then(() => {
+                setSuccessful(true);
+            })
+            .catch(() => {
+                setSuccessful(false);
+            });
+    }
 
-        setSuccessful(false);
-
-        form.current.validateAll();
-
-        if (checkBtn.current.context._errors.length === 0) {
-            dispatch(register(username, email, password))
-                .then(() => {
-                    setSuccessful(true);
-                })
-                .catch(() => {
-                    setSuccessful(false);
-                });
-        }
-    };
 
     return (
-        <div className="col-md-12">
-            <div className="card card-container">
-                <img
-                    src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"
-                    alt="profile-img"
-                    className="profile-img-card"
-                />
+        <Container component="main" maxWidth="xs">
+            <CssBaseline/>
+            <div className={classes.paper}>
+                <Avatar className={classes.avatar}>
+                    <LockOutlinedIcon/>
+                </Avatar>
+                <Typography component="h1" variant="h5">
+                    Sign up
+                </Typography>
+                <form className={classes.form} noValidate>
+                    <Grid container spacing={2}>
+                        <Grid item xs={12}>
+                            <TextField
+                                autoComplete="username"
+                                name="username"
+                                variant="outlined"
+                                required
+                                fullWidth
+                                id="username"
+                                label="Username"
+                                autoFocus
+                                onChange={onChangeUsername}
+                            />
+                        </Grid>
+                        <Grid item xs={12}>
+                            <TextField
+                                variant="outlined"
+                                required
+                                fullWidth
+                                id="email"
+                                label="Email"
+                                name="email"
+                                autoComplete="email"
+                                onChange={onChangeEmail}
+                            />
+                        </Grid>
+                        <Grid item xs={12}>
+                            <TextField
+                                variant="outlined"
+                                required
+                                fullWidth
+                                name="password"
+                                label="Password"
+                                type="password"
+                                id="password"
+                                autoComplete="current-password"
+                                onChange={onChangePassword}
+                            />
+                        </Grid>
+                    </Grid>
 
-                <Form onSubmit={handleRegister} ref={form}>
-                    {
-                        !successful && (
-                            <div>
-                                <div className="form-group">
-                                    <label htmlFor="username">Username</label>
-                                    <Input
-                                        type="text"
-                                        className="form-control"
-                                        name="username"
-                                        value={username}
-                                        onChange={onChangeUsername}
-                                        validations={[required, vusername]}
-                                    />
-                                </div>
-
-                                <div className="form-group">
-                                    <label htmlFor="email">Email</label>
-                                    <Input
-                                        type="text"
-                                        className="form-control"
-                                        name="email"
-                                        value={email}
-                                        onChange={onChangeEmail}
-                                        validations={[required, validEmail]}
-                                    />
-                                </div>
-
-                                <div className="form-group">
-                                    <label htmlFor="password">Password</label>
-                                    <Input
-                                        type="password"
-                                        className="form-control"
-                                        name="password"
-                                        value={password}
-                                        onChange={onChangePassword}
-                                        validations={[required, vpassword]}
-                                    />
-                                </div>
-
-                                <div className="form-group">
-                                    <button className="btn btn-primary btn-block">Sign Up</button>
-                                </div>
-                            </div>
-                        )
-                    }
-
-                    {message && (
+                    {!successful && message && (
                         <div className="form-group">
-                            <div className={successful ? "alert alert-success" : "alert alert-danger"} role="alert">
+                            <div className="alert alert-danger" role="alert">
                                 {message}
                             </div>
                         </div>
                     )}
-                    <CheckButton style={{display: "none"}} ref={checkBtn}/>
-                </Form>
+
+                    {successful && message && (
+                        <div className="form-group">
+                            <div className="alert alert-success" role="alert">
+                                {message}
+                            </div>
+                        </div>
+                    )}
+
+                    <Controls.Button
+                        type="submit"
+                        variant="contained"
+                        color="primary"
+                        text="Sign up"
+                        className={classes.submit}
+                        onClick={handleRegister}
+                    >
+                    </Controls.Button>
+                    <Grid container justify="flex-end">
+                        <Grid item>
+                            <NavLink to="/login" variant="body2">
+                                Already have an account? Sign in
+                            </NavLink>
+                        </Grid>
+                    </Grid>
+                </form>
             </div>
-        </div>
-    );
-};
+        </Container>
+    )
+}
 
 export default Register;

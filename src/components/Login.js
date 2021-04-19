@@ -1,29 +1,38 @@
-import React, {useState, useRef} from "react";
+import React, {useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
-import {Redirect} from 'react-router-dom';
-import Form from "react-validation/build/form";
-import Input from "react-validation/build/input";
-import CheckButton from "react-validation/build/button";
+import {NavLink, Redirect} from 'react-router-dom';
 import {login} from "../actions/auth";
+import {Avatar, Container, CssBaseline, Grid, makeStyles, TextField, Typography} from "@material-ui/core";
+import Controls from "../components/controls/Controls";
+import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 
-const required = (value) => {
-    if (!value) {
-        return (
-            <div className="alert alert-danger" role="alert">
-                This field is required!
-            </div>
-        );
-    }
-};
+const useStyles = makeStyles((theme) => ({
+    paper: {
+        marginTop: theme.spacing(8),
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+    },
+    avatar: {
+        margin: theme.spacing(1),
+        backgroundColor: theme.palette.secondary.main,
+    },
+    form: {
+
+        marginTop: theme.spacing(1),
+    },
+    submit: {
+        margin: theme.spacing(3, 0, 2),
+        width: 500
+    },
+}));
 
 const Login = (props) => {
-    const form = useRef();
-    const checkBtn = useRef();
+    const classes = useStyles();
 
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
-    const [loading, setLoading] = useState(false);
-
+    const [successful, setSuccessful] = useState(false);
     const {isLoggedIn} = useSelector(state => state.auth);
     const {message} = useSelector(state => state.message);
 
@@ -41,83 +50,83 @@ const Login = (props) => {
 
     const handleLogin = (e) => {
         e.preventDefault();
-
-        setLoading(true);
-
-        form.current.validateAll();
-
-        if (checkBtn.current.context._errors.length === 0) {
-            dispatch(login(username, password))
-                .then(() => {
-                    props.history.push("/profile");
-                })
-                .catch(() => {
-                    setLoading(false);
-                });
-        } else {
-            setLoading(false);
-        }
-    };
+        dispatch(login(username, password))
+            .then(() => {
+                props.history.push("/profile");
+            })
+            .catch(() => {
+                setSuccessful(false);
+            });
+    }
 
     if (isLoggedIn) {
         return <Redirect to="/profile"/>;
     }
 
     return (
-        <div className="col-md-12">
-            <div className="card card-container">
-                <img
-                    src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"
-                    alt="profile-img"
-                    className="profile-img-card"
-                />
+        <Container component="main" maxWidth="xs">
+            <CssBaseline/>
+            <div className={classes.paper}>
+                <Avatar className={classes.avatar}>
+                    <LockOutlinedIcon/>
+                </Avatar>
+                <Typography component="h1" variant="h5">
+                    Sign in
+                </Typography>
+                <form className={classes.form} noValidate>
+                    <TextField
+                        variant="outlined"
+                        margin="normal"
+                        required
+                        fullWidth
+                        id="username"
+                        label="Username"
+                        name="username"
+                        autoComplete="username"
+                        autoFocus
+                        onChange={onChangeUsername}
+                    />
+                    <TextField
+                        variant="outlined"
+                        margin="normal"
+                        required
+                        fullWidth
+                        name="password"
+                        label="Password"
+                        type="password"
+                        id="password"
+                        autoComplete="current-password"
+                        onChange={onChangePassword}
+                    />
 
-                <Form onSubmit={handleLogin} ref={form}>
-                    <div className="form-group">
-                        <label htmlFor="username">Username</label>
-                        <Input
-                            type="text"
-                            className="form-control"
-                            name="username"
-                            value={username}
-                            onChange={onChangeUsername}
-                            validations={[required]}
-                        />
-                    </div>
-
-                    <div className="form-group">
-                        <label htmlFor="password">Password</label>
-                        <Input
-                            type="password"
-                            className="form-control"
-                            name="password"
-                            value={password}
-                            onChange={onChangePassword}
-                            validations={[required]}
-                        />
-                    </div>
-
-                    <div className="form-group">
-                        <button className="btn btn-primary btn-block" disabled={loading}>
-                            {loading && (
-                                <span className="spinner-border spinner-border-sm"/>
-                            )}
-                            <span>Login</span>
-                        </button>
-                    </div>
-
-                    {message && (
+                    {!successful && message && (
                         <div className="form-group">
                             <div className="alert alert-danger" role="alert">
                                 {message}
                             </div>
                         </div>
                     )}
-                    <CheckButton style={{display: "none"}} ref={checkBtn}/>
-                </Form>
+
+                    <Controls.Button
+                        type="Submit"
+                        color="primary"
+                        className={classes.submit}
+                        text="Sign in"
+                        onClick={handleLogin}
+                    />
+
+                    <Grid container>
+                        <Grid item>
+                            <NavLink to="/register" variant="body2">
+                                {"Don't have an account? Sign Up"}
+                            </NavLink>
+                        </Grid>
+                    </Grid>
+                </form>
             </div>
-        </div>
+        </Container>
     );
-};
+}
+
 
 export default Login;
