@@ -1,22 +1,29 @@
 import {
-    SET_CURRENT_PAGE_SECOND_REQUEST, SET_CURRENT_PAGE_THIRD_REQUEST,
-    SET_MEDICINE_BY_AREA,
+    SET_CURRENT_PAGE_SECOND_REQUEST,
+    SET_CURRENT_PAGE_THIRD_REQUEST,
+    SET_IS_FETCHING_REQUEST,
     SET_MEDICINE_BY_PHARMACY,
-    SET_SECOND_REQUEST,
+    SET_MEDICINE_BY_TOWN,
+    SET_SECOND_REQUEST_FIRST_PART,
+    SET_SECOND_REQUEST_SECOND_PART,
     SET_THIRD_REQUEST
 } from "../actions/types";
 
 const defaultState = {
     medicineByPharmacy: [],
-    medicineByArea: [],
+    medicineByTown: [],
 
     pharmaciesInEachArea: [],
     currentPageSecondRequest: 1,
     totalCountSecondRequest: 0,
 
+    secondRequestSecondPart: [],
+
     thirdRequest: [],
     currentPageThirdRequest: 1,
-    totalCountThirdRequest: 0
+    totalCountThirdRequest: 0,
+    isFetchingRequest: true
+
 }
 
 export default function requestsReducer(state = defaultState, action) {
@@ -26,16 +33,21 @@ export default function requestsReducer(state = defaultState, action) {
                 ...state,
                 medicineByPharmacy: action.payload,
             }
-        case SET_MEDICINE_BY_AREA:
+        case SET_MEDICINE_BY_TOWN:
             return {
                 ...state,
-                medicineByArea: action.payload,
+                medicineByTown: action.payload,
             }
-        case SET_SECOND_REQUEST:
+        case SET_SECOND_REQUEST_FIRST_PART:
             return {
                 ...state,
                 pharmaciesInEachArea: action.payload.requestResult,
                 totalCountSecondRequest: action.payload.totalCount
+            }
+        case SET_SECOND_REQUEST_SECOND_PART:
+            return {
+                ...state,
+                secondRequestSecondPart: action.payload,
             }
         case SET_CURRENT_PAGE_SECOND_REQUEST:
             return {
@@ -46,12 +58,18 @@ export default function requestsReducer(state = defaultState, action) {
             return {
                 ...state,
                 thirdRequest: action.payload.requestResult,
-                totalCountThirdRequest: action.payload.totalCount
+                totalCountThirdRequest: action.payload.totalCount,
+                isFetchingRequest: false
             }
         case SET_CURRENT_PAGE_THIRD_REQUEST:
             return {
                 ...state,
                 currentPageThirdRequest: action.payload
+            }
+        case SET_IS_FETCHING_REQUEST:
+            return {
+                ...state,
+                isFetchingRequest: action.payload
             }
         default:
             return state
@@ -59,8 +77,10 @@ export default function requestsReducer(state = defaultState, action) {
 }
 
 export const setMedicineByPharmacy = (medicineByPharmacy) => ({type: SET_MEDICINE_BY_PHARMACY, payload: medicineByPharmacy})
-export const setMedicineByArea = (medicineByArea) => ({type: SET_MEDICINE_BY_AREA, payload: medicineByArea})
-export const setSecondRequest = (secondRequest) => ({type: SET_SECOND_REQUEST, payload: secondRequest})
+export const setMedicineByTown = (medicineByTown) => ({type: SET_MEDICINE_BY_TOWN, payload: medicineByTown})
+export const setSecondRequestFirstPart = (secondRequestFirstPart) => ({type: SET_SECOND_REQUEST_FIRST_PART, payload: secondRequestFirstPart})
+export const setSecondRequestSecondPart = (secondRequestSecondPart) => ({type: SET_SECOND_REQUEST_SECOND_PART, payload: secondRequestSecondPart})
 export const setCurrentPageSecondRequest = (currentPageSecondRequest) => ({type: SET_CURRENT_PAGE_SECOND_REQUEST, payload: currentPageSecondRequest})
 export const setThirdRequest = (thirdRequest) => ({type: SET_THIRD_REQUEST, payload: thirdRequest})
 export const setCurrentPageThirdRequest = (currentPageThirdRequest) => ({type: SET_CURRENT_PAGE_THIRD_REQUEST, payload: currentPageThirdRequest})
+export const setIsFetchingRequest = (bool) => ({type: SET_IS_FETCHING_REQUEST, payload: bool})

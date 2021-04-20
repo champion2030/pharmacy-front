@@ -33,6 +33,7 @@ import SecondRequestTable from "../requestsTables/secondRequest/SecondRequestTab
 import ThirdRequestTable from "../requestsTables/thirdRequest/ThirdRequestTable";
 import ProtectedRoute from "../commonComponents/ProtectedRoute"
 import Unauthorized from "../commonComponents/Unauthorized";
+import NewDeliver from "../pharmacyTable/NewDeliver";
 
 const Content = () => {
 
@@ -70,6 +71,7 @@ const Content = () => {
             <ProtectedRoute path="/firstRequest" component={FirstRequestTable}/>
             <ProtectedRoute path="/secondRequest" component={SecondRequestTable}/>
             <ProtectedRoute path="/thirdRequest" component={ThirdRequestTable}/>
+            <ProtectedRoute path="/newDeliverForCurrentPharmacy/:id" component={NewDeliver}/>
             <Route exact path='/unauthorized' component={Unauthorized} />
             <Redirect to="/login"/>
         </Switch>

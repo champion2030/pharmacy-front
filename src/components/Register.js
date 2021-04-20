@@ -1,12 +1,10 @@
-import React, {useState, useRef} from "react";
+import React, {useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {Avatar, Container, CssBaseline, Grid, makeStyles, TextField, Typography} from "@material-ui/core";
 import {NavLink} from "react-router-dom";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Controls from "../components/controls/Controls";
 import {register} from "../actions/auth";
-import {setMessage} from "../actions/message";
-import {SET_MESSAGE} from "../actions/types";
 
 const useStyles = makeStyles((theme) => ({
     paper: {

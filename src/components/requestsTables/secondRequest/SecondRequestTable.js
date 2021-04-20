@@ -1,10 +1,11 @@
 import React, {useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
-import {makeStyles, Paper, Table, TableBody, TableCell, TableRow} from "@material-ui/core";
+import {Grid, makeStyles, Paper, Table, TableBody, TableCell, TableRow, Toolbar, Typography} from "@material-ui/core";
 import SecondRequestTableHead from "./SecondRequestTableHead";
-import {getSecondRequest} from "../../../actions/getRequests";
+import {getSecondRequestFirstPart, getSecondRequestSecondPart} from "../../../actions/getRequests";
 import {setCurrentPageSecondRequest} from "../../../reducers/requestTableReducer";
 import TablePagination from "@material-ui/core/TablePagination";
+import SecondRequestSecondPartTableHead from "./SecondRequestSecondPartTableHead";
 
 const useStyles = makeStyles(theme => ({
     pageContent: {
@@ -45,12 +46,14 @@ const SecondRequestTable = () => {
     const classes = useStyles();
     const dispatch = useDispatch()
     const pharmaciesInEachArea = useSelector(state => state.requestsReducer.pharmaciesInEachArea)
-    let currentPageSecondRequest = useSelector(state => state.requestsReducer.currentPageSecondRequest)
-    let totalCountSecondRequest = useSelector(state => state.requestsReducer.totalCountSecondRequest)
+    const currentPageSecondRequest = useSelector(state => state.requestsReducer.currentPageSecondRequest)
+    const totalCountSecondRequest = useSelector(state => state.requestsReducer.totalCountSecondRequest)
+    const secondRequestSecondPart = useSelector(state => state.requestsReducer.secondRequestSecondPart)
     const [rowsPerPage, setRowsPerPage] = useState(5);
 
     useEffect(() => {
-        dispatch(getSecondRequest(currentPageSecondRequest, rowsPerPage))
+        dispatch(getSecondRequestSecondPart())
+        dispatch(getSecondRequestFirstPart(currentPageSecondRequest, rowsPerPage))
     }, [dispatch, currentPageSecondRequest, rowsPerPage])
 
     const handleChangePage = (event, newPage) => {
@@ -65,6 +68,15 @@ const SecondRequestTable = () => {
     return (
         <div>
             <Paper className={classes.pageContent}>
+                <Toolbar>
+                    <Grid container align="center" justify="center" alignItems="center">
+                        <Grid item xs={3}>
+                            <Typography variant="h6">
+                                Количество аптек каждого типа собственности в каждом районе
+                            </Typography>
+                        </Grid>
+                    </Grid>
+                </Toolbar>
                 <Table className={classes.table}>
                     <SecondRequestTableHead/>
                     <TableBody>
@@ -91,6 +103,32 @@ const SecondRequestTable = () => {
                     onChangePage={handleChangePage}
                     onChangeRowsPerPage={handleChangeRowsPerPage}
                 />
+
+                <Toolbar>
+                    <Grid container align="center" justify="center" alignItems="center">
+                        <Grid item xs={3}>
+                            <Typography variant="h6">
+                                Количество аптек конкретного типа собственности по городу в целом
+                            </Typography>
+                        </Grid>
+                    </Grid>
+                </Toolbar>
+                <Table className={classes.table}>
+                    <SecondRequestSecondPartTableHead/>
+                    <TableBody>
+                        {
+                            secondRequestSecondPart.map((item, index) => {
+                                    return (
+                                        <TableRow key={index}>
+                                            <TableCell>{item.count}</TableCell>
+                                            <TableCell>{item.name_of_property}</TableCell>
+                                        </TableRow>
+                                    )
+                                }
+                            )
+                        }
+                    </TableBody>
+                </Table>
             </Paper>
         </div>
     )

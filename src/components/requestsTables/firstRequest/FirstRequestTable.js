@@ -1,13 +1,13 @@
 import React, {useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
-import {Grid, makeStyles, Paper, Table, TableBody, TableCell, TableRow, TextField, Toolbar} from "@material-ui/core";
+import {Grid, makeStyles, Paper, Table, TableBody, TableCell, TableRow, TextField, Toolbar, Typography} from "@material-ui/core";
 import Controls from "../../controls/Controls";
 import {Search} from "@material-ui/icons";
-import {getAreas} from "../../../actions/getAreas";
 import {getAllPharmacies} from "../../../actions/getPharmacy";
 import {Autocomplete} from "@material-ui/lab";
 import {getMedicineByArea, getMedicineByPharmacy} from "../../../actions/getRequests";
 import FirstRequestTableHead from "./FirstRequestTableHead";
+import {clearMessage} from "../../../actions/message";
 
 const useStyles = makeStyles(theme => ({
     pageContent: {
@@ -48,24 +48,28 @@ const FirstRequestTable = () => {
     const classes = useStyles();
     const dispatch = useDispatch()
     const medicineByPharmacy = useSelector(state => state.requestsReducer.medicineByPharmacy)
-    const medicineByArea = useSelector(state => state.requestsReducer.medicineByArea)
+    const medicineByTown = useSelector(state => state.requestsReducer.medicineByTown)
     const allPharmacies = useSelector(state => state.pharmacyReducer.allPharmacies)
-    const areas = useSelector(state => state.areaReducer.areas)
     const [pharmacyId, setPharmacyId] = useState('')
-    const [areaId, setAreaId] = useState('')
-
+    const {message} = useSelector(state => state.message);
 
     useEffect(() => {
-        dispatch(getAreas())
         dispatch(getAllPharmacies())
+
     }, [dispatch])
 
     function getFirstPartRequest() {
         dispatch(getMedicineByPharmacy(pharmacyId))
+            .then(() => {
+                dispatch(clearMessage())
+            })
+            .catch((error) => {
+                console.log(error);
+            });
     }
 
     function getSecondPartRequest() {
-        dispatch(getMedicineByArea(areaId))
+        dispatch(getMedicineByArea())
     }
 
     return (
@@ -74,13 +78,20 @@ const FirstRequestTable = () => {
                 <Toolbar>
                     <Grid container align="center" justify="center" alignItems="center">
                         <Grid item xs={3}>
+                            <Typography variant="h6">
+                                Топ 5 лекарств поставляемых в конкретную аптеку
+                            </Typography>
+                        </Grid>
+                        <Grid item xs={3}>
                             <Autocomplete
                                 id="combo-box-demo3"
                                 options={allPharmacies}
                                 disableClearable
                                 getOptionLabel={(option) => option.id + ' , ' + option.name}
                                 style={{width: 300, marginBottom: 20}}
-                                onChange={(event, newValue) => {setPharmacyId(newValue.id)}}
+                                onChange={(event, newValue) => {
+                                    setPharmacyId(newValue.id)
+                                }}
                                 renderInput={(params) =>
                                     <TextField{...params} variant="outlined"/>}
                             />
@@ -116,27 +127,31 @@ const FirstRequestTable = () => {
                         }
                     </TableBody>
                 </Table>
+
+                {message && (
+                    <div className="form-group">
+                        <div className="alert alert-danger" role="alert">
+                            {message}
+                        </div>
+                    </div>
+                )}
+
+
                 <Toolbar className={classes.toolBar}>
                     <Grid container align="center" justify="center" alignItems="center">
                         <Grid item xs={3}>
-                    <Autocomplete
-                        id="combo-box-demo2"
-                        options={areas}
-                        disableClearable
-                        getOptionLabel={(option) => option.name_of_area}
-                        style={{width: 300, marginBottom: 20}}
-                        onChange={(event, newValue) => {setAreaId(newValue.id)}}
-                        renderInput={(params) => <TextField{...params} variant="outlined"/>}
-                    />
+                            <Typography variant="h6">
+                                Топ 5 лекарств поставляемых по всему городу
+                            </Typography>
                         </Grid>
                         <Grid item xs={3}>
-                    <Controls.Button
-                        text="Найти"
-                        variant="outlined"
-                        startIcon={<Search/>}
-                        className={classes.newButton}
-                        onClick={() => getSecondPartRequest()}
-                    />
+                            <Controls.Button
+                                text="Найти"
+                                variant="outlined"
+                                startIcon={<Search/>}
+                                className={classes.newButton}
+                                onClick={() => getSecondPartRequest()}
+                            />
                         </Grid>
                     </Grid>
                 </Toolbar>
@@ -144,7 +159,7 @@ const FirstRequestTable = () => {
                     <FirstRequestTableHead/>
                     <TableBody>
                         {
-                            medicineByArea.map(item =>
+                            medicineByTown.map(item =>
                                 (
                                     <TableRow key={item.id}>
                                         <TableCell>{item.form_of_issue}</TableCell>

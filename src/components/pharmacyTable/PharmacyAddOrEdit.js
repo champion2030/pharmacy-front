@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {Grid, makeStyles, Paper, TextField} from "@material-ui/core";
-import {useParams} from "react-router-dom"
+import {NavLink, useParams} from "react-router-dom"
 import Controls from "../controls/Controls";
 import {clearMessage} from "../../actions/message";
 import {createNewPharmacy, getCurrentPharmacy, updateCurrentPharmacy} from "../../actions/getPharmacy";
@@ -11,6 +11,7 @@ import {getAreas} from "../../actions/getAreas";
 import {Autocomplete} from "@material-ui/lab";
 import {getDeliversForCurrentPharmacy} from "../../actions/getDeliveries";
 import {DataGrid} from '@material-ui/data-grid';
+import AddIcon from "@material-ui/icons/Add";
 
 const useStyles = makeStyles(theme => ({
     pageContent: {
@@ -227,16 +228,35 @@ const PharmacyAddOrEdit = (props) => {
                 </div>
             </Grid>
             {
+
+
                 action === 'see'
                     ?
-                    <DataGrid rows={deliversForCurrentPharmacy} columns={columns} pageSize={5} autoHeight={true}
-                              disableSelectionOnClick={true}/>
+                    <div>
+                        <Grid container align="center" justify="center" alignItems="center">
+                            <NavLink to={`/newDeliverForCurrentPharmacy/${id}`}>
+                                <Controls.Button
+                                    text="Добавить новую"
+                                    variant="outlined"
+                                    startIcon={<AddIcon/>}
+                                />
+                            </NavLink>
+                        </Grid>
+
+                        <DataGrid
+                            rows={deliversForCurrentPharmacy}
+                            columns={columns}
+                            pageSize={5}
+                            autoHeight={true}
+                            disableSelectionOnClick={true}
+                            rowsPerPageOptions={[5, 10, 50]}/>
+                    </div>
                     :
                     null
             }
         </Paper>
 
     )
-};
+}
 
 export default PharmacyAddOrEdit;

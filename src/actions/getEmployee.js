@@ -1,7 +1,7 @@
 import axios from "axios";
 import {
     setAllEmployees,
-    setCurrentPageEmployee,
+    setCurrentPageEmployee, setEmployeeForCurrentPharmacy,
     setEmployees,
     setIsFetchingEmployee,
     setPotentialDataToDeleteByEmployee
@@ -11,7 +11,7 @@ import {SET_MESSAGE} from "./types";
 const API_URL = "http://localhost:8080/api/";
 
 export const getEmployees = (searchQuery, currentPage, perPage) => {
-    if (searchQuery === 1){
+    if (searchQuery === ""){
         searchQuery = "default"
     }
     return async (dispatch) => {
@@ -25,6 +25,13 @@ export const getAllEmployees = () => {
     return async (dispatch) => {
         const employees = await axios.get(API_URL + `getAllEmployee`);
         dispatch(setAllEmployees(employees.data))
+    }
+}
+
+export const getEmployeesForCurrentPharmacy = (id) => {
+    return async (dispatch) => {
+        const employees = await axios.get(API_URL + `getEmployeeForCurrentPharmacy/${id}`);
+        dispatch(setEmployeeForCurrentPharmacy(employees.data))
     }
 }
 
