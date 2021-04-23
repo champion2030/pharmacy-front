@@ -1,14 +1,13 @@
 import React, {useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {Grid, makeStyles, Paper, TextField,} from "@material-ui/core";
-import {useParams} from "react-router-dom"
-import Controls from "../controls/Controls";
-import {clearMessage} from "../../actions/message";
-import {getAllFirms} from "../../actions/getManufacturerFirm";
-import {createNewMedicine, getCurrentMedicine, updateCurrentMedicine} from "../../actions/getMedicine";
-import {getForms} from "../../actions/getFormsOfIssue";
-import {getGroups} from "../../actions/getPharmacologicalGroups";
 import {Autocomplete} from "@material-ui/lab";
+import {getForms} from "../../../actions/getFormsOfIssue";
+import {getGroups} from "../../../actions/getPharmacologicalGroups";
+import {getAllFirms} from "../../../actions/getManufacturerFirm";
+import {clearMessage} from "../../../actions/message";
+import {createNewMedicine} from "../../../actions/getMedicine";
+import Controls from "../../controls/Controls";
 
 const useStyles = makeStyles(theme => ({
     pageContent: {
@@ -41,18 +40,14 @@ const useStyles = makeStyles(theme => ({
     },
 }))
 
-const MedicineAddOrEdit = (props) => {
+const AddNewMedicine = (props) => {
 
     const dispatch = useDispatch()
     const classes = useStyles();
-    const {id, action} = useParams()
     const [medicineName, setMedicineName] = useState('')
     const [formOfIssueId, setFormOfIssueId] = useState('')
-    const [formOfIssue, setFormOfIssue] = useState('')
     const [pharmacologicalGroupId, setPharmacologicalGroupId] = useState('')
-    const [pharmacologicalGroup, setPharmacologicalGroup] = useState('')
     const [manufacturerFirmId, setManufacturerFirmId] = useState('')
-    const [manufacturerFirm, setManufacturerFirm] = useState('')
     const [barcode, setBarcode] = useState('')
     const [instruction, setInstruction] = useState('')
     const [successful, setSuccessful] = useState(false);
@@ -62,16 +57,11 @@ const MedicineAddOrEdit = (props) => {
     const forms = useSelector(state => state.formOfIssueReducer.forms)
 
     useEffect(() => {
-        if (Number(id) !== 0) {
-            getCurrentMedicine(id, setMedicineName, setFormOfIssueId, setFormOfIssue, setPharmacologicalGroupId, setPharmacologicalGroup, setManufacturerFirmId, setManufacturerFirm, setBarcode, setInstruction)
-        }
-        if (action !== 'see') {
-            dispatch(getForms())
-            dispatch(getGroups())
-            dispatch(getAllFirms())
-        }
+        dispatch(getForms())
+        dispatch(getGroups())
+        dispatch(getAllFirms())
         dispatch(clearMessage())
-    }, [dispatch, id, action])
+    }, [dispatch])
 
     const onChangeMedicineName = (e) => {
         const MedicineName = e.target.value;
@@ -89,26 +79,15 @@ const MedicineAddOrEdit = (props) => {
     };
 
     const handleSubmit = () => {
-        if (Number(id) === 0) {
-            dispatch(createNewMedicine(formOfIssueId, pharmacologicalGroupId, manufacturerFirmId, medicineName, instruction, barcode))
-                .then(() => {
-                    setSuccessful(true);
-                    props.history.goBack()
-                })
-                .catch(() => {
-                    setSuccessful(false);
-                });
-        } else {
-            dispatch(updateCurrentMedicine(formOfIssueId, pharmacologicalGroupId, manufacturerFirmId, medicineName, instruction, barcode, id))
-                .then(() => {
-                    setSuccessful(true);
-                    props.history.goBack()
-                })
-                .catch(() => {
-                    setSuccessful(false);
-                });
-        }
-    };
+        dispatch(createNewMedicine(formOfIssueId, pharmacologicalGroupId, manufacturerFirmId, medicineName, instruction, barcode))
+            .then(() => {
+                setSuccessful(true);
+                props.history.goBack()
+            })
+            .catch(() => {
+                setSuccessful(false);
+            });
+    }
 
     return (
         <Paper className={classes.pageContent}>
@@ -117,10 +96,9 @@ const MedicineAddOrEdit = (props) => {
                     <TextField
                         variant="outlined"
                         name="medicineName"
-                        value={medicineName || ""}
+                        value={medicineName}
                         onChange={e => onChangeMedicineName(e)}
                         helperText="Название лекарства"
-                        disabled={action === 'see'}
                     />
                 </Grid>
                 <Grid item xs={3}>
@@ -128,10 +106,9 @@ const MedicineAddOrEdit = (props) => {
                         variant="outlined"
                         name="barcode"
                         type="number"
-                        value={barcode || ""}
+                        value={barcode}
                         onChange={e => onChangeBarcode(e)}
                         helperText="Штрих-код"
-                        disabled={action === 'see'}
                     />
                 </Grid>
                 <Grid item xs={3}>
@@ -139,13 +116,12 @@ const MedicineAddOrEdit = (props) => {
                         variant="outlined"
                         name="instruction"
                         style={{width: 400}}
-                        value={instruction || ""}
+                        value={instruction}
                         onChange={e => onChangeInstruction(e)}
                         helperText="Инструкция"
                         multiline
                         rows={6}
                         rowsMax={6}
-                        disabled={action === 'see'}
                     />
                 </Grid>
                 <Grid item xs={3}>
@@ -153,17 +129,15 @@ const MedicineAddOrEdit = (props) => {
                         id="combo-box-demo1"
                         options={forms}
                         disableClearable
-                        disabled={action === 'see'}
                         getOptionLabel={(option) => option.form_of_issue}
                         style={{width: 300, marginBottom: 20}}
                         onChange={(event, newValue) => {
                             setFormOfIssueId(newValue.id)
-                            setFormOfIssue(newValue.form_of_issue)
                         }}
                         renderInput={(params) =>
                             <TextField
                                 {...params}
-                                label={action === 'addNew' ? "Форма выпуска" : formOfIssue}
+                                label={"Форма выпуска"}
                                 variant="outlined"
                             />}
                     />
@@ -173,17 +147,15 @@ const MedicineAddOrEdit = (props) => {
                         id="combo-box-demo2"
                         options={groups}
                         disableClearable
-                        disabled={action === 'see'}
                         getOptionLabel={(option) => option.pharmacological_group}
                         style={{width: 300, marginBottom: 20}}
                         onChange={(event, newValue) => {
                             setPharmacologicalGroupId(newValue.id)
-                            setPharmacologicalGroup(newValue.pharmacological_group)
                         }}
                         renderInput={(params) =>
                             <TextField
                                 {...params}
-                                label={action === 'addNew' ? "Фармакологическая группа" : pharmacologicalGroup}
+                                label={"Фармакологическая группа"}
                                 variant="outlined"
                             />}
                     />
@@ -193,17 +165,15 @@ const MedicineAddOrEdit = (props) => {
                         id="combo-box-demo3"
                         options={allManufacturerFirms}
                         disableClearable
-                        disabled={action === 'see'}
                         getOptionLabel={(option) => option.firm_name}
                         style={{width: 300, marginBottom: 20}}
                         onChange={(event, newValue) => {
                             setManufacturerFirmId(newValue.id)
-                            setManufacturerFirm(newValue.firm_name)
                         }}
                         renderInput={(params) =>
                             <TextField
                                 {...params}
-                                label={action === 'addNew' ? "Фирма производитель" : manufacturerFirm}
+                                label={"Фирма производитель"}
                                 variant="outlined"
                             />}
                     />
@@ -220,8 +190,7 @@ const MedicineAddOrEdit = (props) => {
                 <div className={classes.buttons}>
                     <Controls.Button
                         type="submit"
-                        text="Добавить/Обновить"
-                        disabled={action === 'see'}
+                        text="Добавить"
                         onClick={handleSubmit}
                     />
                     <Controls.Button
@@ -235,4 +204,4 @@ const MedicineAddOrEdit = (props) => {
     )
 };
 
-export default MedicineAddOrEdit;
+export default AddNewMedicine;

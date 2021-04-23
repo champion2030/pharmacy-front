@@ -1,5 +1,6 @@
 import axios from "axios";
-import {setAllFirms, setCurrentPageFirm, setFirms, setIsFetchingFirm, setPotentialDataToDeleteByFirm} from "../reducers/manufacturerFirmTableReducer";
+import {setAllFirms, setCurrentFirm, setCurrentPageFirm, setFirms, setIsFetchingFirm, setPotentialDataToDeleteByFirm
+} from "../reducers/manufacturerFirmTableReducer";
 import {SET_MESSAGE} from "./types";
 
 const API_URL = "http://localhost:8080/api/";
@@ -35,19 +36,21 @@ export const deleteFirm = (id, searchQuery, currentPage, perPage) => async (disp
     dispatch(setFirms(firms.data))
 }
 
-export const getCurrentFirm = async (id, setCountryOfManufactureId, setCountryOfManufacture, setFirm, setEmail, setAddress, setSelectedDate) => {
-    const firm = await axios.get(API_URL + `getCurrentManufacturerFirm/${id}`)
-    setCountryOfManufactureId(firm.data.country_of_manufacture_id)
-    setCountryOfManufacture(firm.data.country)
-    setFirm(firm.data.firm_name)
-    setEmail(firm.data.email)
-    setAddress(firm.data.address)
-    setSelectedDate(firm.data.year_open)
+export const getCurrentFirm = (id) => {
+    return (dispatch) => {
+        dispatch(setIsFetchingFirm(true))
+        return axios
+            .get(API_URL + `getCurrentManufacturerFirm/${id}`)
+            .then(result => {
+                dispatch(setCurrentFirm(result.data))
+            })
+            .catch(error => {
+                console.log(error)
+            })
+    }
 }
 
-
 export const updateCurrentFirm = (country_of_manufacture_id, firm_name, email, address, year_open, id) => (dispatch) => {
-    dispatch(setIsFetchingFirm(true))
     const updatedFirm = axios.put(API_URL + `updateManufacturerFirm/${id}`, {
         country_of_manufacture_id,
         firm_name,
@@ -93,7 +96,6 @@ export const createNewFirm = (country_of_manufacture_id, firm_name, email, addre
         },
         (error) => {
             const message = error.response.data.error
-
             dispatch({
                 type: SET_MESSAGE,
                 payload: message,

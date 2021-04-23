@@ -62,7 +62,7 @@ const MedicineTable = () => {
     let totalCount = useSelector(state => state.medicineReducer.totalCount)
     const [value, setValue] = useState('')
     const [rowsPerPage, setRowsPerPage] = useState(5);
-    const [selected, setSelected] = React.useState([]);
+    const [selected, setSelected] = useState([]);
     const [confirmDialog, setConfirmDialog] = useState({isOpen: false, title: '', subTitle: ''})
     const [notify, setNotify] = useState({isOpen: false, message: '', type: ''})
     const isFetchingMedicine = useSelector(state => state.medicineReducer.isFetchingMedicine)
@@ -159,7 +159,7 @@ const MedicineTable = () => {
                             )
                         }}
                     />
-                    <NavLink to={`/currentMedicine/${0}/addNew`}>
+                    <NavLink to={`/addNewMedicine`}>
                         <Controls.Button
                             text="Добавить новое"
                             variant="outlined"

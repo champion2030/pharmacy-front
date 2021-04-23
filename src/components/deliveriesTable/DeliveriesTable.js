@@ -65,7 +65,7 @@ const DeliveriesTable = () => {
     const isFetchingDeliveries = useSelector(state => state.deliveriesReducer.isFetchingDeliveries)
     const [value, setValue] = useState('')
     const [rowsPerPage, setRowsPerPage] = useState(5);
-    const [selected, setSelected] = React.useState([]);
+    const [selected, setSelected] = useState([]);
     const [confirmDialog, setConfirmDialog] = useState({isOpen: false, title: '', subTitle: ''})
     const [notify, setNotify] = useState({isOpen: false, message: '', type: ''})
 
@@ -161,7 +161,7 @@ const DeliveriesTable = () => {
                             )
                         }}
                     />
-                    <NavLink to={`/currentDeliver/${0}/addNew`}>
+                    <NavLink to={`/addNewDeliver`}>
                         <Controls.Button
                             text="Добавить новую"
                             variant="outlined"

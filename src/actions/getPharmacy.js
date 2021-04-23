@@ -4,9 +4,10 @@ import {
     setIsFetchingPharmacy,
     setAllPharmacies,
     setCurrentPagePharmacy,
-    setPotentialDataToDeleteByPharmacy
+    setPotentialDataToDeleteByPharmacy, setCurrentPharmacy
 } from "../reducers/pharmacyTableReducer";
 import {SET_MESSAGE} from "./types";
+import {setCurrentMedicine, setIsFetchingMedicine} from "../reducers/medicineTableReducer";
 
 const API_URL = "http://localhost:8080/api/";
 
@@ -41,16 +42,18 @@ export const deletePharmacy = (id, searchQuery, currentPage, perPage) => async (
     dispatch(setPharmacies(pharmacies.data))
 }
 
-export const getCurrentPharmacy = async (id, setPharmacyNameId, setPharmacyName, setAreaId, setArea, setTypeOfPropertyId, setTypeOfProperty, setTelephone, setAddress) => {
-    const pharmacy = await axios.get(API_URL + `getCurrentPharmacy/${id}`)
-    setPharmacyNameId(pharmacy.data.name_id)
-    setPharmacyName(pharmacy.data.name)
-    setAreaId(pharmacy.data.area_id)
-    setArea(pharmacy.data.name_of_area)
-    setTypeOfPropertyId(pharmacy.data.type_of_property_id)
-    setTypeOfProperty(pharmacy.data.name_of_property)
-    setTelephone(pharmacy.data.telephone)
-    setAddress(pharmacy.data.address)
+export const getCurrentPharmacy = (id) => {
+    return (dispatch) => {
+        dispatch(setIsFetchingPharmacy(true))
+        return axios
+            .get(API_URL + `getCurrentPharmacy/${id}`)
+            .then(result => {
+                dispatch(setCurrentPharmacy(result.data))
+            })
+            .catch(error => {
+                console.log(error)
+            })
+    }
 }
 
 export const updateCurrentPharmacy = (name_id, area_id, type_of_property_id, telephone, address, id) => (dispatch) => {

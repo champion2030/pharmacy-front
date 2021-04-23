@@ -23,17 +23,22 @@ import PharmacologicalGroupUpdate from "../pharmacologicalGroupTable/Pharmacolog
 import PharmacyNameUpdate from "../pharmacyName/PharmacyNameUpdate";
 import ReasonForReturnUpdate from "../reasonForReturnTable/ReasonForReturnUpdate";
 import TypeOfPropertyUpdate from "../typeOfPropertyTable/TypeOfPropertyUpdate";
-import ManufactureFirmAddOrEdit from "../manufacturerFirmTable/ManufactureFirmAddOrEdit";
-import MedicineAddOrEdit from "../medicineTable/MedicineAddOrEdit";
-import PharmacyAddOrEdit from "../pharmacyTable/PharmacyAddOrEdit";
-import EmployeeAddOrEdit from "../employeeTable/EmployeeAddOrEdit";
-import DeliveriesAddOrEdit from "../deliveriesTable/DeliveriesAddOrEdit";
 import FirstRequestTable from "../requestsTables/firstRequest/FirstRequestTable";
 import SecondRequestTable from "../requestsTables/secondRequest/SecondRequestTable";
 import ThirdRequestTable from "../requestsTables/thirdRequest/ThirdRequestTable";
 import ProtectedRoute from "../commonComponents/ProtectedRoute"
 import Unauthorized from "../commonComponents/Unauthorized";
 import NewDeliver from "../pharmacyTable/NewDeliver";
+import AddNewManufactureFirm from "../manufacturerFirmTable/AddNewManudactureFirm/AddNewManufactureFirm";
+import AddNewMedicine from "../medicineTable/AddNewMedicine/AddNewMedicine";
+import MedicineViewOrEdit from "../medicineTable/MedicineViewOrEdit/MedicineViewOrEdit";
+import ManufactureFirmViewOrEdit from "../manufacturerFirmTable/ManufactureFirmViewOrEdit/ManufactureFirmViewOrEdit";
+import DeliveriesViewOrEdit from "../deliveriesTable/DeliveriesViewOrEdit/DeliveriesViewOrEdit";
+import AddNewDeliver from "../deliveriesTable/AddNewDeliver/AddNewDeliver";
+import AddNewEmployee from "../employeeTable/AddNewEmployee/AddNewEmployee";
+import EmployeeViewOrEdit from "../employeeTable/EmployeeViewOrEdit/EmployeeViewOrEdit";
+import AddNewPharmacy from "../pharmacyTable/AddNewPharmacy/AddNewPharmacy";
+import PharmacyViewOrEdit from "../pharmacyTable/PharmacyViewOrEdit/PharmacyViewOrEdit";
 
 const Content = () => {
 
@@ -63,15 +68,20 @@ const Content = () => {
             <ProtectedRoute path="/currentPharmacyName/:id" component={PharmacyNameUpdate}/>
             <ProtectedRoute path="/currentReasonForReturn/:id" component={ReasonForReturnUpdate}/>
             <ProtectedRoute path="/currentTypeOfProperty/:id" component={TypeOfPropertyUpdate}/>
-            <ProtectedRoute path="/currentFirm/:id/:action" component={ManufactureFirmAddOrEdit}/>
-            <ProtectedRoute path="/currentMedicine/:id/:action" component={MedicineAddOrEdit}/>
-            <ProtectedRoute path="/currentPharmacy/:id/:action" component={PharmacyAddOrEdit}/>
-            <ProtectedRoute path="/currentEmployee/:id/:action" component={EmployeeAddOrEdit}/>
-            <ProtectedRoute path="/currentDeliver/:id/:action" component={DeliveriesAddOrEdit}/>
+            <ProtectedRoute path="/currentFirm/:id/:action" component={ManufactureFirmViewOrEdit}/>
+            <ProtectedRoute path="/currentMedicine/:id/:action" component={MedicineViewOrEdit}/>
+            <ProtectedRoute path="/currentPharmacy/:id/:action" component={PharmacyViewOrEdit}/>
+            <ProtectedRoute path="/currentEmployee/:id/:action" component={EmployeeViewOrEdit}/>
+            <ProtectedRoute path="/currentDeliver/:id/:action" component={DeliveriesViewOrEdit}/>
             <ProtectedRoute path="/firstRequest" component={FirstRequestTable}/>
             <ProtectedRoute path="/secondRequest" component={SecondRequestTable}/>
             <ProtectedRoute path="/thirdRequest" component={ThirdRequestTable}/>
             <ProtectedRoute path="/newDeliverForCurrentPharmacy/:id" component={NewDeliver}/>
+            <ProtectedRoute path="/addNewFirm" component={AddNewManufactureFirm}/>
+            <ProtectedRoute path="/addNewMedicine" component={AddNewMedicine}/>
+            <ProtectedRoute path="/addNewDeliver" component={AddNewDeliver}/>
+            <ProtectedRoute path="/addNewEmployee" component={AddNewEmployee}/>
+            <ProtectedRoute path="/addNewPharmacy" component={AddNewPharmacy}/>
             <Route exact path='/unauthorized' component={Unauthorized} />
             <Redirect to="/login"/>
         </Switch>

@@ -1,7 +1,7 @@
 import {
     GET_POTENTIAL_DATA_TO_DELETE_BY_PHARMACY,
     SET_ALL_PHARMACIES,
-    SET_CURRENT_PAGE_PHARMACY,
+    SET_CURRENT_PAGE_PHARMACY, SET_CURRENT_PHARMACY,
     SET_IS_FETCHING_PHARMACY,
     SET_PHARMACIES
 } from "../actions/types";
@@ -15,7 +15,8 @@ const defaultState = {
     potentialDataToDeleteByPharmacy: {
         employee: 0,
         deliveries: 0
-    }
+    },
+    currentPharmacy: {}
 }
 
 export default function pharmacyReducer(state = defaultState, action) {
@@ -47,6 +48,12 @@ export default function pharmacyReducer(state = defaultState, action) {
                 ...state,
                 potentialDataToDeleteByPharmacy: action.payload
             }
+        case SET_CURRENT_PHARMACY:
+            return {
+                ...state,
+                currentPharmacy: action.payload,
+                isFetchingPharmacy: false
+            }
         default:
             return state
     }
@@ -60,3 +67,5 @@ export const setPotentialDataToDeleteByPharmacy = (potentialDataToDeleteByPharma
     type: GET_POTENTIAL_DATA_TO_DELETE_BY_PHARMACY,
     payload: potentialDataToDeleteByPharmacy
 })
+export const setCurrentPharmacy = (currentPharmacy) => ({type: SET_CURRENT_PHARMACY, payload: currentPharmacy})
+

@@ -1,6 +1,6 @@
 import axios from "axios";
 import {
-    setAllMedicine,
+    setAllMedicine, setCurrentMedicine,
     setCurrentPageMedicine,
     setIsFetchingMedicine,
     setMedicine,
@@ -41,17 +41,18 @@ export const deleteMedicine = (id, searchQuery, currentPage, perPage) => async (
     dispatch(setMedicine(medicines.data))
 }
 
-export const getCurrentMedicine = async (id, setMedicineName, setFormOfIssueId, setFormOfIssue, setPharmacologicalGroupId, setPharmacologicalGroup, setManufacturerFirmId, setManufacturerFirm, setBarcode, setInstruction) => {
-    const medicine = await axios.get(API_URL + `getCurrentMedicine/${id}`)
-    setMedicineName(medicine.data.medicine_name)
-    setFormOfIssueId(medicine.data.form_of_issue_id)
-    setFormOfIssue(medicine.data.form_of_issue)
-    setPharmacologicalGroupId(medicine.data.pharmacological_group_id)
-    setPharmacologicalGroup(medicine.data.pharmacological_group)
-    setManufacturerFirmId(medicine.data.manufacture_firm_id)
-    setManufacturerFirm(medicine.data.firm_name)
-    setBarcode(medicine.data.barcode)
-    setInstruction(medicine.data.instruction)
+export const getCurrentMedicine = (id) => {
+    return (dispatch) => {
+        dispatch(setIsFetchingMedicine(true))
+        return axios
+            .get(API_URL + `getCurrentMedicine/${id}`)
+            .then(result => {
+                dispatch(setCurrentMedicine(result.data))
+            })
+            .catch(error => {
+                console.log(error)
+            })
+    }
 }
 
 export const updateCurrentMedicine = (form_of_issue_id, pharmacological_group_id, manufacture_firm_id, medicine_name, instruction, barcode, id) => (dispatch) => {

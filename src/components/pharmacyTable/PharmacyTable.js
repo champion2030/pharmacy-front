@@ -159,7 +159,7 @@ const PharmacyTable = () => {
                             )
                         }}
                     />
-                    <NavLink to={`/currentPharmacy/${0}/addNew`}>
+                    <NavLink to={`/addNewPharmacy`}>
                         <Controls.Button
                             text="Добавить новую"
                             variant="outlined"

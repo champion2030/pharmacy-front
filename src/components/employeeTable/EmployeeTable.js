@@ -159,7 +159,7 @@ const EmployeeTable = () => {
                             )
                         }}
                     />
-                    <NavLink to={`/currentEmployee/${0}/addNew`}>
+                    <NavLink to={`/addNewEmployee`}>
                         <Controls.Button
                             text="Добавить нового"
                             variant="outlined"

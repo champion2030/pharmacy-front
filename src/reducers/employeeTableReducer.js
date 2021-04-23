@@ -1,7 +1,7 @@
 import {
     GET_ALL_EMPLOYEE_FOR_CURRENT_PHARMACY,
     GET_POTENTIAL_DATA_TO_DELETE_BY_EMPLOYEE,
-    SET_ALL_EMPLOYEES,
+    SET_ALL_EMPLOYEES, SET_CURRENT_EMPLOYEE,
     SET_CURRENT_PAGE_EMPLOYEE,
     SET_EMPLOYEES,
     SET_IS_FETCHING_EMPLOYEE
@@ -16,7 +16,8 @@ const defaultState = {
     isFetchingEmployee: true,
     potentialDataToDeleteByEmployee: {
         deliveries: 0
-    }
+    },
+    currentEmployee: {}
 }
 
 export default function employeeReducer(state = defaultState, action) {
@@ -53,6 +54,12 @@ export default function employeeReducer(state = defaultState, action) {
                 ...state,
                 allEmployeesForCurrentPharmacy: action.payload
             }
+        case SET_CURRENT_EMPLOYEE:
+            return {
+                ...state,
+                currentEmployee: action.payload,
+                isFetchingEmployee: false
+            }
         default:
             return state
     }
@@ -67,4 +74,4 @@ export const setPotentialDataToDeleteByEmployee = (potentialDataToDeleteByEmploy
     payload: potentialDataToDeleteByEmployee
 })
 export const setEmployeeForCurrentPharmacy = (employeesForCurrentPharmacy) => ({type: GET_ALL_EMPLOYEE_FOR_CURRENT_PHARMACY, payload: employeesForCurrentPharmacy})
-
+export const setCurrentEmployee = (currentEmployee) => ({type: SET_CURRENT_EMPLOYEE, payload: currentEmployee})

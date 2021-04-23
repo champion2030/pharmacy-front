@@ -1,11 +1,10 @@
 import React, {useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {Grid, makeStyles, Paper, TextField,} from "@material-ui/core";
-import {useParams} from "react-router-dom"
-import Controls from "../controls/Controls";
-import {clearMessage} from "../../actions/message";
-import {getAllPharmacies} from "../../actions/getPharmacy";
-import {createNewEmployee, getCurrentEmployee, updateCurrentEmployee} from "../../actions/getEmployee";
+import Controls from "../../controls/Controls";
+import {clearMessage} from "../../../actions/message";
+import {getAllPharmacies} from "../../../actions/getPharmacy";
+import {createNewEmployee} from "../../../actions/getEmployee";
 import {Autocomplete} from "@material-ui/lab";
 
 const useStyles = makeStyles(theme => ({
@@ -39,29 +38,22 @@ const useStyles = makeStyles(theme => ({
     },
 }))
 
-const EmployeeAddOrEdit = (props) => {
+const AddNewEmployee = (props) => {
 
     const dispatch = useDispatch()
     const classes = useStyles();
-    const {id, action} = useParams()
     const [name, setName] = useState('')
     const [surname, setSurname] = useState('')
     const [patronymic, setPatronymic] = useState('')
     const [pharmacyId, setPharmacyId] = useState('')
-    const [pharmacy, setPharmacy] = useState('')
     const [successful, setSuccessful] = useState(false);
     const {message} = useSelector(state => state.message);
     const allPharmacies = useSelector(state => state.pharmacyReducer.allPharmacies)
 
     useEffect(() => {
-        if (Number(id) !== 0) {
-            getCurrentEmployee(id, setName, setSurname, setPatronymic, setPharmacyId, setPharmacy)
-        }
-        if (action !== 'see') {
-            dispatch(getAllPharmacies())
-        }
+        dispatch(getAllPharmacies())
         dispatch(clearMessage())
-    }, [dispatch, id, action])
+    }, [dispatch])
 
     const onChangeName = (e) => {
         const name = e.target.value;
@@ -79,26 +71,15 @@ const EmployeeAddOrEdit = (props) => {
     };
 
     const handleSubmit = () => {
-        if (Number(id) === 0) {
-            dispatch(createNewEmployee(pharmacyId, name, surname, patronymic))
-                .then(() => {
-                    setSuccessful(true);
-                    props.history.goBack()
-                })
-                .catch(() => {
-                    setSuccessful(false);
-                });
-        } else {
-            dispatch(updateCurrentEmployee(pharmacyId, name, surname, patronymic, id))
-                .then(() => {
-                    setSuccessful(true);
-                    props.history.goBack()
-                })
-                .catch(() => {
-                    setSuccessful(false);
-                });
-        }
-    };
+        dispatch(createNewEmployee(pharmacyId, name, surname, patronymic))
+            .then(() => {
+                setSuccessful(true);
+                props.history.goBack()
+            })
+            .catch(() => {
+                setSuccessful(false);
+            });
+    }
 
     return (
         <Paper className={classes.pageContent}>
@@ -110,7 +91,6 @@ const EmployeeAddOrEdit = (props) => {
                         value={name || ""}
                         onChange={e => onChangeName(e)}
                         helperText="Имя сотрудника"
-                        disabled={action === 'see'}
                     />
                 </Grid>
                 <Grid item xs={3}>
@@ -120,7 +100,6 @@ const EmployeeAddOrEdit = (props) => {
                         value={surname || ""}
                         onChange={e => onChangeSurname(e)}
                         helperText="Фамилия сотрудника"
-                        disabled={action === 'see'}
                     />
                 </Grid>
                 <Grid item xs={3}>
@@ -130,7 +109,6 @@ const EmployeeAddOrEdit = (props) => {
                         value={patronymic || ""}
                         onChange={e => onChangePatronymic(e)}
                         helperText="Отчество сотрудника"
-                        disabled={action === 'see'}
                     />
                 </Grid>
                 <Grid item xs={3}>
@@ -138,17 +116,15 @@ const EmployeeAddOrEdit = (props) => {
                         id="combo-box-demo3"
                         options={allPharmacies}
                         disableClearable
-                        disabled={action === 'see'}
                         getOptionLabel={(option) => option.id + ' , ' + option.name}
                         style={{width: 300, marginBottom: 20}}
                         onChange={(event, newValue) => {
                             setPharmacyId(newValue.id)
-                            setPharmacy(newValue.name)
                         }}
                         renderInput={(params) =>
                             <TextField
                                 {...params}
-                                label={action === 'addNew' ? "Аптека" : pharmacyId + ' , ' + pharmacy}
+                                label={"Аптека"}
                                 variant="outlined"
                             />}
                     />
@@ -165,8 +141,7 @@ const EmployeeAddOrEdit = (props) => {
                 <div className={classes.buttons}>
                     <Controls.Button
                         type="submit"
-                        text="Добавить/Обновить"
-                        disabled={action === 'see'}
+                        text="Добавить"
                         onClick={handleSubmit}
                     />
                     <Controls.Button
@@ -180,4 +155,4 @@ const EmployeeAddOrEdit = (props) => {
     )
 };
 
-export default EmployeeAddOrEdit;
+export default AddNewEmployee;

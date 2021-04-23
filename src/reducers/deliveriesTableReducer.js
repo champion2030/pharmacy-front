@@ -1,4 +1,5 @@
 import {
+    SET_CURRENT_DELIVER,
     SET_CURRENT_PAGE_DELIVERS,
     SET_DELIVERIES,
     SET_DELIVERIES_FOR_CURRENT_PHARMACY,
@@ -10,7 +11,8 @@ const defaultState = {
     deliversForCurrentPharmacy: [],
     totalCount: 0,
     currentPageDelivers: 1,
-    isFetchingDeliveries: true
+    isFetchingDeliveries: true,
+    currentDeliver: {}
 }
 
 export default function deliveriesReducer(state = defaultState, action) {
@@ -38,6 +40,12 @@ export default function deliveriesReducer(state = defaultState, action) {
                 ...state,
                 isFetchingDeliveries: action.payload
             }
+        case SET_CURRENT_DELIVER:
+            return {
+                ...state,
+                currentDeliver: action.payload,
+                isFetchingDeliveries: false
+            }
         default:
             return state
     }
@@ -47,3 +55,4 @@ export const setDeliveries = (deliveries) => ({type: SET_DELIVERIES, payload: de
 export const setIsFetchingDeliveries = (bool) => ({type: SET_IS_FETCHING_DELIVERIES, payload: bool})
 export const setCurrentPageDelivers = (page) => ({type: SET_CURRENT_PAGE_DELIVERS, payload: page})
 export const setDeliversForCurrentPharmacy = (deliversForCurrentPharmacy) => ({type: SET_DELIVERIES_FOR_CURRENT_PHARMACY, payload: deliversForCurrentPharmacy})
+export const setCurrentDeliver = (currentDeliver) => ({type: SET_CURRENT_DELIVER, payload: currentDeliver})

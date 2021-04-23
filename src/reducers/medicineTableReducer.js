@@ -1,6 +1,6 @@
 import {
     GET_POTENTIAL_DATA_TO_DELETE_BY_MEDICINE,
-    SET_ALL_MEDICINE,
+    SET_ALL_MEDICINE, SET_CURRENT_MEDICINE,
     SET_CURRENT_PAGE_MEDICINE,
     SET_IS_FETCHING_MEDICINE,
     SET_MEDICINE
@@ -14,7 +14,8 @@ const defaultState = {
     isFetchingMedicine: true,
     potentialDataToDeleteByMedicine: {
         deliveries: 0
-    }
+    },
+    currentMedicine: {}
 }
 
 export default function medicineReducer(state = defaultState, action) {
@@ -46,6 +47,12 @@ export default function medicineReducer(state = defaultState, action) {
                 ...state,
                 potentialDataToDeleteByMedicine: action.payload
             }
+        case SET_CURRENT_MEDICINE:
+            return {
+                ...state,
+                currentMedicine: action.payload,
+                isFetchingMedicine: false
+            }
         default:
             return state
     }
@@ -56,4 +63,5 @@ export const setIsFetchingMedicine = (bool) => ({type: SET_IS_FETCHING_MEDICINE,
 export const setCurrentPageMedicine = (page) => ({type: SET_CURRENT_PAGE_MEDICINE, payload: page})
 export const setAllMedicine = (allMedicines) => ({type: SET_ALL_MEDICINE, payload: allMedicines})
 export const setPotentialDataToDeleteByMedicine = (potentialDataToDeleteByMedicine) => ({type: GET_POTENTIAL_DATA_TO_DELETE_BY_MEDICINE, payload: potentialDataToDeleteByMedicine})
+export const setCurrentMedicine = (currentMedicine) => ({type: SET_CURRENT_MEDICINE, payload: currentMedicine})
 

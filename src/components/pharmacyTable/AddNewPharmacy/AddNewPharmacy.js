@@ -1,17 +1,13 @@
 import React, {useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {Grid, makeStyles, Paper, TextField} from "@material-ui/core";
-import {NavLink, useParams} from "react-router-dom"
-import Controls from "../controls/Controls";
-import {clearMessage} from "../../actions/message";
-import {createNewPharmacy, getCurrentPharmacy, updateCurrentPharmacy} from "../../actions/getPharmacy";
-import {getTypes} from "../../actions/getTypesOfProperty";
-import {getNames} from "../../actions/getPharmacyNames";
-import {getAreas} from "../../actions/getAreas";
+import Controls from "../../controls/Controls";
+import {clearMessage} from "../../../actions/message";
+import {createNewPharmacy} from "../../../actions/getPharmacy";
+import {getTypes} from "../../../actions/getTypesOfProperty";
+import {getNames} from "../../../actions/getPharmacyNames";
+import {getAreas} from "../../../actions/getAreas";
 import {Autocomplete} from "@material-ui/lab";
-import {getDeliversForCurrentPharmacy} from "../../actions/getDeliveries";
-import {DataGrid} from '@material-ui/data-grid';
-import AddIcon from "@material-ui/icons/Add";
 
 const useStyles = makeStyles(theme => ({
     pageContent: {
@@ -39,55 +35,27 @@ const useStyles = makeStyles(theme => ({
     },
 }))
 
-const columns = [
-    {field: 'medicine_name', headerName: 'Название лекарства', width: 250},
-    {field: 'full_name', headerName: 'Сотрудник', width: 250},
-    {field: 'reason_for_return', headerName: 'Причина возврата', width: 350},
-    {field: 'receipt_date', headerName: 'Дата поступления', width: 250},
-    {field: 'number_of_packages', headerName: 'Количество упаковок', width: 190},
-    {field: 'presence_of_defect', headerName: 'Наличие деффекта', width: 170},
-    {field: 'supplier_price', headerName: 'Цена (производитель)', width: 150},
-    {field: 'pharmacy_price', headerName: 'Цена (аптека)', width: 170},
-    {field: 'expiry_start_date', headerName: 'Начало строка годности', width: 250},
-    {field: 'expiration_date', headerName: 'Конец срока годности', width: 250},
-    {field: 'batch_number', headerName: 'Номер партии', width: 150},
-]
-
-const PharmacyAddOrEdit = (props) => {
+const AddNewPharmacy = (props) => {
 
     const dispatch = useDispatch()
     const classes = useStyles();
-    const {id, action} = useParams()
     const [pharmacyNameId, setPharmacyNameId] = useState('')
-    const [pharmacyName, setPharmacyName] = useState('')
     const [areaId, setAreaId] = useState('')
-    const [area, setArea] = useState('')
     const [typeOfPropertyId, setTypeOfPropertyId] = useState('')
-    const [typeOfProperty, setTypeOfProperty] = useState('')
     const [telephone, setTelephone] = useState('')
     const [address, setAddress] = useState('')
     const types = useSelector(state => state.typesOfPropertyReducer.types)
     const names = useSelector(state => state.pharmacyNameReducer.names)
     const areas = useSelector(state => state.areaReducer.areas)
-    const deliversForCurrentPharmacy = useSelector(state => state.deliveriesReducer.deliversForCurrentPharmacy)
     const {message} = useSelector(state => state.message);
     const [successful, setSuccessful] = useState(false);
 
     useEffect(() => {
-        if (Number(id) !== 0) {
-            getCurrentPharmacy(id, setPharmacyNameId, setPharmacyName, setAreaId, setArea, setTypeOfPropertyId, setTypeOfProperty, setTelephone, setAddress)
-        }
-        if (action !== 'see') {
-            dispatch(getTypes())
-            dispatch(getNames())
-            dispatch(getAreas())
-        }
-        if (action === 'see') {
-            dispatch(getDeliversForCurrentPharmacy(id))
-        }
+        dispatch(getTypes())
+        dispatch(getNames())
+        dispatch(getAreas())
         dispatch(clearMessage())
-    }, [dispatch, id, action])
-
+    }, [dispatch])
 
     const onChangeAddress = (e) => {
         const address = e.target.value;
@@ -100,25 +68,14 @@ const PharmacyAddOrEdit = (props) => {
     };
 
     const handleSubmit = () => {
-        if (Number(id) === 0) {
-            dispatch(createNewPharmacy(pharmacyNameId, areaId, typeOfPropertyId, telephone, address))
-                .then(() => {
-                    setSuccessful(true);
-                    props.history.goBack()
-                })
-                .catch(() => {
-                    setSuccessful(false);
-                });
-        } else {
-            dispatch(updateCurrentPharmacy(pharmacyNameId, areaId, typeOfPropertyId, telephone, address, id))
-                .then(() => {
-                    setSuccessful(true);
-                    props.history.goBack()
-                })
-                .catch(() => {
-                    setSuccessful(false);
-                });
-        }
+        dispatch(createNewPharmacy(pharmacyNameId, areaId, typeOfPropertyId, telephone, address))
+            .then(() => {
+                setSuccessful(true);
+                props.history.goBack()
+            })
+            .catch(() => {
+                setSuccessful(false);
+            });
     };
 
     return (
@@ -131,7 +88,6 @@ const PharmacyAddOrEdit = (props) => {
                         value={address || ""}
                         onChange={e => onChangeAddress(e)}
                         helperText="Адресс"
-                        disabled={action === 'see'}
                     />
                 </Grid>
                 <Grid item xs={3}>
@@ -141,7 +97,6 @@ const PharmacyAddOrEdit = (props) => {
                         value={telephone || ""}
                         onChange={e => onChangeTelephone(e)}
                         helperText="Телефон"
-                        disabled={action === 'see'}
                     />
                 </Grid>
                 <Grid item xs={3}>
@@ -149,17 +104,15 @@ const PharmacyAddOrEdit = (props) => {
                         id="combo-box-demo1"
                         options={names}
                         disableClearable
-                        disabled={action === 'see'}
                         getOptionLabel={(option) => option.name}
                         style={{width: 300, marginBottom: 20}}
                         onChange={(event, newValue) => {
                             setPharmacyNameId(newValue.id)
-                            setPharmacyName(newValue.name)
                         }}
                         renderInput={(params) =>
                             <TextField
                                 {...params}
-                                label={action === 'addNew' ? "Название аптеки" : pharmacyName}
+                                label={"Название аптеки"}
                                 variant="outlined"
                             />}
                     />
@@ -169,17 +122,15 @@ const PharmacyAddOrEdit = (props) => {
                         id="combo-box-demo2"
                         options={areas}
                         disableClearable
-                        disabled={action === 'see'}
                         getOptionLabel={(option) => option.name_of_area}
                         style={{width: 300, marginBottom: 20}}
                         onChange={(event, newValue) => {
                             setAreaId(newValue.id)
-                            setArea(newValue.name_of_area)
                         }}
                         renderInput={(params) =>
                             <TextField
                                 {...params}
-                                label={action === 'addNew' ? "Район" : area}
+                                label={"Район"}
                                 variant="outlined"
                             />}
                     />
@@ -189,17 +140,15 @@ const PharmacyAddOrEdit = (props) => {
                         id="combo-box-demo3"
                         options={types}
                         disableClearable
-                        disabled={action === 'see'}
                         getOptionLabel={(option) => option.name_of_property}
                         style={{width: 300, marginBottom: 20}}
                         onChange={(event, newValue) => {
                             setTypeOfPropertyId(newValue.id)
-                            setTypeOfProperty(newValue.name_of_property)
                         }}
                         renderInput={(params) =>
                             <TextField
                                 {...params}
-                                label={action === 'addNew' ? "Тип собственности" : typeOfProperty}
+                                label={"Тип собственности"}
                                 variant="outlined"
                             />}
                     />
@@ -216,8 +165,7 @@ const PharmacyAddOrEdit = (props) => {
                 <div className={classes.buttons}>
                     <Controls.Button
                         type="submit"
-                        text="Добавить/Обновить"
-                        disabled={action === 'see'}
+                        text="Добавить"
                         onClick={handleSubmit}
                     />
                     <Controls.Button
@@ -227,36 +175,9 @@ const PharmacyAddOrEdit = (props) => {
                     />
                 </div>
             </Grid>
-            {
-
-
-                action === 'see'
-                    ?
-                    <div>
-                        <Grid container align="center" justify="center" alignItems="center">
-                            <NavLink to={`/newDeliverForCurrentPharmacy/${id}`}>
-                                <Controls.Button
-                                    text="Добавить новую"
-                                    variant="outlined"
-                                    startIcon={<AddIcon/>}
-                                />
-                            </NavLink>
-                        </Grid>
-
-                        <DataGrid
-                            rows={deliversForCurrentPharmacy}
-                            columns={columns}
-                            pageSize={5}
-                            autoHeight={true}
-                            disableSelectionOnClick={true}
-                            rowsPerPageOptions={[5, 10, 50]}/>
-                    </div>
-                    :
-                    null
-            }
         </Paper>
 
     )
 }
 
-export default PharmacyAddOrEdit;
+export default AddNewPharmacy;

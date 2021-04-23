@@ -2,6 +2,7 @@ import {IconButton, lighten, makeStyles, Toolbar, Tooltip, Typography} from "@ma
 import DeleteIcon from '@material-ui/icons/Delete';
 import FilterListIcon from '@material-ui/icons/FilterList';
 import clsx from "clsx";
+import CancelIcon from '@material-ui/icons/Cancel';
 
 const useToolbarStyles = makeStyles((theme) => ({
     root: {
@@ -22,11 +23,17 @@ const useToolbarStyles = makeStyles((theme) => ({
     title: {
         flex: '1 1 100%',
     },
+    icons: {
+        display: 'none',
+        [theme.breakpoints.up('md')]: {
+            display: 'flex',
+        },
+    }
 }));
 
 const CommonTableToolbar = (props) => {
     const classes = useToolbarStyles();
-    const { numSelected, tableName } = props;
+    const {numSelected, tableName} = props;
 
     return (
         <Toolbar
@@ -44,19 +51,26 @@ const CommonTableToolbar = (props) => {
                 </Typography>
             )}
 
-            {numSelected > 0 ? (
-                <Tooltip title="Delete">
-                    <IconButton aria-label="delete">
-                        <DeleteIcon />
-                    </IconButton>
-                </Tooltip>
-            ) : (
-                <Tooltip title="Filter list">
-                    <IconButton aria-label="filter list">
-                        <FilterListIcon />
-                    </IconButton>
-                </Tooltip>
-            )}
+            {numSelected > 0 ?
+                <div className={classes.icons}>
+                    <Tooltip title="Cancel">
+                        <IconButton aria-label="cancel">
+                            <CancelIcon/>
+                        </IconButton>
+                    </Tooltip>
+                    <Tooltip title="Delete">
+                        <IconButton aria-label="delete">
+                            <DeleteIcon/>
+                        </IconButton>
+                    </Tooltip>
+                </div>
+                : (
+                    <Tooltip title="Filter list">
+                        <IconButton aria-label="filter list">
+                            <FilterListIcon/>
+                        </IconButton>
+                    </Tooltip>
+                )}
         </Toolbar>
     );
 }

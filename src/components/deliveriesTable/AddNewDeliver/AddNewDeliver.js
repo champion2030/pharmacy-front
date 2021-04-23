@@ -1,16 +1,15 @@
 import React, {useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {Checkbox, Grid, makeStyles, Paper, TextField} from "@material-ui/core";
-import {useParams} from "react-router-dom"
-import Controls from "../controls/Controls";
-import {clearMessage} from "../../actions/message";
-import {getAllEmployees} from "../../actions/getEmployee";
-import {getAllMedicines} from "../../actions/getMedicine";
-import {getReasons} from "../../actions/getReasonsForReturn";
+import Controls from "../../controls/Controls";
+import {clearMessage} from "../../../actions/message";
+import {getAllEmployees} from "../../../actions/getEmployee";
+import {getAllMedicines} from "../../../actions/getMedicine";
+import {getReasons} from "../../../actions/getReasonsForReturn";
 import {MuiPickersUtilsProvider, KeyboardDatePicker} from "@material-ui/pickers";
 import DateFnsUtils from "@date-io/date-fns";
-import {createNewDeliver, getCurrentDeliver, updateCurrentDeliver} from "../../actions/getDeliveries";
-import {SET_MESSAGE} from "../../actions/types";
+import {createNewDeliver} from "../../../actions/getDeliveries";
+import {SET_MESSAGE} from "../../../actions/types";
 import {Autocomplete} from "@material-ui/lab";
 
 const useStyles = makeStyles(theme => ({
@@ -44,15 +43,12 @@ const useStyles = makeStyles(theme => ({
     },
 }))
 
-const DeliveriesAddOrEdit = (props) => {
+const AddNewDeliver = (props) => {
 
     const dispatch = useDispatch()
     const classes = useStyles();
-    const {id, action} = useParams()
     const [medicineId, setMedicineId] = useState('')
-    const [medicineName, setMedicineName] = useState('')
     const [employeeId, setEmployeeId] = useState('')
-    const [employeeFullName, setEmployeeFullName] = useState('')
     const [causeId, setCauseId] = useState(null)
     const [cause, setCause] = useState(null)
     const [receiptDate, setReceiptDate] = useState(new Date())
@@ -62,7 +58,6 @@ const DeliveriesAddOrEdit = (props) => {
     const [pharmacyPrice, setPharmacyPrice] = useState()
     const [expiryStartDate, setExpiryStartDate] = useState(new Date())
     const [expirationDate, setExpirationDate] = useState(new Date())
-    const [batchNumber, setBatchNumber] = useState()
     const reasons = useSelector(state => state.reasonForReturnReducer.reasons)
     const allMedicines = useSelector(state => state.medicineReducer.allMedicines)
     const allEmployees = useSelector(state => state.employeeReducer.allEmployees)
@@ -70,15 +65,11 @@ const DeliveriesAddOrEdit = (props) => {
     const {message} = useSelector(state => state.message);
 
     useEffect(() => {
-        if (Number(id) !== 0) {
-            getCurrentDeliver(id, setMedicineId, setMedicineName, setEmployeeId, setEmployeeFullName, setCauseId, setCause, setReceiptDate, setNumberOfPackages, setPresentOfDefect, setSupplierPrice, setPharmacyPrice, setExpiryStartDate, setExpirationDate, setBatchNumber)
-        } if (action !== 'see') {
-            dispatch(getAllMedicines())
-            dispatch(getAllEmployees())
-            dispatch(getReasons())
-        }
+        dispatch(getAllMedicines())
+        dispatch(getAllEmployees())
+        dispatch(getReasons())
         dispatch(clearMessage())
-    }, [dispatch, id, action])
+    }, [dispatch])
 
     const handleChangeReceiptDate = (date) => {
         setReceiptDate(date)
@@ -115,25 +106,14 @@ const DeliveriesAddOrEdit = (props) => {
             dispatch({type: SET_MESSAGE, payload: "Выберите причину возврата!"})
             setSuccessful(false);
         } else {
-            if (Number(id) === 0) {
-                dispatch(createNewDeliver(medicineId, employeeId, causeId ? causeId : null, receiptDate, numberOfPackages, presentOfDefect, supplierPrice, pharmacyPrice, expiryStartDate, expirationDate))
-                    .then(() => {
-                        setSuccessful(true);
-                        props.history.goBack()
-                    })
-                    .catch(() => {
-                        setSuccessful(false);
-                    });
-            } else {
-                dispatch(updateCurrentDeliver(medicineId, employeeId, causeId ? causeId : null, receiptDate, numberOfPackages, presentOfDefect, supplierPrice, pharmacyPrice, expiryStartDate, expirationDate, id))
-                    .then(() => {
-                        setSuccessful(true);
-                        props.history.goBack()
-                    })
-                    .catch(() => {
-                        setSuccessful(false);
-                    });
-            }
+            dispatch(createNewDeliver(medicineId, employeeId, causeId ? causeId : null, receiptDate, numberOfPackages, presentOfDefect, supplierPrice, pharmacyPrice, expiryStartDate, expirationDate))
+                .then(() => {
+                    setSuccessful(true);
+                    props.history.goBack()
+                })
+                .catch(() => {
+                    setSuccessful(false);
+                });
         }
     }
 
@@ -146,17 +126,15 @@ const DeliveriesAddOrEdit = (props) => {
                             id="combo-box-demo1"
                             options={allMedicines}
                             disableClearable
-                            disabled={action === 'see'}
                             getOptionLabel={(option) => option.medicine_name}
                             style={{width: 300, marginBottom: 20}}
                             onChange={(event, newValue) => {
                                 setMedicineId(newValue.id)
-                                setMedicineName(newValue.medicine_name)
                             }}
                             renderInput={(params) =>
                                 <TextField
                                     {...params}
-                                    label={action === 'addNew' ? "Название лекарства" : medicineName}
+                                    label={"Название лекарства"}
                                     variant="outlined"
                                 />}
                         />
@@ -166,17 +144,15 @@ const DeliveriesAddOrEdit = (props) => {
                             id="combo-box-demo2"
                             options={allEmployees}
                             disableClearable
-                            disabled={action === 'see'}
                             getOptionLabel={(option) => option.full_name}
                             style={{width: 300, marginBottom: 20}}
                             onChange={(event, newValue) => {
-                                    setEmployeeId(newValue.id)
-                                    setEmployeeFullName(newValue.full_name)
+                                setEmployeeId(newValue.id)
                             }}
                             renderInput={(params) =>
                                 <TextField
                                     {...params}
-                                    label={action === 'addNew' ? "Сотрудник" : employeeFullName}
+                                    label={"Сотрудник"}
                                     variant="outlined"
                                 />}
                         />
@@ -186,17 +162,16 @@ const DeliveriesAddOrEdit = (props) => {
                             id="combo-box-demo3"
                             options={reasons}
                             disableClearable
-                            disabled={action === 'see' || !presentOfDefect}
+                            disabled={!presentOfDefect}
                             getOptionLabel={(option) => option.reason_for_return}
                             style={{width: 500, marginBottom: 20}}
                             onChange={(event, newValue) => {
-                                    setCauseId(newValue.id)
-                                    setCause(newValue.reason_for_return)
+                                setCauseId(newValue.id)
                             }}
                             renderInput={(params) =>
                                 <TextField
                                     {...params}
-                                    label={action === 'addNew' || !presentOfDefect ? "Причина возврата" : cause}
+                                    label={!presentOfDefect ? "Причина возврата" : cause}
                                     variant="outlined"
                                 />}
                         />
@@ -213,7 +188,6 @@ const DeliveriesAddOrEdit = (props) => {
                             KeyboardButtonProps={{
                                 'aria-label': 'change date',
                             }}
-                            disabled={action === 'see'}
                         />
                     </Grid>
                     <Grid item xs={3}>
@@ -224,7 +198,6 @@ const DeliveriesAddOrEdit = (props) => {
                             value={numberOfPackages || ""}
                             onChange={e => onChangeNumberOfPackages(e)}
                             helperText="Количество упаковок"
-                            disabled={action === 'see'}
                         />
                     </Grid>
                     <Grid item xs={3}>
@@ -233,7 +206,6 @@ const DeliveriesAddOrEdit = (props) => {
                             label="Наличие деффекта"
                             onChange={handleChangePresentOfDefect}
                             inputProps={{'aria-label': 'primary checkbox'}}
-                            disabled={action === 'see'}
                         />
                     </Grid>
                     <Grid item xs={3}>
@@ -244,7 +216,6 @@ const DeliveriesAddOrEdit = (props) => {
                             value={supplierPrice || ""}
                             onChange={e => onChangeSupplierPrice(e)}
                             helperText="Цена упаковки(производитель)"
-                            disabled={action === 'see'}
                         />
                     </Grid>
                     <Grid item xs={3}>
@@ -255,7 +226,6 @@ const DeliveriesAddOrEdit = (props) => {
                             value={pharmacyPrice || ""}
                             onChange={e => onChangePharmacyPrice(e)}
                             helperText="Цена упаковки(аптека)"
-                            disabled={action === 'see'}
                         />
                     </Grid>
                     <Grid item xs={3}>
@@ -270,7 +240,6 @@ const DeliveriesAddOrEdit = (props) => {
                             KeyboardButtonProps={{
                                 'aria-label': 'change date',
                             }}
-                            disabled={action === 'see'}
                         />
                     </Grid>
                     <Grid item xs={3}>
@@ -285,22 +254,8 @@ const DeliveriesAddOrEdit = (props) => {
                             KeyboardButtonProps={{
                                 'aria-label': 'change date',
                             }}
-                            disabled={action === 'see'}
                         />
                     </Grid>
-                    {action === 'see' ?
-                        <Grid item xs={3}>
-                            <TextField
-                                variant="outlined"
-                                name="batchNumber"
-                                value={batchNumber || ""}
-                                helperText="Номер партии"
-                                disabled
-                            />
-                        </Grid>
-                        :
-                        null
-                    }
                 </Grid>
             </MuiPickersUtilsProvider>
             {!successful && message && (
@@ -314,8 +269,7 @@ const DeliveriesAddOrEdit = (props) => {
                 <div className={classes.buttons}>
                     <Controls.Button
                         type="submit"
-                        text="Добавить/Обновить"
-                        disabled={action === 'see'}
+                        text="Добавить"
                         onClick={handleSubmit}
                     />
                     <Controls.Button
@@ -327,6 +281,6 @@ const DeliveriesAddOrEdit = (props) => {
             </Grid>
         </Paper>
     )
-};
+}
 
-export default DeliveriesAddOrEdit;
+export default AddNewDeliver;

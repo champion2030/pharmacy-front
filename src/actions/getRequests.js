@@ -20,7 +20,6 @@ export const getMedicineByPharmacy = (pharmacy_id) => (dispatch) => {
         },
         (error) => {
             const message = error.response.data.error
-            console.log(message)
             dispatch({
                 type: SET_MESSAGE,
                 payload: message,

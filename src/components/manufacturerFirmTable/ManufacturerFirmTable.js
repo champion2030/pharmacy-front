@@ -63,7 +63,7 @@ const ManufacturerFirmTable = () => {
     let totalCount = useSelector(state => state.manufacturerFirmReducer.totalCount)
     const [value, setValue] = useState('')
     const [rowsPerPage, setRowsPerPage] = useState(5);
-    const [selected, setSelected] = React.useState([]);
+    const [selected, setSelected] = useState([]);
     const [confirmDialog, setConfirmDialog] = useState({isOpen: false, title: '', subTitle: ''})
     const [notify, setNotify] = useState({isOpen: false, message: '', type: ''})
     const isFetchingFirm = useSelector(state => state.manufacturerFirmReducer.isFetchingFirm)
@@ -160,7 +160,7 @@ const ManufacturerFirmTable = () => {
                             )
                         }}
                     />
-                    <NavLink to={`/currentFirm/${0}/addNew`}>
+                    <NavLink to={`/addNewFirm`}>
                         <Controls.Button
                             text="Добавить новую"
                             variant="outlined"
