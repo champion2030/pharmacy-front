@@ -1,6 +1,11 @@
 import {
+    SET_CURRENT_PAGE_DATE_FIRST_REQUEST, SET_CURRENT_PAGE_DATE_SECOND_REQUEST,
     SET_CURRENT_PAGE_SECOND_REQUEST,
     SET_CURRENT_PAGE_THIRD_REQUEST,
+    SET_DATE_FIRST_REQUEST,
+    SET_DATE_SECOND_REQUEST,
+    SET_IS_FETCHING_DATE_FIRST_REQUEST,
+    SET_IS_FETCHING_DATE_SECOND_REQUEST,
     SET_IS_FETCHING_REQUEST,
     SET_MEDICINE_BY_PHARMACY,
     SET_MEDICINE_BY_TOWN,
@@ -22,7 +27,17 @@ const defaultState = {
     thirdRequest: [],
     currentPageThirdRequest: 1,
     totalCountThirdRequest: 0,
-    isFetchingRequest: true
+    isFetchingRequest: true,
+
+    dateFirstRequest: [],
+    currentPageDateFirstRequest: 1,
+    totalCountDateFirstRequest: 0,
+    isFetchingDateFirstRequest: true,
+
+    dateSecondRequest: [],
+    currentPageDateSecondRequest: 1,
+    totalCountDateSecondRequest: 0,
+    isFetchingDateSecondRequest: true,
 
 }
 
@@ -71,6 +86,40 @@ export default function requestsReducer(state = defaultState, action) {
                 ...state,
                 isFetchingRequest: action.payload
             }
+        case SET_DATE_FIRST_REQUEST:
+            return {
+                ...state,
+                dateFirstRequest: action.payload.requestResult,
+                totalCountDateFirstRequest: action.payload.totalCount,
+                isFetchingDateFirstRequest: false
+            }
+        case SET_IS_FETCHING_DATE_FIRST_REQUEST:
+            return {
+                ...state,
+                isFetchingDateFirstRequest: action.payload
+            }
+        case SET_CURRENT_PAGE_DATE_FIRST_REQUEST:
+            return {
+                ...state,
+                currentPageDateFirstRequest: action.payload
+            }
+        case SET_DATE_SECOND_REQUEST:
+            return {
+                ...state,
+                dateSecondRequest: action.payload.requestResult,
+                totalCountDateSecondRequest: action.payload.totalCount,
+                isFetchingDateSecondRequest: false
+            }
+        case SET_IS_FETCHING_DATE_SECOND_REQUEST:
+            return {
+                ...state,
+                isFetchingDateSecondRequest: action.payload
+            }
+        case SET_CURRENT_PAGE_DATE_SECOND_REQUEST:
+            return {
+                ...state,
+                currentPageDateSecondRequest: action.payload
+            }
         default:
             return state
     }
@@ -84,3 +133,11 @@ export const setCurrentPageSecondRequest = (currentPageSecondRequest) => ({type:
 export const setThirdRequest = (thirdRequest) => ({type: SET_THIRD_REQUEST, payload: thirdRequest})
 export const setCurrentPageThirdRequest = (currentPageThirdRequest) => ({type: SET_CURRENT_PAGE_THIRD_REQUEST, payload: currentPageThirdRequest})
 export const setIsFetchingRequest = (bool) => ({type: SET_IS_FETCHING_REQUEST, payload: bool})
+
+export const setDateFirstRequest = (dateFirstRequest) => ({type: SET_DATE_FIRST_REQUEST, payload: dateFirstRequest})
+export const setIsFetchingDateFirstRequest = (bool) => ({type: SET_IS_FETCHING_DATE_FIRST_REQUEST, payload: bool})
+export const setCurrentPageDateFirstRequest = (currentPageDateFirstRequest) => ({type: SET_CURRENT_PAGE_DATE_FIRST_REQUEST, payload: currentPageDateFirstRequest})
+
+export const setDateSecondRequest = (dateSecondRequest) => ({type: SET_DATE_SECOND_REQUEST, payload: dateSecondRequest})
+export const setIsFetchingDateSecondRequest = (bool) => ({type: SET_IS_FETCHING_DATE_SECOND_REQUEST, payload: bool})
+export const setCurrentPageDateSecondRequest = (currentPageDateSecondRequest) => ({type: SET_CURRENT_PAGE_DATE_SECOND_REQUEST, payload: currentPageDateSecondRequest})

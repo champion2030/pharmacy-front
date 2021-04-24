@@ -133,6 +133,7 @@ const ManufactureFirmViewOrEdit = (props) => {
                                                 {...params}
                                                 label={countryOfManufacture}
                                                 variant="outlined"
+                                                helperText="Страна производитель"
                                             />}
                                     />
                                 </Grid>
@@ -169,6 +170,7 @@ const ManufactureFirmViewOrEdit = (props) => {
                                 <Grid item xs={8}>
                                     <KeyboardDatePicker
                                         disableToolbar
+                                        helperText="Год открытия"
                                         variant="inline"
                                         format="dd/MM/yyyy"
                                         margin="normal"

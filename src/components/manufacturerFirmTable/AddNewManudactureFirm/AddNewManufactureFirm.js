@@ -141,6 +141,7 @@ const AddNewManufactureFirm = (props) => {
                         <KeyboardDatePicker
                             disableToolbar
                             variant="inline"
+                            helperText="Год открытия"
                             format="dd/MM/yyyy"
                             margin="normal"
                             id="date-picker-inline"

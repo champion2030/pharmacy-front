@@ -118,3 +118,16 @@ export const getDeleteEmployeeInfo = (id) => async (dispatch) => {
     const info = await axios.get(API_URL + `deleteEmployeeInfo/${id}`);
     dispatch(setPotentialDataToDeleteByEmployee(info.data))
 }
+
+export const deleteGroupOfEmployee = (employeeId, searchQuery, currentPage, perPage) => async (dispatch) => {
+    dispatch(setIsFetchingEmployee(true))
+    await axios.delete(API_URL + `deleteGroupOfEmployee`, {data: {employeeId: employeeId}})
+    const employees = await axios.get(API_URL + `getEmployee?searchQuery=${searchQuery}&page=${currentPage}&limit=${perPage}`);
+    if (currentPage > employees.data.totalPages && employees.data.totalPages !== 0){
+        dispatch(setCurrentPageEmployee(employees.data.totalPages))
+    }
+    else if (employees.data.totalPages === 0){
+        dispatch(setCurrentPageEmployee(1))
+    }
+    dispatch(setEmployees(employees.data))
+}

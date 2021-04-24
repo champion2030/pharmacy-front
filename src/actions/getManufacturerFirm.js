@@ -27,10 +27,9 @@ export const deleteFirm = (id, searchQuery, currentPage, perPage) => async (disp
     dispatch(setIsFetchingFirm(true))
     await axios.delete(API_URL + `deleteManufacturerFirm/${id}`)
     const firms = await axios.get(API_URL + `getManufacturerFirm?searchQuery=${searchQuery}&page=${currentPage}&limit=${perPage}`);
-    if (currentPage > firms.data.totalPages && firms.data.totalPages !== 0){
+    if (currentPage > firms.data.totalPages && firms.data.totalPages !== 0) {
         dispatch(setCurrentPageFirm(firms.data.totalPages))
-    }
-    else if (firms.data.totalPages === 0){
+    } else if (firms.data.totalPages === 0) {
         dispatch(setCurrentPageFirm(1))
     }
     dispatch(setFirms(firms.data))
@@ -108,4 +107,16 @@ export const createNewFirm = (country_of_manufacture_id, firm_name, email, addre
 export const getDeleteFirmInfo = (id) => async (dispatch) => {
     const info = await axios.get(API_URL + `deleteManufacturerFirmInfo/${id}`);
     dispatch(setPotentialDataToDeleteByFirm(info.data))
+}
+
+export const deleteGroupOfFirms = (firmsId, searchQuery, currentPage, perPage) => async (dispatch) => {
+    dispatch(setIsFetchingFirm(true))
+    await axios.delete(API_URL + `deleteGroupOfFirms`, {data: {firmsId: firmsId}})
+    const firms = await axios.get(API_URL + `getManufacturerFirm?searchQuery=${searchQuery}&page=${currentPage}&limit=${perPage}`);
+    if (currentPage > firms.data.totalPages && firms.data.totalPages !== 0) {
+        dispatch(setCurrentPageFirm(firms.data.totalPages))
+    } else if (firms.data.totalPages === 0) {
+        dispatch(setCurrentPageFirm(1))
+    }
+    dispatch(setFirms(firms.data))
 }

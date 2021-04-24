@@ -10,9 +10,9 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e0de64aa-80a1-43a0-bc39-5202a49cf082" name="Default Changelist" comment="adding a delivery in a complex form is done">
-      <change afterPath="$PROJECT_DIR$/src/components/manufacturerFirmTable/ManufactureFirmViewOrEdit/ManufactureFirmViewOrEdit.js" afterDir="false" />
+    <list default="true" id="e0de64aa-80a1-43a0-bc39-5202a49cf082" name="Default Changelist" comment="Updating and Adding make from redux">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/debug.log" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/actions/getDeliveries.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/actions/getDeliveries.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/actions/getEmployee.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/actions/getEmployee.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/actions/getManufacturerFirm.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/actions/getManufacturerFirm.js" afterDir="false" />
@@ -20,24 +20,24 @@
       <change beforePath="$PROJECT_DIR$/src/actions/getPharmacy.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/actions/getPharmacy.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/actions/getRequests.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/actions/getRequests.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/actions/types.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/actions/types.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/AppBarPharmacy/AppBarPharmacy.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/AppBarPharmacy/AppBarPharmacy.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/Content/Content.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Content/Content.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/commonComponents/CommonToolBar.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/commonComponents/CommonToolBar.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/commonComponents/LoadingAnimation.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/commonComponents/LoadingAnimation.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/deliveriesTable/DeliveriesAddOrEdit.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/deliveriesTable/DeliveriesViewOrEdit/DeliveriesViewOrEdit.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/deliveriesTable/AddNewDeliver/AddNewDeliver.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/deliveriesTable/AddNewDeliver/AddNewDeliver.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/deliveriesTable/DeliveriesTable.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/deliveriesTable/DeliveriesTable.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/employeeTable/EmployeeAddOrEdit.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/employeeTable/EmployeeViewOrEdit/EmployeeViewOrEdit.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/deliveriesTable/DeliveriesViewOrEdit/DeliveriesViewOrEdit.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/deliveriesTable/DeliveriesViewOrEdit/DeliveriesViewOrEdit.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/employeeTable/EmployeeTable.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/employeeTable/EmployeeTable.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/manufacturerFirmTable/ManufactureFirmAddOrEdit.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/employeeTable/EmployeeViewOrEdit/EmployeeViewOrEdit.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/employeeTable/EmployeeViewOrEdit/EmployeeViewOrEdit.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/manufacturerFirmTable/AddNewManudactureFirm/AddNewManufactureFirm.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/manufacturerFirmTable/AddNewManudactureFirm/AddNewManufactureFirm.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/manufacturerFirmTable/ManufactureFirmViewOrEdit/ManufactureFirmViewOrEdit.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/manufacturerFirmTable/ManufactureFirmViewOrEdit/ManufactureFirmViewOrEdit.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/manufacturerFirmTable/ManufacturerFirmTable.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/manufacturerFirmTable/ManufacturerFirmTable.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/medicineTable/MedicineAddOrEdit.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/medicineTable/MedicineViewOrEdit/MedicineViewOrEdit.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/medicineTable/MedicineTable.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/medicineTable/MedicineTable.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/pharmacyTable/PharmacyAddOrEdit.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/pharmacyTable/PharmacyViewOrEdit/PharmacyViewOrEdit.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/medicineTable/MedicineViewOrEdit/MedicineViewOrEdit.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/medicineTable/MedicineViewOrEdit/MedicineViewOrEdit.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/pharmacyTable/AddNewPharmacy/AddNewPharmacy.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/pharmacyTable/AddNewPharmacy/AddNewPharmacy.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/pharmacyTable/PharmacyTable.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/pharmacyTable/PharmacyTable.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/reducers/deliveriesTableReducer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/reducers/deliveriesTableReducer.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/reducers/employeeTableReducer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/reducers/employeeTableReducer.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/reducers/manufacturerFirmTableReducer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/reducers/manufacturerFirmTableReducer.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/reducers/medicineTableReducer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/reducers/medicineTableReducer.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/reducers/pharmacyTableReducer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/reducers/pharmacyTableReducer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/pharmacyTable/PharmacyViewOrEdit/PharmacyViewOrEdit.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/pharmacyTable/PharmacyViewOrEdit/PharmacyViewOrEdit.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/requestsTables/firstRequest/FirstRequestTable.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/requestsTables/firstRequest/FirstRequestTable.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/reducers/requestTableReducer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/reducers/requestTableReducer.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -76,7 +76,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/components/requestsTables/dateRequests" />
     <property name="list.type.of.created.stylesheet" value="SCSS" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.standard" value="true" />
@@ -92,11 +92,11 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\Универ\Второй курс\Четвёртый семестр\БД\pharmacy-front\src\components\requestsTables\dateRequests" />
+      <recent name="D:\Универ\Второй курс\Четвёртый семестр\БД\pharmacy-front\src\components\commonComponents" />
       <recent name="D:\Универ\Второй курс\Четвёртый семестр\БД\pharmacy-front\src\components\deliveriesTable" />
       <recent name="D:\Универ\Второй курс\Четвёртый семестр\БД\pharmacy-front\src\components\employeeTable" />
       <recent name="D:\Универ\Второй курс\Четвёртый семестр\БД\pharmacy-front\src\components\pharmacyTable" />
-      <recent name="D:\Универ\Второй курс\Четвёртый семестр\БД\pharmacy-front\src\components\medicineTable" />
-      <recent name="D:\Универ\Второй курс\Четвёртый семестр\БД\pharmacy-front\src\components\manufacturerFirmTable" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\Универ\Второй курс\Четвёртый семестр\БД\pharmacy-front\src\components\pharmacyTable\PharmacyViewOrEdit" />
@@ -196,7 +196,9 @@
       <workItem from="1619032669819" duration="264000" />
       <workItem from="1619036692016" duration="721000" />
       <workItem from="1619115825478" duration="6913000" />
-      <workItem from="1619168044653" duration="19771000" />
+      <workItem from="1619168044653" duration="19962000" />
+      <workItem from="1619193082890" duration="10437000" />
+      <workItem from="1619260303919" duration="15405000" />
     </task>
     <task id="LOCAL-00001" summary="User Registration and Login">
       <created>1614707057660</created>
@@ -457,7 +459,14 @@
       <option name="project" value="LOCAL" />
       <updated>1618954440052</updated>
     </task>
-    <option name="localTasksCounter" value="38" />
+    <task id="LOCAL-00038" summary="Updating and Adding make from redux">
+      <created>1619189242877</created>
+      <option name="number" value="00038" />
+      <option name="presentableId" value="LOCAL-00038" />
+      <option name="project" value="LOCAL" />
+      <updated>1619189242877</updated>
+    </task>
+    <option name="localTasksCounter" value="39" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -504,6 +513,7 @@
     <MESSAGE value="Loading animation done" />
     <MESSAGE value="ProtectedRoutes done" />
     <MESSAGE value="adding a delivery in a complex form is done" />
-    <option name="LAST_COMMIT_MESSAGE" value="adding a delivery in a complex form is done" />
+    <MESSAGE value="Updating and Adding make from redux" />
+    <option name="LAST_COMMIT_MESSAGE" value="Updating and Adding make from redux" />
   </component>
 </project>

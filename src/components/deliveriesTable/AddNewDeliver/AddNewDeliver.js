@@ -182,6 +182,7 @@ const AddNewDeliver = (props) => {
                             variant="inline"
                             format="dd/MM/yyyy"
                             margin="normal"
+                            helperText="Дата поступления в аптеку"
                             id="date-picker-inline1"
                             value={receiptDate}
                             onChange={handleChangeReceiptDate}
@@ -233,6 +234,7 @@ const AddNewDeliver = (props) => {
                             disableToolbar
                             variant="inline"
                             format="dd/MM/yyyy"
+                            helperText="Начало срока годности"
                             margin="normal"
                             id="date-picker-inline2"
                             value={expiryStartDate}
@@ -248,6 +250,7 @@ const AddNewDeliver = (props) => {
                             variant="inline"
                             format="dd/MM/yyyy"
                             margin="normal"
+                            helperText="Конец срока годности"
                             id="date-picker-inline3"
                             value={expirationDate}
                             onChange={handleChangeExpirationDate}

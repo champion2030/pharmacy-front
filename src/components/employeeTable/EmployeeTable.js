@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
-import {Checkbox, InputAdornment, makeStyles, Paper, Table, TableBody, TableCell, TableRow, TextField, Toolbar} from "@material-ui/core";
+import {Checkbox, IconButton, InputAdornment, lighten, makeStyles, Paper, Table, TableBody, TableCell, TableRow, TextField, Toolbar, Tooltip, Typography} from "@material-ui/core";
 import Controls from "../controls/Controls";
 import EditOutlinedIcon from "@material-ui/icons/EditOutlined";
 import CloseIcon from "@material-ui/icons/Close";
@@ -10,12 +10,16 @@ import {Search} from "@material-ui/icons";
 import AddIcon from "@material-ui/icons/Add";
 import Notification from "../commonComponents/Notification";
 import EmployeeTableHead from "./EmployeeTableHead";
-import {deleteEmployee, getDeleteEmployeeInfo, getEmployees} from "../../actions/getEmployee";
+import {deleteEmployee, deleteGroupOfEmployee, getDeleteEmployeeInfo, getEmployees} from "../../actions/getEmployee";
 import {NavLink} from "react-router-dom";
 import VisibilityIcon from "@material-ui/icons/Visibility";
-import CommonTableToolbar from "../commonComponents/CommonToolBar";
 import ConfirmDeleteDialogEmployee from "./ConfirmDeleteDialogEmployee";
 import '../commonComponents/LoadingAnimation.css'
+import clsx from "clsx";
+import CancelIcon from "@material-ui/icons/Cancel";
+import DeleteIcon from "@material-ui/icons/Delete";
+import FilterListIcon from "@material-ui/icons/FilterList";
+import ConfirmDeleteDialogCommon from "../commonComponents/ConfirmDeleteDialogCommon";
 
 const useStyles = makeStyles(theme => ({
     pageContent: {
@@ -50,6 +54,30 @@ const useStyles = makeStyles(theme => ({
             width: '100%',
             margin: theme.spacing(1)
         }
+    },
+    root1: {
+        paddingLeft: theme.spacing(2),
+        paddingRight: theme.spacing(1),
+        marginBottom: theme.spacing(2)
+    },
+    highlight:
+        theme.palette.type === 'light'
+            ? {
+                color: theme.palette.secondary.main,
+                backgroundColor: lighten(theme.palette.secondary.light, 0.1),
+            }
+            : {
+                color: theme.palette.text.primary,
+                backgroundColor: theme.palette.secondary.dark,
+            },
+    title: {
+        flex: '1 1 100%',
+    },
+    icons: {
+        display: 'none',
+        [theme.breakpoints.up('md')]: {
+            display: 'flex',
+        },
     }
 }))
 
@@ -64,6 +92,7 @@ const EmployeeTable = () => {
     const [selected, setSelected] = React.useState([]);
     const [rowsPerPage, setRowsPerPage] = useState(5);
     const [confirmDialog, setConfirmDialog] = useState({isOpen: false, title: '', subTitle: ''})
+    const [confirmDialogCommon, setConfirmDialogCommon] = useState({isOpen: false, title: '', subTitle: ''})
     const [notify, setNotify] = useState({isOpen: false, message: '', type: ''})
     const isFetchingEmployee = useSelector(state => state.employeeReducer.isFetchingEmployee)
 
@@ -78,6 +107,20 @@ const EmployeeTable = () => {
             setSelected(newSelected)
         }
         dispatch(deleteEmployee(id, value, currentPageEmployee, rowsPerPage))
+        setNotify({
+            isOpen: true,
+            message: 'Удалено успешно',
+            type: 'error'
+        })
+    }
+
+    const onDeleteGroupOfEmployee = () => {
+        setConfirmDialogCommon({
+            ...confirmDialogCommon,
+            isOpen: false
+        })
+        dispatch(deleteGroupOfEmployee(selected, value, currentPageEmployee, rowsPerPage))
+        setSelected([])
         setNotify({
             isOpen: true,
             message: 'Удалено успешно',
@@ -143,7 +186,59 @@ const EmployeeTable = () => {
     return (
         <div>
             <Paper className={classes.pageContent}>
-                <CommonTableToolbar numSelected={selected.length} tableName={'Сотрудники'}/>
+                <Toolbar
+                    className={clsx(classes.root1, {
+                        [classes.highlight]: selected.length > 0,
+                    })}
+                >
+                    {selected.length > 0 ? (
+                        <Typography className={classes.title} color="inherit" variant="subtitle1" component="div">
+                            {selected.length} selected
+                        </Typography>
+                    ) : (
+                        <Typography className={classes.title} variant="h6" id="tableTitle" component="div">
+                            Сотрудники
+                        </Typography>
+                    )}
+
+                    {selected.length > 0 ?
+                        <div className={classes.icons}>
+                            <Tooltip title="Cancel">
+                                <IconButton
+                                    aria-label="cancel"
+                                    onClick={() => {
+                                        setSelected([])
+                                    }}
+                                >
+                                    <CancelIcon/>
+                                </IconButton>
+                            </Tooltip>
+                            <Tooltip title="Delete">
+                                <IconButton
+                                    aria-label="delete"
+                                    onClick={() => {
+                                        setConfirmDialogCommon({
+                                            isOpen: true,
+                                            title: 'Вы уверены что хотите удалить эти записи?',
+                                            subTitle: "Вы не сможете отменить это действие",
+                                            onConfirm: () => {
+                                                onDeleteGroupOfEmployee()
+                                            }
+                                        })
+                                    }}
+                                >
+                                    <DeleteIcon/>
+                                </IconButton>
+                            </Tooltip>
+                        </div>
+                        : (
+                            <Tooltip title="Filter list">
+                                <IconButton aria-label="filter list">
+                                    <FilterListIcon/>
+                                </IconButton>
+                            </Tooltip>
+                        )}
+                </Toolbar>
                 <Toolbar>
                     <TextField
                         variant="outlined"
@@ -257,6 +352,10 @@ const EmployeeTable = () => {
             <ConfirmDeleteDialogEmployee
                 confirmDialog={confirmDialog}
                 setConfirmDialog={setConfirmDialog}
+            />
+            <ConfirmDeleteDialogCommon
+                confirmDialog={confirmDialogCommon}
+                setConfirmDialog={setConfirmDialogCommon}
             />
         </div>
     )

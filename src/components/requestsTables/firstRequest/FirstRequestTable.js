@@ -55,7 +55,6 @@ const FirstRequestTable = () => {
 
     useEffect(() => {
         dispatch(getAllPharmacies())
-
     }, [dispatch])
 
     function getFirstPartRequest() {

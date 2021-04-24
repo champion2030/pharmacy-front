@@ -154,6 +154,7 @@ const EmployeeViewOrEdit = (props) => {
                                             {...params}
                                             label={pharmacyId + ' , ' + pharmacy}
                                             variant="outlined"
+                                            helperText="Аптека"
                                         />}
                                 />
                             </Grid>

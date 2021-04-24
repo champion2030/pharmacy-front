@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
-import {Checkbox, InputAdornment, makeStyles, Paper, Table, TableBody, TableCell, TableRow, TextField, Toolbar} from "@material-ui/core";
+import {Checkbox, IconButton, InputAdornment, lighten, makeStyles, Paper, Table, TableBody, TableCell, TableRow, TextField, Toolbar, Tooltip, Typography} from "@material-ui/core";
 import Controls from "../controls/Controls";
 import EditOutlinedIcon from "@material-ui/icons/EditOutlined";
 import CloseIcon from "@material-ui/icons/Close";
@@ -9,14 +9,18 @@ import {setCurrentPageFirm} from "../../reducers/manufacturerFirmTableReducer";
 import {Search} from "@material-ui/icons";
 import AddIcon from "@material-ui/icons/Add";
 import ManufacturerFirmTableHead from "./ManufacturerFirmTableHead";
-import {deleteFirm, getDeleteFirmInfo, getFirms} from "../../actions/getManufacturerFirm";
+import {deleteFirm, deleteGroupOfFirms, getDeleteFirmInfo, getFirms} from "../../actions/getManufacturerFirm";
 import Notification from "../commonComponents/Notification";
 import {NavLink} from "react-router-dom";
 import VisibilityIcon from '@material-ui/icons/Visibility';
 import Moment from 'react-moment';
-import CommonTableToolbar from "../commonComponents/CommonToolBar";
 import ConfirmDeleteDialogFirm from "./ConfirmDeleteDialogFirm";
 import '../commonComponents/LoadingAnimation.css'
+import clsx from "clsx";
+import CancelIcon from "@material-ui/icons/Cancel";
+import DeleteIcon from "@material-ui/icons/Delete";
+import FilterListIcon from "@material-ui/icons/FilterList";
+import ConfirmDeleteDialogCommon from "../commonComponents/ConfirmDeleteDialogCommon";
 
 const useStyles = makeStyles(theme => ({
     pageContent: {
@@ -51,6 +55,30 @@ const useStyles = makeStyles(theme => ({
             width: '100%',
             margin: theme.spacing(1)
         }
+    },
+    root1: {
+        paddingLeft: theme.spacing(2),
+        paddingRight: theme.spacing(1),
+        marginBottom: theme.spacing(2)
+    },
+    highlight:
+        theme.palette.type === 'light'
+            ? {
+                color: theme.palette.secondary.main,
+                backgroundColor: lighten(theme.palette.secondary.light, 0.1),
+            }
+            : {
+                color: theme.palette.text.primary,
+                backgroundColor: theme.palette.secondary.dark,
+            },
+    title: {
+        flex: '1 1 100%',
+    },
+    icons: {
+        display: 'none',
+        [theme.breakpoints.up('md')]: {
+            display: 'flex',
+        },
     }
 }))
 
@@ -65,6 +93,7 @@ const ManufacturerFirmTable = () => {
     const [rowsPerPage, setRowsPerPage] = useState(5);
     const [selected, setSelected] = useState([]);
     const [confirmDialog, setConfirmDialog] = useState({isOpen: false, title: '', subTitle: ''})
+    const [confirmDialogCommon, setConfirmDialogCommon] = useState({isOpen: false, title: '', subTitle: ''})
     const [notify, setNotify] = useState({isOpen: false, message: '', type: ''})
     const isFetchingFirm = useSelector(state => state.manufacturerFirmReducer.isFetchingFirm)
 
@@ -111,6 +140,20 @@ const ManufacturerFirmTable = () => {
         })
     }
 
+    const onDeleteGroupOfFirms = () => {
+        setConfirmDialogCommon({
+            ...confirmDialogCommon,
+            isOpen: false
+        })
+        dispatch(deleteGroupOfFirms(selected, value, currentPageFirm, rowsPerPage))
+        setSelected([])
+        setNotify({
+            isOpen: true,
+            message: 'Удалено успешно',
+            type: 'error'
+        })
+    }
+
     const isSelected = (id) => selected.indexOf(id) !== -1;
 
     const handleChangePage = (event, newPage) => {
@@ -144,7 +187,57 @@ const ManufacturerFirmTable = () => {
     return (
         <div>
             <Paper className={classes.pageContent}>
-                <CommonTableToolbar numSelected={selected.length} tableName={'Фирмы производители'}/>
+                <Toolbar
+                    className={clsx(classes.root1, {
+                        [classes.highlight]: selected.length > 0,
+                    })}
+                >
+                    {selected.length > 0 ? (
+                        <Typography className={classes.title} color="inherit" variant="subtitle1" component="div">
+                            {selected.length} selected
+                        </Typography>
+                    ) : (
+                        <Typography className={classes.title} variant="h6" id="tableTitle" component="div">
+                            Фирма производитель
+                        </Typography>
+                    )}
+
+                    {selected.length > 0 ?
+                        <div className={classes.icons}>
+                            <Tooltip title="Cancel">
+                                <IconButton
+                                    aria-label="cancel"
+                                    onClick={() => {setSelected([])}}
+                                >
+                                    <CancelIcon/>
+                                </IconButton>
+                            </Tooltip>
+                            <Tooltip title="Delete">
+                                <IconButton
+                                    aria-label="delete"
+                                    onClick={() => {
+                                        setConfirmDialogCommon({
+                                            isOpen: true,
+                                            title: 'Вы уверены что хотите удалить эти записи?',
+                                            subTitle: "Вы не сможете отменить это действие",
+                                            onConfirm: () => {
+                                                onDeleteGroupOfFirms()
+                                            }
+                                        })
+                                    }}
+                                >
+                                    <DeleteIcon/>
+                                </IconButton>
+                            </Tooltip>
+                        </div>
+                        : (
+                            <Tooltip title="Filter list">
+                                <IconButton aria-label="filter list">
+                                    <FilterListIcon/>
+                                </IconButton>
+                            </Tooltip>
+                        )}
+                </Toolbar>
                 <Toolbar>
                     <TextField
                         variant="outlined"
@@ -262,6 +355,10 @@ const ManufacturerFirmTable = () => {
             <ConfirmDeleteDialogFirm
                 confirmDialog={confirmDialog}
                 setConfirmDialog={setConfirmDialog}
+            />
+            <ConfirmDeleteDialogCommon
+                confirmDialog={confirmDialogCommon}
+                setConfirmDialog={setConfirmDialogCommon}
             />
         </div>
     )

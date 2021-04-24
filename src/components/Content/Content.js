@@ -39,6 +39,7 @@ import AddNewEmployee from "../employeeTable/AddNewEmployee/AddNewEmployee";
 import EmployeeViewOrEdit from "../employeeTable/EmployeeViewOrEdit/EmployeeViewOrEdit";
 import AddNewPharmacy from "../pharmacyTable/AddNewPharmacy/AddNewPharmacy";
 import PharmacyViewOrEdit from "../pharmacyTable/PharmacyViewOrEdit/PharmacyViewOrEdit";
+import DateRequests from "../requestsTables/dateRequests/DateRequests";
 
 const Content = () => {
 
@@ -82,6 +83,7 @@ const Content = () => {
             <ProtectedRoute path="/addNewDeliver" component={AddNewDeliver}/>
             <ProtectedRoute path="/addNewEmployee" component={AddNewEmployee}/>
             <ProtectedRoute path="/addNewPharmacy" component={AddNewPharmacy}/>
+            <ProtectedRoute path="/dateRequests" component={DateRequests}/>
             <Route exact path='/unauthorized' component={Unauthorized} />
             <Redirect to="/login"/>
         </Switch>

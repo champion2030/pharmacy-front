@@ -176,7 +176,6 @@ const AddNewPharmacy = (props) => {
                 </div>
             </Grid>
         </Paper>
-
     )
 }
 

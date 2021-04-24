@@ -1,11 +1,5 @@
 import axios from "axios";
-import {
-    setCurrentDeliver,
-    setCurrentPageDelivers,
-    setDeliveries,
-    setDeliversForCurrentPharmacy,
-    setIsFetchingDeliveries
-} from "../reducers/deliveriesTableReducer";
+import {setCurrentDeliver, setCurrentPageDelivers, setDeliveries, setDeliversForCurrentPharmacy, setIsFetchingDeliveries} from "../reducers/deliveriesTableReducer";
 import {SET_MESSAGE} from "./types";
 
 const API_URL = "http://localhost:8080/api/";
@@ -120,3 +114,15 @@ export const getDeliversForCurrentPharmacy = (id, currentPage, perPage) => {
     }
 }
 
+export const deleteGroupOfDelivers = (deliversId, searchQuery, currentPage, perPage) => async (dispatch) => {
+    dispatch(setIsFetchingDeliveries(true))
+    await axios.delete(API_URL + `deleteGroupOfDelivers`, {data: {deliversId: deliversId}})
+    const deliveries = await axios.get(API_URL + `getDeliveries?searchQuery=${searchQuery}&page=${currentPage}&limit=${perPage}`);
+    if (currentPage > deliveries.data.totalPages && deliveries.data.totalPages !== 0){
+        dispatch(setCurrentPageDelivers(deliveries.data.totalPages))
+    }
+    else if (deliveries.data.totalPages === 0){
+        dispatch(setCurrentPageDelivers(1))
+    }
+    dispatch(setDeliveries(deliveries.data))
+}

@@ -5,7 +5,11 @@ import {
     setSecondRequestFirstPart,
     setThirdRequest,
     setSecondRequestSecondPart,
-    setIsFetchingRequest
+    setIsFetchingRequest,
+    setDateFirstRequest,
+    setIsFetchingDateFirstRequest,
+    setCurrentPageDateFirstRequest,
+    setDateSecondRequest, setIsFetchingDateSecondRequest, setCurrentPageDateSecondRequest
 } from "../reducers/requestTableReducer";
 import {SET_MESSAGE} from "./types";
 
@@ -58,5 +62,33 @@ export const getThirdRequest = (searchQuery, currentPage, perPage) => {
         dispatch(setIsFetchingRequest(true))
         const requestResult = await axios.get(API_URL + `thirdRequest?searchQuery=${searchQuery}&page=${currentPage}&limit=${perPage}`);
         dispatch(setThirdRequest(requestResult.data))
+    }
+}
+
+export const getDateFistRequest = (date, currentPage, perPage) => {
+    return async (dispatch) => {
+        dispatch(setIsFetchingDateFirstRequest(true))
+        const requestResult = await axios.post(API_URL + `dateFirstRequest?page=${currentPage}&limit=${perPage}`, {date});
+        if (currentPage > requestResult.data.totalPages && requestResult.data.totalPages !== 0){
+            dispatch(setDateFirstRequest(requestResult.data.totalPages))
+        }
+        else if (requestResult.data.totalPages === 0){
+            dispatch(setCurrentPageDateFirstRequest(1))
+        }
+        dispatch(setDateFirstRequest(requestResult.data))
+    }
+}
+
+export const getDateSecondRequest = (date, currentPage, perPage) => {
+    return async (dispatch) => {
+        dispatch(setIsFetchingDateSecondRequest(true))
+        const requestResult = await axios.post(API_URL + `dateSecondRequest?page=${currentPage}&limit=${perPage}`, {date});
+        if (currentPage > requestResult.data.totalPages && requestResult.data.totalPages !== 0){
+            dispatch(setDateSecondRequest(requestResult.data.totalPages))
+        }
+        else if (requestResult.data.totalPages === 0){
+            dispatch(setCurrentPageDateSecondRequest(1))
+        }
+        dispatch(setDateSecondRequest(requestResult.data))
     }
 }

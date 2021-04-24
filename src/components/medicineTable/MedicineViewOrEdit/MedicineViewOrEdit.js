@@ -173,6 +173,7 @@ const MedicineViewOrEdit = (props) => {
                                             {...params}
                                             label={formOfIssue}
                                             variant="outlined"
+                                            helperText="Форма выпуска"
                                         />}
                                 />
                             </Grid>
@@ -193,6 +194,7 @@ const MedicineViewOrEdit = (props) => {
                                             {...params}
                                             label={pharmacologicalGroup}
                                             variant="outlined"
+                                            helperText="Фармакологическая группа"
                                         />}
                                 />
                             </Grid>
@@ -213,6 +215,7 @@ const MedicineViewOrEdit = (props) => {
                                             {...params}
                                             label={manufacturerFirm}
                                             variant="outlined"
+                                            helperText="Фирма производитель"
                                         />}
                                 />
                             </Grid>

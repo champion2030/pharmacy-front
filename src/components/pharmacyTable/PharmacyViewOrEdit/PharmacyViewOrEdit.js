@@ -167,6 +167,7 @@ const PharmacyViewOrEdit = (props) => {
                                             {...params}
                                             label={pharmacyName}
                                             variant="outlined"
+                                            helperText="азвание аптеки"
                                         />}
                                 />
                             </Grid>
@@ -187,6 +188,7 @@ const PharmacyViewOrEdit = (props) => {
                                             {...params}
                                             label={area}
                                             variant="outlined"
+                                            helperText="Район"
                                         />}
                                 />
                             </Grid>
@@ -207,6 +209,7 @@ const PharmacyViewOrEdit = (props) => {
                                             {...params}
                                             label={typeOfProperty}
                                             variant="outlined"
+                                            helperText="Тип собственности"
                                         />}
                                 />
                             </Grid>

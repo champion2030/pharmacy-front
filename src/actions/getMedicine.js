@@ -117,3 +117,16 @@ export const getDeleteMedicineInfo = (id) => async (dispatch) => {
     const info = await axios.get(API_URL + `deleteMedicineInfo/${id}`);
     dispatch(setPotentialDataToDeleteByMedicine(info.data))
 }
+
+export const deleteGroupOfMedicine = (medicineId, searchQuery, currentPage, perPage) => async (dispatch) => {
+    dispatch(setIsFetchingMedicine(true))
+    await axios.delete(API_URL + `deleteGroupOfMedicine`, {data: {medicineId: medicineId}})
+    const medicines = await axios.get(API_URL + `getMedicine?searchQuery=${searchQuery}&page=${currentPage}&limit=${perPage}`);
+    if (currentPage > medicines.data.totalPages && medicines.data.totalPages !== 0){
+        dispatch(setCurrentPageMedicine(medicines.data.totalPages))
+    }
+    else if (medicines.data.totalPages === 0){
+        dispatch(setCurrentPageMedicine(1))
+    }
+    dispatch(setMedicine(medicines.data))
+}

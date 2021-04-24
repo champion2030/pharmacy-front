@@ -264,6 +264,9 @@ const AppBarPharmacy = () => {
                     <ListItem button component={Link} to="/thirdRequest">
                         <ListItemText primary={"Трейтий запрос"}/>
                     </ListItem>
+                    <ListItem button component={Link} to="/dateRequests">
+                        <ListItemText primary={"Запросы на дату"}/>
+                    </ListItem>
                 </List>
             </Drawer>
         </ThemeProvider>

@@ -54,7 +54,10 @@ const CommonTableToolbar = (props) => {
             {numSelected > 0 ?
                 <div className={classes.icons}>
                     <Tooltip title="Cancel">
-                        <IconButton aria-label="cancel">
+                        <IconButton
+                            aria-label="cancel"
+                            onClick={() => console.log(1)}
+                        >
                             <CancelIcon/>
                         </IconButton>
                     </Tooltip>

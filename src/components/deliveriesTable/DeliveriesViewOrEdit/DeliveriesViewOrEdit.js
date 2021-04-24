@@ -172,6 +172,7 @@ const DeliveriesViewOrEdit = (props) => {
                                                 {...params}
                                                 label={medicineName}
                                                 variant="outlined"
+                                                helperText="Название лекарства"
                                             />}
                                     />
                                 </Grid>
@@ -192,6 +193,7 @@ const DeliveriesViewOrEdit = (props) => {
                                                 {...params}
                                                 label={employeeFullName}
                                                 variant="outlined"
+                                                helperText="Полное имя сотрудника"
                                             />}
                                     />
                                 </Grid>
@@ -212,6 +214,7 @@ const DeliveriesViewOrEdit = (props) => {
                                                 {...params}
                                                 label={cause}
                                                 variant="outlined"
+                                                helperText="Причина возврата"
                                             />}
                                     />
                                 </Grid>
@@ -221,6 +224,7 @@ const DeliveriesViewOrEdit = (props) => {
                                         variant="inline"
                                         format="dd/MM/yyyy"
                                         margin="normal"
+                                        helperText="Дата поступления в аптеку"
                                         id="date-picker-inline1"
                                         value={receiptDate}
                                         onChange={handleChangeReceiptDate}
@@ -277,6 +281,7 @@ const DeliveriesViewOrEdit = (props) => {
                                         disableToolbar
                                         variant="inline"
                                         format="dd/MM/yyyy"
+                                        helperText="Дата начала срока годности"
                                         margin="normal"
                                         id="date-picker-inline2"
                                         value={expiryStartDate}
@@ -292,6 +297,7 @@ const DeliveriesViewOrEdit = (props) => {
                                         disableToolbar
                                         variant="inline"
                                         format="dd/MM/yyyy"
+                                        helperText="Дата конца срока годности"
                                         margin="normal"
                                         id="date-picker-inline3"
                                         value={expirationDate}
