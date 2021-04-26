@@ -188,12 +188,7 @@ const PharmacyTable = () => {
 
     useEffect(() => {
         dispatch(getPharmacies(value, currentPagePharmacy, rowsPerPage))
-    }, [currentPagePharmacy, dispatch, rowsPerPage])
-
-    useEffect(() => {
-        dispatch(setCurrentPagePharmacy(1))
-        dispatch(getPharmacies(value, currentPagePharmacy, rowsPerPage))
-    }, [value])
+    }, [currentPagePharmacy, dispatch, rowsPerPage, value])
 
     return (
         <div>
@@ -257,7 +252,10 @@ const PharmacyTable = () => {
                         label="Поиск аптек"
                         className={classes.searchInput}
                         value={value}
-                        onChange={(event) => setValue(event.target.value)}
+                        onChange={(event) => {
+                            dispatch(setCurrentPagePharmacy(1))
+                            setValue(event.target.value)
+                        }}
                         InputProps={{
                             startAdornment: (
                                 <InputAdornment position="start">

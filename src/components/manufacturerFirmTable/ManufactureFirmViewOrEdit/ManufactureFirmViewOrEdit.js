@@ -76,7 +76,7 @@ const ManufactureFirmViewOrEdit = (props) => {
             setAddress(currentFirm.address)
             setSelectedDate(currentFirm.year_open)
         }
-    }, [isFetchingFirm])
+    }, [isFetchingFirm, currentFirm])
 
     const handleDateChange = (date) => {
         setSelectedDate(date)

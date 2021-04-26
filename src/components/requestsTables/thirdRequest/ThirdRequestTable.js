@@ -59,12 +59,7 @@ const ThirdRequestTable = () => {
 
     useEffect(() => {
         dispatch(getThirdRequest(value, currentPageThirdRequest, rowsPerPage))
-    }, [dispatch, currentPageThirdRequest, rowsPerPage])
-
-    useEffect(() => {
-        dispatch(setCurrentPageThirdRequest(1))
-        dispatch(getThirdRequest(value, currentPageThirdRequest, rowsPerPage))
-    }, [value])
+    }, [dispatch, currentPageThirdRequest, rowsPerPage, value])
 
     const handleChangePage = (event, newPage) => {
         dispatch(setCurrentPageThirdRequest(newPage + 1))
@@ -92,7 +87,10 @@ const ThirdRequestTable = () => {
                         label="Поиск поставок"
                         className={classes.searchInput}
                         value={value}
-                        onChange={(event) => setValue(event.target.value)}
+                        onChange={(event) => {
+                            dispatch(setCurrentPageThirdRequest(1))
+                            setValue(event.target.value)
+                        }}
                         InputProps={{
                             startAdornment: (
                                 <InputAdornment position="start">

@@ -176,12 +176,7 @@ const EmployeeTable = () => {
 
     useEffect(() => {
         dispatch(getEmployees(value, currentPageEmployee, rowsPerPage))
-    }, [currentPageEmployee, dispatch, rowsPerPage])
-
-    useEffect(() => {
-        dispatch(setCurrentPageEmployee(1))
-        dispatch(getEmployees(value, currentPageEmployee, rowsPerPage))
-    }, [value])
+    }, [currentPageEmployee, dispatch, rowsPerPage, value])
 
     return (
         <div>
@@ -245,7 +240,10 @@ const EmployeeTable = () => {
                         label="Поиск по сотрудникам"
                         className={classes.searchInput}
                         value={value}
-                        onChange={(event) => setValue(event.target.value)}
+                        onChange={(event) => {
+                            dispatch(setCurrentPageEmployee(1))
+                            setValue(event.target.value)
+                        }}
                         InputProps={{
                             startAdornment: (
                                 <InputAdornment position="start">

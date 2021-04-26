@@ -2,7 +2,6 @@ import React from 'react'
 import {TableHead, TableRow, TableCell} from '@material-ui/core'
 
 const headCells = [
-    {id: 'checkbox', label: ''},
     {id: 'fullName', label: 'User Name'},
     {id: 'email', label: 'Email Address'},
     {id: 'actions', label: 'Actions', disableSorting: true}

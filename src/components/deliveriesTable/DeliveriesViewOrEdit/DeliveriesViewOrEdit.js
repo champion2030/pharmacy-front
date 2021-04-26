@@ -99,7 +99,7 @@ const DeliveriesViewOrEdit = (props) => {
             setExpirationDate(currentDeliver.expiration_date)
             setBatchNumber(currentDeliver.batch_number)
         }
-    }, [isFetchingDeliveries])
+    }, [isFetchingDeliveries, currentDeliver])
 
     const handleChangeReceiptDate = (date) => {
         setReceiptDate(date)

@@ -10,34 +10,28 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e0de64aa-80a1-43a0-bc39-5202a49cf082" name="Default Changelist" comment="Updating and Adding make from redux">
+    <list default="true" id="e0de64aa-80a1-43a0-bc39-5202a49cf082" name="Default Changelist" comment="All done">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/debug.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/actions/getDeliveries.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/actions/getDeliveries.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/actions/getEmployee.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/actions/getEmployee.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/actions/getManufacturerFirm.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/actions/getManufacturerFirm.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/actions/getMedicine.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/actions/getMedicine.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/actions/getPharmacy.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/actions/getPharmacy.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/actions/getRequests.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/actions/getRequests.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/actions/types.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/actions/types.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/actions/auth.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/actions/auth.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/actions/getUsers.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/actions/getUsers.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/AppBarPharmacy/AppBarPharmacy.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/AppBarPharmacy/AppBarPharmacy.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Content/Content.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Content/Content.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/commonComponents/CommonToolBar.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/commonComponents/CommonToolBar.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/deliveriesTable/AddNewDeliver/AddNewDeliver.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/deliveriesTable/AddNewDeliver/AddNewDeliver.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/deliveriesTable/DeliveriesTable.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/deliveriesTable/DeliveriesTable.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/deliveriesTable/DeliveriesViewOrEdit/DeliveriesViewOrEdit.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/deliveriesTable/DeliveriesViewOrEdit/DeliveriesViewOrEdit.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/employeeTable/EmployeeTable.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/employeeTable/EmployeeTable.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/employeeTable/EmployeeViewOrEdit/EmployeeViewOrEdit.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/employeeTable/EmployeeViewOrEdit/EmployeeViewOrEdit.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/manufacturerFirmTable/AddNewManudactureFirm/AddNewManufactureFirm.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/manufacturerFirmTable/AddNewManudactureFirm/AddNewManufactureFirm.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/manufacturerFirmTable/ManufactureFirmViewOrEdit/ManufactureFirmViewOrEdit.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/manufacturerFirmTable/ManufactureFirmViewOrEdit/ManufactureFirmViewOrEdit.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/manufacturerFirmTable/ManufacturerFirmTable.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/manufacturerFirmTable/ManufacturerFirmTable.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/medicineTable/MedicineTable.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/medicineTable/MedicineTable.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/medicineTable/MedicineViewOrEdit/MedicineViewOrEdit.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/medicineTable/MedicineViewOrEdit/MedicineViewOrEdit.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/pharmacyTable/AddNewPharmacy/AddNewPharmacy.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/pharmacyTable/AddNewPharmacy/AddNewPharmacy.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/pharmacyTable/PharmacyTable.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/pharmacyTable/PharmacyTable.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/pharmacyTable/PharmacyViewOrEdit/PharmacyViewOrEdit.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/pharmacyTable/PharmacyViewOrEdit/PharmacyViewOrEdit.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/requestsTables/firstRequest/FirstRequestTable.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/requestsTables/firstRequest/FirstRequestTable.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/reducers/requestTableReducer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/reducers/requestTableReducer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/requestsTables/thirdRequest/ThirdRequestTable.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/requestsTables/thirdRequest/ThirdRequestTable.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/usersTable/UsersTable.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/usersTable/UsersTable.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/usersTable/UsersTableHead.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/usersTable/UsersTableHead.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/reducers/auth.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/reducers/auth.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/reducers/message.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/reducers/message.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/services/auth-header.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/auth-header.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/services/auth.service.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/auth.service.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -76,7 +70,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/components/requestsTables/dateRequests" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="list.type.of.created.stylesheet" value="SCSS" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.standard" value="true" />
@@ -198,7 +192,10 @@
       <workItem from="1619115825478" duration="6913000" />
       <workItem from="1619168044653" duration="19962000" />
       <workItem from="1619193082890" duration="10437000" />
-      <workItem from="1619260303919" duration="15405000" />
+      <workItem from="1619260303919" duration="15525000" />
+      <workItem from="1619296408960" duration="2520000" />
+      <workItem from="1619339248104" duration="3043000" />
+      <workItem from="1619447757723" duration="5711000" />
     </task>
     <task id="LOCAL-00001" summary="User Registration and Login">
       <created>1614707057660</created>
@@ -466,7 +463,14 @@
       <option name="project" value="LOCAL" />
       <updated>1619189242877</updated>
     </task>
-    <option name="localTasksCounter" value="39" />
+    <task id="LOCAL-00039" summary="All done">
+      <created>1619289723893</created>
+      <option name="number" value="00039" />
+      <option name="presentableId" value="LOCAL-00039" />
+      <option name="project" value="LOCAL" />
+      <updated>1619289723893</updated>
+    </task>
+    <option name="localTasksCounter" value="40" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -514,6 +518,7 @@
     <MESSAGE value="ProtectedRoutes done" />
     <MESSAGE value="adding a delivery in a complex form is done" />
     <MESSAGE value="Updating and Adding make from redux" />
-    <option name="LAST_COMMIT_MESSAGE" value="Updating and Adding make from redux" />
+    <MESSAGE value="All done" />
+    <option name="LAST_COMMIT_MESSAGE" value="All done" />
   </component>
 </project>

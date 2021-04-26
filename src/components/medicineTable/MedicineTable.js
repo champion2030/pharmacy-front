@@ -157,12 +157,7 @@ const MedicineTable = () => {
 
     useEffect(() => {
         dispatch(getMedicines(value, currentPageMedicine, rowsPerPage))
-    }, [currentPageMedicine, dispatch, rowsPerPage])
-
-    useEffect(() => {
-        dispatch(setCurrentPageMedicine(1))
-        dispatch(getMedicines(value, currentPageMedicine, rowsPerPage))
-    }, [value])
+    }, [value, currentPageMedicine, dispatch, rowsPerPage])
 
     const handleClick = (event, name) => {
         const selectedIndex = selected.indexOf(name);
@@ -243,7 +238,10 @@ const MedicineTable = () => {
                         label="Искать лекарства"
                         className={classes.searchInput}
                         value={value}
-                        onChange={(event) => setValue(event.target.value)}
+                        onChange={(event) => {
+                            dispatch(setCurrentPageMedicine(1))
+                            setValue(event.target.value)
+                        }}
                         InputProps={{
                             startAdornment: (
                                 <InputAdornment position="start">

@@ -1,9 +1,8 @@
 import React, {useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
-import {getUsers} from "../../actions/getUsers";
-import {Checkbox, InputAdornment, makeStyles, Paper, Table, TableBody, TableCell, TableRow, TextField, Toolbar} from "@material-ui/core";
+import {deleteUser, getUsers} from "../../actions/getUsers";
+import {InputAdornment, makeStyles, Paper, Table, TableBody, TableCell, TableRow, TextField, Toolbar} from "@material-ui/core";
 import Controls from "../controls/Controls";
-import EditOutlinedIcon from "@material-ui/icons/EditOutlined";
 import CloseIcon from "@material-ui/icons/Close";
 import UsersTableHead from "./UsersTableHead";
 import TablePagination from "@material-ui/core/TablePagination";
@@ -12,7 +11,9 @@ import {Search} from "@material-ui/icons";
 import AddIcon from "@material-ui/icons/Add";
 import UserFormWindow from "./UserFormWindow";
 import UniversalModalWindow from "../ModalWindow/UniversalModalWindow";
-
+import ConfirmDeleteDialogCommon from "../commonComponents/ConfirmDeleteDialogCommon";
+import Notification from "../commonComponents/Notification";
+import {logout} from "../../actions/auth";
 
 const useStyles = makeStyles(theme => ({
     pageContent: {
@@ -61,7 +62,7 @@ const UsersTable = () => {
     const [modalActive, setModalActive] = useState(false)
     const [confirmDialog, setConfirmDialog] = useState({isOpen: false, title: '', subTitle: ''})
     const [notify, setNotify] = useState({isOpen: false, message: '', type: ''})
-
+    const {user: currentUser} = useSelector((state) => state.auth);
 
     const handleChangePage = (event, newPage) => {
         dispatch(setCurrentPage(newPage + 1))
@@ -77,9 +78,13 @@ const UsersTable = () => {
             ...confirmDialog,
             isOpen: false
         })
+        dispatch(deleteUser(id, value, currentPage, rowsPerPage))
+        if (id === currentUser.id){
+            dispatch(logout())
+        }
         setNotify({
             isOpen: true,
-            message: 'Deleted Successfully',
+            message: 'Удалён успешно',
             type: 'error'
         })
     }
@@ -94,7 +99,7 @@ const UsersTable = () => {
                 <Toolbar>
                     <TextField
                         variant="outlined"
-                        label="Search Employees"
+                        label="Искать пользователей"
                         className={classes.searchInput}
                         value={value}
                         onChange={(event) => setValue(event.target.value)}
@@ -107,14 +112,13 @@ const UsersTable = () => {
                         }}
                     />
                     <Controls.Button
-                        text="Add New"
+                        text="Добавить нового"
                         variant="outlined"
                         startIcon={<AddIcon/>}
                         className={classes.newButton}
                         onClick={() => setModalActive(true)}
                     />
                 </Toolbar>
-
                 <Table className={classes.table}>
                     <UsersTableHead/>
                     <TableBody>
@@ -122,31 +126,16 @@ const UsersTable = () => {
                             users.map(item =>
                                 (
                                     <TableRow key={item.id}>
-                                        <TableCell padding="checkbox">
-                                            <Checkbox
-                                                //checked={isItemSelected}
-                                                //inputProps={{ 'aria-labelledby': labelId }}
-                                            />
-                                        </TableCell>
                                         <TableCell>{item.username}</TableCell>
                                         <TableCell>{item.email}</TableCell>
-
                                         <TableCell>
-                                            <Controls.ActionButton
-                                                color="primary"
-                                                // onClick={() => {
-                                                //     openInPopup(item)
-                                                // }}
-                                            >
-                                                <EditOutlinedIcon fontSize="small"/>
-                                            </Controls.ActionButton>
                                             <Controls.ActionButton
                                                 color="secondary"
                                                 onClick={() => {
                                                     setConfirmDialog({
                                                         isOpen: true,
-                                                        title: 'Are you sure to delete this record?',
-                                                        subTitle: "You can't undo this operation",
+                                                        title: 'Вы уверены что хотите удалить этого пользователя?',
+                                                        subTitle: "Вы не сможете отменить это действие",
                                                         onConfirm: () => {
                                                             onDelete(item.id)
                                                         }
@@ -177,10 +166,14 @@ const UsersTable = () => {
             <UniversalModalWindow active={modalActive}>
                 <UserFormWindow active={modalActive} setActive={setModalActive}/>
             </UniversalModalWindow>
-            {/*<ConfirmDialog*/}
-            {/*    confirmDialog={confirmDialog}*/}
-            {/*    setConfirmDialog={setConfirmDialog}*/}
-            {/*/>*/}
+            <ConfirmDeleteDialogCommon
+                confirmDialog={confirmDialog}
+                setConfirmDialog={setConfirmDialog}
+            />
+            <Notification
+                notify={notify}
+                setNotify={setNotify}
+            />
         </div>
     )
 };

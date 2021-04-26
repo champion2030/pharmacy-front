@@ -86,7 +86,7 @@ const MedicineViewOrEdit = (props) => {
             setBarcode(currentMedicine.barcode)
             setInstruction(currentMedicine.instruction)
         }
-    }, [isFetchingMedicine])
+    }, [isFetchingMedicine, currentMedicine])
 
     const onChangeMedicineName = (e) => {
         const MedicineName = e.target.value;

@@ -188,7 +188,6 @@ const AppBarPharmacy = () => {
                         </div>
                     </Toolbar>
                 </AppBar>
-
             <Drawer
                 className={classes.drawer}
                 variant="persistent"
@@ -196,7 +195,9 @@ const AppBarPharmacy = () => {
                 open={open}
                 classes={{
                     paper: classes.drawerPaper,
-                }}>
+                }}
+                onClick={handleDrawerClose}
+            >
                 <div className={classes.drawerHeader}>
                     <IconButton onClick={handleDrawerClose}>
                         {theme.direction === 'ltr' ? <ChevronLeftIcon/> : <ChevronRightIcon/>}

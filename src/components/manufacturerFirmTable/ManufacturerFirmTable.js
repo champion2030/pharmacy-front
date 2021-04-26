@@ -99,12 +99,7 @@ const ManufacturerFirmTable = () => {
 
     useEffect(() => {
         dispatch(getFirms(value, currentPageFirm, rowsPerPage))
-    }, [currentPageFirm, dispatch, rowsPerPage])
-
-    useEffect(() => {
-        dispatch(setCurrentPageFirm(1))
-        dispatch(getFirms(value, currentPageFirm, rowsPerPage))
-    }, [value])
+    }, [currentPageFirm, dispatch, rowsPerPage, value])
 
     const handleSelectAllClick = (event) => {
         if (event.target.checked) {
@@ -244,7 +239,10 @@ const ManufacturerFirmTable = () => {
                         label="Поиск фирмы"
                         className={classes.searchInput}
                         value={value}
-                        onChange={(event) => setValue(event.target.value)}
+                        onChange={(event) => {
+                            dispatch(setCurrentPageFirm(1))
+                            setValue(event.target.value)
+                        }}
                         InputProps={{
                             startAdornment: (
                                 <InputAdornment position="start">

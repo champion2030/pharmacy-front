@@ -193,12 +193,7 @@ const DeliveriesTable = () => {
 
     useEffect(() => {
         dispatch(getDeliveries(value, currentPageDelivers, rowsPerPage))
-    }, [currentPageDelivers, dispatch, rowsPerPage])
-
-    useEffect(() => {
-        dispatch(setCurrentPageDelivers(1))
-        dispatch(getDeliveries(value, currentPageDelivers, rowsPerPage))
-    }, [value])
+    }, [value, currentPageDelivers, dispatch, rowsPerPage])
 
     return (
         <div>
@@ -260,7 +255,10 @@ const DeliveriesTable = () => {
                         label="Поиск поставок"
                         className={classes.searchInput}
                         value={value}
-                        onChange={(event) => setValue(event.target.value)}
+                        onChange={(event) => {
+                            dispatch(setCurrentPageDelivers(1))
+                            setValue(event.target.value)
+                        }}
                         InputProps={{
                             startAdornment: (
                                 <InputAdornment position="start">
@@ -377,7 +375,7 @@ const DeliveriesTable = () => {
                         </div>
                 }
                 <TablePagination
-                    rowsPerPageOptions={[5, 10, 50, 100, 200]}
+                    rowsPerPageOptions={[5, 10, 50, 200]}
                     component="div"
                     count={totalCount}
                     rowsPerPage={rowsPerPage}

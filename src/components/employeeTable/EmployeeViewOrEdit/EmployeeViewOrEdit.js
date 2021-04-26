@@ -72,7 +72,7 @@ const EmployeeViewOrEdit = (props) => {
             setPharmacyId(currentEmployee.pharmacy_id)
             setPharmacy(currentEmployee.pharmacy_name)
         }
-    }, [isFetchingEmployee])
+    }, [isFetchingEmployee, currentEmployee])
 
     const onChangeName = (e) => {
         const name = e.target.value;

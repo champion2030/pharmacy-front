@@ -100,7 +100,7 @@ const PharmacyViewOrEdit = (props) => {
             setTelephone(currentPharmacy.telephone)
             setAddress(currentPharmacy.address)
         }
-    }, [isFetchingPharmacy])
+    }, [isFetchingPharmacy, currentPharmacy])
 
     const onChangeAddress = (e) => {
         const address = e.target.value;
