@@ -15,6 +15,7 @@ import pharmacyReducer from "./pharmacyTableReducer";
 import employeeReducer from "./employeeTableReducer";
 import deliveriesReducer from "./deliveriesTableReducer";
 import requestsReducer from "./requestTableReducer";
+import summaryQueries from "./summaryQueriesReducer";
 
 export default combineReducers({
     auth,
@@ -32,5 +33,6 @@ export default combineReducers({
     pharmacyReducer,
     employeeReducer,
     deliveriesReducer,
-    requestsReducer
+    requestsReducer,
+    summaryQueries
 });

@@ -40,7 +40,7 @@ const theme = createMuiTheme({
     }
 })
 
-const drawerWidth = 250;
+const drawerWidth = 270;
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -267,6 +267,12 @@ const AppBarPharmacy = () => {
                     </ListItem>
                     <ListItem button component={Link} to="/dateRequests">
                         <ListItemText primary={"Запросы на дату"}/>
+                    </ListItem>
+                    <ListItem button component={Link} to="/queryWithDataCondition">
+                        <ListItemText primary={"Итоговый запрос с уловием на данные"}/>
+                    </ListItem>
+                    <ListItem button component={Link} to="/queryWithConditionForGroups">
+                        <ListItemText primary={"Итоговый запрос с уловием на группы"}/>
                     </ListItem>
                 </List>
             </Drawer>

@@ -84,7 +84,7 @@ export const getDateSecondRequest = (date, currentPage, perPage) => {
         dispatch(setIsFetchingDateSecondRequest(true))
         const requestResult = await axios.post(API_URL + `dateSecondRequest?page=${currentPage}&limit=${perPage}`, {date});
         if (currentPage > requestResult.data.totalPages && requestResult.data.totalPages !== 0){
-            dispatch(setDateSecondRequest(requestResult.data.totalPages))
+            dispatch(setCurrentPageDateSecondRequest(requestResult.data.totalPages))
         }
         else if (requestResult.data.totalPages === 0){
             dispatch(setCurrentPageDateSecondRequest(1))

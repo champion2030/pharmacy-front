@@ -40,6 +40,9 @@ import EmployeeViewOrEdit from "../employeeTable/EmployeeViewOrEdit/EmployeeView
 import AddNewPharmacy from "../pharmacyTable/AddNewPharmacy/AddNewPharmacy";
 import PharmacyViewOrEdit from "../pharmacyTable/PharmacyViewOrEdit/PharmacyViewOrEdit";
 import DateRequests from "../requestsTables/dateRequests/DateRequests";
+import QueryWithDataConditionTable from "../summaryQueriesTable/QueryWithDataCondition/QueryWithDataConditionTable";
+import QueryWithConditionForGroupsTable
+        from "../summaryQueriesTable/QueryWithConditionForGroups/QueryWithConditionForGroupsTable";
 
 const Content = () => {
 
@@ -84,6 +87,8 @@ const Content = () => {
             <ProtectedRoute path="/addNewEmployee" component={AddNewEmployee}/>
             <ProtectedRoute path="/addNewPharmacy" component={AddNewPharmacy}/>
             <ProtectedRoute path="/dateRequests" component={DateRequests}/>
+            <ProtectedRoute path="/queryWithDataCondition" component={QueryWithDataConditionTable}/>
+            <ProtectedRoute path="/queryWithConditionForGroups" component={QueryWithConditionForGroupsTable}/>
             <Route exact path='/unauthorized' component={Unauthorized} />
             <Redirect to="/login"/>
         </Switch>

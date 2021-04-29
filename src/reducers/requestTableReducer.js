@@ -125,19 +125,72 @@ export default function requestsReducer(state = defaultState, action) {
     }
 }
 
-export const setMedicineByPharmacy = (medicineByPharmacy) => ({type: SET_MEDICINE_BY_PHARMACY, payload: medicineByPharmacy})
-export const setMedicineByTown = (medicineByTown) => ({type: SET_MEDICINE_BY_TOWN, payload: medicineByTown})
-export const setSecondRequestFirstPart = (secondRequestFirstPart) => ({type: SET_SECOND_REQUEST_FIRST_PART, payload: secondRequestFirstPart})
-export const setSecondRequestSecondPart = (secondRequestSecondPart) => ({type: SET_SECOND_REQUEST_SECOND_PART, payload: secondRequestSecondPart})
-export const setCurrentPageSecondRequest = (currentPageSecondRequest) => ({type: SET_CURRENT_PAGE_SECOND_REQUEST, payload: currentPageSecondRequest})
-export const setThirdRequest = (thirdRequest) => ({type: SET_THIRD_REQUEST, payload: thirdRequest})
-export const setCurrentPageThirdRequest = (currentPageThirdRequest) => ({type: SET_CURRENT_PAGE_THIRD_REQUEST, payload: currentPageThirdRequest})
-export const setIsFetchingRequest = (bool) => ({type: SET_IS_FETCHING_REQUEST, payload: bool})
+export const setMedicineByPharmacy = (medicineByPharmacy) => ({
+    type: SET_MEDICINE_BY_PHARMACY,
+    payload: medicineByPharmacy
+})
 
-export const setDateFirstRequest = (dateFirstRequest) => ({type: SET_DATE_FIRST_REQUEST, payload: dateFirstRequest})
-export const setIsFetchingDateFirstRequest = (bool) => ({type: SET_IS_FETCHING_DATE_FIRST_REQUEST, payload: bool})
-export const setCurrentPageDateFirstRequest = (currentPageDateFirstRequest) => ({type: SET_CURRENT_PAGE_DATE_FIRST_REQUEST, payload: currentPageDateFirstRequest})
+export const setMedicineByTown = (medicineByTown) => ({
+    type: SET_MEDICINE_BY_TOWN,
+    payload: medicineByTown
+})
 
-export const setDateSecondRequest = (dateSecondRequest) => ({type: SET_DATE_SECOND_REQUEST, payload: dateSecondRequest})
-export const setIsFetchingDateSecondRequest = (bool) => ({type: SET_IS_FETCHING_DATE_SECOND_REQUEST, payload: bool})
-export const setCurrentPageDateSecondRequest = (currentPageDateSecondRequest) => ({type: SET_CURRENT_PAGE_DATE_SECOND_REQUEST, payload: currentPageDateSecondRequest})
+export const setSecondRequestFirstPart = (secondRequestFirstPart) => ({
+    type: SET_SECOND_REQUEST_FIRST_PART,
+    payload: secondRequestFirstPart
+})
+
+export const setSecondRequestSecondPart = (secondRequestSecondPart) => ({
+    type: SET_SECOND_REQUEST_SECOND_PART,
+    payload: secondRequestSecondPart
+})
+
+export const setCurrentPageSecondRequest = (currentPageSecondRequest) => ({
+    type: SET_CURRENT_PAGE_SECOND_REQUEST,
+    payload: currentPageSecondRequest
+})
+
+export const setThirdRequest = (thirdRequest) => ({
+    type: SET_THIRD_REQUEST,
+    payload: thirdRequest
+})
+
+export const setCurrentPageThirdRequest = (currentPageThirdRequest) => ({
+    type: SET_CURRENT_PAGE_THIRD_REQUEST,
+    payload: currentPageThirdRequest
+})
+
+export const setIsFetchingRequest = (bool) => ({
+    type: SET_IS_FETCHING_REQUEST,
+    payload: bool
+})
+
+export const setDateFirstRequest = (dateFirstRequest) => ({
+    type: SET_DATE_FIRST_REQUEST,
+    payload: dateFirstRequest
+})
+
+export const setIsFetchingDateFirstRequest = (bool) => ({
+    type: SET_IS_FETCHING_DATE_FIRST_REQUEST,
+    payload: bool
+})
+
+export const setCurrentPageDateFirstRequest = (currentPageDateFirstRequest) => ({
+    type: SET_CURRENT_PAGE_DATE_FIRST_REQUEST,
+    payload: currentPageDateFirstRequest
+})
+
+export const setDateSecondRequest = (dateSecondRequest) => ({
+    type: SET_DATE_SECOND_REQUEST,
+    payload: dateSecondRequest
+})
+
+export const setIsFetchingDateSecondRequest = (bool) => ({
+    type: SET_IS_FETCHING_DATE_SECOND_REQUEST,
+    payload: bool
+})
+
+export const setCurrentPageDateSecondRequest = (currentPageDateSecondRequest) => ({
+    type: SET_CURRENT_PAGE_DATE_SECOND_REQUEST,
+    payload: currentPageDateSecondRequest
+})

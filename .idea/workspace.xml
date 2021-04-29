@@ -12,26 +12,12 @@
   <component name="ChangeListManager">
     <list default="true" id="e0de64aa-80a1-43a0-bc39-5202a49cf082" name="Default Changelist" comment="All done">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/actions/auth.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/actions/auth.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/actions/getUsers.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/actions/getUsers.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/actions/getRequests.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/actions/getRequests.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/actions/types.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/actions/types.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/AppBarPharmacy/AppBarPharmacy.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/AppBarPharmacy/AppBarPharmacy.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/deliveriesTable/DeliveriesTable.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/deliveriesTable/DeliveriesTable.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/deliveriesTable/DeliveriesViewOrEdit/DeliveriesViewOrEdit.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/deliveriesTable/DeliveriesViewOrEdit/DeliveriesViewOrEdit.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/employeeTable/EmployeeTable.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/employeeTable/EmployeeTable.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/employeeTable/EmployeeViewOrEdit/EmployeeViewOrEdit.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/employeeTable/EmployeeViewOrEdit/EmployeeViewOrEdit.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/manufacturerFirmTable/ManufactureFirmViewOrEdit/ManufactureFirmViewOrEdit.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/manufacturerFirmTable/ManufactureFirmViewOrEdit/ManufactureFirmViewOrEdit.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/manufacturerFirmTable/ManufacturerFirmTable.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/manufacturerFirmTable/ManufacturerFirmTable.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/medicineTable/MedicineTable.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/medicineTable/MedicineTable.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/medicineTable/MedicineViewOrEdit/MedicineViewOrEdit.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/medicineTable/MedicineViewOrEdit/MedicineViewOrEdit.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/pharmacyTable/PharmacyTable.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/pharmacyTable/PharmacyTable.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/pharmacyTable/PharmacyViewOrEdit/PharmacyViewOrEdit.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/pharmacyTable/PharmacyViewOrEdit/PharmacyViewOrEdit.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/requestsTables/thirdRequest/ThirdRequestTable.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/requestsTables/thirdRequest/ThirdRequestTable.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/usersTable/UsersTable.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/usersTable/UsersTable.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/usersTable/UsersTableHead.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/usersTable/UsersTableHead.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/reducers/auth.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/reducers/auth.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/reducers/message.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/reducers/message.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/services/auth-header.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/auth-header.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/services/auth.service.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/auth.service.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Content/Content.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Content/Content.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/reducers/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/reducers/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/reducers/requestTableReducer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/reducers/requestTableReducer.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -196,6 +182,11 @@
       <workItem from="1619296408960" duration="2520000" />
       <workItem from="1619339248104" duration="3043000" />
       <workItem from="1619447757723" duration="5711000" />
+      <workItem from="1619466173724" duration="695000" />
+      <workItem from="1619523117780" duration="24000" />
+      <workItem from="1619539261325" duration="187000" />
+      <workItem from="1619539465098" duration="8266000" />
+      <workItem from="1619709004946" duration="1917000" />
     </task>
     <task id="LOCAL-00001" summary="User Registration and Login">
       <created>1614707057660</created>
@@ -470,7 +461,14 @@
       <option name="project" value="LOCAL" />
       <updated>1619289723893</updated>
     </task>
-    <option name="localTasksCounter" value="40" />
+    <task id="LOCAL-00040" summary="All done">
+      <created>1619466262761</created>
+      <option name="number" value="00040" />
+      <option name="presentableId" value="LOCAL-00040" />
+      <option name="project" value="LOCAL" />
+      <updated>1619466262761</updated>
+    </task>
+    <option name="localTasksCounter" value="41" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
