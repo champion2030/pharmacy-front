@@ -10,14 +10,8 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e0de64aa-80a1-43a0-bc39-5202a49cf082" name="Default Changelist" comment="All done">
+    <list default="true" id="e0de64aa-80a1-43a0-bc39-5202a49cf082" name="Default Changelist" comment="Requests added">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/actions/getRequests.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/actions/getRequests.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/actions/types.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/actions/types.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/AppBarPharmacy/AppBarPharmacy.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/AppBarPharmacy/AppBarPharmacy.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Content/Content.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Content/Content.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/reducers/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/reducers/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/reducers/requestTableReducer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/reducers/requestTableReducer.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -186,7 +180,8 @@
       <workItem from="1619523117780" duration="24000" />
       <workItem from="1619539261325" duration="187000" />
       <workItem from="1619539465098" duration="8266000" />
-      <workItem from="1619709004946" duration="1917000" />
+      <workItem from="1619709004946" duration="2128000" />
+      <workItem from="1619802164885" duration="2321000" />
     </task>
     <task id="LOCAL-00001" summary="User Registration and Login">
       <created>1614707057660</created>
@@ -468,7 +463,14 @@
       <option name="project" value="LOCAL" />
       <updated>1619466262761</updated>
     </task>
-    <option name="localTasksCounter" value="41" />
+    <task id="LOCAL-00041" summary="Requests added">
+      <created>1619725816550</created>
+      <option name="number" value="00041" />
+      <option name="presentableId" value="LOCAL-00041" />
+      <option name="project" value="LOCAL" />
+      <updated>1619725816550</updated>
+    </task>
+    <option name="localTasksCounter" value="42" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -517,6 +519,7 @@
     <MESSAGE value="adding a delivery in a complex form is done" />
     <MESSAGE value="Updating and Adding make from redux" />
     <MESSAGE value="All done" />
-    <option name="LAST_COMMIT_MESSAGE" value="All done" />
+    <MESSAGE value="Requests added" />
+    <option name="LAST_COMMIT_MESSAGE" value="Requests added" />
   </component>
 </project>
