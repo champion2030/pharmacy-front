@@ -43,6 +43,8 @@ import DateRequests from "../requestsTables/dateRequests/DateRequests";
 import QueryWithDataConditionTable from "../summaryQueriesTable/QueryWithDataCondition/QueryWithDataConditionTable";
 import QueryWithConditionForGroupsTable
         from "../summaryQueriesTable/QueryWithConditionForGroups/QueryWithConditionForGroupsTable";
+import FinalQueryWithConditionForDataAndGroupsTable
+        from "../summaryQueriesTable/FinalQueryWithConditionForDataAndGroups/FinalQueryWithConditionForDataAndGroupsTable";
 
 const Content = () => {
 
@@ -89,6 +91,7 @@ const Content = () => {
             <ProtectedRoute path="/dateRequests" component={DateRequests}/>
             <ProtectedRoute path="/queryWithDataCondition" component={QueryWithDataConditionTable}/>
             <ProtectedRoute path="/queryWithConditionForGroups" component={QueryWithConditionForGroupsTable}/>
+            <ProtectedRoute path="/finalQueryWithConditionForGroupsAndData" component={FinalQueryWithConditionForDataAndGroupsTable}/>
             <Route exact path='/unauthorized' component={Unauthorized} />
             <Redirect to="/login"/>
         </Switch>

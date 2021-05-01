@@ -1,7 +1,11 @@
 import axios from "axios";
 import {
-    setCurrentPageQueryWithDataCondition, setIsFetchingQueryWithConditionForGroups,
-    setIsFetchingQueryWithDataCondition, setQueryWithConditionForGroups,
+    setCurrentPageFinalQueryWithDataAndGroup,
+    setCurrentPageQueryWithDataCondition, setFinalQueryWithDataAndGroup,
+    setIsFetchingFinalQueryWithDataAndGroup,
+    setIsFetchingQueryWithConditionForGroups,
+    setIsFetchingQueryWithDataCondition,
+    setQueryWithConditionForGroups,
     setQueryWithDataCondition
 } from "../reducers/summaryQueriesReducer";
 
@@ -28,5 +32,22 @@ export const getQueryWithConditionForGroups = () => {
         dispatch(setIsFetchingQueryWithConditionForGroups(true))
         const requestResult = await axios.get(API_URL + `queryWithConditionForGroups`)
         dispatch(setQueryWithConditionForGroups(requestResult.data))
+    }
+}
+
+export const getFinalQueryWithDataAndGroups = (currentPage, perPage, start_date, finish_date, manufacturerFirmId) => {
+    return async (dispatch) => {
+        dispatch(setIsFetchingFinalQueryWithDataAndGroup(true))
+        const requestResult = await axios.post(API_URL + `finalQueryWithDataAndGroup?page=${currentPage}&limit=${perPage}`, {
+            start_date,
+            finish_date,
+            manufacturerFirmId
+        });
+        if (currentPage > requestResult.data.totalPages && requestResult.data.totalPages !== 0) {
+            dispatch(setCurrentPageFinalQueryWithDataAndGroup(requestResult.data.totalPages))
+        } else if (requestResult.data.totalPages === 0) {
+            dispatch(setCurrentPageFinalQueryWithDataAndGroup(1))
+        }
+        dispatch(setFinalQueryWithDataAndGroup(requestResult.data))
     }
 }

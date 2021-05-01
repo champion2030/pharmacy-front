@@ -1,6 +1,11 @@
 import {
-    SET_CURRENT_PAGE_QUERY_WITH_DATA_CONDITIONS, SET_IS_FETCHING_QUERY_WITH_CONDITIONS_FOR_GROUPS,
-    SET_IS_FETCHING_QUERY_WITH_DATA_CONDITIONS, SET_QUERY_WITH_CONDITIONS_FOR_GROUPS,
+    SET_CURRENT_PAGE_FINAL_QUERY_WITH_DATA_AND_GROUPS,
+    SET_CURRENT_PAGE_QUERY_WITH_DATA_CONDITIONS,
+    SET_FINAL_QUERY_WITH_DATA_AND_GROUPS,
+    SET_IS_FETCHING_FINAL_QUERY_WITH_DATA_AND_GROUPS,
+    SET_IS_FETCHING_QUERY_WITH_CONDITIONS_FOR_GROUPS,
+    SET_IS_FETCHING_QUERY_WITH_DATA_CONDITIONS,
+    SET_QUERY_WITH_CONDITIONS_FOR_GROUPS,
     SET_QUERY_WITH_DATA_CONDITIONS
 } from "../actions/types";
 
@@ -11,7 +16,12 @@ const defaultState = {
     isFetchingQueryWithDataCondition: true,
 
     queryWithConditionForGroups: [],
-    isFetchingQueryWithConditionForGroups: true
+    isFetchingQueryWithConditionForGroups: true,
+
+    finalQueryWithDataAndGroup: [],
+    currentPageFinalQueryWithDataAndGroup: 1,
+    totalCountFinalQueryWithDataAndGroup: 0,
+    isFetchingFinalQueryWithDataAndGroup: true,
 }
 
 export default function summaryQueries(state = defaultState, action) {
@@ -44,6 +54,23 @@ export default function summaryQueries(state = defaultState, action) {
                 ...state,
                 isFetchingQueryWithConditionForGroups: action.payload
             }
+        case SET_FINAL_QUERY_WITH_DATA_AND_GROUPS:
+            return {
+                ...state,
+                finalQueryWithDataAndGroup: action.payload.requestResult,
+                totalCountFinalQueryWithDataAndGroup: action.payload.totalCount,
+                isFetchingFinalQueryWithDataAndGroup: false
+            }
+        case SET_CURRENT_PAGE_FINAL_QUERY_WITH_DATA_AND_GROUPS:
+            return {
+                ...state,
+                currentPageFinalQueryWithDataAndGroup: action.payload
+            }
+        case SET_IS_FETCHING_FINAL_QUERY_WITH_DATA_AND_GROUPS:
+            return {
+                ...state,
+                isFetchingFinalQueryWithDataAndGroup: action.payload
+            }
         default:
             return state
     }
@@ -71,5 +98,20 @@ export const setQueryWithConditionForGroups = (queryWithConditionForGroups) => (
 
 export const setIsFetchingQueryWithConditionForGroups = (bool) => ({
     type: SET_IS_FETCHING_QUERY_WITH_CONDITIONS_FOR_GROUPS,
+    payload: bool
+})
+
+export const setFinalQueryWithDataAndGroup = (finalQueryWithDataAndGroup) => ({
+    type: SET_FINAL_QUERY_WITH_DATA_AND_GROUPS,
+    payload: finalQueryWithDataAndGroup
+})
+
+export const setCurrentPageFinalQueryWithDataAndGroup = (currentPageFinalQueryWithDataAndGroup) => ({
+    type: SET_CURRENT_PAGE_FINAL_QUERY_WITH_DATA_AND_GROUPS,
+    payload: currentPageFinalQueryWithDataAndGroup
+})
+
+export const setIsFetchingFinalQueryWithDataAndGroup = (bool) => ({
+    type: SET_IS_FETCHING_FINAL_QUERY_WITH_DATA_AND_GROUPS,
     payload: bool
 })

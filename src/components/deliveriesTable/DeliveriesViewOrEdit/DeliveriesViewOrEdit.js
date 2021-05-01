@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
-import {Checkbox, Grid, makeStyles, Paper, TextField} from "@material-ui/core";
+import {Checkbox, FormControlLabel, Grid, makeStyles, Paper, TextField} from "@material-ui/core";
 import {useParams} from "react-router-dom"
 import Controls from "../../controls/Controls";
 import {clearMessage} from "../../../actions/message";
@@ -246,12 +246,16 @@ const DeliveriesViewOrEdit = (props) => {
                                     />
                                 </Grid>
                                 <Grid item xs={3}>
-                                    <Checkbox
-                                        checked={presentOfDefect || false}
+                                    <FormControlLabel
+                                        control={
+                                            <Checkbox
+                                                checked={presentOfDefect || false}
+                                                label="Наличие деффекта"
+                                                onChange={handleChangePresentOfDefect}
+                                                inputProps={{'aria-label': 'primary checkbox'}}
+                                                disabled={action === 'see'}
+                                            />}
                                         label="Наличие деффекта"
-                                        onChange={handleChangePresentOfDefect}
-                                        inputProps={{'aria-label': 'primary checkbox'}}
-                                        disabled={action === 'see'}
                                     />
                                 </Grid>
                                 <Grid item xs={3}>

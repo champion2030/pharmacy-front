@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
-import {Checkbox, Grid, makeStyles, Paper, TextField} from "@material-ui/core";
+import {Checkbox, FormControlLabel, Grid, makeStyles, Paper, TextField} from "@material-ui/core";
 import Controls from "../../controls/Controls";
 import {clearMessage} from "../../../actions/message";
 import {getAllEmployees} from "../../../actions/getEmployee";
@@ -202,11 +202,15 @@ const AddNewDeliver = (props) => {
                         />
                     </Grid>
                     <Grid item xs={3}>
-                        <Checkbox
-                            checked={presentOfDefect}
+                        <FormControlLabel
+                            control={
+                                <Checkbox
+                                    checked={presentOfDefect}
+                                    label="Наличие деффекта"
+                                    onChange={handleChangePresentOfDefect}
+                                    inputProps={{'aria-label': 'primary checkbox'}}
+                                />}
                             label="Наличие деффекта"
-                            onChange={handleChangePresentOfDefect}
-                            inputProps={{'aria-label': 'primary checkbox'}}
                         />
                     </Grid>
                     <Grid item xs={3}>

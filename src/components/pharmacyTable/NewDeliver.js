@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
-import {Checkbox, Grid, makeStyles, Paper, TextField} from "@material-ui/core";
+import {Checkbox, FormControlLabel, Grid, makeStyles, Paper, TextField} from "@material-ui/core";
 import Controls from "../controls/Controls";
 import {clearMessage} from "../../actions/message";
 import {getAllMedicines} from "../../actions/getMedicine";
@@ -179,6 +179,7 @@ const NewDeliver = (props) => {
                             variant="inline"
                             format="dd/MM/yyyy"
                             margin="normal"
+                            helperText="Дата поступления в аптеку"
                             id="date-picker-inline1"
                             value={receiptDate}
                             onChange={handleChangeReceiptDate}
@@ -198,11 +199,14 @@ const NewDeliver = (props) => {
                         />
                     </Grid>
                     <Grid item xs={3}>
-                        <Checkbox
-                            checked={presentOfDefect}
+                        <FormControlLabel
+                            control={
+                                <Checkbox
+                                checked={presentOfDefect}
+                                onChange={handleChangePresentOfDefect}
+                                inputProps={{'aria-label': 'primary checkbox'}}
+                            />}
                             label="Наличие деффекта"
-                            onChange={handleChangePresentOfDefect}
-                            inputProps={{'aria-label': 'primary checkbox'}}
                         />
                     </Grid>
                     <Grid item xs={3}>
@@ -230,6 +234,7 @@ const NewDeliver = (props) => {
                             disableToolbar
                             variant="inline"
                             format="dd/MM/yyyy"
+                            helperText="Дата начала срока годности"
                             margin="normal"
                             id="date-picker-inline2"
                             value={expiryStartDate}
@@ -245,6 +250,7 @@ const NewDeliver = (props) => {
                             variant="inline"
                             format="dd/MM/yyyy"
                             margin="normal"
+                            helperText="Дата конца срока годности"
                             id="date-picker-inline3"
                             value={expirationDate}
                             onChange={handleChangeExpirationDate}

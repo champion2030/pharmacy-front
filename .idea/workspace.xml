@@ -12,6 +12,15 @@
   <component name="ChangeListManager">
     <list default="true" id="e0de64aa-80a1-43a0-bc39-5202a49cf082" name="Default Changelist" comment="Requests added">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/actions/getSummaryQueries.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/actions/getSummaryQueries.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/actions/types.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/actions/types.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/AppBarPharmacy/AppBarPharmacy.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/AppBarPharmacy/AppBarPharmacy.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Content/Content.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Content/Content.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/deliveriesTable/AddNewDeliver/AddNewDeliver.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/deliveriesTable/AddNewDeliver/AddNewDeliver.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/deliveriesTable/DeliveriesViewOrEdit/DeliveriesViewOrEdit.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/deliveriesTable/DeliveriesViewOrEdit/DeliveriesViewOrEdit.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/pharmacyTable/NewDeliver.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/pharmacyTable/NewDeliver.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/summaryQueriesTable/FinalQueryWithConditionForDataAndGroups/FinalQueryWithConditionForDataAndGroupsTable.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/summaryQueriesTable/FinalQueryWithConditionForDataAndGroups/FinalQueryWithConditionForDataAndGroupsTable.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/reducers/summaryQueriesReducer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/reducers/summaryQueriesReducer.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -181,7 +190,8 @@
       <workItem from="1619539261325" duration="187000" />
       <workItem from="1619539465098" duration="8266000" />
       <workItem from="1619709004946" duration="2128000" />
-      <workItem from="1619802164885" duration="2321000" />
+      <workItem from="1619802164885" duration="8744000" />
+      <workItem from="1619866243308" duration="2957000" />
     </task>
     <task id="LOCAL-00001" summary="User Registration and Login">
       <created>1614707057660</created>
@@ -470,7 +480,14 @@
       <option name="project" value="LOCAL" />
       <updated>1619725816550</updated>
     </task>
-    <option name="localTasksCounter" value="42" />
+    <task id="LOCAL-00042" summary="Requests added">
+      <created>1619814191626</created>
+      <option name="number" value="00042" />
+      <option name="presentableId" value="LOCAL-00042" />
+      <option name="project" value="LOCAL" />
+      <updated>1619814191626</updated>
+    </task>
+    <option name="localTasksCounter" value="43" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

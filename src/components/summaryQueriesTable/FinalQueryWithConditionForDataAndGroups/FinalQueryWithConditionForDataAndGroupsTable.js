@@ -1,15 +1,17 @@
 import React, {useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
-import {Checkbox, Grid, lighten, makeStyles, Paper, Table, TableBody, TableCell, TableRow, Typography,} from "@material-ui/core";
+import {Checkbox, Grid, lighten, makeStyles, Paper, Table, TableBody, TableCell, TableRow, TextField, Typography,} from "@material-ui/core";
 import TablePagination from "@material-ui/core/TablePagination";
 import Moment from "react-moment";
 import AttachMoneyIcon from '@material-ui/icons/AttachMoney';
 import '../../commonComponents/LoadingAnimation.css'
-import QueryWithDataConditionTableHead from "./QueryWithDataConditionTableHead";
-import {setCurrentPageQueryWithDataCondition} from "../../../reducers/summaryQueriesReducer";
-import {getQueryWithDataCondition} from "../../../actions/getSummaryQueries";
+import {setCurrentPageFinalQueryWithDataAndGroup,} from "../../../reducers/summaryQueriesReducer";
 import {KeyboardDatePicker, MuiPickersUtilsProvider} from "@material-ui/pickers";
 import DateFnsUtils from "@date-io/date-fns";
+import FinalQueryWithConditionForDataAndGroupsTableHead from "./FinalQueryWithConditionForDataAndGroupsTableHead";
+import {Autocomplete} from "@material-ui/lab";
+import {getAllFirms} from "../../../actions/getManufacturerFirm";
+import {getFinalQueryWithDataAndGroups} from "../../../actions/getSummaryQueries";
 
 const useStyles = makeStyles(theme => ({
     pageContent: {
@@ -71,29 +73,35 @@ const useStyles = makeStyles(theme => ({
     }
 }))
 
-const QueryWithDataConditionTable = () => {
+const FinalQueryWithConditionForDataAndGroupsTable = () => {
 
     const classes = useStyles();
     const dispatch = useDispatch()
-    const queryWithDataCondition = useSelector(state => state.summaryQueries.queryWithDataCondition)
-    const currentPageQueryWithDataCondition = useSelector(state => state.summaryQueries.currentPageQueryWithDataCondition)
-    const totalCountQueryWithDataCondition = useSelector(state => state.summaryQueries.totalCountQueryWithDataCondition)
-    const isFetchingQueryWithDataCondition = useSelector(state => state.summaryQueries.isFetchingQueryWithDataCondition)
+    const allManufacturerFirms = useSelector(state => state.manufacturerFirmReducer.allManufacturerFirms)
+    const finalQueryWithDataAndGroup = useSelector(state => state.summaryQueries.finalQueryWithDataAndGroup)
+    const currentPageFinalQueryWithDataAndGroup = useSelector(state => state.summaryQueries.currentPageFinalQueryWithDataAndGroup)
+    const totalCountFinalQueryWithDataAndGroup = useSelector(state => state.summaryQueries.totalCountFinalQueryWithDataAndGroup)
+    const isFetchingFinalQueryWithDataAndGroup = useSelector(state => state.summaryQueries.isFetchingFinalQueryWithDataAndGroup)
     const [rowsPerPage, setRowsPerPage] = useState(5);
     const [startDate, setStartDate] = useState(new Date('2012-01-01'))
     const [finishDate, setFinishDate] = useState(new Date())
+    const [manufacturerFirmId, setManufacturerFirmId] = useState('')
 
     useEffect(() => {
-        dispatch(getQueryWithDataCondition(currentPageQueryWithDataCondition, rowsPerPage, startDate, finishDate))
-    }, [currentPageQueryWithDataCondition, dispatch, rowsPerPage, startDate, finishDate])
+        dispatch(getFinalQueryWithDataAndGroups(currentPageFinalQueryWithDataAndGroup, rowsPerPage, startDate, finishDate, manufacturerFirmId))
+    }, [currentPageFinalQueryWithDataAndGroup, dispatch, rowsPerPage, startDate, finishDate, manufacturerFirmId])
+
+    useEffect(() => {
+        dispatch(getAllFirms())
+    }, [dispatch])
 
     const handleChangePage = (event, newPage) => {
-        dispatch(setCurrentPageQueryWithDataCondition(newPage + 1))
+        dispatch(setCurrentPageFinalQueryWithDataAndGroup(newPage + 1))
     };
 
     const handleChangeRowsPerPage = (event) => {
         setRowsPerPage(+event.target.value);
-        dispatch(setCurrentPageQueryWithDataCondition(1))
+        dispatch(setCurrentPageFinalQueryWithDataAndGroup(1))
     }
 
     const handleStartDateChange = (date) => {
@@ -111,8 +119,22 @@ const QueryWithDataConditionTable = () => {
                     <Grid container align="center" justify="center" alignItems="center">
                         <Grid item xs={12}>
                             <Typography variant="h6">
-                                Поставки и их количество за определённый промежуток времени
+                                Поставки и их количество за определённый промежуток времени для конкретного производителя
                             </Typography>
+                        </Grid>
+                        <Grid item xs={3}>
+                            <Autocomplete
+                                id="combo-box-demo3"
+                                options={allManufacturerFirms}
+                                disableClearable
+                                getOptionLabel={(option) => option.firm_name}
+                                style={{width: 300, marginBottom: 20}}
+                                onChange={(event, newValue) => {
+                                    setManufacturerFirmId(newValue.id)
+                                }}
+                                renderInput={(params) =>
+                                    <TextField{...params} variant="outlined"/>}
+                            />
                         </Grid>
                         <Grid item xs={3}>
                             <KeyboardDatePicker
@@ -147,18 +169,18 @@ const QueryWithDataConditionTable = () => {
                     </Grid>
                 </MuiPickersUtilsProvider>
                 {
-                    isFetchingQueryWithDataCondition === false
+                    isFetchingFinalQueryWithDataAndGroup === false
                         ?
                         <Table className={classes.table}>
-                            <QueryWithDataConditionTableHead/>
+                            <FinalQueryWithConditionForDataAndGroupsTableHead/>
                             <TableBody>
                                 {
-                                    queryWithDataCondition.map(item =>
+                                    finalQueryWithDataAndGroup.map(item =>
                                         (
                                             <TableRow key={item.id}>
                                                 <TableCell>{item.medicine_name}</TableCell>
                                                 <TableCell>{item.full_name}</TableCell>
-                                                <TableCell width="100">{item.reason_for_return}</TableCell>
+                                                <TableCell width="350">{item.reason_for_return}</TableCell>
                                                 <TableCell>
                                                     <Moment format="DD/MM/YYYY" add={{hours: 3}}>
                                                         {item.receipt_date}
@@ -202,9 +224,9 @@ const QueryWithDataConditionTable = () => {
                 <TablePagination
                     rowsPerPageOptions={[5, 10, 50, 200]}
                     component="div"
-                    count={totalCountQueryWithDataCondition}
+                    count={totalCountFinalQueryWithDataAndGroup}
                     rowsPerPage={rowsPerPage}
-                    page={currentPageQueryWithDataCondition - 1}
+                    page={currentPageFinalQueryWithDataAndGroup - 1}
                     onChangePage={handleChangePage}
                     onChangeRowsPerPage={handleChangeRowsPerPage}
                 />
@@ -213,4 +235,4 @@ const QueryWithDataConditionTable = () => {
     )
 };
 
-export default QueryWithDataConditionTable;
+export default FinalQueryWithConditionForDataAndGroupsTable;

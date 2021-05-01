@@ -274,6 +274,9 @@ const AppBarPharmacy = () => {
                     <ListItem button component={Link} to="/queryWithConditionForGroups">
                         <ListItemText primary={"Итоговый запрос с уловием на группы"}/>
                     </ListItem>
+                    <ListItem button component={Link} to="/finalQueryWithConditionForGroupsAndData">
+                        <ListItemText primary={"Итоговый запрос с уловием на группы и данные"}/>
+                    </ListItem>
                 </List>
             </Drawer>
         </ThemeProvider>
