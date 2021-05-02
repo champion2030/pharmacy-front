@@ -114,7 +114,7 @@ const DateRequests = () => {
                                     variant="inline"
                                     format="dd/MM/yyyy"
                                     margin="normal"
-                                    id="date-picker-inline"
+                                    id="date-picker-inline1"
                                     value={selectedDate}
                                     onChange={handleDateChange}
                                     KeyboardButtonProps={{
@@ -182,7 +182,7 @@ const DateRequests = () => {
                                     variant="inline"
                                     format="dd/MM/yyyy"
                                     margin="normal"
-                                    id="date-picker-inline"
+                                    id="date-picker-inline2"
                                     value={selectedDateSecondRequest}
                                     onChange={handleDateChangeSecondRequest}
                                     KeyboardButtonProps={{

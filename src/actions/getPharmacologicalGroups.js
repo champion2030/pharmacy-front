@@ -1,23 +1,22 @@
 import axios from "axios";
 import {setCurrentPharmacologicalGroup, setGroups,
-    setIsFetching, setPotentialDataToDeleteByPharmacologicalGroup,
+    setPotentialDataToDeleteByPharmacologicalGroup,
     updateInputPharmacologicalGroup
 } from "../reducers/pharmacologicalGroupTableReducer";
 import {SET_MESSAGE} from "./types";
+import authHeader from "../services/auth-header";
 
 const API_URL = "http://localhost:8080/api/";
 
 export const getGroups = () => {
     return async (dispatch) => {
-        dispatch(setIsFetching(true))
-        const groups = await axios.get(API_URL + `getPharmacologicalGroup`);
+        const groups = await axios.get(API_URL + `getPharmacologicalGroup`, {headers: authHeader()});
         dispatch(setGroups(groups.data))
     }
 };
 
 export const createNewGroup = (pharmacological_group) => (dispatch) => {
-    dispatch(setIsFetching(true))
-    const group = axios.post(API_URL + `createPharmacologicalGroup`, {pharmacological_group})
+    const group = axios.post(API_URL + `createPharmacologicalGroup`, {pharmacological_group}, {headers: authHeader()})
     return group.then(
         () => {
             dispatch({
@@ -39,16 +38,14 @@ export const createNewGroup = (pharmacological_group) => (dispatch) => {
 }
 
 export const deletePharmacologicalGroup = (id) => async (dispatch) => {
-    dispatch(setIsFetching(true))
-    await axios.delete(API_URL + `deletePharmacologicalGroup/${id}`)
-    const groups = await axios.get(API_URL + `getPharmacologicalGroup`);
+    await axios.delete(API_URL + `deletePharmacologicalGroup/${id}`, {headers: authHeader()})
+    const groups = await axios.get(API_URL + `getPharmacologicalGroup`, {headers: authHeader()});
     dispatch(setGroups(groups.data))
 }
 
 export const getCurrentPharmacologicalGroup = (id) => {
     return async (dispatch) => {
-        dispatch(setIsFetching(true))
-        const form = await axios.get(API_URL + `getCurrentPharmacologicalGroup/${id}`);
+        const form = await axios.get(API_URL + `getCurrentPharmacologicalGroup/${id}`, {headers: authHeader()});
         dispatch(setCurrentPharmacologicalGroup(form.data.pharmacological_group))
     }
 };
@@ -60,8 +57,7 @@ export const updateCurrentInputPharmacologicalGroup = (input) => {
 };
 
 export const updateCurrentPharmacologicalGroup = (pharmacological_group, id) => (dispatch) => {
-    dispatch(setIsFetching(true))
-    const updatedGroup = axios.put(API_URL + `updatePharmacologicalGroup/${id}`, {pharmacological_group})
+    const updatedGroup = axios.put(API_URL + `updatePharmacologicalGroup/${id}`, {pharmacological_group}, {headers: authHeader()})
     return updatedGroup.then(
         () => {
             dispatch({
@@ -83,6 +79,6 @@ export const updateCurrentPharmacologicalGroup = (pharmacological_group, id) => 
 }
 
 export const getDeletePharmacologicalGroupInfo = (id) => async (dispatch) => {
-    const info = await axios.get(API_URL + `getDeletePharmacologicalGroupInfo/${id}`);
+    const info = await axios.get(API_URL + `getDeletePharmacologicalGroupInfo/${id}`, {headers: authHeader()});
     dispatch(setPotentialDataToDeleteByPharmacologicalGroup(info.data))
 }

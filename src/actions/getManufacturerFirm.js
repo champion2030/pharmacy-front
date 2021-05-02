@@ -1,7 +1,9 @@
 import axios from "axios";
-import {setAllFirms, setCurrentFirm, setCurrentPageFirm, setFirms, setIsFetchingFirm, setPotentialDataToDeleteByFirm
+import {
+    setAllFirms, setCurrentFirm, setCurrentPageFirm, setFirms, setIsFetchingFirm, setPotentialDataToDeleteByFirm
 } from "../reducers/manufacturerFirmTableReducer";
 import {SET_MESSAGE} from "./types";
+import authHeader from "../services/auth-header";
 
 const API_URL = "http://localhost:8080/api/";
 
@@ -11,22 +13,22 @@ export const getFirms = (searchQuery, currentPage, perPage) => {
     }
     return async (dispatch) => {
         dispatch(setIsFetchingFirm(true))
-        const firms = await axios.get(API_URL + `getManufacturerFirm?searchQuery=${searchQuery}&page=${currentPage}&limit=${perPage}`);
+        const firms = await axios.get(API_URL + `getManufacturerFirm?searchQuery=${searchQuery}&page=${currentPage}&limit=${perPage}`, {headers: authHeader()});
         dispatch(setFirms(firms.data))
     }
 }
 
 export const getAllFirms = () => {
     return async (dispatch) => {
-        const firms = await axios.get(API_URL + `getAllManufacturerFirm`);
+        const firms = await axios.get(API_URL + `getAllManufacturerFirm`, {headers: authHeader()});
         dispatch(setAllFirms(firms.data))
     }
 }
 
 export const deleteFirm = (id, searchQuery, currentPage, perPage) => async (dispatch) => {
     dispatch(setIsFetchingFirm(true))
-    await axios.delete(API_URL + `deleteManufacturerFirm/${id}`)
-    const firms = await axios.get(API_URL + `getManufacturerFirm?searchQuery=${searchQuery}&page=${currentPage}&limit=${perPage}`);
+    await axios.delete(API_URL + `deleteManufacturerFirm/${id}`, {headers: authHeader()})
+    const firms = await axios.get(API_URL + `getManufacturerFirm?searchQuery=${searchQuery}&page=${currentPage}&limit=${perPage}`, {headers: authHeader()});
     if (currentPage > firms.data.totalPages && firms.data.totalPages !== 0) {
         dispatch(setCurrentPageFirm(firms.data.totalPages))
     } else if (firms.data.totalPages === 0) {
@@ -39,7 +41,7 @@ export const getCurrentFirm = (id) => {
     return (dispatch) => {
         dispatch(setIsFetchingFirm(true))
         return axios
-            .get(API_URL + `getCurrentManufacturerFirm/${id}`)
+            .get(API_URL + `getCurrentManufacturerFirm/${id}`, {headers: authHeader()})
             .then(result => {
                 dispatch(setCurrentFirm(result.data))
             })
@@ -56,7 +58,7 @@ export const updateCurrentFirm = (country_of_manufacture_id, firm_name, email, a
         email,
         address,
         year_open
-    })
+    }, {headers: authHeader()})
     return updatedFirm.then(
         () => {
             dispatch({
@@ -84,7 +86,7 @@ export const createNewFirm = (country_of_manufacture_id, firm_name, email, addre
         email,
         address,
         year_open
-    })
+    }, {headers: authHeader()})
     return newFirm.then(
         () => {
             dispatch({
@@ -105,14 +107,14 @@ export const createNewFirm = (country_of_manufacture_id, firm_name, email, addre
 }
 
 export const getDeleteFirmInfo = (id) => async (dispatch) => {
-    const info = await axios.get(API_URL + `deleteManufacturerFirmInfo/${id}`);
+    const info = await axios.get(API_URL + `deleteManufacturerFirmInfo/${id}`, {headers: authHeader()});
     dispatch(setPotentialDataToDeleteByFirm(info.data))
 }
 
 export const deleteGroupOfFirms = (firmsId, searchQuery, currentPage, perPage) => async (dispatch) => {
     dispatch(setIsFetchingFirm(true))
-    await axios.delete(API_URL + `deleteGroupOfFirms`, {data: {firmsId: firmsId}})
-    const firms = await axios.get(API_URL + `getManufacturerFirm?searchQuery=${searchQuery}&page=${currentPage}&limit=${perPage}`);
+    await axios.delete(API_URL + `deleteGroupOfFirms`, {data: {firmsId: firmsId}, headers: authHeader()})
+    const firms = await axios.get(API_URL + `getManufacturerFirm?searchQuery=${searchQuery}&page=${currentPage}&limit=${perPage}`, {headers: authHeader()});
     if (currentPage > firms.data.totalPages && firms.data.totalPages !== 0) {
         dispatch(setCurrentPageFirm(firms.data.totalPages))
     } else if (firms.data.totalPages === 0) {

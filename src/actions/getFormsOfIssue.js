@@ -6,20 +6,21 @@ import {
     updateInputFormOfIssue
 } from "../reducers/formOfIssueTableReducer";
 import {SET_MESSAGE} from "./types";
+import authHeader from "../services/auth-header";
 
 const API_URL = "http://localhost:8080/api/";
 
 export const getForms = () => {
     return async (dispatch) => {
         dispatch(setIsFetching(true))
-        const forms = await axios.get(API_URL + `getFormOfIssue`);
+        const forms = await axios.get(API_URL + `getFormOfIssue`, {headers: authHeader()});
         dispatch(setForms(forms.data))
     }
 };
 
 export const createNewForm = (form_of_issue) => (dispatch) => {
     dispatch(setIsFetching(true))
-    const form = axios.post(API_URL + `createFormOfIssue`, {form_of_issue})
+    const form = axios.post(API_URL + `createFormOfIssue`, {form_of_issue}, {headers: authHeader()})
     return form.then(
         () => {
             dispatch({
@@ -42,15 +43,15 @@ export const createNewForm = (form_of_issue) => (dispatch) => {
 
 export const deleteFormOfIssue = (id) => async (dispatch) => {
     dispatch(setIsFetching(true))
-    await axios.delete(API_URL + `deleteFormOfIssue/${id}`)
-    const forms = await axios.get(API_URL + `getFormOfIssue`);
+    await axios.delete(API_URL + `deleteFormOfIssue/${id}`, {headers: authHeader()})
+    const forms = await axios.get(API_URL + `getFormOfIssue`, {headers: authHeader()});
     dispatch(setForms(forms.data))
 }
 
 export const getCurrentFormOfIssue = (id) => {
     return async (dispatch) => {
         dispatch(setIsFetching(true))
-        const form = await axios.get(API_URL + `getCurrentFormOfIssue/${id}`);
+        const form = await axios.get(API_URL + `getCurrentFormOfIssue/${id}`, {headers: authHeader()});
         dispatch(setCurrentFormOfIssue(form.data.form_of_issue))
     }
 };
@@ -63,7 +64,7 @@ export const updateCurrentInputFormOfIssue = (input) => {
 
 export const updateCurrentFormOfIssue = (form_of_issue, id) => (dispatch) => {
     dispatch(setIsFetching(true))
-    const updatedForm = axios.put(API_URL + `updateFormOfIssue/${id}`, {form_of_issue})
+    const updatedForm = axios.put(API_URL + `updateFormOfIssue/${id}`, {form_of_issue}, {headers: authHeader()})
     return updatedForm.then(
         () => {
             dispatch({
@@ -85,6 +86,6 @@ export const updateCurrentFormOfIssue = (form_of_issue, id) => (dispatch) => {
 }
 
 export const getDeleteFormOfIssueInfo = (id) => async (dispatch) => {
-    const info = await axios.get(API_URL + `getDeleteFormOfIssueInfo/${id}`);
+    const info = await axios.get(API_URL + `getDeleteFormOfIssueInfo/${id}`, {headers: authHeader()});
     dispatch(setPotentialDataToDeleteByFormOfIssue(info.data))
 }

@@ -8,6 +8,7 @@ import {
     setQueryWithConditionForGroups,
     setQueryWithDataCondition
 } from "../reducers/summaryQueriesReducer";
+import authHeader from "../services/auth-header";
 
 const API_URL = "http://localhost:8080/api/";
 
@@ -17,7 +18,7 @@ export const getQueryWithDataCondition = (currentPage, perPage, start_date, fini
         const requestResult = await axios.post(API_URL + `queryWithDataCondition?page=${currentPage}&limit=${perPage}`, {
             start_date,
             finish_date
-        });
+        }, {headers: authHeader()});
         if (currentPage > requestResult.data.totalPages && requestResult.data.totalPages !== 0) {
             dispatch(setCurrentPageQueryWithDataCondition(requestResult.data.totalPages))
         } else if (requestResult.data.totalPages === 0) {
@@ -30,7 +31,7 @@ export const getQueryWithDataCondition = (currentPage, perPage, start_date, fini
 export const getQueryWithConditionForGroups = () => {
     return async (dispatch) => {
         dispatch(setIsFetchingQueryWithConditionForGroups(true))
-        const requestResult = await axios.get(API_URL + `queryWithConditionForGroups`)
+        const requestResult = await axios.get(API_URL + `queryWithConditionForGroups`, {headers: authHeader()})
         dispatch(setQueryWithConditionForGroups(requestResult.data))
     }
 }
@@ -42,7 +43,7 @@ export const getFinalQueryWithDataAndGroups = (currentPage, perPage, start_date,
             start_date,
             finish_date,
             manufacturerFirmId
-        });
+        }, {headers: authHeader()});
         if (currentPage > requestResult.data.totalPages && requestResult.data.totalPages !== 0) {
             dispatch(setCurrentPageFinalQueryWithDataAndGroup(requestResult.data.totalPages))
         } else if (requestResult.data.totalPages === 0) {

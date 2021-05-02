@@ -102,7 +102,7 @@ const AddNewDeliver = (props) => {
     };
 
     const handleSubmit = () => {
-        if (presentOfDefect && cause == null) {
+        if (presentOfDefect && causeId === null) {
             dispatch({type: SET_MESSAGE, payload: "Выберите причину возврата!"})
             setSuccessful(false);
         } else {

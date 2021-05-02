@@ -26,7 +26,6 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-
 const Register = () => {
     const classes = useStyles();
 
@@ -91,13 +90,13 @@ const Register = () => {
                         </Grid>
                         <Grid item xs={12}>
                             <TextField
+                                autoComplete="email"
                                 variant="outlined"
                                 required
                                 fullWidth
                                 id="email"
                                 label="Email"
                                 name="email"
-                                autoComplete="email"
                                 onChange={onChangeEmail}
                             />
                         </Grid>
