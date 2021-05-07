@@ -45,6 +45,8 @@ import QueryWithConditionForGroupsTable
         from "../summaryQueriesTable/QueryWithConditionForGroups/QueryWithConditionForGroupsTable";
 import FinalQueryWithConditionForDataAndGroupsTable
         from "../summaryQueriesTable/FinalQueryWithConditionForDataAndGroups/FinalQueryWithConditionForDataAndGroupsTable";
+import FinalRequestWithoutConditionTable
+        from "../summaryQueriesTable/FinalRequestWithoutCondition/FinalRequestWithoutConditionTable";
 
 const Content = () => {
 
@@ -92,6 +94,7 @@ const Content = () => {
             <ProtectedRoute path="/queryWithDataCondition" component={QueryWithDataConditionTable}/>
             <ProtectedRoute path="/queryWithConditionForGroups" component={QueryWithConditionForGroupsTable}/>
             <ProtectedRoute path="/finalQueryWithConditionForGroupsAndData" component={FinalQueryWithConditionForDataAndGroupsTable}/>
+            <ProtectedRoute path="/finalQueryWithoutCondition" component={FinalRequestWithoutConditionTable}/>
             <Route exact path='/unauthorized' component={Unauthorized} />
             <Redirect to="/login"/>
         </Switch>

@@ -1,8 +1,11 @@
 import axios from "axios";
 import {
     setCurrentPageFinalQueryWithDataAndGroup,
-    setCurrentPageQueryWithDataCondition, setFinalQueryWithDataAndGroup,
-    setIsFetchingFinalQueryWithDataAndGroup,
+    setCurrentPageFinalQueryWithGroup,
+    setCurrentPageFinalRequestWithoutCondition,
+    setCurrentPageQueryWithDataCondition,
+    setFinalQueryWithDataAndGroup, setFinalRequestWithoutCondition,
+    setIsFetchingFinalQueryWithDataAndGroup, setIsFetchingFinalRequestWithoutCondition,
     setIsFetchingQueryWithConditionForGroups,
     setIsFetchingQueryWithDataCondition,
     setQueryWithConditionForGroups,
@@ -28,10 +31,16 @@ export const getQueryWithDataCondition = (currentPage, perPage, start_date, fini
     }
 }
 
-export const getQueryWithConditionForGroups = () => {
+export const getQueryWithConditionForGroups = (currentPage, perPage, manufacturerFirmId) => {
     return async (dispatch) => {
         dispatch(setIsFetchingQueryWithConditionForGroups(true))
-        const requestResult = await axios.get(API_URL + `queryWithConditionForGroups`, {headers: authHeader()})
+        const requestResult = await axios.post(API_URL + `queryWithConditionForGroups?page=${currentPage}&limit=${perPage}`, {manufacturerFirmId},
+            {headers: authHeader()})
+        if (currentPage > requestResult.data.totalPages && requestResult.data.totalPages !== 0) {
+            dispatch(setCurrentPageFinalQueryWithGroup(requestResult.data.totalPages))
+        } else if (requestResult.data.totalPages === 0) {
+            dispatch(setCurrentPageFinalQueryWithGroup(1))
+        }
         dispatch(setQueryWithConditionForGroups(requestResult.data))
     }
 }
@@ -50,5 +59,20 @@ export const getFinalQueryWithDataAndGroups = (currentPage, perPage, start_date,
             dispatch(setCurrentPageFinalQueryWithDataAndGroup(1))
         }
         dispatch(setFinalQueryWithDataAndGroup(requestResult.data))
+    }
+}
+
+
+
+export const getFinalRequestWithoutCondition = (currentPage, perPage) => {
+    return async (dispatch) => {
+        dispatch(setIsFetchingFinalRequestWithoutCondition(true))
+        const requestResult = await axios.get(API_URL + `finalRequestWithoutCondition?page=${currentPage}&limit=${perPage}`,{headers: authHeader()});
+        if (currentPage > requestResult.data.totalPages && requestResult.data.totalPages !== 0) {
+            dispatch(setCurrentPageFinalRequestWithoutCondition(requestResult.data.totalPages))
+        } else if (requestResult.data.totalPages === 0) {
+            dispatch(setCurrentPageFinalRequestWithoutCondition(1))
+        }
+        dispatch(setFinalRequestWithoutCondition(requestResult.data))
     }
 }

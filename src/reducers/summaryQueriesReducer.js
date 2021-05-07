@@ -1,8 +1,8 @@
 import {
-    SET_CURRENT_PAGE_FINAL_QUERY_WITH_DATA_AND_GROUPS,
-    SET_CURRENT_PAGE_QUERY_WITH_DATA_CONDITIONS,
-    SET_FINAL_QUERY_WITH_DATA_AND_GROUPS,
-    SET_IS_FETCHING_FINAL_QUERY_WITH_DATA_AND_GROUPS,
+    SET_CURRENT_PAGE_FINAL_QUERY_WITH_DATA_AND_GROUPS, SET_CURRENT_PAGE_FINAL_REQUEST_WITHOUT_CONDITION,
+    SET_CURRENT_PAGE_QUERY_WITH_DATA_CONDITIONS, SET_CURRENT_PAGE_QUERY_WITH_GROUP_CONDITIONS,
+    SET_FINAL_QUERY_WITH_DATA_AND_GROUPS, SET_FINAL_REQUEST_WITHOUT_CONDITION,
+    SET_IS_FETCHING_FINAL_QUERY_WITH_DATA_AND_GROUPS, SET_IS_FETCHING_FINAL_REQUEST_WITHOUT_CONDITION,
     SET_IS_FETCHING_QUERY_WITH_CONDITIONS_FOR_GROUPS,
     SET_IS_FETCHING_QUERY_WITH_DATA_CONDITIONS,
     SET_QUERY_WITH_CONDITIONS_FOR_GROUPS,
@@ -16,12 +16,19 @@ const defaultState = {
     isFetchingQueryWithDataCondition: true,
 
     queryWithConditionForGroups: [],
+    currentPageFinalQueryWithGroup: 1,
+    totalCountFinalQueryWithGroup: 0,
     isFetchingQueryWithConditionForGroups: true,
 
     finalQueryWithDataAndGroup: [],
     currentPageFinalQueryWithDataAndGroup: 1,
     totalCountFinalQueryWithDataAndGroup: 0,
     isFetchingFinalQueryWithDataAndGroup: true,
+
+    finalRequestWithoutCondition: [],
+    currentPageFinalRequestWithoutCondition: 1,
+    totalCountFinalRequestWithoutCondition: 0,
+    isFetchingFinalRequestWithoutCondition: true,
 }
 
 export default function summaryQueries(state = defaultState, action) {
@@ -46,8 +53,14 @@ export default function summaryQueries(state = defaultState, action) {
         case SET_QUERY_WITH_CONDITIONS_FOR_GROUPS:
             return {
                 ...state,
-                queryWithConditionForGroups: action.payload,
+                queryWithConditionForGroups: action.payload.requestResult,
+                totalCountFinalQueryWithGroup: action.payload.totalCount,
                 isFetchingQueryWithConditionForGroups: false
+            }
+        case SET_CURRENT_PAGE_QUERY_WITH_GROUP_CONDITIONS:
+            return {
+                ...state,
+                currentPageFinalQueryWithGroup: action.payload
             }
         case SET_IS_FETCHING_QUERY_WITH_CONDITIONS_FOR_GROUPS:
             return {
@@ -70,6 +83,23 @@ export default function summaryQueries(state = defaultState, action) {
             return {
                 ...state,
                 isFetchingFinalQueryWithDataAndGroup: action.payload
+            }
+        case SET_FINAL_REQUEST_WITHOUT_CONDITION:
+            return {
+                ...state,
+                finalRequestWithoutCondition: action.payload.requestResult,
+                totalCountFinalRequestWithoutCondition: action.payload.totalCount,
+                isFetchingFinalRequestWithoutCondition: false
+            }
+        case SET_CURRENT_PAGE_FINAL_REQUEST_WITHOUT_CONDITION:
+            return {
+                ...state,
+                currentPageFinalRequestWithoutCondition: action.payload
+            }
+        case SET_IS_FETCHING_FINAL_REQUEST_WITHOUT_CONDITION:
+            return {
+                ...state,
+                isFetchingFinalRequestWithoutCondition: action.payload
             }
         default:
             return state
@@ -96,6 +126,11 @@ export const setQueryWithConditionForGroups = (queryWithConditionForGroups) => (
     payload: queryWithConditionForGroups
 })
 
+export const setCurrentPageFinalQueryWithGroup = (currentPageFinalQueryWithGroup) => ({
+    type: SET_CURRENT_PAGE_QUERY_WITH_GROUP_CONDITIONS,
+    payload: currentPageFinalQueryWithGroup
+})
+
 export const setIsFetchingQueryWithConditionForGroups = (bool) => ({
     type: SET_IS_FETCHING_QUERY_WITH_CONDITIONS_FOR_GROUPS,
     payload: bool
@@ -113,5 +148,20 @@ export const setCurrentPageFinalQueryWithDataAndGroup = (currentPageFinalQueryWi
 
 export const setIsFetchingFinalQueryWithDataAndGroup = (bool) => ({
     type: SET_IS_FETCHING_FINAL_QUERY_WITH_DATA_AND_GROUPS,
+    payload: bool
+})
+
+export const setFinalRequestWithoutCondition = (finalRequestWithoutCondition) => ({
+    type: SET_FINAL_REQUEST_WITHOUT_CONDITION,
+    payload: finalRequestWithoutCondition
+})
+
+export const setCurrentPageFinalRequestWithoutCondition = (currentPageFinalRequestWithoutCondition) => ({
+    type: SET_CURRENT_PAGE_FINAL_REQUEST_WITHOUT_CONDITION,
+    payload: currentPageFinalRequestWithoutCondition
+})
+
+export const setIsFetchingFinalRequestWithoutCondition = (bool) => ({
+    type: SET_IS_FETCHING_FINAL_REQUEST_WITHOUT_CONDITION,
     payload: bool
 })
