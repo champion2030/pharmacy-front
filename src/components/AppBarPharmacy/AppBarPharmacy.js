@@ -121,73 +121,73 @@ const AppBarPharmacy = () => {
 
     return (
         <ThemeProvider theme={theme}>
-                <AppBar
-                    position="fixed"
-                    className={clsx(classes.appBar, {
-                        [classes.appBarShift]: open,
-                    })}
-                >
-                    <Toolbar className={classes.toolbar}>
-                        <IconButton
-                            color="inherit"
-                            aria-label="open drawer"
-                            onClick={handleDrawerOpen}
-                            edge="start"
-                            className={clsx(classes.menuButton, open && classes.hide)}
-                        >
-                            <MenuIcon/>
-                        </IconButton>
-                        <Typography className={classes.title} variant="h6" noWrap>
-                            Аптеки
-                        </Typography>
-                        <div className={classes.grow}/>
-                        <div className={classes.sectionDesktop}>
-                            {currentUser ? (
-                                <div>
-                                    <IconButton
-                                        edge="end"
-                                        aria-label="account of current user"
-                                        aria-haspopup="true"
-                                        color="secondary"
-                                        component={Link}
-                                        to={"/profile"}
-                                    >
-                                        <AccountCircle/>
-                                    </IconButton>
-                                    <IconButton
-                                        color="secondary"
-                                        onClick={logOut}
-                                        component={Link}
-                                        to={"/login"}>
-                                        <Badge color="secondary">
-                                            <ExitToAppTwoToneIcon/>
-                                        </Badge>
-                                    </IconButton>
-                                </div>
-                            ) : (
-                                <div>
-                                    <IconButton
-                                        color="secondary"
-                                        component={Link}
-                                        to={"/login"}>
-                                        <Badge color="secondary">
-                                            <VpnKeyIcon/>
-                                        </Badge>
-                                    </IconButton>
+            <AppBar
+                position="fixed"
+                className={clsx(classes.appBar, {
+                    [classes.appBarShift]: open,
+                })}
+            >
+                <Toolbar className={classes.toolbar}>
+                    <IconButton
+                        color="inherit"
+                        aria-label="open drawer"
+                        onClick={handleDrawerOpen}
+                        edge="start"
+                        className={clsx(classes.menuButton, open && classes.hide)}
+                    >
+                        <MenuIcon/>
+                    </IconButton>
+                    <Typography className={classes.title} variant="h6" noWrap>
+                        Аптеки
+                    </Typography>
+                    <div className={classes.grow}/>
+                    <div className={classes.sectionDesktop}>
+                        {currentUser ? (
+                            <div>
+                                <IconButton
+                                    edge="end"
+                                    aria-label="account of current user"
+                                    aria-haspopup="true"
+                                    color="secondary"
+                                    component={Link}
+                                    to={"/profile"}
+                                >
+                                    <AccountCircle/>
+                                </IconButton>
+                                <IconButton
+                                    color="secondary"
+                                    onClick={logOut}
+                                    component={Link}
+                                    to={"/login"}>
+                                    <Badge color="secondary">
+                                        <ExitToAppTwoToneIcon/>
+                                    </Badge>
+                                </IconButton>
+                            </div>
+                        ) : (
+                            <div>
+                                <IconButton
+                                    color="secondary"
+                                    component={Link}
+                                    to={"/login"}>
+                                    <Badge color="secondary">
+                                        <VpnKeyIcon/>
+                                    </Badge>
+                                </IconButton>
 
-                                    <IconButton
-                                        color="secondary"
-                                        component={Link}
-                                        to={"/register"}>
-                                        <Badge color="secondary">
-                                            <HowToRegIcon/>
-                                        </Badge>
-                                    </IconButton>
-                                </div>
-                            )}
-                        </div>
-                    </Toolbar>
-                </AppBar>
+                                <IconButton
+                                    color="secondary"
+                                    component={Link}
+                                    to={"/register"}>
+                                    <Badge color="secondary">
+                                        <HowToRegIcon/>
+                                    </Badge>
+                                </IconButton>
+                            </div>
+                        )}
+                    </div>
+                </Toolbar>
+            </AppBar>
             <Drawer
                 className={classes.drawer}
                 variant="persistent"
@@ -279,6 +279,18 @@ const AppBarPharmacy = () => {
                     </ListItem>
                     <ListItem button component={Link} to="/finalQueryWithoutCondition">
                         <ListItemText primary={"Итоговый запрос без условия"}/>
+                    </ListItem>
+                    <ListItem button component={Link} to="/queryOnWrapUpQuery">
+                        <ListItemText primary={"Запрос на запросе по принципу итогового запроса"}/>
+                    </ListItem>
+                    <ListItem button component={Link} to="/finalQueryWithSubquery">
+                        <ListItemText primary={"Итоговый запрос с подзапросом"}/>
+                    </ListItem>
+                </List>
+                <Divider/>
+                <List>
+                    <ListItem button component={Link} to="/diagram">
+                        <ListItemText primary={"Диаграммы"}/>
                     </ListItem>
                 </List>
             </Drawer>

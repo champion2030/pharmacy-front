@@ -1,10 +1,17 @@
 import {
-    SET_CURRENT_PAGE_FINAL_QUERY_WITH_DATA_AND_GROUPS, SET_CURRENT_PAGE_FINAL_REQUEST_WITHOUT_CONDITION,
-    SET_CURRENT_PAGE_QUERY_WITH_DATA_CONDITIONS, SET_CURRENT_PAGE_QUERY_WITH_GROUP_CONDITIONS,
-    SET_FINAL_QUERY_WITH_DATA_AND_GROUPS, SET_FINAL_REQUEST_WITHOUT_CONDITION,
-    SET_IS_FETCHING_FINAL_QUERY_WITH_DATA_AND_GROUPS, SET_IS_FETCHING_FINAL_REQUEST_WITHOUT_CONDITION,
+    SET_CURRENT_PAGE_FINAL_QUERY_WITH_DATA_AND_GROUPS,
+    SET_CURRENT_PAGE_FINAL_QUERY_WITH_SUBQUERY,
+    SET_CURRENT_PAGE_FINAL_REQUEST_WITHOUT_CONDITION,
+    SET_CURRENT_PAGE_QUERY_WITH_DATA_CONDITIONS,
+    SET_CURRENT_PAGE_QUERY_WITH_GROUP_CONDITIONS,
+    SET_FINAL_QUERY_WITH_DATA_AND_GROUPS,
+    SET_FINAL_QUERY_WITH_SUBQUERY,
+    SET_FINAL_REQUEST_WITHOUT_CONDITION,
+    SET_IS_FETCHING_FINAL_QUERY_WITH_DATA_AND_GROUPS, SET_IS_FETCHING_FINAL_QUERY_WITH_SUBQUERY,
+    SET_IS_FETCHING_FINAL_REQUEST_WITHOUT_CONDITION,
     SET_IS_FETCHING_QUERY_WITH_CONDITIONS_FOR_GROUPS,
     SET_IS_FETCHING_QUERY_WITH_DATA_CONDITIONS,
+    SET_QUERY_ON_WRAP_UP_QUERY,
     SET_QUERY_WITH_CONDITIONS_FOR_GROUPS,
     SET_QUERY_WITH_DATA_CONDITIONS
 } from "../actions/types";
@@ -29,6 +36,20 @@ const defaultState = {
     currentPageFinalRequestWithoutCondition: 1,
     totalCountFinalRequestWithoutCondition: 0,
     isFetchingFinalRequestWithoutCondition: true,
+
+    queryOnWrapUpQuery: {
+        id: 0,
+        medicine_name: "",
+        form_of_issue: "",
+        pharmacological_group: "",
+        firm_name: "",
+        supplier_price: 0
+    },
+
+    finalQueryWithSubquery: [],
+    currentPageFinalQueryWithSubquery: 1,
+    totalCountFinalQueryWithSubquery: 0,
+    isFetchingFinalQueryWithSubquery: true,
 }
 
 export default function summaryQueries(state = defaultState, action) {
@@ -101,6 +122,28 @@ export default function summaryQueries(state = defaultState, action) {
                 ...state,
                 isFetchingFinalRequestWithoutCondition: action.payload
             }
+        case SET_QUERY_ON_WRAP_UP_QUERY:
+            return {
+                ...state,
+                queryOnWrapUpQuery: action.payload
+            }
+        case SET_FINAL_QUERY_WITH_SUBQUERY:
+            return {
+                ...state,
+                finalQueryWithSubquery: action.payload.requestResult,
+                totalCountFinalQueryWithSubquery: action.payload.totalCount,
+                isFetchingFinalQueryWithSubquery: false
+            }
+        case SET_CURRENT_PAGE_FINAL_QUERY_WITH_SUBQUERY:
+            return {
+                ...state,
+                currentPageFinalQueryWithSubquery: action.payload
+            }
+        case SET_IS_FETCHING_FINAL_QUERY_WITH_SUBQUERY:
+            return {
+                ...state,
+                isFetchingFinalQueryWithSubquery: action.payload
+            }
         default:
             return state
     }
@@ -163,5 +206,25 @@ export const setCurrentPageFinalRequestWithoutCondition = (currentPageFinalReque
 
 export const setIsFetchingFinalRequestWithoutCondition = (bool) => ({
     type: SET_IS_FETCHING_FINAL_REQUEST_WITHOUT_CONDITION,
+    payload: bool
+})
+
+export const setQueryOnWrapUpQuery = (queryOnWrapUpQuery) => ({
+    type: SET_QUERY_ON_WRAP_UP_QUERY,
+    payload: queryOnWrapUpQuery
+})
+
+export const setFinalQueryWithSubquery = (finalQueryWithSubquery) => ({
+    type: SET_FINAL_QUERY_WITH_SUBQUERY,
+    payload: finalQueryWithSubquery
+})
+
+export const setCurrentPageFinalQueryWithSubquery = (currentPageFinalQueryWithSubquery) => ({
+    type: SET_CURRENT_PAGE_FINAL_QUERY_WITH_SUBQUERY,
+    payload: currentPageFinalQueryWithSubquery
+})
+
+export const setIsFetchingFinalQueryWithSubquery = (bool) => ({
+    type: SET_IS_FETCHING_FINAL_QUERY_WITH_SUBQUERY,
     payload: bool
 })

@@ -47,58 +47,63 @@ import FinalQueryWithConditionForDataAndGroupsTable
         from "../summaryQueriesTable/FinalQueryWithConditionForDataAndGroups/FinalQueryWithConditionForDataAndGroupsTable";
 import FinalRequestWithoutConditionTable
         from "../summaryQueriesTable/FinalRequestWithoutCondition/FinalRequestWithoutConditionTable";
+import QueryOnWrapUpQueryTable from "../summaryQueriesTable/QueryOnWrapUpQuery/QueryOnWrapUpQueryTable";
+import FinalQueryWithSubqueryTable from "../summaryQueriesTable/FinalQueryWithSubquery/FinalQueryWithSubqueryTable";
 
 const Content = () => {
 
-    return (
-        <Switch>
-            <Route exact path={["/login"]} component={SignIn}/>
-            <Route path="/login" component={SignIn}/>
-            <Route path="/register" component={Register}/>
-            <ProtectedRoute path="/profile" component={Profile}/>
-            <ProtectedRoute path="/users" component={UsersTable}/>
-            <ProtectedRoute path="/formOfIssue" component={FormOfIssueTable}/>
-            <ProtectedRoute path="/pharmacologicalGroup" component={PharmacologicalGroupTable}/>
-            <ProtectedRoute path="/countryOfManufacture" component={CountryOfManufactureTable}/>
-            <ProtectedRoute path="/typeOfProperty" component={TypeOfPropertyTable}/>
-            <ProtectedRoute path="/pharmacyName" component={PharmacyNameTable}/>
-            <ProtectedRoute path="/area" component={AreaTable}/>
-            <ProtectedRoute path="/reasonForReturn" component={ReasonForReturnTable}/>
-            <ProtectedRoute path="/manufacturerFirms" component={ManufacturerFirmTable}/>
-            <ProtectedRoute path="/medicines" component={MedicineTable}/>
-            <ProtectedRoute path="/pharmacy" component={PharmacyTable}/>
-            <ProtectedRoute path="/employee" component={EmployeeTable}/>
-            <ProtectedRoute path="/deliveries" component={DeliveriesTable}/>
-            <ProtectedRoute path="/currentArea/:id" component={AreaUpdate}/>
-            <ProtectedRoute path="/currentCountry/:id" component={CountryOfManufactureUpdate}/>
-            <ProtectedRoute path="/currentFormOfIssue/:id" component={FormOfIssueUpdate}/>
-            <ProtectedRoute path="/currentPharmacologicalGroup/:id" component={PharmacologicalGroupUpdate}/>
-            <ProtectedRoute path="/currentPharmacyName/:id" component={PharmacyNameUpdate}/>
-            <ProtectedRoute path="/currentReasonForReturn/:id" component={ReasonForReturnUpdate}/>
-            <ProtectedRoute path="/currentTypeOfProperty/:id" component={TypeOfPropertyUpdate}/>
-            <ProtectedRoute path="/currentFirm/:id/:action" component={ManufactureFirmViewOrEdit}/>
-            <ProtectedRoute path="/currentMedicine/:id/:action" component={MedicineViewOrEdit}/>
-            <ProtectedRoute path="/currentPharmacy/:id/:action" component={PharmacyViewOrEdit}/>
-            <ProtectedRoute path="/currentEmployee/:id/:action" component={EmployeeViewOrEdit}/>
-            <ProtectedRoute path="/currentDeliver/:id/:action" component={DeliveriesViewOrEdit}/>
-            <ProtectedRoute path="/firstRequest" component={FirstRequestTable}/>
-            <ProtectedRoute path="/secondRequest" component={SecondRequestTable}/>
-            <ProtectedRoute path="/thirdRequest" component={ThirdRequestTable}/>
-            <ProtectedRoute path="/newDeliverForCurrentPharmacy/:id" component={NewDeliver}/>
-            <ProtectedRoute path="/addNewFirm" component={AddNewManufactureFirm}/>
-            <ProtectedRoute path="/addNewMedicine" component={AddNewMedicine}/>
-            <ProtectedRoute path="/addNewDeliver" component={AddNewDeliver}/>
-            <ProtectedRoute path="/addNewEmployee" component={AddNewEmployee}/>
-            <ProtectedRoute path="/addNewPharmacy" component={AddNewPharmacy}/>
-            <ProtectedRoute path="/dateRequests" component={DateRequests}/>
-            <ProtectedRoute path="/queryWithDataCondition" component={QueryWithDataConditionTable}/>
-            <ProtectedRoute path="/queryWithConditionForGroups" component={QueryWithConditionForGroupsTable}/>
-            <ProtectedRoute path="/finalQueryWithConditionForGroupsAndData" component={FinalQueryWithConditionForDataAndGroupsTable}/>
-            <ProtectedRoute path="/finalQueryWithoutCondition" component={FinalRequestWithoutConditionTable}/>
-            <Route exact path='/unauthorized' component={Unauthorized} />
-            <Redirect to="/login"/>
-        </Switch>
-    )
+        return (
+            <Switch>
+                    <Route exact path={["/login"]} component={SignIn}/>
+                    <Route path="/login" component={SignIn}/>
+                    <Route path="/register" component={Register}/>
+                    <ProtectedRoute path="/profile" component={Profile}/>
+                    <ProtectedRoute path="/users" component={UsersTable}/>
+                    <ProtectedRoute path="/formOfIssue" component={FormOfIssueTable}/>
+                    <ProtectedRoute path="/pharmacologicalGroup" component={PharmacologicalGroupTable}/>
+                    <ProtectedRoute path="/countryOfManufacture" component={CountryOfManufactureTable}/>
+                    <ProtectedRoute path="/typeOfProperty" component={TypeOfPropertyTable}/>
+                    <ProtectedRoute path="/pharmacyName" component={PharmacyNameTable}/>
+                    <ProtectedRoute path="/area" component={AreaTable}/>
+                    <ProtectedRoute path="/reasonForReturn" component={ReasonForReturnTable}/>
+                    <ProtectedRoute path="/manufacturerFirms" component={ManufacturerFirmTable}/>
+                    <ProtectedRoute path="/medicines" component={MedicineTable}/>
+                    <ProtectedRoute path="/pharmacy" component={PharmacyTable}/>
+                    <ProtectedRoute path="/employee" component={EmployeeTable}/>
+                    <ProtectedRoute path="/deliveries" component={DeliveriesTable}/>
+                    <ProtectedRoute path="/currentArea/:id" component={AreaUpdate}/>
+                    <ProtectedRoute path="/currentCountry/:id" component={CountryOfManufactureUpdate}/>
+                    <ProtectedRoute path="/currentFormOfIssue/:id" component={FormOfIssueUpdate}/>
+                    <ProtectedRoute path="/currentPharmacologicalGroup/:id" component={PharmacologicalGroupUpdate}/>
+                    <ProtectedRoute path="/currentPharmacyName/:id" component={PharmacyNameUpdate}/>
+                    <ProtectedRoute path="/currentReasonForReturn/:id" component={ReasonForReturnUpdate}/>
+                    <ProtectedRoute path="/currentTypeOfProperty/:id" component={TypeOfPropertyUpdate}/>
+                    <ProtectedRoute path="/currentFirm/:id/:action" component={ManufactureFirmViewOrEdit}/>
+                    <ProtectedRoute path="/currentMedicine/:id/:action" component={MedicineViewOrEdit}/>
+                    <ProtectedRoute path="/currentPharmacy/:id/:action" component={PharmacyViewOrEdit}/>
+                    <ProtectedRoute path="/currentEmployee/:id/:action" component={EmployeeViewOrEdit}/>
+                    <ProtectedRoute path="/currentDeliver/:id/:action" component={DeliveriesViewOrEdit}/>
+                    <ProtectedRoute path="/firstRequest" component={FirstRequestTable}/>
+                    <ProtectedRoute path="/secondRequest" component={SecondRequestTable}/>
+                    <ProtectedRoute path="/thirdRequest" component={ThirdRequestTable}/>
+                    <ProtectedRoute path="/newDeliverForCurrentPharmacy/:id" component={NewDeliver}/>
+                    <ProtectedRoute path="/addNewFirm" component={AddNewManufactureFirm}/>
+                    <ProtectedRoute path="/addNewMedicine" component={AddNewMedicine}/>
+                    <ProtectedRoute path="/addNewDeliver" component={AddNewDeliver}/>
+                    <ProtectedRoute path="/addNewEmployee" component={AddNewEmployee}/>
+                    <ProtectedRoute path="/addNewPharmacy" component={AddNewPharmacy}/>
+                    <ProtectedRoute path="/dateRequests" component={DateRequests}/>
+                    <ProtectedRoute path="/queryWithDataCondition" component={QueryWithDataConditionTable}/>
+                    <ProtectedRoute path="/queryWithConditionForGroups" component={QueryWithConditionForGroupsTable}/>
+                    <ProtectedRoute path="/finalQueryWithConditionForGroupsAndData" component={FinalQueryWithConditionForDataAndGroupsTable}/>
+                    <ProtectedRoute path="/finalQueryWithoutCondition" component={FinalRequestWithoutConditionTable}/>
+                    <ProtectedRoute path="/queryOnWrapUpQuery" component={QueryOnWrapUpQueryTable}/>
+                    <ProtectedRoute path="/finalQueryWithSubquery" component={FinalQueryWithSubqueryTable}/>
+                    {/*<ProtectedRoute path="/diagrams" component={ChartsTable}/>*/}
+                    <Route exact path='/unauthorized' component={Unauthorized} />
+                    <Redirect to="/login"/>
+            </Switch>
+        )
 }
 
 export default Content;

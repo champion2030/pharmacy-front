@@ -1,13 +1,17 @@
 import axios from "axios";
 import {
     setCurrentPageFinalQueryWithDataAndGroup,
-    setCurrentPageFinalQueryWithGroup,
+    setCurrentPageFinalQueryWithGroup, setCurrentPageFinalQueryWithSubquery,
     setCurrentPageFinalRequestWithoutCondition,
     setCurrentPageQueryWithDataCondition,
-    setFinalQueryWithDataAndGroup, setFinalRequestWithoutCondition,
-    setIsFetchingFinalQueryWithDataAndGroup, setIsFetchingFinalRequestWithoutCondition,
+    setFinalQueryWithDataAndGroup, setFinalQueryWithSubquery,
+    setFinalRequestWithoutCondition,
+    setIsFetchingFinalQueryWithDataAndGroup,
+    setIsFetchingFinalQueryWithSubquery,
+    setIsFetchingFinalRequestWithoutCondition,
     setIsFetchingQueryWithConditionForGroups,
     setIsFetchingQueryWithDataCondition,
+    setQueryOnWrapUpQuery,
     setQueryWithConditionForGroups,
     setQueryWithDataCondition
 } from "../reducers/summaryQueriesReducer";
@@ -74,5 +78,25 @@ export const getFinalRequestWithoutCondition = (currentPage, perPage) => {
             dispatch(setCurrentPageFinalRequestWithoutCondition(1))
         }
         dispatch(setFinalRequestWithoutCondition(requestResult.data))
+    }
+}
+
+export const getQueryOnWrapUpQuery = (pharmacyId) => {
+    return async (dispatch) => {
+        const requestResult = await axios.post(API_URL + `queryOnWrapUpQuery`,{pharmacyId},{headers: authHeader()});
+        dispatch(setQueryOnWrapUpQuery(requestResult.data))
+    }
+}
+
+export const getFinalQueryWithSubquery = (currentPage, perPage) => {
+    return async (dispatch) => {
+        dispatch(setIsFetchingFinalQueryWithSubquery(true))
+        const requestResult = await axios.get(API_URL + `finalQueryWithSubquery?page=${currentPage}&limit=${perPage}`,{headers: authHeader()});
+        if (currentPage > requestResult.data.totalPages && requestResult.data.totalPages !== 0) {
+            dispatch(setCurrentPageFinalQueryWithSubquery(requestResult.data.totalPages))
+        } else if (requestResult.data.totalPages === 0) {
+            dispatch(setCurrentPageFinalQueryWithSubquery(1))
+        }
+        dispatch(setFinalQueryWithSubquery(requestResult.data))
     }
 }
