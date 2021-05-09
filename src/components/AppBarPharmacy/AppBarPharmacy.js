@@ -1,4 +1,18 @@
-import {AppBar, Badge, createMuiTheme, Divider, Drawer, IconButton, List, ListItem, ListItemText, makeStyles, ThemeProvider, Toolbar, Typography} from "@material-ui/core";
+import {
+    AppBar,
+    Badge,
+    createMuiTheme,
+    Divider,
+    Drawer,
+    IconButton,
+    List,
+    ListItem,
+    ListItemText,
+    makeStyles,
+    ThemeProvider,
+    Toolbar,
+    Typography
+} from "@material-ui/core";
 import {Link} from "react-router-dom";
 import clsx from "clsx";
 import MenuIcon from "@material-ui/icons/Menu";
@@ -297,4 +311,5 @@ const AppBarPharmacy = () => {
         </ThemeProvider>
     )
 }
+
 export default AppBarPharmacy;

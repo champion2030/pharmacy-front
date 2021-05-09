@@ -49,6 +49,7 @@ import FinalRequestWithoutConditionTable
         from "../summaryQueriesTable/FinalRequestWithoutCondition/FinalRequestWithoutConditionTable";
 import QueryOnWrapUpQueryTable from "../summaryQueriesTable/QueryOnWrapUpQuery/QueryOnWrapUpQueryTable";
 import FinalQueryWithSubqueryTable from "../summaryQueriesTable/FinalQueryWithSubquery/FinalQueryWithSubqueryTable";
+import ChartTable from "../Charts/ChartTable";
 
 const Content = () => {
 
@@ -99,7 +100,7 @@ const Content = () => {
                     <ProtectedRoute path="/finalQueryWithoutCondition" component={FinalRequestWithoutConditionTable}/>
                     <ProtectedRoute path="/queryOnWrapUpQuery" component={QueryOnWrapUpQueryTable}/>
                     <ProtectedRoute path="/finalQueryWithSubquery" component={FinalQueryWithSubqueryTable}/>
-                    {/*<ProtectedRoute path="/diagrams" component={ChartsTable}/>*/}
+                    <ProtectedRoute path="/diagram" component={ChartTable}/>
                     <Route exact path='/unauthorized' component={Unauthorized} />
                     <Redirect to="/login"/>
             </Switch>
