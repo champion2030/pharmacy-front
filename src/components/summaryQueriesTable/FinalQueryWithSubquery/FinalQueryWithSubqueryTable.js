@@ -7,6 +7,7 @@ import {setCurrentPageFinalQueryWithSubquery} from "../../../reducers/summaryQue
 import TablePagination from "@material-ui/core/TablePagination";
 import FinalQueryWithSubqueryTableHead from "./FinalQueryWithSubqueryTableHead";
 import Moment from "react-moment";
+import {ExportCSV} from "./ExportCSV";
 
 const useStyles = makeStyles(theme => ({
     pageContent: {
@@ -33,7 +34,7 @@ const useStyles = makeStyles(theme => ({
             width: '100%',
             margin: theme.spacing(1)
         }
-    }
+    },
 }))
 
 const FinalQueryWithSubqueryTable = () => {
@@ -64,16 +65,19 @@ const FinalQueryWithSubqueryTable = () => {
         <div>
             <Paper className={classes.pageContent}>
                 <Grid container align="center" justify="center" alignItems="center">
-                    <Grid item xs={12}>
+                    <Grid item xs={6}>
                         <Typography variant="h6">
                             Производители с количеством лекарст больше среднего
                         </Typography>
+                    </Grid>
+                    <Grid item xs={6}>
+                        <ExportCSV csvData={finalQueryWithSubquery} fileName="FileExport" />
                     </Grid>
                 </Grid>
                 {
                     isFetchingFinalQueryWithSubquery === false
                         ?
-                        <Table className={classes.table}>
+                        <Table className={classes.table} id="tblData">
                             <FinalQueryWithSubqueryTableHead/>
                             <TableBody>
                                 {
@@ -103,7 +107,7 @@ const FinalQueryWithSubqueryTable = () => {
                         </div>
                 }
                 <TablePagination
-                    rowsPerPageOptions={[5, 10, 50]}
+                    rowsPerPageOptions={[5, 10, 50, totalCountFinalQueryWithSubquery]}
                     component="div"
                     count={totalCountFinalQueryWithSubquery}
                     rowsPerPage={rowsPerPage}
