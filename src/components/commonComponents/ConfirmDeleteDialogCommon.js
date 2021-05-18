@@ -32,7 +32,7 @@ const useStyles = makeStyles(theme => ({
 }))
 
 export default function ConfirmDeleteDialogCommon(props) {
-    const { confirmDialog, setConfirmDialog } = props;
+    const { confirmDialog, setConfirmDialog, subSubTitle } = props;
     const classes = useStyles()
 
     return (
@@ -46,8 +46,11 @@ export default function ConfirmDeleteDialogCommon(props) {
                 <Typography variant="h6">
                     {confirmDialog.title}
                 </Typography>
-                <Typography variant="subtitle2">
+                <Typography variant="subtitle1">
                     {confirmDialog.subTitle}
+                </Typography>
+                <Typography variant="subtitle2">
+                    {subSubTitle}
                 </Typography>
             </DialogContent>
             <DialogActions className={classes.dialogAction}>

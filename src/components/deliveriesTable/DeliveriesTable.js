@@ -380,6 +380,7 @@ const DeliveriesTable = () => {
             <ConfirmDeleteDialogCommon
                 confirmDialog={confirmDialogCommon}
                 setConfirmDialog={setConfirmDialogCommon}
+                subSubTitle={'При удалении данных записей никто не пострадает, но лучше задумайтесь!!!'}
             />
         </div>
     )

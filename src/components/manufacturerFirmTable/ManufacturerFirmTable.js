@@ -92,7 +92,7 @@ const ManufacturerFirmTable = () => {
     const [value, setValue] = useState('')
     const [rowsPerPage, setRowsPerPage] = useState(5);
     const [selected, setSelected] = useState([]);
-    const [confirmDialog, setConfirmDialog] = useState({isOpen: false, title: '', subTitle: ''})
+    const [confirmDialog, setConfirmDialog] = useState({isOpen: false, title: '', subTitle: '', subSubTitle: ''})
     const [confirmDialogCommon, setConfirmDialogCommon] = useState({isOpen: false, title: '', subTitle: ''})
     const [notify, setNotify] = useState({isOpen: false, message: '', type: ''})
     const isFetchingFirm = useSelector(state => state.manufacturerFirmReducer.isFetchingFirm)
@@ -357,6 +357,7 @@ const ManufacturerFirmTable = () => {
             <ConfirmDeleteDialogCommon
                 confirmDialog={confirmDialogCommon}
                 setConfirmDialog={setConfirmDialogCommon}
+                subSubTitle={'При удалении данных записей могут пострадать невинные данные из таблиц: Лекарства, Поставки'}
             />
         </div>
     )

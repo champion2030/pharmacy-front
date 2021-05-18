@@ -366,6 +366,7 @@ const PharmacyTable = () => {
             <ConfirmDeleteDialogCommon
                 confirmDialog={confirmDialogCommon}
                 setConfirmDialog={setConfirmDialogCommon}
+                subSubTitle={'При удалении данных записей могут пострадать невинные данные из таблиц: Сотрудники, Поставки'}
             />
         </div>
     )

@@ -12,10 +12,16 @@
   <component name="ChangeListManager">
     <list default="true" id="e0de64aa-80a1-43a0-bc39-5202a49cf082" name="Default Changelist" comment="All done, maybe something will be added">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/actions/getChart.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/actions/getChart.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/actions/types.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/actions/types.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Charts/ChartTable.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Charts/ChartTable.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/commonComponents/ConfirmDeleteDialogCommon.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/commonComponents/ConfirmDeleteDialogCommon.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/deliveriesTable/DeliveriesTable.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/deliveriesTable/DeliveriesTable.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/summaryQueriesTable/FinalQueryWithSubquery/FinalQueryWithSubqueryTable.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/summaryQueriesTable/FinalQueryWithSubquery/FinalQueryWithSubqueryTable.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/employeeTable/EmployeeTable.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/employeeTable/EmployeeTable.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/manufacturerFirmTable/ManufacturerFirmTable.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/manufacturerFirmTable/ManufacturerFirmTable.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/medicineTable/MedicineTable.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/medicineTable/MedicineTable.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/pharmacyTable/PharmacyTable.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/pharmacyTable/PharmacyTable.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/reducers/chartTableReducer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/reducers/chartTableReducer.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -200,6 +206,14 @@
       <workItem from="1620683752665" duration="614000" />
       <workItem from="1620730144716" duration="937000" />
       <workItem from="1620739886955" duration="145000" />
+      <workItem from="1620847493861" duration="202000" />
+      <workItem from="1620852503772" duration="260000" />
+      <workItem from="1621088251126" duration="67000" />
+      <workItem from="1621193632824" duration="931000" />
+      <workItem from="1621278182497" duration="44000" />
+      <workItem from="1621280771391" duration="736000" />
+      <workItem from="1621333586508" duration="63000" />
+      <workItem from="1621333671166" duration="11303000" />
     </task>
     <task id="LOCAL-00001" summary="User Registration and Login">
       <created>1614707057660</created>
@@ -523,7 +537,14 @@
       <option name="project" value="LOCAL" />
       <updated>1620599540835</updated>
     </task>
-    <option name="localTasksCounter" value="47" />
+    <task id="LOCAL-00047" summary="All done, maybe something will be added">
+      <created>1620847615300</created>
+      <option name="number" value="00047" />
+      <option name="presentableId" value="LOCAL-00047" />
+      <option name="project" value="LOCAL" />
+      <updated>1620847615300</updated>
+    </task>
+    <option name="localTasksCounter" value="48" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

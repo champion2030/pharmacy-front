@@ -1,4 +1,4 @@
-import {SET_CHART} from "../actions/types";
+import {SET_3D_CHART, SET_CHART} from "../actions/types";
 
 const defaultState = {
     requestResult: [],
@@ -13,7 +13,10 @@ const defaultState = {
                 data: []
             }
         ]
-    }
+    },
+    category: [],
+    dataset: []
+
 }
 
 export default function chartTableReducer(state = defaultState, action) {
@@ -24,9 +27,23 @@ export default function chartTableReducer(state = defaultState, action) {
                 requestResult: action.payload.requestResult,
                 diagramInfo: action.payload.result,
             }
+        case SET_3D_CHART:
+            return {
+                ...state,
+                category: action.payload.category,
+                dataset: action.payload.dataset,
+            }
         default:
             return state
     }
 }
 
-export const setDiagramInfo = (diagramInfo) => ({type: SET_CHART, payload: diagramInfo})
+export const setDiagramInfo = (diagramInfo) => ({
+    type: SET_CHART,
+    payload: diagramInfo
+})
+
+export const set3DDiagram = (diagram3D) => ({
+    type: SET_3D_CHART,
+    payload: diagram3D
+})
