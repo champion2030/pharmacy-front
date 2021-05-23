@@ -7,6 +7,7 @@ import ReactFC from "react-fusioncharts";
 import Column2D from "fusioncharts/fusioncharts.charts";
 import FusionTheme from "fusioncharts/themes/fusioncharts.theme.fusion";
 import ReactFusioncharts from "react-fusioncharts";
+
 ReactFC.fcRoot(FusionCharts, Column2D, FusionTheme);
 
 const ChartTable = () => {
